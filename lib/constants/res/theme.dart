@@ -7,42 +7,44 @@ import 'font_manager.dart';
 ThemeData getApplicationTheme() {
   return ThemeData(
     // colors of the app
-    primaryColor: ColorManager.neuturals1,
-    fontFamily: FontConstant.fontFamilyDM,
-    bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      unselectedLabelStyle: getRegularStyle(color: ColorManager.neuturals4),
-      selectedLabelStyle: getRegularStyle(color: ColorManager.primary2),
-      backgroundColor: ColorManager.neuturals1,
-      selectedItemColor: ColorManager.primary2,
-      unselectedItemColor: ColorManager.neuturals4,
-    ),
-    scaffoldBackgroundColor: ColorManager.neuturals1,
+    primaryColor: ColorManager.mainBlue, // 1
+
+    fontFamily: FontConstant.fontFamilyDM, // bura poppins olacaq
+    // bottomNavigationBarTheme: BottomNavigationBarThemeData(
+    // unselectedLabelStyle: getRegularStyle(color: ColorManager.neuturals4),
+    // selectedLabelStyle: getRegularStyle(color: ColorManager.primary2),
+    // backgroundColor: ColorManager.neuturals1,
+    // selectedItemColor: ColorManager.primary2,
+    // unselectedItemColor: ColorManager.neuturals4,
+    // ),
+    scaffoldBackgroundColor: ColorManager.mainWhite, // 2
     //primaryColorLight: ColorManager.primaryOpacity70,
     //primaryColorDark: ColorManager.darkPrimary,
-    disabledColor: ColorManager
-        .neuturals2, //will be used incase of disabled button for example
-    splashColor: ColorManager.neuturals1,
+    // disabledColor: ColorManager
+    // .neuturals2,
+    //will be used incase of disabled button for example
+    // splashColor: ColorManager.neuturals1,
     //accentColor: ColorManager.grey,
 
     //card view theme
 
-    appBarTheme: AppBarTheme(
-        centerTitle: true,
-        color: ColorManager.neuturals1,
-        //elevation: AppSize.s4,
-        //shadowColor: ColorManager.primaryOpacity70,
-        titleTextStyle: TextStyle(
-            color: ColorManager.neuturals8,
-            fontSize: FontSize.s24,
-            fontWeight: FontWeightManager.bold)),
+    // appBarTheme: AppBarTheme(
+    //     centerTitle: true,
+    //     color: ColorManager.neuturals1,
+    //     //elevation: AppSize.s4,
+    //     //shadowColor: ColorManager.primaryOpacity70,
+    //     titleTextStyle: TextStyle(
+    //         color: ColorManager.neuturals8,
+    //         fontSize: FontSize.s24,
+    //         fontWeight: FontWeightManager.bold)),
 
-    //button theme
-    buttonTheme: ButtonThemeData(
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(RadiusManager.radiusCircular90)),
-      disabledColor: ColorManager.primary1.withOpacity(0.5),
-      buttonColor: ColorManager.primary1,
-    ), //splashColor: ColorManager.primaryOpacity70),
+    // //button theme
+    // buttonTheme: ButtonThemeData(
+    //   shape: RoundedRectangleBorder(
+    //       borderRadius: BorderRadius.all(RadiusManager.radiusCircular90)),
+    //   disabledColor: ColorManager.primary1.withOpacity(0.5),
+    //   buttonColor: ColorManager.primary1,
+    // ), //splashColor: ColorManager.primaryOpacity70),
     //elevated button theme
     // elevatedButtonTheme: ElevatedButtonThemeData(
     //     style: ElevatedButton.styleFrom(

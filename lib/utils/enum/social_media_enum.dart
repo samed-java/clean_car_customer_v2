@@ -1,1 +1,6 @@
-enum SocialMediaEnum { twitter, web, telegram, reddit }
+enum SocialMediaEnum {
+  twitter,
+  web,
+  telegram,
+  reddit,
+}

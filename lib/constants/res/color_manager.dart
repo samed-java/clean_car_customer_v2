@@ -4,7 +4,7 @@ class ColorManager {
   ColorManager._();
 
   //static Color primary1 = HexColor.fromHex("#3772FF");
-
+  static Color mainBlack = HexColor.fromHex("#000000");
 }
 
 extension HexColor on Color {

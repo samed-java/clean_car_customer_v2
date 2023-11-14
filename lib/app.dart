@@ -2,9 +2,9 @@ import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_e
 import 'package:clean_car_customer_v2/utils/services/navigation_service/navigation_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../constants/res/theme.dart';
-import '../utils/enum/locale_enum.dart';
-import '../utils/pager/pager.dart';
+import 'constants/res/theme.dart';
+import 'utils/enum/locale_enum.dart';
+import 'utils/pager/pager.dart';
 
 class App extends StatelessWidget {
   const App({super.key});

@@ -1,1 +1,9 @@
-enum InputTypes { text, link, number, password, phone, mail, description }
+enum InputTypes {
+  text,
+  link,
+  number,
+  password,
+  phone,
+  mail,
+  description,
+}
