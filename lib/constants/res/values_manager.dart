@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 class AppMargin {
+  static const double m4 = 4.0;
   static const double m8 = 8.0;
   static const double m10 = 10.0;
   static const double m12 = 12.0;
@@ -55,19 +56,18 @@ class DurationConstantD {
   static const int d700 = 700;
 }
 
-class DurationConstant{
-  static const Duration ms100 =  Duration(milliseconds: 100);
-  static const Duration ms200 =  Duration(milliseconds: 200);
-  static const Duration ms300 =  Duration(milliseconds: 300);
-  static const Duration ms400 =  Duration(milliseconds: 400);
-  static const Duration ms500 =  Duration(milliseconds: 500);
-  static const Duration ms600 =  Duration(milliseconds: 600);
-  static const Duration ms700 =  Duration(milliseconds: 700);
-  static const Duration s1 =  Duration(seconds: 1);
-  static const Duration s2 =  Duration(seconds: 2);
-  static const Duration s3 =  Duration(seconds: 3);
+class DurationConstant {
+  static const Duration ms100 = Duration(milliseconds: 100);
+  static const Duration ms200 = Duration(milliseconds: 200);
+  static const Duration ms300 = Duration(milliseconds: 300);
+  static const Duration ms400 = Duration(milliseconds: 400);
+  static const Duration ms500 = Duration(milliseconds: 500);
+  static const Duration ms600 = Duration(milliseconds: 600);
+  static const Duration ms700 = Duration(milliseconds: 700);
+  static const Duration s1 = Duration(seconds: 1);
+  static const Duration s2 = Duration(seconds: 2);
+  static const Duration s3 = Duration(seconds: 3);
 }
-
 
 class AppRadius {
   static const double radius20 = 20;

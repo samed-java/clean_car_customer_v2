@@ -6,14 +6,19 @@ class Paddings {
 
   Paddings._();
 
+  static EdgeInsets horizontal2 = EdgeInsets.symmetric(horizontal: 2.w);
+  static EdgeInsets horizontal4 = EdgeInsets.symmetric(horizontal: 4.w);
   static EdgeInsets horizontal8 = EdgeInsets.symmetric(horizontal: 8.w);
   static EdgeInsets horizontal16 = EdgeInsets.symmetric(horizontal: 16.w);
   static EdgeInsets horizontal20 = EdgeInsets.symmetric(horizontal: 20.w);
   static EdgeInsets horizontal32 = EdgeInsets.symmetric(horizontal: 32.w);
+  static EdgeInsets horizontal64 = EdgeInsets.symmetric(horizontal: 64.w);
   static EdgeInsets horizontal24 = EdgeInsets.symmetric(horizontal: 24.w);
+  static EdgeInsets horizontal48 = EdgeInsets.symmetric(horizontal: 48.w);
 
   static EdgeInsets vertical16 = EdgeInsets.symmetric(vertical: 16.h);
   static EdgeInsets vertical8 = EdgeInsets.symmetric(vertical: 8.h);
+  static EdgeInsets vertical4 = EdgeInsets.symmetric(vertical: 4.h);
 
   static EdgeInsets horizontal24vertical16 =
       EdgeInsets.symmetric(horizontal: 32.w, vertical: 16.h);

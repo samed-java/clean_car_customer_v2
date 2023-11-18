@@ -51,4 +51,8 @@ class Gaps {
   static SizedBox w4 = SizedBox(
     width: 4.w,
   );
+  static SizedBox w2 = SizedBox(
+    width: 2.w,
+  );
+  static SizedBox empty = const SizedBox();
 }

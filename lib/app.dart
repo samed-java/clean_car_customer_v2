@@ -24,7 +24,7 @@ class App extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             navigatorKey: NavigationService.instance.navigationKey,
             theme: getApplicationTheme(),
-            home: Pager.splash,
+            home: Pager.main,
           );
         });
   }

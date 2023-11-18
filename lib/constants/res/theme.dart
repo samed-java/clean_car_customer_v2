@@ -1,4 +1,4 @@
-import 'package:clean_car_customer_v2/constants/res/styles_manager.dart';
+// import 'package:clean_car_customer_v2/constants/res/styles_manager.dart';
 import 'package:flutter/material.dart';
 
 import 'color_manager.dart';
@@ -9,7 +9,7 @@ ThemeData getApplicationTheme() {
     // colors of the app
     primaryColor: ColorManager.mainBlue, // 1
 
-    fontFamily: FontConstant.fontFamilyDM, // bura poppins olacaq
+    fontFamily: FontConstant.fontFamilyPoppins, // bura poppins olacaq
     // bottomNavigationBarTheme: BottomNavigationBarThemeData(
     // unselectedLabelStyle: getRegularStyle(color: ColorManager.neuturals4),
     // selectedLabelStyle: getRegularStyle(color: ColorManager.primary2),
@@ -17,7 +17,7 @@ ThemeData getApplicationTheme() {
     // selectedItemColor: ColorManager.primary2,
     // unselectedItemColor: ColorManager.neuturals4,
     // ),
-    scaffoldBackgroundColor: ColorManager.mainWhite, // 2
+    scaffoldBackgroundColor: ColorManager.mainBackgroundColor, // 2
     //primaryColorLight: ColorManager.primaryOpacity70,
     //primaryColorDark: ColorManager.darkPrimary,
     // disabledColor: ColorManager

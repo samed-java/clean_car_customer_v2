@@ -35,6 +35,14 @@ dependencies:
   get_it: any
   flutter_bloc: any
 
+  #design
+  animate_do: ^3.0.2
+  flutter_svg: any
+  flutter_bounce: ^1.1.0
+  flutter_screenutil: any
+  pinput: ^3.0.1
+  dropdown_button2: ^2.3.9
+
 
 
 dev_dependencies:
@@ -46,7 +54,6 @@ dev_dependencies:
   flutter_localization: any
   firebase_messaging: any
   flutter_local_notifications: any
-  flutter_screenutil: any
 
   flutter_lints: ^2.0.0
 
