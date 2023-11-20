@@ -2,18 +2,37 @@ import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+// ignore: must_be_immutable
 class CustomDots extends StatelessWidget {
   final int currentPage;
+  Color? onColor;
+  Color? offColor;
+  int number;
 
-  const CustomDots({super.key, required this.currentPage});
+  CustomDots(
+      {Key? key,
+      required this.currentPage,
+      required this.number,
+      this.offColor,
+      this.onColor})
+      : super(key: key) {
+    onColor ??= ColorManager.mainBlue;
+    offColor ??= ColorManager.secondaryBlue;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: List.generate(
-        3,
-        (index) => Dot(index: index, currentPage: currentPage),
+        number,
+        (index) => Dot(
+          index: index,
+          currentPage: currentPage,
+          onColor: onColor,
+          offColor: offColor,
+          number: number,
+        ),
       ),
     );
   }
@@ -22,8 +41,18 @@ class CustomDots extends StatelessWidget {
 class Dot extends StatelessWidget {
   final int index;
   final int currentPage;
+  final Color? onColor;
+  final Color? offColor;
+  final int? number;
 
-  const Dot({super.key, required this.index, required this.currentPage});
+  const Dot({
+    super.key,
+    required this.index,
+    required this.currentPage,
+    required this.number,
+    required this.offColor,
+    required this.onColor,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +64,7 @@ class Dot extends StatelessWidget {
       decoration: BoxDecoration(
         shape: isSelected ? BoxShape.rectangle : BoxShape.circle,
         borderRadius: isSelected ? BorderRadius.circular(4.r) : null,
-        color: isSelected ? ColorManager.mainBlue : ColorManager.secondaryBlue,
+        color: isSelected ? onColor : offColor,
       ),
     );
   }

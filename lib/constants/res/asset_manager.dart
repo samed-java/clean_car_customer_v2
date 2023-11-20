@@ -26,4 +26,8 @@ class IconAssets {
   static String rightArrow = '$iconPath/arrow_right.svg';
   static String arrowDown = '$iconPath/arrow_down.png';
   static String exit = '$iconPath/exit.svg';
+  static String backButton = '$iconPath/back_button.png';
+  static String phone = '$iconPath/phone.svg';
+  static String clock = '$iconPath/clock.svg';
+  static String location = '$iconPath/location.svg';
 }

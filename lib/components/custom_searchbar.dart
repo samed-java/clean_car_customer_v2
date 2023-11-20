@@ -5,12 +5,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class CustomSearchBar extends StatelessWidget {
   CustomSearchBar({
     super.key,
-    required this.onFocusChanged,
+    required this.focusNode,
   });
   final ValueNotifier<bool> isBack = ValueNotifier<bool>(false);
   final TextEditingController searchController = TextEditingController();
-  final FocusNode focusNode = FocusNode();
-  final VoidCallback onFocusChanged;
+  final FocusNode focusNode;
+  // final Function onFocusChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -23,18 +23,21 @@ class CustomSearchBar extends StatelessWidget {
         builder: (context, value, child) {
           return TextField(
             controller: searchController,
-            focusNode: focusNode,
+            // focusNode: focusNode,
             onTap: () {
-              if (searchController.text.isEmpty) {
-                onFocusChanged();
-              }
+              // if (searchController.text.isEmpty) {
+              //   onFocusChanged();
+              // }
+              // isBack.value = !isBack.value;
+              // if (focusNode.hasFocus) {}
+              isBack.value = !isBack.value;
             },
             onChanged: (value) {
-              if (value.isNotEmpty) {
-                isBack.value = true;
-              } else {
-                isBack.value = false;
-              }
+              // if (value.isNotEmpty) {
+              //   isBack.value = true;
+              // } else {
+              //   isBack.value = false;
+              // }
             },
             cursorColor: ColorManager.thirdBlack,
             decoration: InputDecoration(
@@ -42,9 +45,9 @@ class CustomSearchBar extends StatelessWidget {
                   ? IconButton(
                       onPressed: () {
                         searchController.clear();
-                        isBack.value = false;
+                        isBack.value = !isBack.value;
                         focusNode.unfocus();
-                        onFocusChanged();
+                        // onFocusChanged();
                       },
                       icon: Icon(
                         Icons.arrow_back,

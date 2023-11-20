@@ -7,8 +7,6 @@ import 'data/services/local/storage_service.dart';
 void main() async {
   await init();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-      overlays: [SystemUiOverlay.bottom]);
 
   runApp(const App());
 }

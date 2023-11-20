@@ -4,9 +4,9 @@ import 'package:clean_car_customer_v2/constants/res/paddings.dart';
 import 'package:clean_car_customer_v2/constants/res/styles_manager.dart';
 import 'package:clean_car_customer_v2/features/home/widgets/filter_dialog.dart';
 import 'package:clean_car_customer_v2/features/home/widgets/branch_card.dart';
-import 'package:clean_car_customer_v2/features/home/widgets/custom_searchbar.dart';
-import 'package:clean_car_customer_v2/features/home/widgets/filter_button.dart';
-import 'package:clean_car_customer_v2/features/home/widgets/offer_card.dart';
+import 'package:clean_car_customer_v2/components/custom_searchbar.dart';
+import 'package:clean_car_customer_v2/components/custom_filter_button.dart';
+import 'package:clean_car_customer_v2/components/offer_card.dart';
 import 'package:clean_car_customer_v2/features/home/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -19,11 +19,15 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  bool isSearchFocused = false;
+  final FocusNode _focusNode = FocusNode();
+  // bool isSearchFocused = false;
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height * 528 / 816;
+
     return Scaffold(
+      backgroundColor: ColorManager.mainBackgroundColor,
       body: SafeArea(
         top: true,
         child: Column(
@@ -35,24 +39,26 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   CustomSearchBar(
-                    onFocusChanged: () {
-                      setState(() {
-                        isSearchFocused = !isSearchFocused;
-                      });
-                    },
+                    // onFocusChanged: () {
+                    // setState(() {
+                    //   isSearchFocused = !isSearchFocused;
+                    // });
+                    // },
+                    focusNode: _focusNode,
                   ),
                   FilterButton(
                     onPressed: () {
-                      openFilterBox(context);
+                      openFilterBox(context, height);
                     },
                   ),
                 ],
               ),
             ),
-            if (isSearchFocused)
+            if (_focusNode.hasFocus)
               SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
                 child: Container(
-                  height: 100.h,
+                  // height: 100.h,
                   width: double.infinity,
                   color: ColorManager.mainWhite,
                 ),
@@ -75,8 +81,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     SizedBox(
                       height: MediaQuery.of(context).size.height * (160 / 816),
                       child: ListView.builder(
+                        physics: const BouncingScrollPhysics(),
                         scrollDirection: Axis.horizontal,
-                        itemCount: 10,
+                        itemCount: 1,
                         itemBuilder: (context, index) {
                           return Padding(
                             padding: EdgeInsets.only(left: 8.w),

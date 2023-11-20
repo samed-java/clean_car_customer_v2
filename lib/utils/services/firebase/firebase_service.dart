@@ -31,12 +31,12 @@ class FirebaseService {
       FlutterLocalNotificationsPlugin();
 
   static Future<void> initializeLocalNotifications() async {
-    final InitializationSettings _initSettings = InitializationSettings(
+    const InitializationSettings initSettings = InitializationSettings(
         android: AndroidInitializationSettings("icon_name"),
         iOS: DarwinInitializationSettings());
 
     /// on did receive notification response = for when app is opened via notification while in foreground on android
-    await FirebaseService.localNotificationsPlugin.initialize(_initSettings,
+    await FirebaseService.localNotificationsPlugin.initialize(initSettings,
         onDidReceiveNotificationResponse: FCMProvider.onTapNotification);
 
     /// need this for ios foregournd notification

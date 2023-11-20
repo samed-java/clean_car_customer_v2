@@ -6,11 +6,13 @@ import 'package:flutter_bounce/flutter_bounce.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class BranchCard extends StatelessWidget {
-  const BranchCard({Key? key}) : super(key: key);
+class DetailedBranchCard extends StatelessWidget {
+  const DetailedBranchCard({super.key});
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     return Bounce(
       duration: const Duration(milliseconds: 100),
       onPressed: () {
@@ -19,13 +21,11 @@ class BranchCard extends StatelessWidget {
       child: Hero(
         tag: "salam",
         child: Container(
-          margin: Paddings.horizontal8,
+          height: height * (160 / 816),
+          width: width * (336 / 375),
           decoration: BoxDecoration(
-            color: ColorManager.mainWhite,
             borderRadius: BorderRadius.all(RadiusManager.radiusCircular6),
           ),
-          height: 160.h,
-          width: 148.w,
           child: ClipRRect(
             borderRadius: BorderRadius.all(RadiusManager.radiusCircular6),
             child: Stack(
@@ -51,7 +51,7 @@ class BranchCard extends StatelessWidget {
                         begin: Alignment.bottomCenter,
                         end: Alignment.topCenter,
                         colors: [
-                          ColorManager.mainBlack.withOpacity(0.6),
+                          ColorManager.mainBlack.withOpacity(0.8),
                           Colors.transparent,
                         ],
                       ),
@@ -60,13 +60,32 @@ class BranchCard extends StatelessWidget {
                 ),
                 Positioned(
                   child: Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Material(
-                      color: Colors.transparent,
-                      child: Text(
-                        "Xocahəsən",
-                        style: getSemiBoldStyle(
-                            color: ColorManager.mainWhite, fontSize: 16),
+                    alignment: Alignment.bottomLeft,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Material(
+                            color: Colors.transparent,
+                            child: Text(
+                              "Xocahəsən",
+                              overflow: TextOverflow.ellipsis,
+                              style: getSemiBoldStyle(
+                                  color: ColorManager.mainWhite, fontSize: 16),
+                            ),
+                          ),
+                          Material(
+                            color: Colors.transparent,
+                            child: Text(
+                              "Nizami filialı, Xocasən rayonu 158",
+                              overflow: TextOverflow.ellipsis,
+                              style: getMediumStyle(
+                                  color: ColorManager.mainWhite, fontSize: 14),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),

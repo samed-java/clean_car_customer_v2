@@ -16,4 +16,5 @@ class RadiusManager {
   static Radius radiusCircular8 = Radius.circular(8.r);
   static Radius radiusCircular6 = Radius.circular(6.r);
   static Radius radiusCircular4 = Radius.circular(4.r);
+  static Radius radiusCircular2 = Radius.circular(2.r);
 }

@@ -1,7 +1,7 @@
 import 'package:clean_car_customer_v2/components/custom_button.dart';
 import 'package:clean_car_customer_v2/components/custom_upper_part.dart';
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
-import 'package:clean_car_customer_v2/features/otp/widgets/count_down_timer.dart';
+import 'package:clean_car_customer_v2/features/onboadding_and_sign_up/otp/widgets/count_down_timer.dart';
 import 'package:clean_car_customer_v2/utils/pager/pager.dart';
 import 'package:clean_car_customer_v2/utils/pager/transition.dart';
 import 'package:flutter/material.dart';

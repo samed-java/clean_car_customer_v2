@@ -1,6 +1,6 @@
 import 'package:clean_car_customer_v2/components/custom_upper_part.dart';
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
-import 'package:clean_car_customer_v2/features/signup/widgets/signup_form.dart';
+import 'package:clean_car_customer_v2/features/onboadding_and_sign_up/signup/widgets/signup_form.dart';
 import 'package:flutter/material.dart';
 
 class SignupScreen extends StatelessWidget {

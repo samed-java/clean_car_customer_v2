@@ -2,7 +2,7 @@ import 'package:clean_car_customer_v2/components/custom_button.dart';
 import 'package:clean_car_customer_v2/components/custom_dots.dart';
 import 'package:clean_car_customer_v2/components/custom_text_button.dart';
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
-import 'package:clean_car_customer_v2/features/onboadding_and_sign_up/widgets/build_onboarding.dart';
+import 'package:clean_car_customer_v2/features/onboadding_and_sign_up/onboarding/widgets/build_onboarding.dart';
 import 'package:clean_car_customer_v2/utils/pager/go.dart';
 import 'package:clean_car_customer_v2/utils/pager/pager.dart';
 import 'package:flutter/material.dart';
@@ -79,7 +79,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   ),
                 ),
                 _currentPage != 2
-                    ? CustomDots(currentPage: _currentPage)
+                    ? CustomDots(
+                        currentPage: _currentPage,
+                        number: 3,
+                      )
                     : CustomButton(
                         frontText: "Başla",
                         onPressed: () {

@@ -1,6 +1,6 @@
 import 'package:clean_car_customer_v2/components/custom_button.dart';
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
-import 'package:clean_car_customer_v2/features/home/widgets/star_box.dart';
+// import 'package:clean_car_customer_v2/features/home/widgets/star_box.dart';
 import 'package:clean_car_customer_v2/features/home/widgets/textfield_widget.dart';
 import 'package:clean_car_customer_v2/utils/pager/go.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +8,7 @@ import 'package:flutter_bounce/flutter_bounce.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-void openFilterBox(BuildContext context, double height) {
+void openBranchesFilterBox(BuildContext context, double height) {
   showDialog(
     context: context,
     builder: (BuildContext context) {
@@ -94,17 +94,17 @@ void openFilterBox(BuildContext context, double height) {
                   ),
                 ),
                 Gaps.h2,
-                const Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    StarBox(text: "1"),
-                    StarBox(text: "2"),
-                    StarBox(text: "3"),
-                    StarBox(text: "4"),
-                    StarBox(text: "5"),
-                  ],
-                ),
-                Gaps.h16,
+                // const Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //   children: [
+                //     StarBox(text: "1"),
+                //     StarBox(text: "2"),
+                //     StarBox(text: "3"),
+                //     StarBox(text: "4"),
+                //     StarBox(text: "5"),
+                //   ],
+                // ),
+                // Gaps.h16,
                 CustomButton(frontText: "Qəbul Et", onPressed: () {})
               ],
             ),

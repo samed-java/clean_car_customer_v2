@@ -1,6 +1,6 @@
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
-import 'package:clean_car_customer_v2/features/branches/branches_screen.dart';
-import 'package:clean_car_customer_v2/features/favorites/favorite_screen.dart';
+import 'package:clean_car_customer_v2/features/branches_and_reservation/branches/branches_screen.dart';
+import 'package:clean_car_customer_v2/features/offers/offers_screen.dart';
 import 'package:clean_car_customer_v2/features/home/home_screen.dart';
 import 'package:clean_car_customer_v2/features/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
@@ -33,17 +33,18 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: PageView(
+        physics: const BouncingScrollPhysics(),
         controller: _pageController,
         onPageChanged: (index) {
           setState(() {
             _currentIndex = index;
           });
         },
-        children: const [
-          HomeScreen(),
-          BranchesScreen(),
-          FavoriteScreen(),
-          ProfileScreen(),
+        children: [
+          const HomeScreen(),
+          const BranchesScreen(),
+          OffersScreen(),
+          const ProfileScreen(),
         ],
       ),
       bottomNavigationBar: BottomAppBar(

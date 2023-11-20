@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../../snacks/snacks.dart';
-
 extension ControllerExtension on TextEditingController {
   bool get controllerIsEmpty => text.isEmpty;
 
@@ -31,5 +29,4 @@ extension ControllerExtension on TextEditingController {
   //     }
   //   }
   // }
-
 }

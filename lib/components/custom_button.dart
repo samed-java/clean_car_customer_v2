@@ -8,6 +8,7 @@ class CustomButton extends StatelessWidget {
   late Color? backgroundColor;
   late Color? foregroundColor;
   late Color? disableColor;
+  late Color? borderColor;
   late double? radius;
   late double? height;
   late double? width;
@@ -23,6 +24,7 @@ class CustomButton extends StatelessWidget {
       this.height,
       this.width,
       this.foregroundColor,
+      this.borderColor,
       required this.onPressed,
       this.radius,
       this.isDisable,
@@ -37,6 +39,7 @@ class CustomButton extends StatelessWidget {
     time ??= 100;
     isDisable ??= false;
     disableColor ??= ColorManager.secondaryBlue;
+    borderColor ??= ColorManager.mainBlue;
   }
 
   @override
@@ -66,6 +69,7 @@ class CustomButton extends StatelessWidget {
               width: width,
               child: Container(
                 decoration: BoxDecoration(
+                  border: Border.all(color: borderColor!),
                   color: backgroundColor,
                   borderRadius: BorderRadius.circular(radius!),
                 ),
