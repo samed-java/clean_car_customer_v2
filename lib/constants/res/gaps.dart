@@ -25,6 +25,9 @@ class Gaps {
   static SizedBox h16 = SizedBox(
     height: 16.h,
   );
+  static SizedBox h12 = SizedBox(
+    height: 12.h,
+  );
   static SizedBox h10 = SizedBox(
     height: 10.h,
   );

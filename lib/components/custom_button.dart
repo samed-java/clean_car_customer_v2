@@ -33,7 +33,7 @@ class CustomButton extends StatelessWidget {
       : super(key: key) {
     backgroundColor ??= ColorManager.mainBlue;
     height ??= 44.h;
-    width ??= 336.w;
+    width ??= double.infinity;
     foregroundColor ??= ColorManager.mainWhite;
     radius ??= 6.r;
     time ??= 100;
@@ -54,8 +54,11 @@ class CustomButton extends StatelessWidget {
                 borderRadius: BorderRadius.circular(radius!),
               ),
               child: Center(
-                child: Text(frontText,
-                    style: getButtonStyle(color: foregroundColor!)),
+                child: Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: Text(frontText,
+                      style: getButtonStyle(color: foregroundColor!)),
+                ),
               ),
             ),
           )
@@ -74,8 +77,11 @@ class CustomButton extends StatelessWidget {
                   borderRadius: BorderRadius.circular(radius!),
                 ),
                 child: Center(
-                  child: Text(frontText,
-                      style: getButtonStyle(color: foregroundColor!)),
+                  child: Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: Text(frontText,
+                        style: getButtonStyle(color: foregroundColor!)),
+                  ),
                 ),
               ),
             ),

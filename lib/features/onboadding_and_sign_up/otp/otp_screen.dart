@@ -23,24 +23,28 @@ class OTPScreen extends StatelessWidget {
               subText: "Telefon nömrənizə göndərilmiş kodu daxil edin",
             ),
             Gaps.h32,
-            Pinput(
-              keyboardType: TextInputType.number,
-              onCompleted: (value) {
-                PageTransitionUtils.navigateWithFadeInTransition(
-                    context,
-                    Pager.splash(
-                        svgAssets: ImageAssets.confirmed,
-                        headerText: "Təsdiqləndi!!!",
-                        subText:
-                            "Mobil tətbiqdəki qeydiyyatınız uğurla təsdiqləndi",
-                        page: Pager.login));
-              },
-              defaultPinTheme: PinTheme(
-                width: 72.w,
-                height: 40.h,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(RadiusManager.radiusCircular6),
-                  color: ColorManager.mainWhite,
+            Padding(
+              padding: Paddings.horizontal16,
+              child: Pinput(
+                keyboardType: TextInputType.number,
+                onCompleted: (value) {
+                  PageTransitionUtils.navigateWithFadeInTransition(
+                      context,
+                      Pager.splash(
+                          svgAssets: ImageAssets.confirmed,
+                          headerText: "Təsdiqləndi!!!",
+                          subText:
+                              "Mobil tətbiqdəki qeydiyyatınız uğurla təsdiqləndi",
+                          page: Pager.login));
+                },
+                defaultPinTheme: PinTheme(
+                  width: 200.w,
+                  height: 45.h,
+                  decoration: BoxDecoration(
+                    borderRadius:
+                        BorderRadius.all(RadiusManager.radiusCircular6),
+                    color: ColorManager.mainWhite,
+                  ),
                 ),
               ),
             ),
@@ -58,18 +62,21 @@ class OTPScreen extends StatelessWidget {
               ],
             ),
             Gaps.h24,
-            CustomButton(
-              frontText: "Təsdiqlə",
-              onPressed: () {
-                PageTransitionUtils.navigateWithFadeInTransition(
-                    context,
-                    Pager.splash(
-                        svgAssets: ImageAssets.confirmed,
-                        headerText: "Təsdiqləndi!!!",
-                        subText:
-                            "Mobil tətbiqdəki qeydiyyatınız uğurla təsdiqləndi",
-                        page: Pager.login));
-              },
+            Padding(
+              padding: Paddings.horizontal16,
+              child: CustomButton(
+                frontText: "Təsdiqlə",
+                onPressed: () {
+                  PageTransitionUtils.navigateWithFadeInTransition(
+                      context,
+                      Pager.splash(
+                          svgAssets: ImageAssets.confirmed,
+                          headerText: "Təsdiqləndi!!!",
+                          subText:
+                              "Mobil tətbiqdəki qeydiyyatınız uğurla təsdiqləndi",
+                          page: Pager.main));
+                },
+              ),
             )
           ],
         ),

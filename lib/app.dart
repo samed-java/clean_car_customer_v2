@@ -20,11 +20,11 @@ class App extends StatelessWidget {
             locale: Locale(LocaleType.EN.name),
             supportedLocales: context.supportedLocales,
             localizationsDelegates: context.localizationsDelegate,
-            //color: ColorManager.neuturals1,
+            // color: ColorManager.neuturals1,
             debugShowCheckedModeBanner: false,
             navigatorKey: NavigationService.instance.navigationKey,
             theme: getApplicationTheme(),
-            home: Pager.main,
+            home: Pager.onboarding,
           );
         });
   }

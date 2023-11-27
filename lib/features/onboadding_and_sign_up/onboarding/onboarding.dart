@@ -83,11 +83,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         currentPage: _currentPage,
                         number: 3,
                       )
-                    : CustomButton(
-                        frontText: "Başla",
-                        onPressed: () {
-                          Go.removeUntillAndGo(Pager.signup);
-                        },
+                    : Padding(
+                        padding: Paddings.horizontal16,
+                        child: CustomButton(
+                          frontText: "Başla",
+                          onPressed: () {
+                            Go.removeUntillAndGo(Pager.signup);
+                          },
+                        ),
                       ),
                 Gaps.h64,
               ],

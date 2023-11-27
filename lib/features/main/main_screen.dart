@@ -2,7 +2,7 @@ import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
 import 'package:clean_car_customer_v2/features/branches_and_reservation/branches/branches_screen.dart';
 import 'package:clean_car_customer_v2/features/offers/offers_screen.dart';
 import 'package:clean_car_customer_v2/features/home/home_screen.dart';
-import 'package:clean_car_customer_v2/features/profile/profile_screen.dart';
+import 'package:clean_car_customer_v2/features/profile_section/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -40,11 +40,11 @@ class _MainScreenState extends State<MainScreen> {
             _currentIndex = index;
           });
         },
-        children: [
-          const HomeScreen(),
-          const BranchesScreen(),
+        children: const [
+          HomeScreen(),
+          BranchesScreen(),
           OffersScreen(),
-          const ProfileScreen(),
+          ProfileScreen(),
         ],
       ),
       bottomNavigationBar: BottomAppBar(

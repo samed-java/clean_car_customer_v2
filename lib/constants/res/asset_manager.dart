@@ -8,6 +8,8 @@ class ImageAssets {
   static String onboarding2 = '$imagePath/onboarding2.svg';
   static String onboarding3 = '$imagePath/onboarding3.svg';
   static String logo = '$imagePath/logo.svg';
+  static String sedan = '$imagePath/sedan.svg';
+  static String jeep = '$imagePath/jeep.svg';
   static String termsAndAgreementLogo =
       '$imagePath/terms_and_agreement_logo.svg';
 }
@@ -17,7 +19,9 @@ class IconAssets {
   static String profile = '$iconPath/profile.svg';
   static String map = '$iconPath/map.svg';
   static String starFill = '$iconPath/star_fill.svg';
+  static String starEmpty = '$iconPath/empty_star.svg';
   static String plus = '$iconPath/plus.svg';
+  static String pencil = '$iconPath/pencil.svg';
   static String search = '$iconPath/search.svg';
   static String search2 = '$iconPath/search.png';
   static String filter = '$iconPath/filter.svg';
@@ -27,6 +31,7 @@ class IconAssets {
   static String arrowDown = '$iconPath/arrow_down.png';
   static String exit = '$iconPath/exit.svg';
   static String backButton = '$iconPath/back_button.png';
+  static String backButton2 = '$iconPath/back_button.svg';
   static String phone = '$iconPath/phone.svg';
   static String clock = '$iconPath/clock.svg';
   static String location = '$iconPath/location.svg';

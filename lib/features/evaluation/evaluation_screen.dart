@@ -1,10 +1,10 @@
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
-import 'package:clean_car_customer_v2/components/offer_card.dart';
+import 'package:clean_car_customer_v2/features/evaluation/widgets/evaluation_content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class OffersScreen extends StatelessWidget {
-  const OffersScreen({super.key});
+class EvaluationScreen extends StatelessWidget {
+  const EvaluationScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class OffersScreen extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(top: 10.h, bottom: 10.h, left: 20.w),
               child: Text(
-                "Təkliflər",
+                "Qiymətləndirmə",
                 style: getSemiBoldStyle(
                   color: ColorManager.mainWhite,
                   fontSize: 20,
@@ -38,15 +38,8 @@ class OffersScreen extends StatelessWidget {
                 ),
                 child: Padding(
                   padding: Paddings.all16,
-                  child: ListView.builder(
-                      physics: const BouncingScrollPhysics(),
-                      itemCount: 5,
-                      itemBuilder: (context, builder) {
-                        return Padding(
-                          padding: Paddings.vertical8,
-                          child: const OfferCard(),
-                        );
-                      }),
+                  // child: BranchesContent(),
+                  child: const EvaluationContent(),
                 ),
               ),
             ),

@@ -17,7 +17,7 @@ class BranchesScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: Paddings.all10,
+              padding: EdgeInsets.only(top: 10.h, bottom: 10.h, left: 20.w),
               child: Text(
                 "Filiallar",
                 style: getSemiBoldStyle(

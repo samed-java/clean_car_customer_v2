@@ -1,10 +1,8 @@
 import 'package:clean_car_customer_v2/components/custom_button.dart';
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
-// import 'package:clean_car_customer_v2/features/home/widgets/star_box.dart';
-import 'package:clean_car_customer_v2/features/home/widgets/textfield_widget.dart';
+import 'package:clean_car_customer_v2/components/custom_textfield_widget.dart';
 import 'package:clean_car_customer_v2/utils/pager/go.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bounce/flutter_bounce.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -39,19 +37,21 @@ void openBranchesFilterBox(BuildContext context, double height) {
                         fontSize: 18,
                       ),
                     ),
-                    Bounce(
-                      duration: const Duration(milliseconds: 50),
-                      onPressed: () {
+                    InkWell(
+                      onTap: () {
                         Go.back();
                       },
                       child: SizedBox(
-                        height: 20.h,
-                        width: 20.w,
-                        child: SvgPicture.asset(
-                          IconAssets.exit,
+                        child: Padding(
+                          padding: Paddings.all6,
+                          child: SvgPicture.asset(
+                            IconAssets.exit,
+                            height: 16.h,
+                            width: 16.w,
+                          ),
                         ),
                       ),
-                    )
+                    ),
                   ],
                 ),
                 Gaps.h10,
