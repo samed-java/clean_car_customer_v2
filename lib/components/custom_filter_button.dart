@@ -20,7 +20,7 @@ class FilterButton extends StatelessWidget {
         height: 40.h,
         decoration: BoxDecoration(
           color: ColorManager.mainBlue,
-          borderRadius: BorderRadius.all(RadiusManager.radiusCircular6),
+          borderRadius: BorderRadius.circular(6.r),
         ),
         child: Image.asset(IconAssets.filter2),
       ),

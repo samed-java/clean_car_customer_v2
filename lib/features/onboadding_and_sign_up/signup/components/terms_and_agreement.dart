@@ -9,7 +9,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class TermsAndAgreementScreen extends StatelessWidget {
-  TermsAndAgreementScreen({super.key});
+  TermsAndAgreementScreen({
+    super.key,
+    required this.emailText,
+    required this.nameText,
+    required this.numberText,
+  });
+  final String nameText;
+  final String emailText;
+  final String numberText;
+
   final ValueNotifier<bool> _isChecked = ValueNotifier<bool>(false);
 
   @override
@@ -17,6 +26,9 @@ class TermsAndAgreementScreen extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         top: true,
+        left: true,
+        right: true,
+        bottom: false,
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -66,6 +78,7 @@ class TermsAndAgreementScreen extends StatelessWidget {
                     child: Row(
                       children: [
                         CustomCheckbox(isCheckedNotifier: _isChecked),
+                        Gaps.w4,
                         Text(
                           "Şərtlər və qaydalar ilə razıyam",
                           style: getRegularStyle(
@@ -76,29 +89,35 @@ class TermsAndAgreementScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              ValueListenableBuilder<bool>(
-                valueListenable: _isChecked,
-                builder: (context, value, _) {
-                  return value
-                      ? CustomButton(
-                          frontText: "Davam Et",
-                          onPressed: () {
-                            Navigator.pushAndRemoveUntil(
-                                context,
-                                CupertinoPageRoute(
-                                    builder: (context) => const SignupScreen(
-                                          isAgree: true,
-                                        )),
-                                (route) => false);
-                          },
-                        )
-                      : CustomButton(
-                          frontText: "Geri Dön",
-                          onPressed: () {
-                            Go.back();
-                          },
-                        );
-                },
+              Padding(
+                padding: Paddings.horizontal24,
+                child: ValueListenableBuilder<bool>(
+                  valueListenable: _isChecked,
+                  builder: (context, value, _) {
+                    return value
+                        ? CustomButton(
+                            frontText: "Davam Et",
+                            onPressed: () {
+                              Navigator.pushAndRemoveUntil(
+                                  context,
+                                  CupertinoPageRoute(
+                                      builder: (context) => SignupScreen(
+                                            isAgree: true,
+                                            nameText: nameText,
+                                            emailText: emailText,
+                                            numberText: numberText,
+                                          )),
+                                  (route) => false);
+                            },
+                          )
+                        : CustomButton(
+                            frontText: "Geri Dön",
+                            onPressed: () {
+                              Go.back();
+                            },
+                          );
+                  },
+                ),
               ),
             ],
           ),

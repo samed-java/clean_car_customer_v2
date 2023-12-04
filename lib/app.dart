@@ -12,20 +12,20 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-        designSize: const Size(375, 812),
-        minTextAdapt: true,
-        splitScreenMode: true,
-        builder: (context, child) {
-          return MaterialApp(
-            locale: Locale(LocaleType.EN.name),
-            supportedLocales: context.supportedLocales,
-            localizationsDelegates: context.localizationsDelegate,
-            // color: ColorManager.neuturals1,
-            debugShowCheckedModeBanner: false,
-            navigatorKey: NavigationService.instance.navigationKey,
-            theme: getApplicationTheme(),
-            home: Pager.onboarding,
-          );
-        });
+      designSize: const Size(375, 812),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (context, child) {
+        return MaterialApp(
+          locale: Locale(LocaleType.EN.name),
+          supportedLocales: context.supportedLocales,
+          localizationsDelegates: context.localizationsDelegate,
+          debugShowCheckedModeBanner: false,
+          navigatorKey: NavigationService.instance.navigationKey,
+          theme: getApplicationTheme(),
+          home: Pager.splahBegin,
+        );
+      },
+    );
   }
 }

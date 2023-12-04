@@ -40,11 +40,13 @@ class _MainScreenState extends State<MainScreen> {
             _currentIndex = index;
           });
         },
-        children: const [
-          HomeScreen(),
-          BranchesScreen(),
-          OffersScreen(),
-          ProfileScreen(),
+        children: [
+          HomeScreen(
+            pageController: _pageController,
+          ),
+          const BranchesScreen(),
+          const OffersScreen(),
+          const ProfileScreen(),
         ],
       ),
       bottomNavigationBar: BottomAppBar(

@@ -13,10 +13,15 @@ class OTPScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // final double topSafeArea = MediaQuery.of(context).padding.top;
     return Scaffold(
       body: SafeArea(
+        bottom: false,
         child: Column(
           children: [
+            // SizedBox(
+            //   height: topSafeArea,
+            // ),
             Gaps.h24,
             const CustomUpperPart(
               headerText: "OTP Autentifikasiyası!!!",
@@ -35,14 +40,13 @@ class OTPScreen extends StatelessWidget {
                           headerText: "Təsdiqləndi!!!",
                           subText:
                               "Mobil tətbiqdəki qeydiyyatınız uğurla təsdiqləndi",
-                          page: Pager.login));
+                          page: Pager.main));
                 },
                 defaultPinTheme: PinTheme(
                   width: 200.w,
                   height: 45.h,
                   decoration: BoxDecoration(
-                    borderRadius:
-                        BorderRadius.all(RadiusManager.radiusCircular6),
+                    borderRadius: BorderRadius.circular(6.r),
                     color: ColorManager.mainWhite,
                   ),
                 ),

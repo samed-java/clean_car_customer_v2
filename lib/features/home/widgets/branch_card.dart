@@ -22,12 +22,12 @@ class BranchCard extends StatelessWidget {
           margin: Paddings.horizontal8,
           decoration: BoxDecoration(
             color: ColorManager.mainWhite,
-            borderRadius: BorderRadius.all(RadiusManager.radiusCircular6),
+            borderRadius: BorderRadius.circular(6.r),
           ),
           height: 160.h,
           width: 148.w,
           child: ClipRRect(
-            borderRadius: BorderRadius.all(RadiusManager.radiusCircular6),
+            borderRadius: BorderRadius.circular(6.r),
             child: Stack(
               children: [
                 Positioned(

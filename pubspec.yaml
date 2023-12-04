@@ -37,9 +37,11 @@ dependencies:
 
   #design
   animate_do: ^3.0.2
+  searchfield: ^0.8.9
   flutter_svg: any
   flutter_bounce: ^1.1.0
   flutter_screenutil: any
+  table_calendar: ^3.0.9
   pinput: ^3.0.1
   dropdown_button2: ^2.3.9
 
@@ -54,8 +56,8 @@ dev_dependencies:
   flutter_localization: any
   firebase_messaging: any
   flutter_local_notifications: any
-
   flutter_lints: ^2.0.0
+
 
 
 
@@ -76,7 +78,14 @@ flutter:
   fonts:
     - family: Poppins
       fonts:
+        - asset: assets/fonts/Poppins-Light.ttf
+          weight: 300
         - asset: assets/fonts/Poppins-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Poppins-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Poppins-SemiBold.ttf
+          weight: 600
         - asset: assets/fonts/Poppins-Bold.ttf
           weight: 700
         - asset: assets/fonts/Poppins-Italic.ttf

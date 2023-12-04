@@ -35,4 +35,19 @@ class IconAssets {
   static String phone = '$iconPath/phone.svg';
   static String clock = '$iconPath/clock.svg';
   static String location = '$iconPath/location.svg';
+  static String card = '$iconPath/card.svg';
+  static String cash = '$iconPath/cash.svg';
+
+  // Washing Types
+  static String carAuto = '$iconPath/car_auto.svg';
+  static String carCeramic = '$iconPath/car_ceramic.svg';
+  static String carChemical = '$iconPath/car_chemical.svg';
+  static String carDetailed = '$iconPath/car_detailed.svg';
+  static String carInside = '$iconPath/car_inside.svg';
+  static String carOutside = '$iconPath/car_outside.svg';
+  static String carEngine = '$iconPath/car_engine.svg';
+  static String carNano = '$iconPath/car_nano.svg';
+  static String carPolishing = '$iconPath/car_polishing.svg';
+  static String carPremium = '$iconPath/car_premium.svg';
+  // Washing Types
 }

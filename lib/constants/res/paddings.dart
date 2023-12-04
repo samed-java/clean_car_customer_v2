@@ -26,6 +26,7 @@ class Paddings {
       EdgeInsets.symmetric(horizontal: 32.w, vertical: 16.h);
 
   static EdgeInsets all16 = EdgeInsets.all(16.w);
+  static EdgeInsets all12 = EdgeInsets.all(12.w);
   static EdgeInsets all24 = EdgeInsets.all(24.w);
   static EdgeInsets all32 = EdgeInsets.all(32.w);
 

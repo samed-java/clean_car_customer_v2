@@ -4,6 +4,8 @@ import 'package:clean_car_customer_v2/features/branches_and_reservation/branch/w
 import 'package:clean_car_customer_v2/features/branches_and_reservation/branch/widgets/branch_info.dart';
 import 'package:clean_car_customer_v2/features/branches_and_reservation/branch/widgets/branch_note.dart';
 import 'package:clean_car_customer_v2/features/branches_and_reservation/branch/widgets/branch_upper.dart';
+import 'package:clean_car_customer_v2/utils/pager/go.dart';
+import 'package:clean_car_customer_v2/utils/pager/pager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -92,7 +94,11 @@ class _BranchScreenState extends State<BranchScreen> {
                         backgroundColor: ColorManager.mainBackgroundColor,
                       ),
                       Gaps.h16,
-                      CustomButton(frontText: "Rezerv Et", onPressed: () {}),
+                      CustomButton(
+                          frontText: "Rezerv Et",
+                          onPressed: () {
+                            Go.to(Pager.reservation);
+                          }),
                       SizedBox(
                         height: 50.h,
                       )

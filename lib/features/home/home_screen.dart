@@ -12,7 +12,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  final PageController? pageController;
+  const HomeScreen({super.key, this.pageController});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -48,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   FilterButton(
                     onPressed: () {
-                      openFilterBox(context, height);
+                      openHomeFilterBox(context, height);
                     },
                   ),
                 ],
@@ -71,6 +72,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     Padding(
                       padding: Paddings.horizontal16,
                       child: TextWidget(
+                        onPressed: () {
+                          widget.pageController?.animateToPage(
+                            1,
+                            duration: const Duration(milliseconds: 300),
+                            curve: Curves.easeInOut,
+                          );
+                          // widget.onPageChanged?.call(1);
+                        },
                         headerText: "Sizə yaxın mərkəzlər",
                         buttonText: "hamısı",
                         textStyle: getRegularStyle(
@@ -96,6 +105,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     Padding(
                       padding: Paddings.horizontal16,
                       child: TextWidget(
+                        onPressed: () {
+                          widget.pageController?.animateToPage(
+                            2,
+                            duration: const Duration(milliseconds: 300),
+                            curve: Curves.easeInOut,
+                          );
+                        },
                         buttonText: "hamısı",
                         headerText: "Ən son təkliflər",
                         textStyle: getUnderlineStyle(

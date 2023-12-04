@@ -13,6 +13,8 @@ class OffersScreen extends StatelessWidget {
       body: SafeArea(
         top: true,
         bottom: false,
+        left: true,
+        right: true,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

@@ -1,5 +1,6 @@
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TextFieldWidget extends StatelessWidget {
   const TextFieldWidget({super.key, required this.headerText});
@@ -18,16 +19,19 @@ class TextFieldWidget extends StatelessWidget {
           ),
         ),
         Gaps.h2,
-        TextFormField(
-          cursorColor: ColorManager.thirdBlack,
-          onChanged: (value) {},
-          decoration: InputDecoration(
-            contentPadding: Paddings.all8,
-            filled: true,
-            fillColor: ColorManager.mainWhite,
-            border: OutlineInputBorder(
-              borderSide: BorderSide.none,
-              borderRadius: BorderRadius.all(RadiusManager.radiusCircular6),
+        SizedBox(
+          height: 40.h,
+          child: TextFormField(
+            cursorColor: ColorManager.thirdBlack,
+            onChanged: (value) {},
+            decoration: InputDecoration(
+              contentPadding: Paddings.all8,
+              filled: true,
+              fillColor: ColorManager.mainWhite,
+              border: OutlineInputBorder(
+                borderSide: BorderSide.none,
+                borderRadius: BorderRadius.all(RadiusManager.radiusCircular6),
+              ),
             ),
           ),
         )

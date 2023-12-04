@@ -1,1 +1,4 @@
-enum CarTypes { sedan, jeep }
+enum CarTypes {
+  sedan,
+  jeep,
+}
