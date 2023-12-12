@@ -1,5 +1,4 @@
 abstract class BaseRequestModel {
-  final String method;
-  BaseRequestModel({required this.method});
+  BaseRequestModel();
   Map<String, dynamic> toJson();
 }

@@ -1,12 +1,13 @@
-
+import '../../../../features/onboadding_and_sign_up/signup/data/model/response/sign_up_res_model.dart';
+import '../../../../utils/language/data/model/response/language_response_model.dart';
 
 class FactoryGenerator {
   FactoryGenerator._();
 
   static final Map<Type, Function> _factoryGenerator = {
-    // OnboardingDataModel: (json) => OnboardingDataModel.fromJson(json),
+    LanguageResponseModel: (json) => LanguageResponseModel.fromJson(json),
     // LoginResModel: (json) => LoginResModel.fromJson(json),
-    // SignUpResModel: (json) => SignUpResModel.fromJson(json),
+    SignUpResModel: (json) => SignUpResModel.fromJson(json),
     // OtpResModel: (json) => OtpResModel.fromJson(json),
     // ForgotPassResModel: (json) => ForgotPassResModel.fromJson(json),
     // NewPassResModel: (json) => NewPassResModel.fromJson(json)

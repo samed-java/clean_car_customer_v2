@@ -1,11 +1,16 @@
 import 'base_response_data.dart';
 
-class BaseResponseModel<T> {
-  String? result;
-  Error? error;
+class BaseResponseModel<T>{
+  bool? success;
   T? data;
+  String? message;
 
-  BaseResponseModel({this.result, this.error, this.data});
+  BaseResponseModel({
+    required this.success,
+    required this.data,
+    required this.message,
+  });
+
 }
 
 class Error {

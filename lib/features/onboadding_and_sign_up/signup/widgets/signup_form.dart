@@ -2,55 +2,34 @@ import 'package:clean_car_customer_v2/components/custom_button.dart';
 import 'package:clean_car_customer_v2/components/custom_checkbar.dart';
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
 import 'package:clean_car_customer_v2/features/onboadding_and_sign_up/signup/components/terms_and_agreement.dart';
+import 'package:clean_car_customer_v2/features/onboadding_and_sign_up/signup/data/cubit/sign_up_cubit.dart';
 import 'package:clean_car_customer_v2/utils/pager/go.dart';
 import 'package:clean_car_customer_v2/utils/pager/pager.dart';
 import 'package:clean_car_customer_v2/utils/validators/is_email_valid.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 // ignore: must_be_immutable
 class SignupFormWidget extends StatefulWidget {
-  SignupFormWidget({
-    super.key,
-    required this.isChecked,
-    this.emailText,
-    this.nameText,
-    this.numberText,
-  });
-  bool isChecked;
-  String? emailText;
-  String? nameText;
-  String? numberText;
+  SignupFormWidget({super.key});
 
   @override
   State<SignupFormWidget> createState() => _SignupFormWidgetState();
 }
 
 class _SignupFormWidgetState extends State<SignupFormWidget> {
-  final _formKey = GlobalKey<FormState>();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _numberController = TextEditingController();
-  ValueNotifier<bool> _isCheckedRememberMe = ValueNotifier<bool>(false);
+  late final SignUpCubit cubit;
   @override
   void initState() {
-    if (widget.nameText != null) {
-      _nameController.text = widget.nameText!;
-    }
-    if (widget.emailText != null) {
-      _emailController.text = widget.emailText!;
-    }
-    if (widget.numberText != null) {
-      _numberController.text = widget.numberText!;
-    }
-    _isCheckedRememberMe = ValueNotifier<bool>(widget.isChecked);
+    cubit = context.read<SignUpCubit>();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: _formKey,
+      key: cubit.formKey,
       child: Padding(
         padding: Paddings.all16,
         child: Column(
@@ -77,7 +56,7 @@ class _SignupFormWidgetState extends State<SignupFormWidget> {
               },
               keyboardType: TextInputType.phone,
               cursorColor: ColorManager.thirdBlack,
-              controller: _numberController,
+              controller: cubit.numberController,
               onChanged: (value) {},
               decoration: InputDecoration(
                 contentPadding: Paddings.all8,
@@ -114,7 +93,7 @@ class _SignupFormWidgetState extends State<SignupFormWidget> {
                 return null;
               },
               cursorColor: ColorManager.thirdBlack,
-              controller: _nameController,
+              controller: cubit.nameController,
               onChanged: (value) {},
               decoration: InputDecoration(
                 contentPadding: Paddings.all8,
@@ -154,7 +133,7 @@ class _SignupFormWidgetState extends State<SignupFormWidget> {
                 return null;
               },
               cursorColor: ColorManager.thirdBlack,
-              controller: _emailController,
+              controller: cubit.emailController,
               onChanged: (value) {},
               decoration: InputDecoration(
                 contentPadding: Paddings.all8,
@@ -171,7 +150,7 @@ class _SignupFormWidgetState extends State<SignupFormWidget> {
             Row(
               children: [
                 Gaps.w4,
-                CustomCheckbox(isCheckedNotifier: _isCheckedRememberMe),
+                CustomCheckbox(isCheckedNotifier: cubit.isCheckedRememberMe),
                 RichText(
                   textAlign: TextAlign.center,
                   text: TextSpan(
@@ -182,10 +161,8 @@ class _SignupFormWidgetState extends State<SignupFormWidget> {
                             color: ColorManager.mainBlue, fontSize: 14),
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
-                            Go.to(TermsAndAgreementScreen(
-                              nameText: _nameController.text,
-                              emailText: _emailController.text,
-                              numberText: _numberController.text,
+                            Go.to(Pager.termsAndAgreement(
+                              signUpCubit: cubit,
                             ));
                           },
                       ),
@@ -204,14 +181,15 @@ class _SignupFormWidgetState extends State<SignupFormWidget> {
             ),
             Gaps.h32,
             ValueListenableBuilder<bool>(
-                valueListenable: _isCheckedRememberMe,
+                valueListenable: cubit.isCheckedRememberMe,
                 builder: (context, value, _) {
                   return CustomButton(
                     frontText: "Davam Et",
                     onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        Go.to(Pager.otp);
-                      }
+                      cubit.signUp();
+                      // if (_formKey.currentState!.validate()) {
+                      //   Go.to(Pager.otp);
+                      // }
                     },
                     isDisable: value ? false : true,
                   );

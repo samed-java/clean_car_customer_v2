@@ -1,3 +1,4 @@
+import 'dart:convert';
 
 import 'package:get_storage/get_storage.dart';
 
@@ -32,6 +33,35 @@ class StorageService {
 
   String? getAccessToken() {
     return instance.read<String>(StorageKeys.accessToken);
+  }
+
+  Future<void> setPhoneNumber([String? number]) async {
+    if (number != null) {
+      await instance.write(StorageKeys.number, number);
+    } else {
+      await instance.remove(StorageKeys.number);
+    }
+  }
+
+  String? getPhoneNumber() {
+    return instance.read<String>(StorageKeys.number);
+  }
+
+  Future<void> setLang(Map<String, dynamic> lang) async {
+    await instance.write(StorageKeys.lang, json.encode(lang));
+  }
+
+  Future<bool> get hasLang async {
+    return (await instance.read(StorageKeys.lang)) != null;
+  }
+
+  Map<String, dynamic>? getLang() {
+    var data = instance.read<String>(StorageKeys.lang);
+    if (data != null) {
+      return json.decode(data);
+    } else {
+      throw Exception("Languages not initialized");
+    }
   }
 
   Future<void> setOtpToken([String? token]) async {

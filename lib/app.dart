@@ -17,9 +17,6 @@ class App extends StatelessWidget {
       splitScreenMode: true,
       builder: (context, child) {
         return MaterialApp(
-          locale: Locale(LocaleType.EN.name),
-          supportedLocales: context.supportedLocales,
-          localizationsDelegates: context.localizationsDelegate,
           debugShowCheckedModeBanner: false,
           navigatorKey: NavigationService.instance.navigationKey,
           theme: getApplicationTheme(),

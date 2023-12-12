@@ -1,23 +1,20 @@
 import 'package:clean_car_customer_v2/components/custom_button.dart';
 import 'package:clean_car_customer_v2/components/custom_checkbar.dart';
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
+import 'package:clean_car_customer_v2/features/onboadding_and_sign_up/signup/data/cubit/sign_up_cubit.dart';
 import 'package:clean_car_customer_v2/features/onboadding_and_sign_up/signup/signup_screen.dart';
 import 'package:clean_car_customer_v2/utils/pager/go.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class TermsAndAgreementScreen extends StatelessWidget {
   TermsAndAgreementScreen({
     super.key,
-    required this.emailText,
-    required this.nameText,
-    required this.numberText,
   });
-  final String nameText;
-  final String emailText;
-  final String numberText;
+
 
   final ValueNotifier<bool> _isChecked = ValueNotifier<bool>(false);
 
@@ -92,22 +89,13 @@ class TermsAndAgreementScreen extends StatelessWidget {
               Padding(
                 padding: Paddings.horizontal24,
                 child: ValueListenableBuilder<bool>(
-                  valueListenable: _isChecked,
+                  valueListenable: context.read<SignUpCubit>().isCheckedRememberMe,
                   builder: (context, value, _) {
                     return value
                         ? CustomButton(
                             frontText: "Davam Et",
                             onPressed: () {
-                              Navigator.pushAndRemoveUntil(
-                                  context,
-                                  CupertinoPageRoute(
-                                      builder: (context) => SignupScreen(
-                                            isAgree: true,
-                                            nameText: nameText,
-                                            emailText: emailText,
-                                            numberText: numberText,
-                                          )),
-                                  (route) => false);
+                              Go.back();
                             },
                           )
                         : CustomButton(

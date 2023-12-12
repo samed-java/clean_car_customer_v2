@@ -1,5 +1,8 @@
 class ApiKeys {
   ApiKeys._();
-  static const String baseUrl =
-      "https://test-api.efendiyev.com/kerimoff/tembel-qarisqa/";
+  static const String _baseUrl = "https://cleancar.az/api";
+
+  static const String getLanguages = "$_baseUrl/getCustomerWords";
+  static const String signUp = "$_baseUrl/customerRegister";
+  static const String verifyOTP = "$_baseUrl/customerVerifyOpt";
 }
