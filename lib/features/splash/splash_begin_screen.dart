@@ -5,6 +5,9 @@ import 'package:clean_car_customer_v2/utils/pager/pager.dart';
 import 'package:clean_car_customer_v2/utils/pager/transition.dart';
 import 'package:flutter/material.dart';
 
+import '../../data/services/local/storage_service.dart';
+import '../../locator.dart';
+
 //import 'package:flutter_svg/flutter_svg.dart';
 
 class SplashBeginScreen extends StatefulWidget {
@@ -30,8 +33,14 @@ class _SplashBeginScreenState extends State<SplashBeginScreen> {
   @override
   void initState() {
     Timer(const Duration(milliseconds: 3000), () {
-      PageTransitionUtils.navigateWithFadeOutTransition(
-          context, Pager.onboarding);
+      if(locator.get<StorageService>().getAccessToken()!=null){
+        PageTransitionUtils.navigateWithFadeOutTransition(
+            context, Pager.main);
+      }else{
+        PageTransitionUtils.navigateWithFadeOutTransition(
+            context, Pager.onboarding);
+      }
+
     });
     super.initState();
   }

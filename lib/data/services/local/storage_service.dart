@@ -64,6 +64,23 @@ class StorageService {
     }
   }
 
+  Future<void> setRegions(Map<String, dynamic> lang) async {
+    await instance.write(StorageKeys.regions, json.encode(lang));
+  }
+
+  Future<bool> get hasRegions async {
+    return (await instance.read(StorageKeys.regions)) != null;
+  }
+
+  Map<String, dynamic>? getRegions() {
+    var data = instance.read<String>(StorageKeys.regions);
+    if (data != null) {
+      return json.decode(data);
+    } else {
+      throw Exception("Languages not initialized");
+    }
+  }
+
   Future<void> setOtpToken([String? token]) async {
     if (token != null) {
       await instance.write(StorageKeys.otpToken, token);

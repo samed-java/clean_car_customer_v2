@@ -2,35 +2,35 @@ import 'dart:io';
 
 import 'errors.dart';
 
-class BaseErrorHandler {
-  BaseErrorHandler(
-      {required this.onProgress,
-      this.onDataIsNullError,
-      this.onSocketException,
-      this.onResponseBodyIsNullError,
-      this.onNotSuccessError,
-      this.onOtherError});
+mixin BaseErrorHandler {
+  // BaseErrorHandler(
+  //     {required this.onProgress,
+  //     this.onDataIsNullError,
+  //     this.onSocketException,
+  //     this.onResponseBodyIsNullError,
+  //     this.onNotSuccessError,
+  //     this.onOtherError});
 
-  final void Function() onProgress;
-  final void Function(SocketException e)? onSocketException;
-  final void Function(ResponseBodyIsNullError e)? onResponseBodyIsNullError;
-  final void Function(DataIsNullError e)? onDataIsNullError;
-  final void Function(NotSuccessError e)? onNotSuccessError;
-  final void Function(Object e, StackTrace s)? onOtherError;
+  void onProgress();
+  void onSocketException(SocketException e){}
+  void onResponseBodyIsNullError(ResponseBodyIsNullError e){}
+  void onDataIsNullError(DataIsNullError e){}
+  void onNotSuccessError(NotSuccessError e){}
+  void onOtherError(Object e, StackTrace s){}
 
   void execute() {
     try {
       onProgress.call();
     } on SocketException catch (e) {
-      onSocketException?.call(e);
+      onSocketException.call(e);
     } on ResponseBodyIsNullError catch (e) {
-      onResponseBodyIsNullError?.call(e);
+      onResponseBodyIsNullError.call(e);
     } on DataIsNullError catch (e) {
-      onDataIsNullError?.call(e);
+      onDataIsNullError.call(e);
     } on NotSuccessError catch (e) {
-      onNotSuccessError?.call(e);
+      onNotSuccessError.call(e);
     } catch (e, s) {
-      onOtherError?.call(e, s);
+      onOtherError.call(e, s);
     }
   }
 }

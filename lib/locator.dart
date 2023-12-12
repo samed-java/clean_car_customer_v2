@@ -1,4 +1,5 @@
 
+import 'package:clean_car_customer_v2/utils/dynamic_constants/repo/regions_repository.dart';
 import 'package:clean_car_customer_v2/utils/language/repo/language_repository.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
@@ -22,4 +23,5 @@ void setUpLocator() {
   locator.registerLazySingleton<LanguageRepository>(() => LanguageRepository());
   locator.registerLazySingleton<SignUpRepository>(() => SignUpRepository());
   locator.registerLazySingleton<OTPRepository>(() => OTPRepository());
+  locator.registerLazySingleton<RegionsRepository>(() => RegionsRepository());
 }

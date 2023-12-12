@@ -11,7 +11,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'sign_up_state.dart';
 
-class SignUpCubit extends Cubit<SignUpState> {
+class SignUpCubit extends Cubit<SignUpState> with BaseErrorHandler{
   SignUpCubit() : super(SignUpInitial());
   final formKey = GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController();
@@ -22,21 +22,67 @@ class SignUpCubit extends Cubit<SignUpState> {
   ValueNotifier<bool> isCheckedRememberMe = ValueNotifier<bool>(false);
 
   void signUp() {
-    BaseErrorHandler(onProgress: () async {
-      if (formKey.currentState!.validate() && isCheckedRememberMe.value) {
-        emit(SignUpLoading());
-        var result = await _signUpRepo.send(SignUpReqModel(
-            phone: numberController.text,
-            name: nameController.text,
-            email: emailController.text));
-        if (result.token != null) {
-          _storageService.setAccessToken(result.token);
-          emit(SignUpRegistered());
-        } else {
-          _storageService.setPhoneNumber(result.user.phone.toString());
-          emit(SignUpNotRegistered());
-        }
+    // BaseErrorHandler(
+    //     onProgress: () async {
+    //   if (formKey.currentState!.validate() && isCheckedRememberMe.value) {
+    //     emit(SignUpLoading());
+    //     var result = await _signUpRepo.send(SignUpReqModel(
+    //         phone: numberController.text,
+    //         name: nameController.text,
+    //         email: emailController.text));
+    //     if (result.token != null) {
+    //       _storageService.setAccessToken(result.token);
+    //       emit(SignUpRegistered());
+    //     } else {
+    //       _storageService.setPhoneNumber(result.user.phone.toString());
+    //       emit(SignUpNotRegistered());
+    //     }
+    //   }
+    // }
+    // ).
+    execute();
+  }
+
+  @override
+  void onDataIsNullError(DataIsNullError e) {
+    // TODO: implement onDataIsNullError
+  }
+
+  @override
+  void onNotSuccessError(NotSuccessError e) {
+    // TODO: implement onNotSuccessError
+  }
+
+  @override
+  void onOtherError(Object e, StackTrace s) {
+    // TODO: implement onOtherError
+  }
+
+  @override
+  void onProgress() async  {
+    if (formKey.currentState!.validate() && isCheckedRememberMe.value) {
+      emit(SignUpLoading());
+      var result = await _signUpRepo.send(SignUpReqModel(
+          phone: numberController.text,
+          name: nameController.text,
+          email: emailController.text));
+      if (result.token != null) {
+        _storageService.setAccessToken(result.token);
+        emit(SignUpRegistered());
+      } else {
+        _storageService.setPhoneNumber(result.user.phone.toString());
+        emit(SignUpNotRegistered());
       }
-    }).execute();
+    }
+  }
+
+  @override
+  void onResponseBodyIsNullError(ResponseBodyIsNullError e) {
+    // TODO: implement onResponseBodyIsNullError
+  }
+
+  @override
+  void onSocketException(SocketException e) {
+    // TODO: implement onSocketException
   }
 }

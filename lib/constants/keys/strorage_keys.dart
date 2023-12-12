@@ -5,5 +5,6 @@ class StorageKeys {
   static const String otpToken = "otp_token";
   static const String refreshToken = "refresh_token";
   static const String lang = "lang";
+  static const String regions = "regions";
   static const String number = "number";
 }
