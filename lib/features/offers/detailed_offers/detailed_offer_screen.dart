@@ -6,8 +6,11 @@ import 'package:clean_car_customer_v2/utils/pager/go.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../data/model/res/offers_res_model.dart';
+
 class DetailedOfferScreen extends StatefulWidget {
-  const DetailedOfferScreen({super.key});
+  const DetailedOfferScreen({super.key, required this.offer});
+  final Offer offer;
 
   @override
   State<DetailedOfferScreen> createState() => _DetailedOfferScreenState();
@@ -62,13 +65,15 @@ class _DetailedOfferScreenState extends State<DetailedOfferScreen> {
                         Padding(
                           padding: Paddings.vertical16,
                           child: Text(
-                            "Super təklif",
+                            widget.offer.title??'Offer',
                             style: getSemiBoldStyle(
                                 color: ColorManager.secondaryBlack,
                                 fontSize: 18),
                           ),
                         ),
-                      const OfferWidget(),
+                      OfferWidget(
+                        offerContent: widget.offer.content,
+                      ),
                       Gaps.h16,
                       const BranchInfoWidget(),
                       Gaps.h24,

@@ -1,6 +1,9 @@
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
 import 'package:clean_car_customer_v2/components/offer_card.dart';
+import 'package:clean_car_customer_v2/features/offers/cubit/offers_cubit.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class OffersScreen extends StatelessWidget {
@@ -40,15 +43,28 @@ class OffersScreen extends StatelessWidget {
                 ),
                 child: Padding(
                   padding: Paddings.all16,
-                  child: ListView.builder(
-                      physics: const BouncingScrollPhysics(),
-                      itemCount: 5,
-                      itemBuilder: (context, builder) {
-                        return Padding(
-                          padding: Paddings.vertical8,
-                          child: const OfferCard(),
-                        );
-                      }),
+                  child: BlocBuilder<OffersCubit, OffersState>(
+                    builder: (context, state) {
+                      if(state is OffersSuccess){
+                        return ListView.builder(
+                            physics: const BouncingScrollPhysics(),
+                            itemCount: state.data.offers.length,
+                            itemBuilder: (context, index) {
+                              return Padding(
+                                padding: Paddings.vertical8,
+                                child: OfferCard(offer: state.data.offers.elementAt(index),),
+                              );
+                            });
+                      }
+                      else if(state is OffersLoading){
+                        return const Center(child: CupertinoActivityIndicator(),);
+                      }
+                      else if(state is OffersFail){
+                        return Center(child: Text(state.message??''),);
+                      }
+                      return const SizedBox.shrink();
+                    },
+                  ),
                 ),
               ),
             ),

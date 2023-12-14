@@ -32,10 +32,25 @@ abstract class BaseRepository<T> {
     }
   }
 
-  Future<T?> fetch({BaseRequestModel? queryParameters}) async {
+  Future<T> fetch({BaseRequestModel? queryParameters}) async {
     BaseResponseModel<T> result = await locator
         .get<GlobalService>()
         .fetchData<T>(baseUrl, queryParameters);
-    return result.data;
+    if (result != null) {
+      if (result.success ?? false) {
+        if (result.data != null) {
+          return result.data!;
+        } else {
+          throw DataIsNullError(
+              message: "Data returned null from request $baseUrl");
+        }
+      } else {
+        throw NotSuccessError(
+            message: "Request result is not success from request $baseUrl");
+      }
+    } else {
+      throw ResponseBodyIsNullError(
+          message: "Response body is null from request $baseUrl");
+    }
   }
 }

@@ -1,3 +1,4 @@
+import '../../../../features/offers/data/model/res/offers_res_model.dart';
 import '../../../../features/onboadding_and_sign_up/signup/data/model/response/sign_up_res_model.dart';
 import '../../../../utils/language/data/model/response/language_response_model.dart';
 
@@ -8,6 +9,7 @@ class FactoryGenerator {
     LanguageResponseModel: (json) => LanguageResponseModel.fromJson(json),
     // LoginResModel: (json) => LoginResModel.fromJson(json),
     SignUpResModel: (json) => SignUpResModel.fromJson(json),
+    OfferResModel: (json) => OfferResModel.fromJson(json),
     // OtpResModel: (json) => OtpResModel.fromJson(json),
     // ForgotPassResModel: (json) => ForgotPassResModel.fromJson(json),
     // NewPassResModel: (json) => NewPassResModel.fromJson(json)

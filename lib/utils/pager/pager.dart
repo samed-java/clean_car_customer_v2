@@ -23,6 +23,9 @@ import 'package:clean_car_customer_v2/features/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../features/offers/cubit/offers_cubit.dart';
+import '../../features/offers/data/model/res/offers_res_model.dart';
+
 class Pager {
   static Widget get onboarding => const OnboardingScreen();
   static Widget get login => const LoginScreen();
@@ -30,7 +33,9 @@ class Pager {
         create: (context) => OTPCubit(),
         child: const OTPScreen(),
       );
-  static Widget get main => const MainScreen();
+  static Widget get main => BlocProvider(
+      create: (context)=>OffersCubit()..execute(),
+      child: const MainScreen());
   static Widget get signup => BlocProvider<SignUpCubit>(
         create: (context) => SignUpCubit(),
         child: SignupScreen(),
@@ -43,11 +48,14 @@ class Pager {
   static Widget get personalInfo => const PersonalInfoScreen();
   static Widget get reservations => const ReservationsScreen();
   static Widget get reservationDetail => const ReservationDetailScreen();
-  static Widget get detialedOffer => const DetailedOfferScreen();
   static Widget get evaluation => const EvaluationScreen();
   static Widget get myCars => const MyCarsScreen();
   static Widget get splahBegin => const SplashBeginScreen();
   static Widget get demo2 => const Demo2();
+
+  static Widget detialedOffer(Offer offer) => DetailedOfferScreen(
+        offer: offer,
+      );
 
   static Widget termsAndAgreement({required SignUpCubit signUpCubit}) =>
       BlocProvider<SignUpCubit>.value(

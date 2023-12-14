@@ -1,10 +1,11 @@
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:html_widget/html_widget.dart';
 
 class OfferWidget extends StatelessWidget {
-  const OfferWidget({super.key});
-
+  const OfferWidget({super.key,required this.offerContent});
+  final String offerContent;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -36,10 +37,13 @@ class OfferWidget extends StatelessWidget {
           ),
           child: Padding(
             padding: Paddings.all10,
-            child: Text(
-              "Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).. ",
-              style:
-                  getRegularStyle(color: ColorManager.mainBlack, fontSize: 14),
+            // child: Text(
+            //   "Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).. ",
+            //   style:
+            //       getRegularStyle(color: ColorManager.mainBlack, fontSize: 14),
+            // ),
+            child: Column(
+              children: MyHtmlParser.parseHtmlToListOfTextWidgets(offerContent),
             ),
           ),
         ),

@@ -1,4 +1,5 @@
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
+import 'package:clean_car_customer_v2/features/offers/data/model/res/offers_res_model.dart';
 import 'package:clean_car_customer_v2/utils/pager/go.dart';
 import 'package:clean_car_customer_v2/utils/pager/pager.dart';
 import 'package:flutter/material.dart';
@@ -7,13 +8,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class OfferCard extends StatelessWidget {
-  const OfferCard({super.key});
+  const OfferCard({super.key,required this.offer});
+
+  final Offer offer;
 
   @override
   Widget build(BuildContext context) {
     return Bounce(
       onPressed: () {
-        Go.to(Pager.detialedOffer);
+        Go.to(Pager.detialedOffer(offer));
       },
       duration: const Duration(milliseconds: 100),
       child: Container(
@@ -48,7 +51,7 @@ class OfferCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Cola mərkəzi",
+                        offer.title??'Offer',
                         style: getMediumStyle(
                           color: ColorManager.mainBlack,
                           fontSize: 16.sp,

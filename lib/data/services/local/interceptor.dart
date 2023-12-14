@@ -8,9 +8,12 @@ class ClientInterceptor extends Interceptor {
   var _storage = locator.get<StorageService>();
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-
-
-    //super.onRequest(options, handler);
+    String? token = locator.get<StorageService>().getAccessToken();
+    if(token != null) {
+      print(token);
+      print(options.uri);
+      options.headers['Authorization'] = "Bearer $token";
+    }
     handler.next(options);
   }
 

@@ -7,6 +7,7 @@ import 'package:get_it/get_it.dart';
 import 'data/services/local/interceptor.dart';
 import 'data/services/local/storage_service.dart';
 import 'data/services/remote/global_service.dart';
+import 'features/offers/data/repo/offers_repo.dart';
 import 'features/onboadding_and_sign_up/otp/data/repository/otp_repository.dart';
 import 'features/onboadding_and_sign_up/signup/data/repository/sign_up_repository.dart';
 
@@ -24,4 +25,5 @@ void setUpLocator() {
   locator.registerLazySingleton<SignUpRepository>(() => SignUpRepository());
   locator.registerLazySingleton<OTPRepository>(() => OTPRepository());
   locator.registerLazySingleton<RegionsRepository>(() => RegionsRepository());
+  locator.registerLazySingleton<OffersRepository>(() => OffersRepository());
 }

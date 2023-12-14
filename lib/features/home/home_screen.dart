@@ -125,17 +125,17 @@ class _HomeScreenState extends State<HomeScreen> {
                           padding: Paddings.horizontal16,
                           child: Column(
                             children: [
-                              ListView.builder(
-                                physics: const NeverScrollableScrollPhysics(),
-                                shrinkWrap: true,
-                                itemCount: 3,
-                                itemBuilder: (context, builder) {
-                                  return const Padding(
-                                    padding: EdgeInsets.only(bottom: 12),
-                                    child: OfferCard(),
-                                  );
-                                },
-                              ),
+                              // ListView.builder(
+                              //   physics: const NeverScrollableScrollPhysics(),
+                              //   shrinkWrap: true,
+                              //   itemCount: 3,
+                              //   itemBuilder: (context, builder) {
+                              //     return const Padding(
+                              //       padding: EdgeInsets.only(bottom: 12),
+                              //       child: OfferCard(),
+                              //     );
+                              //   },
+                              // ),
                             ],
                           ),
                         ),
