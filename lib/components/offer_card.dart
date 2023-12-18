@@ -38,7 +38,7 @@ class OfferCard extends StatelessWidget {
                 width: 108.w,
                 height: 100.h,
                 child: Image.network(
-                  "https://wavescarwash.co.uk/images/pageImages/Coventry4RebrandPhotos-23102069.jpeg",
+                  offer.image!,
                   fit: BoxFit.fill,
                 ),
               ),
@@ -69,7 +69,7 @@ class OfferCard extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                       ),
                       Text(
-                        "12 % endirim",
+                        offer.discount??'',
                         style: getMediumStyle(
                           color: ColorManager.mainBlue,
                           fontSize: 14.sp,

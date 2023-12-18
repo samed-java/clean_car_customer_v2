@@ -5,7 +5,9 @@ import 'package:flutter_bounce/flutter_bounce.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DetailedOfferImage extends StatelessWidget {
-  const DetailedOfferImage({super.key});
+  const DetailedOfferImage({super.key,required this.image});
+
+  final String image;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,7 @@ class DetailedOfferImage extends StatelessWidget {
             height: 350.h,
             width: double.infinity,
             child: Image.network(
-              "https://wavescarwash.co.uk/images/pageImages/Coventry4RebrandPhotos-23102069.jpeg",
+              image,
               fit: BoxFit.fill,
             ),
           ),

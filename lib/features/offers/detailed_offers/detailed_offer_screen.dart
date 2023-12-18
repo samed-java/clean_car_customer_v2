@@ -49,8 +49,10 @@ class _DetailedOfferScreenState extends State<DetailedOfferScreen> {
             expandedHeight: 200.h,
             floating: false,
             pinned: false,
-            flexibleSpace: const FlexibleSpaceBar(
-              background: DetailedOfferImage(),
+            flexibleSpace: FlexibleSpaceBar(
+              background: DetailedOfferImage(
+                image: widget.offer.image!,
+              ),
             ),
           ),
           SliverList(
@@ -65,7 +67,7 @@ class _DetailedOfferScreenState extends State<DetailedOfferScreen> {
                         Padding(
                           padding: Paddings.vertical16,
                           child: Text(
-                            widget.offer.title??'Offer',
+                            widget.offer.title ?? 'Offer',
                             style: getSemiBoldStyle(
                                 color: ColorManager.secondaryBlack,
                                 fontSize: 18),
