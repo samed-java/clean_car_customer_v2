@@ -6,7 +6,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class ReservationDetailScreen extends StatelessWidget {
-  const ReservationDetailScreen({super.key});
+  const ReservationDetailScreen({super.key, this.isNew = false});
+  final bool isNew;
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +63,9 @@ class ReservationDetailScreen extends StatelessWidget {
                 ),
                 child: Padding(
                   padding: Paddings.all16,
-                  child: const ReservationDetailContent(),
+                  child: ReservationDetailContent(
+                    isNew: isNew,
+                  ),
                 ),
                 // child: const MyCarsContent(),
               ),

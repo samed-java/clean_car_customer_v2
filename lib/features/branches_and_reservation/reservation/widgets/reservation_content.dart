@@ -6,6 +6,8 @@ import 'package:clean_car_customer_v2/features/branches_and_reservation/reservat
 import 'package:clean_car_customer_v2/features/branches_and_reservation/reservation/widgets/payment_method_widget.dart';
 import 'package:clean_car_customer_v2/features/branches_and_reservation/reservation/widgets/reservation_choose_car.dart';
 import 'package:clean_car_customer_v2/features/branches_and_reservation/reservation/widgets/reservation_location_card.dart';
+import 'package:clean_car_customer_v2/utils/pager/go.dart';
+import 'package:clean_car_customer_v2/utils/pager/pager.dart';
 import 'package:flutter/material.dart';
 
 class ReservationContent extends StatelessWidget {
@@ -104,7 +106,9 @@ class ReservationContent extends StatelessWidget {
             padding: Paddings.horizontal16,
             child: CustomButton(
               frontText: "Rezerv Et",
-              onPressed: () {},
+              onPressed: () {
+                Go.to(Pager.reservationDetail(isNew: true));
+              },
             ),
           ),
           Gaps.h24,

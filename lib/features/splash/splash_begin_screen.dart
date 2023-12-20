@@ -32,15 +32,12 @@ class SplashBeginScreen extends StatefulWidget {
 class _SplashBeginScreenState extends State<SplashBeginScreen> {
   @override
   void initState() {
-    Timer(const Duration(milliseconds: 3000), () {
-      if(locator.get<StorageService>().getAccessToken()!=null){
-        PageTransitionUtils.navigateWithFadeOutTransition(
-            context, Pager.main);
-      }else{
-        PageTransitionUtils.navigateWithFadeOutTransition(
-            context, Pager.onboarding);
+    Timer(const Duration(milliseconds: 1500), () {
+      if (locator.get<StorageService>().getAccessToken() != null) {
+        PageTransitionUtils.navigateWithFadeOutTransition(context, Pager.main);
+      } else {
+        PageTransitionUtils.navigateWithFadeOutTransition(context, Pager.login);
       }
-
     });
     super.initState();
   }

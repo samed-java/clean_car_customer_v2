@@ -1,11 +1,14 @@
 import 'package:clean_car_customer_v2/components/custom_button.dart';
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
 import 'package:clean_car_customer_v2/features/profile_section/reservation_details/widgets/reservation_detail_card.dart';
+import 'package:clean_car_customer_v2/utils/pager/pager.dart';
+import 'package:clean_car_customer_v2/utils/pager/transition.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class ReservationDetailContent extends StatelessWidget {
-  const ReservationDetailContent({super.key});
+  const ReservationDetailContent({super.key, required this.isNew});
+  final bool isNew;
 
   @override
   Widget build(BuildContext context) {
@@ -85,18 +88,34 @@ class ReservationDetailContent extends StatelessWidget {
             headerText: "Qiymət",
           ),
           Gaps.h16,
-          CustomButton(
-            frontText: "Sil",
-            onPressed: () {},
-            backgroundColor: ColorManager.mainBackgroundColor,
-            foregroundColor: ColorManager.mainRed,
-            borderColor: ColorManager.mainRed,
-          ),
+          isNew
+              ? Gaps.empty
+              : CustomButton(
+                  frontText: "Sil",
+                  onPressed: () {},
+                  backgroundColor: ColorManager.mainBackgroundColor,
+                  foregroundColor: ColorManager.mainRed,
+                  borderColor: ColorManager.mainRed,
+                ),
           Gaps.h12,
-          CustomButton(
-            frontText: "Dəyişiklik Et",
-            onPressed: () {},
-          ),
+          isNew
+              ? CustomButton(
+                  frontText: "Təsdiqlə",
+                  onPressed: () {
+                    PageTransitionUtils.navigateWithFadeInTransition(
+                        context,
+                        Pager.splash(
+                            svgAssets: ImageAssets.calendar,
+                            headerText: "Rezerv edildi!!!",
+                            subText:
+                                "Rezerv etmə prosesiniz uğurla təsdiqləndi ",
+                            page: Pager.main));
+                  },
+                )
+              : CustomButton(
+                  frontText: "Dəyişiklik Et",
+                  onPressed: () {},
+                ),
           Gaps.h16
         ],
       ),

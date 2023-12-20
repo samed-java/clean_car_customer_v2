@@ -1,5 +1,5 @@
 import 'package:clean_car_customer_v2/components/custom_button.dart';
-import 'package:clean_car_customer_v2/components/custom_textfield_widget.dart';
+import 'package:clean_car_customer_v2/components/custom_dropdown_button.dart';
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
 import 'package:clean_car_customer_v2/features/home/widgets/star_box.dart';
 import 'package:clean_car_customer_v2/utils/pager/go.dart';
@@ -15,26 +15,6 @@ class FilterBoxContent extends StatefulWidget {
 }
 
 class _FilterBoxContentState extends State<FilterBoxContent> {
-  List<DropdownMenuItem<String>> items = [
-    const DropdownMenuItem<String>(
-      value: "",
-      child: Text(""),
-    ),
-    const DropdownMenuItem<String>(
-      value: "One",
-      child: Text("One"),
-    ),
-    const DropdownMenuItem<String>(
-      value: "Two",
-      child: Text("Two"),
-    ),
-    const DropdownMenuItem<String>(
-      value: "Three",
-      child: Text("Three"),
-    ),
-  ];
-  String drowDownValue = "";
-
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -81,11 +61,44 @@ class _FilterBoxContentState extends State<FilterBoxContent> {
                 ],
               ),
               Gaps.h10,
-              const TextFieldWidget(headerText: "Şəhər"),
+              // Şəhər
+              Text(
+                "Şəhər",
+                style: getRegularStyle(
+                  color: ColorManager.thirdBlack,
+                  fontSize: 14,
+                ),
+              ),
+              const CustomDropDownButton(
+                defaultValue: "Şəhər seç",
+              ),
+
               Gaps.h16,
-              const TextFieldWidget(headerText: "Bölgə"),
+              // Bölgə
+              Text(
+                "Bölgə",
+                style: getRegularStyle(
+                  color: ColorManager.thirdBlack,
+                  fontSize: 14,
+                ),
+              ),
+              const CustomDropDownButton(
+                defaultValue: "Bölgə seç",
+              ),
+
               Gaps.h16,
-              const TextFieldWidget(headerText: "Qəsəbə"),
+              // Qəsəbə
+              Text(
+                "Qəsəbə",
+                style: getRegularStyle(
+                  color: ColorManager.thirdBlack,
+                  fontSize: 14,
+                ),
+              ),
+              const CustomDropDownButton(
+                defaultValue: "Qəsəbə seç",
+              ),
+
               Gaps.h16,
               Text(
                 "Xidmət növü",
@@ -95,32 +108,7 @@ class _FilterBoxContentState extends State<FilterBoxContent> {
                 ),
               ),
               Gaps.h2,
-              Container(
-                height: 40.h,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(6.r)),
-                child: Padding(
-                  padding: Paddings.horizontal16,
-                  child: DropdownButtonHideUnderline(
-                    child: DropdownButton<String>(
-                      disabledHint: null,
-                      // isDense: true,
-                      underline: null,
-                      borderRadius: BorderRadius.circular(6.r),
-                      isExpanded: true,
-                      value: drowDownValue,
-                      icon: Image.asset(IconAssets.arrowDown),
-                      items: items,
-                      onChanged: (String? newValue) {
-                        setState(() {
-                          drowDownValue = newValue!;
-                        });
-                      },
-                    ),
-                  ),
-                ),
-              ),
+              const CustomDropDownButton(defaultValue: "Xidmət növü seç"),
               Gaps.h16,
               Text(
                 "Qiymətləndirmə",

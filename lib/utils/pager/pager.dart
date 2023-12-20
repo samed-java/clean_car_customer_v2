@@ -34,8 +34,7 @@ class Pager {
         child: const OTPScreen(),
       );
   static Widget get main => BlocProvider(
-      create: (context)=>OffersCubit()..execute(),
-      child: const MainScreen());
+      create: (context) => OffersCubit()..execute(), child: const MainScreen());
   static Widget get signup => BlocProvider<SignUpCubit>(
         create: (context) => SignUpCubit(),
         child: SignupScreen(),
@@ -47,15 +46,20 @@ class Pager {
   static Widget get profile => const ProfileScreen();
   static Widget get personalInfo => const PersonalInfoScreen();
   static Widget get reservations => const ReservationsScreen();
-  static Widget get reservationDetail => const ReservationDetailScreen();
   static Widget get evaluation => const EvaluationScreen();
   static Widget get myCars => const MyCarsScreen();
-  static Widget get splahBegin => const SplashBeginScreen();
+  static Widget get splashBegin => const SplashBeginScreen();
   static Widget get demo2 => const Demo2();
 
   static Widget detialedOffer(Offer offer) => DetailedOfferScreen(
         offer: offer,
       );
+
+  static Widget reservationDetail({bool isNew = false}) {
+    return ReservationDetailScreen(
+      isNew: isNew,
+    );
+  }
 
   static Widget termsAndAgreement({required SignUpCubit signUpCubit}) =>
       BlocProvider<SignUpCubit>.value(

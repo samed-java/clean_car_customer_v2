@@ -1,4 +1,6 @@
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
+import 'package:clean_car_customer_v2/features/branches_and_reservation/reservation/widgets/choose_car_dialog.dart';
+import 'package:clean_car_customer_v2/features/profile_section/my_cars/widgets/car_info_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bounce/flutter_bounce.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -15,6 +17,9 @@ class ReservationChooseCar extends StatelessWidget {
           child: SizedBox(
             height: 44.h,
             child: TextFormField(
+              onTap: () {
+                chooseCarDialog(context);
+              },
               readOnly: true,
               cursorColor: ColorManager.thirdBlack,
               onChanged: (value) {},
@@ -33,7 +38,9 @@ class ReservationChooseCar extends StatelessWidget {
         ),
         Gaps.w16,
         Bounce(
-          onPressed: () {},
+          onPressed: () {
+            carInfoDialog(context, isNew: true);
+          },
           duration: const Duration(milliseconds: 80),
           child: Container(
             width: 44.w,

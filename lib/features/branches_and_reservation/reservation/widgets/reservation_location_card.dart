@@ -1,4 +1,6 @@
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
+import 'package:clean_car_customer_v2/utils/pager/go.dart';
+import 'package:clean_car_customer_v2/utils/pager/pager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bounce/flutter_bounce.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -47,7 +49,9 @@ class ReservationLocationCard extends StatelessWidget {
             ),
             Expanded(child: Gaps.empty),
             Bounce(
-              onPressed: () {},
+              onPressed: () {
+                Go.to(Pager.branches);
+              },
               duration: const Duration(milliseconds: 100),
               child: Padding(
                 padding: EdgeInsets.only(bottom: 8.h),

@@ -4,6 +4,7 @@ const String lottiePath = "assets/lottie";
 
 class ImageAssets {
   static String confirmed = '$imagePath/confirmed.svg';
+  static String calendar = '$imagePath/calendar.svg';
   static String onboarding1 = '$imagePath/onboarding1.svg';
   static String onboarding2 = '$imagePath/onboarding2.svg';
   static String onboarding3 = '$imagePath/onboarding3.svg';

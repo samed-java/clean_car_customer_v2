@@ -1,4 +1,5 @@
 import 'package:clean_car_customer_v2/components/custom_button.dart';
+import 'package:clean_car_customer_v2/components/custom_dropdown_button.dart';
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
 import 'package:clean_car_customer_v2/components/custom_textfield_widget.dart';
 import 'package:clean_car_customer_v2/utils/pager/go.dart';
@@ -6,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-void carInfoDialog(BuildContext context) {
+void carInfoDialog(BuildContext context, {isNew = false}) {
   showDialog(
     context: context,
     builder: (BuildContext context) {
@@ -61,37 +62,41 @@ void carInfoDialog(BuildContext context) {
                     fontSize: 14,
                   ),
                 ),
+
                 Gaps.h2,
-                TextFormField(
-                  readOnly: true,
-                  cursorColor: ColorManager.thirdBlack,
-                  onChanged: (value) {},
-                  decoration: InputDecoration(
-                    suffixIcon: Image.asset(IconAssets.arrowDown),
-                    contentPadding: Paddings.all8,
-                    filled: true,
-                    fillColor: ColorManager.mainWhite,
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide.none,
-                      borderRadius:
-                          BorderRadius.all(RadiusManager.radiusCircular6),
-                    ),
-                  ),
-                ),
+                const CustomDropDownButton(defaultValue: "Avtomobil növü seç"),
+                // TextFormField(
+                //   readOnly: true,
+                //   cursorColor: ColorManager.thirdBlack,
+                //   onChanged: (value) {},
+                //   decoration: InputDecoration(
+                //     suffixIcon: Image.asset(IconAssets.arrowDown),
+                //     contentPadding: Paddings.all8,
+                //     filled: true,
+                //     fillColor: ColorManager.mainWhite,
+                //     border: OutlineInputBorder(
+                //       borderSide: BorderSide.none,
+                //       borderRadius:
+                //           BorderRadius.all(RadiusManager.radiusCircular6),
+                //     ),
+                //   ),
+                // ),
                 Gaps.h16,
                 const TextFieldWidget(headerText: "Ad"),
                 Gaps.h16,
                 const TextFieldWidget(headerText: "Nömrə"),
                 Gaps.h16,
-                CustomButton(
-                  frontText: "Sil",
-                  onPressed: () {},
-                  borderColor: ColorManager.mainRed,
-                  foregroundColor: ColorManager.mainRed,
-                  backgroundColor: ColorManager.mainBackgroundColor,
-                ),
+                isNew
+                    ? Gaps.empty
+                    : CustomButton(
+                        frontText: "Sil",
+                        onPressed: () {},
+                        borderColor: ColorManager.mainRed,
+                        foregroundColor: ColorManager.mainRed,
+                        backgroundColor: ColorManager.mainBackgroundColor,
+                      ),
                 Gaps.h10,
-                CustomButton(frontText: "Qəbul Et", onPressed: () {})
+                CustomButton(frontText: "Yadda Saxla", onPressed: () {})
               ],
             ),
           ),

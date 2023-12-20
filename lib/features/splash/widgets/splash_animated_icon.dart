@@ -28,7 +28,7 @@ class SplashAnimatedIcon extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SvgPicture.asset(
-                  ImageAssets.confirmed,
+                  svgAssets,
                   width: 128.w,
                   height: 128.h,
                 ),

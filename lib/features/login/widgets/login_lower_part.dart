@@ -95,7 +95,7 @@ class LoginLowerPart extends StatelessWidget {
                       color: ColorManager.mainBlue, fontSize: 14),
                   recognizer: TapGestureRecognizer()
                     ..onTap = () {
-                      Go.to(Pager.signup);
+                      Go.to(Pager.onboarding);
                       // Handle the "Xidmət Şərtlərimiz" link tap
                     },
                 ),

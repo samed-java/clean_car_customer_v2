@@ -3,6 +3,8 @@ import 'package:clean_car_customer_v2/features/branches_and_reservation/branches
 import 'package:clean_car_customer_v2/features/offers/offers_screen.dart';
 import 'package:clean_car_customer_v2/features/home/home_screen.dart';
 import 'package:clean_car_customer_v2/features/profile_section/profile/profile_screen.dart';
+import 'package:clean_car_customer_v2/utils/pager/go.dart';
+import 'package:clean_car_customer_v2/utils/pager/pager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -59,7 +61,9 @@ class _MainScreenState extends State<MainScreen> {
               buildTabItem(0, IconAssets.home, "Ana səhifə"),
               buildTabItem(1, IconAssets.map, "Filiallar"),
               FloatingActionButton(
-                onPressed: () {},
+                onPressed: () {
+                  Go.to(Pager.reservation);
+                },
                 elevation: 0,
                 focusElevation: 0,
                 hoverElevation: 0,
