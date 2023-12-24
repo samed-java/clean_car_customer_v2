@@ -6,9 +6,11 @@ import 'package:flutter_bounce/flutter_bounce.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class BranchCard extends StatelessWidget {
-  const BranchCard({Key? key}) : super(key: key);
+import '../../branches_and_reservation/data/model/res/regions_res_model.dart';
 
+class BranchCard extends StatelessWidget {
+  const BranchCard({Key? key, required this.model}) : super(key: key);
+  final Region model;
   @override
   Widget build(BuildContext context) {
     return Bounce(
@@ -64,7 +66,7 @@ class BranchCard extends StatelessWidget {
                     child: Material(
                       color: Colors.transparent,
                       child: Text(
-                        "Xocahəsən",
+                        model.title,
                         style: getSemiBoldStyle(
                             color: ColorManager.mainWhite, fontSize: 16),
                       ),

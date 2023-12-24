@@ -1,14 +1,18 @@
+import 'package:clean_car_customer_v2/components/offer_card.dart';
 import 'package:clean_car_customer_v2/constants/res/color_manager.dart';
 import 'package:clean_car_customer_v2/constants/res/gaps.dart';
 import 'package:clean_car_customer_v2/constants/res/paddings.dart';
 import 'package:clean_car_customer_v2/constants/res/styles_manager.dart';
+import 'package:clean_car_customer_v2/features/branches_and_reservation/cubit/regions_cubit.dart';
 import 'package:clean_car_customer_v2/features/home/widgets/filter_dialog.dart';
 import 'package:clean_car_customer_v2/features/home/widgets/branch_card.dart';
 import 'package:clean_car_customer_v2/components/custom_searchbar.dart';
 import 'package:clean_car_customer_v2/components/custom_filter_button.dart';
-import 'package:clean_car_customer_v2/components/offer_card.dart';
 import 'package:clean_car_customer_v2/features/home/widgets/text_widget.dart';
+import 'package:clean_car_customer_v2/features/offers/cubit/offers_cubit.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -89,15 +93,32 @@ class _HomeScreenState extends State<HomeScreen> {
                     Gaps.h10,
                     SizedBox(
                       height: MediaQuery.of(context).size.height * (160 / 816),
-                      child: ListView.builder(
-                        physics: const BouncingScrollPhysics(),
-                        scrollDirection: Axis.horizontal,
-                        itemCount: 1,
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: EdgeInsets.only(left: 8.w),
-                            child: const BranchCard(),
-                          );
+                      child: BlocBuilder<RegionsCubit, RegionsState>(
+                        builder: (context, state) {
+                          if (state is RegionsSuccess) {
+                            return ListView.builder(
+                              physics: const BouncingScrollPhysics(),
+                              scrollDirection: Axis.horizontal,
+                              itemCount: state.data.regions.length,
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                  padding: EdgeInsets.only(left: 8.w),
+                                  child: BranchCard(
+                                    model: state.data.regions[index],
+                                  ),
+                                );
+                              },
+                            );
+                          } else if (state is RegionsLoading) {
+                            return const Center(
+                              child: CupertinoActivityIndicator(),
+                            );
+                          } else if (state is RegionsFail) {
+                            return Center(
+                              child: Text(state.message),
+                            );
+                          }
+                          return const SizedBox.shrink();
                         },
                       ),
                     ),
@@ -125,17 +146,34 @@ class _HomeScreenState extends State<HomeScreen> {
                           padding: Paddings.horizontal16,
                           child: Column(
                             children: [
-                              // ListView.builder(
-                              //   physics: const NeverScrollableScrollPhysics(),
-                              //   shrinkWrap: true,
-                              //   itemCount: 3,
-                              //   itemBuilder: (context, builder) {
-                              //     return const Padding(
-                              //       padding: EdgeInsets.only(bottom: 12),
-                              //       child: OfferCard(),
-                              //     );
-                              //   },
-                              // ),
+                              BlocBuilder<OffersCubit, OffersState>(
+                                builder: (context, state) {
+                                  if (state is OffersSuccess) {
+                                    return ListView.builder(
+                                      physics:
+                                          const NeverScrollableScrollPhysics(),
+                                      shrinkWrap: true,
+                                      itemCount: state.data.offers.length,
+                                      itemBuilder: (context, index) {
+                                        return Padding(
+                                          padding:
+                                              const EdgeInsets.only(bottom: 12),
+                                          child: OfferCard(
+                                              offer: state.data.offers[index]),
+                                        );
+                                      },
+                                    );
+                                  } else if (state is OffersLoading) {
+                                    return const Center(
+                                        child: CupertinoActivityIndicator());
+                                  } else if (state is OffersFail) {
+                                    return Center(
+                                      child: Text(state.message ?? ''),
+                                    );
+                                  }
+                                  return const SizedBox.shrink();
+                                },
+                              ),
                             ],
                           ),
                         ),

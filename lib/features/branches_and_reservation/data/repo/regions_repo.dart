@@ -1,7 +1,7 @@
 import 'package:clean_car_customer_v2/constants/keys/api_keys.dart';
 import 'package:clean_car_customer_v2/data/repository/base_repository.dart';
-import '../data/model/response/regions_response_model.dart';
+import 'package:clean_car_customer_v2/features/branches_and_reservation/data/model/res/regions_res_model.dart';
 
-class RegionsRepository extends BaseRepository<RegionsResModel> {
+class RegionsRepository extends BaseRepository<RegionResModel> {
   RegionsRepository() : super(baseUrl: ApiKeys.getRegions);
 }

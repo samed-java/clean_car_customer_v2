@@ -8,7 +8,7 @@ import '../data/model/res/offers_res_model.dart';
 
 part 'offers_state.dart';
 
-class OffersCubit extends Cubit<OffersState> with BaseErrorHandler{
+class OffersCubit extends Cubit<OffersState> with BaseErrorHandler {
   OffersCubit() : super(OffersInitial());
 
   @override
@@ -30,10 +30,9 @@ class OffersCubit extends Cubit<OffersState> with BaseErrorHandler{
   }
 
   @override
-  void onOtherError(e,s){
+  void onOtherError(e, s) {
     print(e);
     print(s);
     emit(OffersFail(message: "Unknown error"));
-
   }
 }

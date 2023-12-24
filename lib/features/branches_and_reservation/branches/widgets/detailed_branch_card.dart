@@ -1,4 +1,5 @@
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
+import 'package:clean_car_customer_v2/features/branches_and_reservation/data/model/res/regions_res_model.dart';
 import 'package:clean_car_customer_v2/utils/pager/go.dart';
 import 'package:clean_car_customer_v2/utils/pager/pager.dart';
 import 'package:flutter/material.dart';
@@ -7,8 +8,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class DetailedBranchCard extends StatelessWidget {
-  const DetailedBranchCard({super.key});
-
+  const DetailedBranchCard({super.key, required this.model});
+  final Region model;
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -70,7 +71,7 @@ class DetailedBranchCard extends StatelessWidget {
                           Material(
                             color: Colors.transparent,
                             child: Text(
-                              "Xocahəsən",
+                              model.title,
                               overflow: TextOverflow.ellipsis,
                               style: getSemiBoldStyle(
                                   color: ColorManager.mainWhite, fontSize: 16),

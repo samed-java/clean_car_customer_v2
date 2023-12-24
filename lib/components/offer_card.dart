@@ -8,7 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class OfferCard extends StatelessWidget {
-  const OfferCard({super.key,required this.offer});
+  const OfferCard({super.key, required this.offer});
 
   final Offer offer;
 
@@ -43,7 +43,7 @@ class OfferCard extends StatelessWidget {
                 ),
               ),
             ),
-            Flexible(
+            Expanded(
               child: Padding(
                 padding: Paddings.horizontal16,
                 child: SingleChildScrollView(
@@ -51,7 +51,7 @@ class OfferCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        offer.title??'Offer',
+                        offer.title ?? 'Offer',
                         style: getMediumStyle(
                           color: ColorManager.mainBlack,
                           fontSize: 16.sp,
@@ -69,7 +69,7 @@ class OfferCard extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                       ),
                       Text(
-                        offer.discount??'',
+                        offer.discount ?? '',
                         style: getMediumStyle(
                           color: ColorManager.mainBlue,
                           fontSize: 14.sp,

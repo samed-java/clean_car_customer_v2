@@ -1,5 +1,6 @@
 import 'package:clean_car_customer_v2/features/branches_and_reservation/branch/branch_screen.dart';
 import 'package:clean_car_customer_v2/features/branches_and_reservation/branches/branches_screen.dart';
+import 'package:clean_car_customer_v2/features/branches_and_reservation/cubit/regions_cubit.dart';
 import 'package:clean_car_customer_v2/features/branches_and_reservation/reservation/reservation_screen.dart';
 import 'package:clean_car_customer_v2/features/demo2.dart';
 import 'package:clean_car_customer_v2/features/evaluation/evaluation_screen.dart';
@@ -33,8 +34,17 @@ class Pager {
         create: (context) => OTPCubit(),
         child: const OTPScreen(),
       );
-  static Widget get main => BlocProvider(
-      create: (context) => OffersCubit()..execute(), child: const MainScreen());
+  static Widget get main => MultiBlocProvider(
+        providers: [
+          BlocProvider<OffersCubit>(
+            create: (context) => OffersCubit()..execute(),
+          ),
+          BlocProvider<RegionsCubit>(
+            create: (context) => RegionsCubit()..execute(),
+          ),
+        ],
+        child: const MainScreen(),
+      );
   static Widget get signup => BlocProvider<SignUpCubit>(
         create: (context) => SignUpCubit(),
         child: SignupScreen(),

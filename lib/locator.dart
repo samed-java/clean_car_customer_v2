@@ -1,6 +1,5 @@
-
-import 'package:clean_car_customer_v2/utils/dynamic_constants/repo/regions_repository.dart';
 import 'package:clean_car_customer_v2/utils/language/repo/language_repository.dart';
+import 'package:clean_car_customer_v2/features/branches_and_reservation/data/repo/regions_repo.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
