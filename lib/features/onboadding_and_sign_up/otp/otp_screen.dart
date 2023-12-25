@@ -10,6 +10,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pinput/pinput.dart';
 
+import '../../../utils/pager/go.dart';
+
 class OTPScreen extends StatelessWidget {
   const OTPScreen({super.key});
 
@@ -75,6 +77,9 @@ class OTPScreen extends StatelessWidget {
                             subText:
                                 "Mobil tətbiqdəki qeydiyyatınız uğurla təsdiqləndi",
                             page: Pager.main));
+                  }
+                  else if(state is OTPNotRegistered){
+                    Go.to(Pager.signup);
                   }
                 },
                 child: CustomButton(

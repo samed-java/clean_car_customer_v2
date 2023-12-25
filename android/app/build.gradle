@@ -52,10 +52,10 @@ android {
         // targetSdkVersion flutter.targetSdkVersion
         // versionCode flutterVersionCode.toInteger()
         // versionName flutterVersionName
-        minSdkVersion localProperties.getProperty('flutter.minSdkVersion').toInteger()
-        targetSdkVersion localProperties.getProperty('flutter.targetSdkVersion').toInteger()
-        versionCode flutterVersionCode.toInteger()
-        versionName flutterVersionName
+        minSdkVersion 22
+        targetSdkVersion 29
+        versionCode 1
+        versionName "2.0.0"
     }
 
     buildTypes {

@@ -1,15 +1,17 @@
 import 'package:clean_car_customer_v2/components/custom_button.dart';
 import 'package:clean_car_customer_v2/components/custom_checkbar.dart';
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
+import 'package:clean_car_customer_v2/features/login/cubit/login_cubit.dart';
 import 'package:clean_car_customer_v2/utils/pager/go.dart';
 import 'package:clean_car_customer_v2/utils/pager/pager.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class LoginLowerPart extends StatelessWidget {
   LoginLowerPart({super.key});
-  final TextEditingController _numberController = TextEditingController();
   final ValueNotifier<bool> _isCheckedRememberMe = ValueNotifier<bool>(false);
 
   @override
@@ -47,8 +49,11 @@ class LoginLowerPart extends StatelessWidget {
             child: TextFormField(
               keyboardType: TextInputType.number,
               cursorColor: ColorManager.thirdBlack,
-              controller: _numberController,
+              controller: context.read<LoginCubit>().phoneController,
               onChanged: (value) {},
+              inputFormatters: [
+                MaskTextInputFormatter(mask: "994 ## ### ## ##")
+              ],
               decoration: InputDecoration(
                 contentPadding: Paddings.all8,
                 filled: true,
@@ -73,11 +78,18 @@ class LoginLowerPart extends StatelessWidget {
             ],
           ),
           Gaps.h32,
-          CustomButton(
-            frontText: "Daxil Ol",
-            onPressed: () {
-              Go.removeUntillAndGo(Pager.main);
+          BlocListener<LoginCubit, LoginState>(
+            listener: (context, state) {
+              if(state is LoginSuccess){
+                Go.to(Pager.otp);
+              }
             },
+            child: CustomButton(
+              frontText: "Daxil Ol",
+              onPressed: () {
+                context.read<LoginCubit>().execute();
+              },
+            ),
           ),
           Gaps.h16,
           RichText(

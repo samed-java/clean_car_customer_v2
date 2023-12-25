@@ -1,7 +1,10 @@
+import 'package:clean_car_customer_v2/features/home/data/model/res/branchs_res_model.dart';
+
+import '../../../../features/home/data/model/res/regions_res_model.dart';
+import '../../../../features/login/data/model/res/login_res_model.dart';
 import '../../../../features/offers/data/model/res/offers_res_model.dart';
 import '../../../../features/onboadding_and_sign_up/signup/data/model/response/sign_up_res_model.dart';
 import '../../../../utils/language/data/model/response/language_response_model.dart';
-import '../../../../features/branches_and_reservation/data/model/res/regions_res_model.dart';
 
 class FactoryGenerator {
   FactoryGenerator._();
@@ -12,7 +15,8 @@ class FactoryGenerator {
     SignUpResModel: (json) => SignUpResModel.fromJson(json),
     OfferResModel: (json) => OfferResModel.fromJson(json),
     RegionResModel: (json) => RegionResModel.fromJson(json),
-
+    LoginResModel: (json) => LoginResModel.fromJson(json),
+    BranchsResModel: (json) => BranchsResModel.fromJson(json),
     // OtpResModel: (json) => OtpResModel.fromJson(json),
     // ForgotPassResModel: (json) => ForgotPassResModel.fromJson(json),
     // NewPassResModel: (json) => NewPassResModel.fromJson(json)

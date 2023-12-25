@@ -1,16 +1,18 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
+import 'package:clean_car_customer_v2/features/home/data/model/res/branchs_res_model.dart';
 import 'package:clean_car_customer_v2/utils/pager/go.dart';
 import 'package:clean_car_customer_v2/utils/pager/pager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bounce/flutter_bounce.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import '';
 
-import '../../branches_and_reservation/data/model/res/regions_res_model.dart';
 
 class BranchCard extends StatelessWidget {
   const BranchCard({Key? key, required this.model}) : super(key: key);
-  final Region model;
+  final Washing model;
   @override
   Widget build(BuildContext context) {
     return Bounce(
@@ -37,8 +39,8 @@ class BranchCard extends StatelessWidget {
                   left: 0,
                   right: 0,
                   bottom: 0,
-                  child: Image.network(
-                    "https://wavescarwash.co.uk/images/pageImages/Coventry4RebrandPhotos-23102069.jpeg",
+                  child: CachedNetworkImage(
+                    imageUrl: model.images.isNotEmpty?model.images.first.image:"https://wavescarwash.co.uk/images/pageImages/Coventry4RebrandPhotos-23102069.jpeg",
                     fit: BoxFit.cover,
                   ),
                 ),

@@ -30,6 +30,7 @@ class OTPCubit extends Cubit<OTPState> with BaseErrorHandler{
       emit(OTPLoading());
       var result = await _otpRepo.send(OtpReqModel(
           phone: _storageService.getPhoneNumber()!,
+          otpToken: _storageService.getOtpToken()!,
           otpCode: int.parse(otpController.text)
       ));
       if (result.token != null) {

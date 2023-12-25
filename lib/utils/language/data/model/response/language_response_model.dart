@@ -236,7 +236,7 @@ class CustomerLangData {
       CustomerLangData(
         area: json['area'],
         superquality: json['super_quality'],
-        possibilityofreservation: json['possibility_of_reservation'],
+        possibilityofreservation: json['possibility of reservation'],
         onboardfirsttext: json['onboard_first_text'],
         pass: json['pass'],
         next: json['next'],

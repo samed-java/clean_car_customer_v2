@@ -3,10 +3,10 @@ import 'package:clean_car_customer_v2/components/custom_searchbar.dart';
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
 import 'package:clean_car_customer_v2/features/branches_and_reservation/branches/widgets/branches_filter_dialog.dart';
 import 'package:clean_car_customer_v2/features/branches_and_reservation/branches/widgets/detailed_branch_card.dart';
-import 'package:clean_car_customer_v2/features/branches_and_reservation/cubit/regions_cubit.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../home/cubit/home_cubit.dart';
 
 class BranchesContent extends StatelessWidget {
   BranchesContent({super.key});
@@ -30,26 +30,26 @@ class BranchesContent extends StatelessWidget {
         ),
         Gaps.h16,
         Expanded(
-          child: BlocBuilder<RegionsCubit, RegionsState>(
+          child: BlocBuilder<HomeCubit, HomeState>(
             builder: (context, state) {
-              if (state is RegionsSuccess) {
+              if (state is HomeSuccess) {
                 return ListView.builder(
                   physics: const BouncingScrollPhysics(),
                   itemBuilder: (context, index) {
                     return Padding(
                       padding: Paddings.vertical8,
                       child: DetailedBranchCard(
-                        model: state.data.regions[index],
+                        model: state.data.washings[index],
                       ),
                     );
                   },
-                  itemCount: state.data.regions.length,
+                  itemCount: state.data.washings.length,
                 );
-              } else if (state is RegionsLoading) {
+              } else if (state is HomeLoading) {
                 return const Center(
                   child: CupertinoActivityIndicator(),
                 );
-              } else if (state is RegionsFail) {
+              } else if (state is HomeFail) {
                 return Center(
                   child: Text(state.message),
                 );

@@ -3,7 +3,7 @@ import 'package:clean_car_customer_v2/constants/res/color_manager.dart';
 import 'package:clean_car_customer_v2/constants/res/gaps.dart';
 import 'package:clean_car_customer_v2/constants/res/paddings.dart';
 import 'package:clean_car_customer_v2/constants/res/styles_manager.dart';
-import 'package:clean_car_customer_v2/features/branches_and_reservation/cubit/regions_cubit.dart';
+import 'package:clean_car_customer_v2/features/home/cubit/home_cubit.dart';
 import 'package:clean_car_customer_v2/features/home/widgets/filter_dialog.dart';
 import 'package:clean_car_customer_v2/features/home/widgets/branch_card.dart';
 import 'package:clean_car_customer_v2/components/custom_searchbar.dart';
@@ -93,27 +93,28 @@ class _HomeScreenState extends State<HomeScreen> {
                     Gaps.h10,
                     SizedBox(
                       height: MediaQuery.of(context).size.height * (160 / 816),
-                      child: BlocBuilder<RegionsCubit, RegionsState>(
+                      child: BlocBuilder<HomeCubit, HomeState>(
                         builder: (context, state) {
-                          if (state is RegionsSuccess) {
+                          if (state is HomeSuccess) {
+                            state.data.washings.length;
                             return ListView.builder(
                               physics: const BouncingScrollPhysics(),
                               scrollDirection: Axis.horizontal,
-                              itemCount: state.data.regions.length,
+                              itemCount: state.data.washings.length,
                               itemBuilder: (context, index) {
                                 return Padding(
                                   padding: EdgeInsets.only(left: 8.w),
                                   child: BranchCard(
-                                    model: state.data.regions[index],
+                                    model: state.data.washings[index],
                                   ),
                                 );
                               },
                             );
-                          } else if (state is RegionsLoading) {
+                          } else if (state is HomeLoading) {
                             return const Center(
                               child: CupertinoActivityIndicator(),
                             );
-                          } else if (state is RegionsFail) {
+                          } else if (state is HomeFail) {
                             return Center(
                               child: Text(state.message),
                             );

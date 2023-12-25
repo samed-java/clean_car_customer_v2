@@ -47,6 +47,7 @@ class StorageService {
     return instance.read<String>(StorageKeys.number);
   }
 
+
   Future<void> setLang(Map<String, dynamic> lang) async {
     await instance.write(StorageKeys.lang, json.encode(lang));
   }

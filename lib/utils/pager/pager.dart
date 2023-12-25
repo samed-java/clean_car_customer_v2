@@ -1,10 +1,11 @@
 import 'package:clean_car_customer_v2/features/branches_and_reservation/branch/branch_screen.dart';
 import 'package:clean_car_customer_v2/features/branches_and_reservation/branches/branches_screen.dart';
-import 'package:clean_car_customer_v2/features/branches_and_reservation/cubit/regions_cubit.dart';
 import 'package:clean_car_customer_v2/features/branches_and_reservation/reservation/reservation_screen.dart';
 import 'package:clean_car_customer_v2/features/demo2.dart';
 import 'package:clean_car_customer_v2/features/evaluation/evaluation_screen.dart';
+import 'package:clean_car_customer_v2/features/home/cubit/home_cubit.dart';
 import 'package:clean_car_customer_v2/features/home/home_screen.dart';
+import 'package:clean_car_customer_v2/features/login/cubit/login_cubit.dart';
 import 'package:clean_car_customer_v2/features/login/login_screen.dart';
 import 'package:clean_car_customer_v2/features/main/main_screen.dart';
 import 'package:clean_car_customer_v2/features/offers/detailed_offers/detailed_offer_screen.dart';
@@ -29,7 +30,10 @@ import '../../features/offers/data/model/res/offers_res_model.dart';
 
 class Pager {
   static Widget get onboarding => const OnboardingScreen();
-  static Widget get login => const LoginScreen();
+  static Widget get login => BlocProvider(
+  create: (context) => LoginCubit(),
+  child: const LoginScreen(),
+);
   static Widget get otp => BlocProvider(
         create: (context) => OTPCubit(),
         child: const OTPScreen(),
@@ -39,8 +43,8 @@ class Pager {
           BlocProvider<OffersCubit>(
             create: (context) => OffersCubit()..execute(),
           ),
-          BlocProvider<RegionsCubit>(
-            create: (context) => RegionsCubit()..execute(),
+          BlocProvider<HomeCubit>(
+            create: (context) => HomeCubit()..execute(),
           ),
         ],
         child: const MainScreen(),
