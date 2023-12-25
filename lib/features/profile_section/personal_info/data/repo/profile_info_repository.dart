@@ -1,0 +1,3 @@
+class ProfileInfoRepository extends BaseRepository{
+  
+}
