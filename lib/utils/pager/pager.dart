@@ -27,13 +27,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../features/offers/cubit/offers_cubit.dart';
 import '../../features/offers/data/model/res/offers_res_model.dart';
+import '../../features/profile_section/my_cars/cubit/my_cars_cubit.dart';
+import '../../features/profile_section/personal_info/cubit/profile_info/profile_info_cubit.dart';
 
 class Pager {
   static Widget get onboarding => const OnboardingScreen();
   static Widget get login => BlocProvider(
-  create: (context) => LoginCubit(),
-  child: const LoginScreen(),
-);
+        create: (context) => LoginCubit(),
+        child: const LoginScreen(),
+      );
   static Widget get otp => BlocProvider(
         create: (context) => OTPCubit(),
         child: const OTPScreen(),
@@ -58,10 +60,15 @@ class Pager {
   static Widget get branch => const BranchScreen();
   static Widget get reservation => const ReservationScreen();
   static Widget get profile => const ProfileScreen();
-  static Widget get personalInfo => const PersonalInfoScreen();
+  static Widget get personalInfo => BlocProvider(
+        create: (context) => ProfileInfoCubit()..execute(),
+        child: const PersonalInfoScreen(),
+      );
   static Widget get reservations => const ReservationsScreen();
   static Widget get evaluation => const EvaluationScreen();
-  static Widget get myCars => const MyCarsScreen();
+  static Widget get myCars => BlocProvider(
+      create: (context)=> MyCarsCubit()..getBanTypes()..execute(),
+      child: const MyCarsScreen());
   static Widget get splashBegin => const SplashBeginScreen();
   static Widget get demo2 => const Demo2();
 

@@ -69,9 +69,9 @@ class _FilterBoxContentState extends State<FilterBoxContent> {
                   fontSize: 14,
                 ),
               ),
-              const CustomDropDownButton(
-                defaultValue: "Şəhər seç",
-              ),
+              // const CustomDropDownButton(
+              //   defaultValue: "Şəhər seç",
+              // ),
 
               Gaps.h16,
               // Bölgə
@@ -82,9 +82,9 @@ class _FilterBoxContentState extends State<FilterBoxContent> {
                   fontSize: 14,
                 ),
               ),
-              const CustomDropDownButton(
-                defaultValue: "Bölgə seç",
-              ),
+              // const CustomDropDownButton(
+              //   defaultValue: "Bölgə seç",
+              // ),
 
               Gaps.h16,
               // Qəsəbə
@@ -95,9 +95,9 @@ class _FilterBoxContentState extends State<FilterBoxContent> {
                   fontSize: 14,
                 ),
               ),
-              const CustomDropDownButton(
-                defaultValue: "Qəsəbə seç",
-              ),
+              // const CustomDropDownButton(
+              //   defaultValue: "Qəsəbə seç",
+              // ),
 
               Gaps.h16,
               Text(
@@ -108,7 +108,7 @@ class _FilterBoxContentState extends State<FilterBoxContent> {
                 ),
               ),
               Gaps.h2,
-              const CustomDropDownButton(defaultValue: "Xidmət növü seç"),
+              //const CustomDropDownButton(defaultValue: "Xidmət növü seç"),
               Gaps.h16,
               Text(
                 "Qiymətləndirmə",

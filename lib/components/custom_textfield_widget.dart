@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TextFieldWidget extends StatelessWidget {
-  const TextFieldWidget({super.key, required this.headerText});
+  const TextFieldWidget({super.key, required this.headerText,this.controller,this.validator});
   final String headerText;
+  final TextEditingController? controller;
+  final String? Function(String?)? validator;
 
   @override
   Widget build(BuildContext context) {
@@ -20,10 +22,13 @@ class TextFieldWidget extends StatelessWidget {
         ),
         Gaps.h2,
         SizedBox(
-          height: 40.h,
+          //height: 40.h,
           child: TextFormField(
+            autovalidateMode: AutovalidateMode.onUserInteraction,
             cursorColor: ColorManager.thirdBlack,
             onChanged: (value) {},
+            controller: controller,
+            validator: validator,
             decoration: InputDecoration(
               contentPadding: Paddings.all8,
               filled: true,

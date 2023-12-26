@@ -11,6 +11,9 @@ import 'features/login/data/repo/login_repository.dart';
 import 'features/offers/data/repo/offers_repo.dart';
 import 'features/onboadding_and_sign_up/otp/data/repository/otp_repository.dart';
 import 'features/onboadding_and_sign_up/signup/data/repository/sign_up_repository.dart';
+import 'features/profile_section/my_cars/data/repo/ban_types_repo.dart';
+import 'features/profile_section/my_cars/data/repo/my_cars_repo.dart';
+import 'features/profile_section/personal_info/data/repo/profile_info_repository.dart';
 
 final locator = GetIt.I;
 
@@ -29,4 +32,7 @@ void setUpLocator() {
   locator.registerLazySingleton<BranchsRepository>(() => BranchsRepository());
   locator.registerLazySingleton<OffersRepository>(() => OffersRepository());
   locator.registerLazySingleton<LoginRepository>(() => LoginRepository());
+  locator.registerLazySingleton<ProfileInfoRepository>(() => ProfileInfoRepository());
+  locator.registerLazySingleton<MyCarsRepository>(() => MyCarsRepository());
+  locator.registerLazySingleton<BanTypesRepository>(() => BanTypesRepository());
 }

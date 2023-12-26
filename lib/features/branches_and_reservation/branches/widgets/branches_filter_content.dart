@@ -68,9 +68,9 @@ class _BranchesFilterContentState extends State<BranchesFilterContent> {
                   fontSize: 14,
                 ),
               ),
-              const CustomDropDownButton(
-                defaultValue: "Şəhər seç",
-              ),
+              // const CustomDropDownButton(
+              //   defaultValue: null,
+              // ),
 
               Gaps.h16,
               // Bölgə
@@ -81,9 +81,9 @@ class _BranchesFilterContentState extends State<BranchesFilterContent> {
                   fontSize: 14,
                 ),
               ),
-              const CustomDropDownButton(
-                defaultValue: "Bölgə seç",
-              ),
+              // const CustomDropDownButton(
+              //   defaultValue: "Bölgə seç",
+              // ),
 
               Gaps.h16,
               // Qəsəbə
@@ -94,9 +94,9 @@ class _BranchesFilterContentState extends State<BranchesFilterContent> {
                   fontSize: 14,
                 ),
               ),
-              const CustomDropDownButton(
-                defaultValue: "Qəsəbə seç",
-              ),
+              // const CustomDropDownButton(
+              //   defaultValue: "Qəsəbə seç",
+              // ),
 
               Gaps.h16,
               Text(
@@ -107,7 +107,7 @@ class _BranchesFilterContentState extends State<BranchesFilterContent> {
                 ),
               ),
               Gaps.h2,
-              const CustomDropDownButton(defaultValue: "Xidmət növü seç"),
+             // const CustomDropDownButton(defaultValue: "Xidmət növü seç"),
 
               Gaps.h24,
 

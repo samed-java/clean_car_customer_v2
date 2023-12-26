@@ -12,7 +12,7 @@ class AddCarWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Bounce(
       onPressed: () {
-        carInfoDialog(context);
+        carInfoDialog(context,isNew: true);
       },
       duration: const Duration(milliseconds: 50),
       child: Row(

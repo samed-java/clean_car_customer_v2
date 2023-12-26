@@ -1,3 +1,5 @@
+import '../../data/model/res/profile_info_res_model.dart';
+
 abstract class ProfileInfoState{}
 
 class ProfileInfoInitial extends ProfileInfoState{}

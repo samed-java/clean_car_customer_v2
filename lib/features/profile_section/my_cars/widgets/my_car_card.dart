@@ -1,20 +1,24 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:clean_car_customer_v2/components/padded_button.dart';
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
 import 'package:clean_car_customer_v2/utils/enum/car_types.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../cubit/my_cars_cubit.dart';
+import '../data/model/res/my_cars_res_model.dart';
+import 'car_info_dialog.dart';
+
 class MyCarCard extends StatelessWidget {
-  final CarTypes carTypes;
-  final String name;
-  final String number;
+
+  final Car car;
 
   const MyCarCard(
       {super.key,
-      required this.carTypes,
-      required this.name,
-      required this.number});
+        required this.car
+        });
 
   @override
   Widget build(BuildContext context) {
@@ -31,9 +35,8 @@ class MyCarCard extends StatelessWidget {
             CircleAvatar(
               backgroundColor: ColorManager.mainBackgroundColor,
               radius: 24.r,
-              child: carTypes == CarTypes.sedan
-                  ? SvgPicture.asset(ImageAssets.sedan)
-                  : SvgPicture.asset(ImageAssets.jeep),
+              child: CachedNetworkImage(imageUrl: car.banType.icon,)
+                  //: SvgPicture.asset(ImageAssets.jeep),
             ),
             Gaps.w12,
             Column(
@@ -41,19 +44,24 @@ class MyCarCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  name,
+                  car.carModel,
                   style: getMediumStyle(
                       color: ColorManager.mainBlack, fontSize: 14),
                 ),
                 Text(
-                  number,
+                  car.carNumber,
                   style: getMediumStyle(
                       color: ColorManager.mainBlack, fontSize: 12),
                 ),
               ],
             ),
             Expanded(child: Gaps.empty),
-            PaddedButton(frontText: "Ətraflı", onPressed: () {})
+            PaddedButton(frontText: "Ətraflı", onPressed: () {
+              context.read<MyCarsCubit>().nameController.text = car.carModel;
+              context.read<MyCarsCubit>().numberController.text = car.carNumber;
+              context.read<MyCarsCubit>().selectedBanType = car.banType.id;
+              carInfoDialog(context,selectedCarId: car.id);
+            })
           ],
         ),
       ),

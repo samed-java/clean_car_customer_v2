@@ -1,76 +1,129 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class CustomDropDownButton extends StatefulWidget {
-  final String defaultValue;
+class CustomDropdown<T> extends StatefulWidget {
+  const CustomDropdown({
+    super.key,
+    this.selectedItems,
+    this.validator,
+    this.items,
+    this.labelText,
+    required this.onChanged,
+    required this.child,
+    this.errorText,
+  }) : title = null;
 
-  const CustomDropDownButton({
-    Key? key,
-    required this.defaultValue,
-  }) : super(key: key);
+  const CustomDropdown.withTitle({
+    super.key,
+    this.selectedItems,
+    this.items,
+    this.labelText,
+    required this.onChanged,
+    required this.child,
+    required this.title,
+    this.errorText,
+    this.validator,
+  });
+
+  final T? selectedItems;
+  final Map<T, dynamic>? items;
+  final String? labelText;
+  final ValueChanged<T?> onChanged;
+  final Widget Function(dynamic) child;
+  final String? Function(T?)? validator;
+  final String? title;
+  final String? errorText;
 
   @override
-  State<CustomDropDownButton> createState() => _CustomDropDownButtonState();
+  State<CustomDropdown<T>> createState() => _CustomDropdownState<T>();
 }
 
-class _CustomDropDownButtonState extends State<CustomDropDownButton> {
-  late String drowDownValue;
-  late List<DropdownMenuItem<String>> items;
+class _CustomDropdownState<T> extends State<CustomDropdown<T>> {
+  T? _selectedItems;
+  String? errorText;
 
   @override
   void initState() {
     super.initState();
+    errorText = widget.errorText;
+    _selectedItems = widget.selectedItems;
+  }
 
-    // Access widget.defaultValue in initState
-    drowDownValue = widget.defaultValue;
-
-    // Initialize items using widget.defaultValue
-    items = [
-      DropdownMenuItem<String>(
-        value: widget.defaultValue,
-        child: Text(widget.defaultValue),
-      ),
-      const DropdownMenuItem<String>(
-        value: "One",
-        child: Text("One"),
-      ),
-      const DropdownMenuItem<String>(
-        value: "Two",
-        child: Text("Two"),
-      ),
-      const DropdownMenuItem<String>(
-        value: "Three",
-        child: Text("Three"),
-      ),
-    ];
+  void _changeSelectItems(T? data) {
+    _selectedItems = data;
+    widget.onChanged.call(data);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 40.h,
-      decoration: BoxDecoration(
-          color: Colors.white, borderRadius: BorderRadius.circular(6.r)),
-      child: Padding(
-        padding: Paddings.horizontal16,
-        child: DropdownButtonHideUnderline(
-          child: DropdownButton<String>(
-            disabledHint: null,
-            underline: null,
-            borderRadius: BorderRadius.circular(6.r),
-            isExpanded: true,
-            value: drowDownValue,
-            icon: Image.asset(IconAssets.arrowDown),
-            items: items,
-            onChanged: (String? newValue) {
-              setState(() {
-                drowDownValue = newValue!;
-              });
-            },
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          // height: 48,
+          padding: Paddings.horizontal8,
+          //alignment: Alignment.center,
+          decoration: BoxDecoration(
+            color: ColorManager.mainWhite,
+            borderRadius: BorderRadius.all(RadiusManager.radiusCircular4)
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.all(RadiusManager.radiusCircular4),
+            child: DropdownButtonHideUnderline(
+              child: DropdownButtonFormField<T>(
+                validator: (value){
+                  setState(() {
+                    errorText = widget.validator?.call(value);
+                  });
+                  return errorText;
+                },
+                isDense: true,
+                value: _selectedItems,
+                onChanged: _changeSelectItems,
+                // isExpanded: true,
+                iconSize: 0,
+                elevation: 0,
+                borderRadius: BorderRadius.all(RadiusManager.radiusCircular4),
+                dropdownColor: ColorManager.mainWhite,
+                decoration: InputDecoration(
+                  labelText: widget.labelText,
+                  suffixIcon: const Icon(Icons.keyboard_arrow_down_sharp),
+                  errorText: '',
+                  errorStyle: const TextStyle(
+                    color: Colors.transparent,
+                    fontSize: 0,
+                    height: 0
+                  ),
+                  errorBorder: InputBorder.none,
+                  border: InputBorder.none
+                ),
+                style: getMediumStyle(
+                    color: ColorManager.mainBlack, fontSize: FontSize.s14),
+                items: widget.items?.entries
+                    .map((e) => DropdownMenuItem<T>(
+                          value: e.key,
+                          child: widget.child(e.value),
+                        ))
+                    .toList(),
+              ),
+            ),
           ),
         ),
-      ),
+        if (errorText != null) ...[
+          4.verticalSpace,
+          Padding(
+            padding: Paddings.all4,
+            child: FadeIn(
+              child: Text(
+                errorText!,
+                style: getRegularStyle(color: ColorManager.mainRed),
+              ),
+            ),
+          ),
+        ],
+      ],
     );
   }
 }

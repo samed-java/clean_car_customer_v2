@@ -9,4 +9,7 @@ class ApiKeys {
   static const String login = "$_baseUrl/sendCustomerOtp";
   static const String verifyOTP = "$_baseUrl/customerVerifyOpt";
   static const String offers = "$_baseUrl/getCustomerOffers";
+  static const String personalInfo = "$_baseUrl/profile";
+  static const String cars = "$_baseUrl/cars";
+  static const String banTypes = "$_baseUrl/bans";
 }

@@ -6,5 +6,6 @@ class StorageKeys {
   static const String refreshToken = "refresh_token";
   static const String lang = "lang";
   static const String regions = "regions";
+  static const String banTypes = "ban_types";
   static const String number = "number";
 }

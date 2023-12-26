@@ -82,6 +82,23 @@ class StorageService {
     }
   }
 
+  Future<void> setBanTypes(Map<String, dynamic> banTypes) async {
+    await instance.write(StorageKeys.banTypes, json.encode(banTypes));
+  }
+
+  Future<bool> get hasBanTypes async {
+    return (await instance.read(StorageKeys.banTypes)) != null;
+  }
+
+  Map<String, dynamic>? getBanTypes() {
+    var data = instance.read<String>(StorageKeys.banTypes);
+    if (data != null) {
+      return json.decode(data);
+    } else {
+      throw Exception("Languages not initialized");
+    }
+  }
+
   Future<void> setOtpToken([String? token]) async {
     if (token != null) {
       await instance.write(StorageKeys.otpToken, token);

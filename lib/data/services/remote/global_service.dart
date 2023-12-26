@@ -29,6 +29,29 @@ class GlobalService {
     }
   }
 
+  Future<BaseResponseModel<T>> putData<T>(
+      String baseUrl, BaseRequestModel body) async {
+    print(body.toJson());
+    print(baseUrl);
+    var response = await _service.put(baseUrl, data: body.toJson());
+
+    if (response.statusCode! >= 200 && response.statusCode! < 400) {
+      if (response.data["error"] == null) {
+        return BaseResponseModel<T>(
+          success: response.data["success"],
+          message: response.data["message"],
+          data: FactoryGenerator.createObject<T>(response.data["data"]),
+        );
+      } else {
+        throw Exception(Error.fromJson(response.data["error"]).message);
+      }
+    } else {
+      throw Exception("Error with status code ${response.statusCode}");
+    }
+  }
+
+
+
   Future<BaseResponseModel<T>> fetchData<T>(String baseUrl,
       [BaseRequestModel? body]) async {
     print(baseUrl);
@@ -40,6 +63,26 @@ class GlobalService {
           success: response.data["success"],
           message: response.data["message"],
           data: FactoryGenerator.createObject<T>(response.data["data"]),
+        );
+      } else {
+        throw Exception(Error.fromJson(response.data["error"]).message);
+      }
+    } else {
+      throw Exception("Error with status code ${response.statusCode}");
+    }
+  }
+
+  Future<BaseResponseModel<T?>> deleteData<T>(String baseUrl,
+      [BaseRequestModel? body]) async {
+    print(baseUrl);
+    var response = await _service.delete(baseUrl, queryParameters: body?.toJson());
+    print(response.data);
+    if (response.statusCode! >= 200 && response.statusCode! < 400) {
+      if (response.data["error"] == null) {
+        return BaseResponseModel<T>(
+          success: response.data["success"],
+          message: response.data["message"],
+          data:response.data["data"]!=null? FactoryGenerator.createObject<T>(response.data["data"]):null,
         );
       } else {
         throw Exception(Error.fromJson(response.data["error"]).message);
