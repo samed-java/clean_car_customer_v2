@@ -15,7 +15,7 @@ class LoginCubit extends Cubit<LoginState> with BaseErrorHandler{
   TextEditingController phoneController =  TextEditingController(text: "994 ");
 
   @override
-  void onProgress() async {
+  Future<void> onProgress() async {
     emit(LoginLoading());
     var result = await locator.get<LoginRepository>().send(LoginReqModel(phone: phoneController.text.replaceAll(" ", '')));
     locator.get<StorageService>().setOtpToken(result.otpToken);

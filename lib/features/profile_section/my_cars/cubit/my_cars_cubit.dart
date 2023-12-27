@@ -26,7 +26,7 @@ class MyCarsCubit extends Cubit<MyCarsState> with BaseErrorHandler {
   TextEditingController numberController = TextEditingController();
 
   @override
-  void onProgress() async {
+  Future<void> onProgress() async {
     emit(MyCarsLoading());
     var result = await locator<MyCarsRepository>().fetch();
     emit(MyCarsSuccess(data: result));
@@ -84,18 +84,20 @@ class MyCarsCubit extends Cubit<MyCarsState> with BaseErrorHandler {
   void deleteCar({
     required int id,
   }) {
-    ErrorHandler(progressAction: () async {
-      try{
-        await locator<MyCarsRepository>().deleteCar(id: id);
-      }catch(e,s){
-        print("lazimli eroorrrrrr");
-        print(e);
-        Go.back();
-        nameController.clear();
-        numberController.clear();
-        selectedBanType = null;
-        execute();
-      }
+    var progress = ErrorHandler(progressAction: () async {
+      //try{
+      await locator<MyCarsRepository>().deleteCar(id: id);
+      // }catch(e,s){
+      //   print("lazimli eroorrrrrr");
+      //   print(e.runtimeType);
+      //   if(e is DataIsNullError){
+      //     Go.back();
+      //     nameController.clear();
+      //     numberController.clear();
+      //     selectedBanType = null;
+      //     execute();
+      //   }
+      // }
     }, dataIsNullErrorAction: (e) {
       print("lazimli eroorrrrrr");
       Go.back();
@@ -103,16 +105,17 @@ class MyCarsCubit extends Cubit<MyCarsState> with BaseErrorHandler {
       numberController.clear();
       selectedBanType = null;
       execute();
-    }, otherErrorAction: (e, s) {
-      if (e is DataIsNullError) {
-        print("lazimli eroorrrrrr");
-        Go.back();
-        nameController.clear();
-        numberController.clear();
-        selectedBanType = null;
-        execute();
-      }
-    }).execute();
+    },
+        otherErrorAction: (e, s) {
+      // if (e is DataIsNullError) {
+      //   print("lazimli eroorrrrrr");
+      //   Go.back();
+      //   nameController.clear();
+      //   numberController.clear();
+      //   selectedBanType = null;
+      //   execute();
+      // }
+    })..execute();
   }
 
   void getBanTypes() {

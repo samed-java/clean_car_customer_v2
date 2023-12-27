@@ -18,7 +18,7 @@ class OffersCubit extends Cubit<OffersState> with BaseErrorHandler {
   }
 
   @override
-  void onProgress() async {
+  Future<void> onProgress() async {
     emit(OffersLoading());
     var result = await locator.get<OffersRepository>().fetch();
     emit(OffersSuccess(data: result));

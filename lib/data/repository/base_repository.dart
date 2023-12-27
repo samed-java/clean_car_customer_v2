@@ -104,6 +104,7 @@ abstract class BaseRepository<T> {
         if (result.data != null) {
           return result.data!;
         } else {
+          print('data null');
           throw DataIsNullError(
               message: "Data returned null from request $baseUrl");
         }

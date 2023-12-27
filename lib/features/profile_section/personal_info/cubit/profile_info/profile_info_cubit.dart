@@ -10,7 +10,7 @@ class ProfileInfoCubit extends Cubit<ProfileInfoState> with BaseErrorHandler{
 	ProfileInfoCubit() : super(ProfileInfoInitial());
 
   @override
-  void onProgress() async {
+  Future<void> onProgress() async {
     emit(ProfileInfoLoading());
 		var result = await locator.get<ProfileInfoRepository>().fetch();
     if(result!=null){

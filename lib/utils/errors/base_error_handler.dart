@@ -2,36 +2,29 @@ import 'dart:io';
 import 'errors.dart';
 
 mixin BaseErrorHandler {
-  // BaseErrorHandler(
-  //     {required this.onProgress,
-  //     this.onDataIsNullError,
-  //     this.onSocketException,
-  //     this.onResponseBodyIsNullError,
-  //     this.onNotSuccessError,
-  //     this.onOtherError});
 
-  void onProgress();
-  void onSocketException(SocketException e){}
-  void onResponseBodyIsNullError(ResponseBodyIsNullError e){}
-  void onDataIsNullError(DataIsNullError e){}
-  void onNotSuccessError(NotSuccessError e){}
-  void onOtherError(Object e, StackTrace s){}
+  Future<void> onProgress();
+  void onSocketException(SocketException e) {}
+  void onResponseBodyIsNullError(ResponseBodyIsNullError e) {}
+  void onDataIsNullError(DataIsNullError e) {}
+  void onNotSuccessError(NotSuccessError e) {}
+  void onOtherError(Object e, StackTrace s) {}
 
-  void execute() {
+  void execute() async {
     try {
-      onProgress.call();
+      await onProgress.call();
     } on SocketException catch (e) {
       onSocketException.call(e);
-    } on ResponseBodyIsNullError catch (e) {
-      onResponseBodyIsNullError.call(e);
-    } on DataIsNullError catch (e) {
-      print("data is null ");
-      onDataIsNullError.call(e);
-    } on NotSuccessError catch (e) {
-      onNotSuccessError.call(e);
     } catch (e, s) {
-      print("other");
-      onOtherError.call(e, s);
+      if (e is DataIsNullError) {
+        onDataIsNullError(e);
+      } else if (e is ResponseBodyIsNullError) {
+        onResponseBodyIsNullError(e);
+      } else if (e is NotSuccessError) {
+        onNotSuccessError(e);
+      } else {
+        onOtherError(e, s);
+      }
     }
   }
 }
@@ -53,8 +46,8 @@ class ErrorHandler with BaseErrorHandler{
   final Function(Object e, StackTrace s)? otherErrorAction;
 
   @override
-  void onProgress() {
-    progressAction.call();
+  Future<void> onProgress() async {
+    await progressAction.call();
   }
 
   @override
@@ -77,7 +70,7 @@ class ErrorHandler with BaseErrorHandler{
 
   @override
   void onOtherError(Object e, StackTrace s) {
-    otherErrorAction?.call(e,s);
+    otherErrorAction?.call(e, s);
     super.onOtherError(e, s);
   }
 
@@ -86,5 +79,4 @@ class ErrorHandler with BaseErrorHandler{
     responseBodyIsNullErrorAction?.call(e);
     super.onResponseBodyIsNullError(e);
   }
-
 }

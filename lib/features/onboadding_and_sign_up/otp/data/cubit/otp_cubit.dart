@@ -25,7 +25,7 @@ class OTPCubit extends Cubit<OTPState> with BaseErrorHandler{
 
 
   @override
-  void onProgress() async {
+  Future<void> onProgress() async {
     if (otpController.text.isNotEmpty) {
       emit(OTPLoading());
       var result = await _otpRepo.send(OtpReqModel(

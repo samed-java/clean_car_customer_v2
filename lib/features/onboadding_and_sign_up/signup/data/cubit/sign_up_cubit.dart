@@ -59,7 +59,7 @@ class SignUpCubit extends Cubit<SignUpState> with BaseErrorHandler{
   }
 
   @override
-  void onProgress() async  {
+  Future<void> onProgress() async  {
     if (formKey.currentState!.validate() && isCheckedRememberMe.value) {
       emit(SignUpLoading());
       var result = await _signUpRepo.send(SignUpReqModel(
