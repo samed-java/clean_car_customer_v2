@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:clean_car_customer_v2/app.dart';
 import 'package:clean_car_customer_v2/locator.dart';

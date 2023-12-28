@@ -62,7 +62,7 @@ class _MainScreenState extends State<MainScreen> {
               buildTabItem(1, IconAssets.map, "Filiallar"),
               FloatingActionButton(
                 onPressed: () {
-                  Go.to(Pager.reservation);
+                  Go.to(Pager.reservation());
                 },
                 elevation: 0,
                 focusElevation: 0,

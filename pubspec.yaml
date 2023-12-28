@@ -49,6 +49,8 @@ dependencies:
   cached_network_image: any
   geolocator: ^10.1.0
   string_mask: ^1.0.0
+  equatable: any
+  animate_to: any
 
 
 
@@ -97,5 +99,4 @@ flutter:
           style: italic
 
 
-flutter_intl:
-  enabled: true
+

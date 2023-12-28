@@ -97,7 +97,7 @@ class _BranchScreenState extends State<BranchScreen> {
                       CustomButton(
                           frontText: "Rezerv Et",
                           onPressed: () {
-                            Go.to(Pager.reservation);
+                            Go.to(Pager.reservation());
                           }),
                       SizedBox(
                         height: 50.h,

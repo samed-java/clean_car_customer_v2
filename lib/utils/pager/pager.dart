@@ -1,5 +1,6 @@
 import 'package:clean_car_customer_v2/features/branches_and_reservation/branch/branch_screen.dart';
 import 'package:clean_car_customer_v2/features/branches_and_reservation/branches/branches_screen.dart';
+import 'package:clean_car_customer_v2/features/branches_and_reservation/reservation/cubit/reservation_cubit.dart';
 import 'package:clean_car_customer_v2/features/branches_and_reservation/reservation/reservation_screen.dart';
 import 'package:clean_car_customer_v2/features/demo2.dart';
 import 'package:clean_car_customer_v2/features/evaluation/evaluation_screen.dart';
@@ -25,6 +26,7 @@ import 'package:clean_car_customer_v2/features/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../features/branches_and_reservation/reservation/data/model/res/reservation_parameters_res_model.dart';
 import '../../features/offers/cubit/offers_cubit.dart';
 import '../../features/offers/data/model/res/offers_res_model.dart';
 import '../../features/profile_section/my_cars/cubit/my_cars_cubit.dart';
@@ -58,7 +60,12 @@ class Pager {
   static Widget get home => const HomeScreen();
   static Widget get branches => const BranchesScreen();
   static Widget get branch => const BranchScreen();
-  static Widget get reservation => const ReservationScreen();
+  static Widget reservation([Branch? branch]) => MultiBlocProvider(providers: [
+      BlocProvider(create: (context)=> ReservationCubit(branch: branch)..execute()),
+      BlocProvider(
+          lazy: false,
+          create: (context)=> MyCarsCubit()..getBanTypes())
+  ],child: const ReservationScreen(),);
   static Widget get profile => const ProfileScreen();
   static Widget get personalInfo => BlocProvider(
         create: (context) => ProfileInfoCubit()..execute(),

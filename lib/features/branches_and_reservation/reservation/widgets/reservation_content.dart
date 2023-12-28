@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:clean_car_customer_v2/components/custom_button.dart';
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
 import 'package:clean_car_customer_v2/features/branches_and_reservation/reservation/widgets/calendar_widget.dart';
@@ -9,6 +10,11 @@ import 'package:clean_car_customer_v2/features/branches_and_reservation/reservat
 import 'package:clean_car_customer_v2/utils/pager/go.dart';
 import 'package:clean_car_customer_v2/utils/pager/pager.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../cubit/reservation_cubit.dart';
+import '../data/model/res/reservation_parameters_res_model.dart';
 
 class ReservationContent extends StatelessWidget {
   const ReservationContent({super.key});
@@ -20,97 +26,54 @@ class ReservationContent extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          SizedBox(width: 1.sw,),
           Padding(
             padding: Paddings.horizontal16,
             child: const ReservationLocationCard(),
           ),
           Gaps.h16,
-          Padding(
-            padding: Paddings.horizontal16,
-            child: Text(
-              "Avtomobili seç",
-              style: getMediumStyle(
-                color: ColorManager.mainBlack,
-                fontSize: 14,
-              ),
-            ),
-          ),
-          Gaps.h10,
-          Padding(
-            padding: Paddings.horizontal16,
-            child: const ReservationChooseCar(),
-          ),
+          const ReservationChooseCar(),
           Gaps.h16,
-          Padding(
-            padding: Paddings.horizontal16,
-            child: Text(
-              "Xidməti seç",
-              style: getMediumStyle(
-                color: ColorManager.mainBlack,
-                fontSize: 14,
-              ),
-            ),
-          ),
-          Gaps.h10,
           const CarTypesWidgets(),
           Gaps.h16,
-          Padding(
-            padding: Paddings.horizontal16,
-            child: Text(
-              "Tarixi seç",
-              style: getMediumStyle(
-                color: ColorManager.mainBlack,
-                fontSize: 14,
-              ),
-            ),
-          ),
-          Gaps.h10,
-          Padding(
-            padding: Paddings.horizontal16,
-            child: const CalendarWidget(),
-          ),
+          const CalendarWidget(),
           Gaps.h16,
-          Padding(
-            padding: Paddings.horizontal16,
-            child: Text(
-              "Saat seç",
-              style: getMediumStyle(
-                color: ColorManager.mainBlack,
-                fontSize: 14,
-              ),
-            ),
-          ),
-          Gaps.h10,
-          Padding(
-            padding: Paddings.horizontal16,
-            child: const HourButtonWidget(),
-          ),
+          const HourButtonWidget(),
           Gaps.h16,
-          Padding(
-            padding: Paddings.horizontal16,
-            child: Text(
-              "Ödəniş növünü seç",
-              style: getSemiBoldStyle(
-                color: ColorManager.mainBlack,
-                fontSize: 16,
-              ),
-            ),
-          ),
-          Gaps.h10,
-          Padding(
-            padding: Paddings.horizontal16,
-            child: const PaymentMethodWidget(),
-          ),
+          // Padding(
+          //   padding: Paddings.horizontal16,
+          //   child: Text(
+          //     "Ödəniş növünü seç",
+          //     style: getSemiBoldStyle(
+          //       color: ColorManager.mainBlack,
+          //       fontSize: 16,
+          //     ),
+          //   ),
+          // ),
+          // Gaps.h10,
+          // Padding(
+          //   padding: Paddings.horizontal16,
+          //   child: const PaymentMethodWidget(),
+          // ),
           Gaps.h24,
-          Padding(
-            padding: Paddings.horizontal16,
-            child: CustomButton(
-              frontText: "Rezerv Et",
-              onPressed: () {
-                Go.to(Pager.reservationDetail(isNew: true));
-              },
-            ),
-          ),
+          ValueListenableBuilder<Time?>(
+              valueListenable: context.read<ReservationCubit>().selectedTime,
+              builder: (context, value,child) {
+                if (value!=null) {
+                  return ZoomIn(
+                      child: Padding(
+                    padding: Paddings.horizontal16,
+                    child: CustomButton(
+                      frontText: "Rezerv Et",
+                      onPressed: () {
+                        Go.to(Pager.reservationDetail(isNew: true));
+                      },
+                    ),
+                  ));
+                } else {
+                  return const ReservationContentLoading();
+                }
+              }),
           Gaps.h24,
         ],
       ),

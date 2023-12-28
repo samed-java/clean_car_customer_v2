@@ -12,4 +12,5 @@ class ApiKeys {
   static const String personalInfo = "$_baseUrl/profile";
   static const String cars = "$_baseUrl/cars";
   static const String banTypes = "$_baseUrl/bans";
+  static const String getWashingServices = "$_baseUrl/getWashingServices";
 }

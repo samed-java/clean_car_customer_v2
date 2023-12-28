@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -37,13 +38,13 @@ class CarTypeButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(6.r),
         ),
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          SvgPicture.asset(
-            iconPath,
+          CachedNetworkImage(
+            imageUrl:iconPath,
             height: 28.h,
             width: 28.w,
-            colorFilter: ColorFilter.mode(
-                isSelected ? ColorManager.mainWhite : ColorManager.mainBlue,
-                BlendMode.srcIn),
+            // colorFilter: ColorFilter.mode(
+            //     isSelected ? ColorManager.mainWhite : ColorManager.mainBlue,
+            //     BlendMode.srcIn),
           ),
           Gaps.h10,
           Text(
