@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../utils/pager/transition.dart';
 import '../cubit/reservation_cubit.dart';
 import '../data/model/res/reservation_parameters_res_model.dart';
 
@@ -63,12 +64,34 @@ class ReservationContent extends StatelessWidget {
                   return ZoomIn(
                       child: Padding(
                     padding: Paddings.horizontal16,
-                    child: CustomButton(
+                    child: BlocListener<ReservationCubit, ReservationState>(
+  listener: (context, state) {
+    if(state is ReservationSuccess){
+      PageTransitionUtils.navigateWithFadeInTransition(
+          context,
+          Pager.splash(
+              svgAssets: ImageAssets.calendar,
+              headerText: "Rezerv edildi!!!",
+              subText:
+              "Rezerv etmə prosesiniz uğurla təsdiqləndi ",
+              page: Pager.main));
+    }
+  },
+  child: CustomButton(
                       frontText: "Rezerv Et",
                       onPressed: () {
-                        Go.to(Pager.reservationDetail(isNew: true));
+                        Go.to(Pager.reservationDetail(
+                            isNew: true,
+                            branch: context.read<ReservationCubit>().selectedBranch.value!,
+                            car: context.read<ReservationCubit>().selectedCar.value!,
+                            service: context.read<ReservationCubit>().selectedService.value!,
+                            date: context.read<ReservationCubit>().selectedDate.value!,
+                            time: context.read<ReservationCubit>().selectedTime.value!,
+                          onSubmit: ()=>context.read<ReservationCubit>().reserve()
+                        ));
                       },
                     ),
+),
                   ));
                 } else {
                   return const ReservationContentLoading();

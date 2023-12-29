@@ -30,6 +30,7 @@ import '../../features/branches_and_reservation/reservation/data/model/res/reser
 import '../../features/offers/cubit/offers_cubit.dart';
 import '../../features/offers/data/model/res/offers_res_model.dart';
 import '../../features/profile_section/my_cars/cubit/my_cars_cubit.dart';
+import '../../features/profile_section/my_cars/data/model/res/my_cars_res_model.dart';
 import '../../features/profile_section/personal_info/cubit/profile_info/profile_info_cubit.dart';
 
 class Pager {
@@ -83,9 +84,21 @@ class Pager {
         offer: offer,
       );
 
-  static Widget reservationDetail({bool isNew = false}) {
+  static Widget reservationDetail({bool isNew = false,
+  required Branch branch,
+  required Car car,
+  required Service service,
+  required DateTime date,
+  required Time time,
+  Function? onSubmit}) {
     return ReservationDetailScreen(
       isNew: isNew,
+      branch: branch,
+      car: car,
+      service: service,
+      date: date,
+      time: time,
+      onSubmit: onSubmit,
     );
   }
 

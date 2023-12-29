@@ -6,9 +6,26 @@ import 'package:clean_car_customer_v2/utils/pager/transition.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../../branches_and_reservation/reservation/data/model/res/reservation_parameters_res_model.dart';
+import '../../my_cars/data/model/res/my_cars_res_model.dart';
+
 class ReservationDetailContent extends StatelessWidget {
-  const ReservationDetailContent({super.key, required this.isNew});
+  const ReservationDetailContent({super.key, required this.isNew,
+  required this.branch,
+  required this.car,
+  required this.service,
+  required this.date,
+  required this.time,
+    this.onSubmit
+  });
   final bool isNew;
+  final Branch branch;
+  final Car car;
+  final Service service;
+  final DateTime date;
+  final Time time;
+  final Function? onSubmit;
+
 
   @override
   Widget build(BuildContext context) {
@@ -102,19 +119,14 @@ class ReservationDetailContent extends StatelessWidget {
               ? CustomButton(
                   frontText: "Təsdiqlə",
                   onPressed: () {
-                    PageTransitionUtils.navigateWithFadeInTransition(
-                        context,
-                        Pager.splash(
-                            svgAssets: ImageAssets.calendar,
-                            headerText: "Rezerv edildi!!!",
-                            subText:
-                                "Rezerv etmə prosesiniz uğurla təsdiqləndi ",
-                            page: Pager.main));
+                    onSubmit?.call();
                   },
                 )
               : CustomButton(
                   frontText: "Dəyişiklik Et",
-                  onPressed: () {},
+                  onPressed: () {
+                    onSubmit?.call();
+                  },
                 ),
           Gaps.h16
         ],

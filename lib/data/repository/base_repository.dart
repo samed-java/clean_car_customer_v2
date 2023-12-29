@@ -72,9 +72,11 @@ abstract class BaseRepository<T> {
   Future<T> fetch(
       {BaseRequestModel? queryParameters, Map<String, dynamic>? path}) async {
     String convertedUrl = _pathConverter(baseUrl, path);
+    print('converted Url: $convertedUrl');
     BaseResponseModel<T> result = await locator
         .get<GlobalService>()
         .fetchData<T>(convertedUrl, queryParameters);
+    print('result: $result');
     if (result != null) {
       if (result.success ?? false) {
         if (result.data != null) {

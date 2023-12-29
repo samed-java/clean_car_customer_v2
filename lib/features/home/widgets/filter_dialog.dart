@@ -2,11 +2,11 @@ import 'package:clean_car_customer_v2/features/home/widgets/filterbox_content.da
 
 import 'package:flutter/material.dart';
 
-void openHomeFilterBox(BuildContext context, double height) {
+void openHomeFilterBox(BuildContext c, double height) {
   showDialog(
-    context: context,
+    context: c,
     builder: (BuildContext context) {
-      return FilterBoxContent();
+      return FilterBoxContent(topContext: c,);
     },
   );
 }

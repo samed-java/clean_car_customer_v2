@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:clean_car_customer_v2/features/branches_and_reservation/reservation/data/model/res/reservation_parameters_res_model.dart';
 import 'package:clean_car_customer_v2/features/branches_and_reservation/reservation/data/repo/reservation_parameters_repo.dart';
+import 'package:clean_car_customer_v2/features/branches_and_reservation/reservation/data/repo/reservation_submit_repo.dart';
 import 'package:clean_car_customer_v2/locator.dart';
 import 'package:clean_car_customer_v2/utils/errors/base_error_handler.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,7 @@ import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
 import '../../../profile_section/my_cars/data/model/res/my_cars_res_model.dart';
 import '../data/model/req/reservation_parameters_req_model.dart';
+import '../data/model/req/reservation_submit_req_model.dart';
 
 part 'reservation_state.dart';
 
@@ -82,5 +84,32 @@ class ReservationCubit extends Cubit<ReservationState> with BaseErrorHandler {
     print(e);
     print(s);
     super.onOtherError(e, s);
+  }
+
+
+  void reserve(){
+    ErrorHandler(
+      progressAction: () async {
+        emit(ReservationLoading());
+        var result = locator.get<ReservationSubmitRepo>().send(ReservationSubmitReqModel(
+            washingId: selectedBranch.value!.id.toString(),
+            serviceId: selectedService.value!.serviceId.toString(),
+            carId: selectedCar.value!.id.toString(),
+            day: DateFormat('dd.MM.yyyy').format(selectedDate.value!),
+            time: selectedTime.value!.time,
+            price: selectedService.value!.price
+
+        ));
+        emit(ReservationSuccess());
+      },
+      socketExceptionAction: (e){
+        emit(ReservationError());
+    },
+      otherErrorAction: (e,s){
+        print(e);
+        print(s);
+        emit(ReservationError());
+      }
+    ).execute();
   }
 }

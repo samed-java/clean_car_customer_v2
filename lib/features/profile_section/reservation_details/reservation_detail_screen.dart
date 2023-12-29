@@ -5,9 +5,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../branches_and_reservation/reservation/data/model/res/reservation_parameters_res_model.dart';
+import '../my_cars/data/model/res/my_cars_res_model.dart';
+
 class ReservationDetailScreen extends StatelessWidget {
-  const ReservationDetailScreen({super.key, this.isNew = false});
+  const ReservationDetailScreen({super.key, this.isNew = false,
+  required this.branch,
+    required this.car,
+    required this.service,
+    required this.date,
+    required this.time,
+    this.onSubmit
+  });
   final bool isNew;
+  final Branch branch;
+  final Car car;
+  final Service service;
+  final DateTime date;
+  final Time time;
+  final Function? onSubmit;
 
   @override
   Widget build(BuildContext context) {
@@ -65,6 +81,12 @@ class ReservationDetailScreen extends StatelessWidget {
                   padding: Paddings.all16,
                   child: ReservationDetailContent(
                     isNew: isNew,
+                    branch: branch,
+                    car: car,
+                    service: service,
+                    date: date,
+                    time: time,
+                    onSubmit: onSubmit,
                   ),
                 ),
                 // child: const MyCarsContent(),

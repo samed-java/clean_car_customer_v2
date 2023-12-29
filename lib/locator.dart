@@ -6,6 +6,7 @@ import 'data/services/local/interceptor.dart';
 import 'data/services/local/storage_service.dart';
 import 'data/services/remote/global_service.dart';
 import 'features/branches_and_reservation/reservation/data/repo/reservation_parameters_repo.dart';
+import 'features/branches_and_reservation/reservation/data/repo/reservation_submit_repo.dart';
 import 'features/home/data/repo/filial_repo.dart';
 import 'features/home/data/repo/regions_repo.dart';
 import 'features/login/data/repo/login_repository.dart';
@@ -37,4 +38,5 @@ void setUpLocator() {
   locator.registerLazySingleton<MyCarsRepository>(() => MyCarsRepository());
   locator.registerLazySingleton<BanTypesRepository>(() => BanTypesRepository());
   locator.registerLazySingleton<ReservationParametersRepository>(() => ReservationParametersRepository());
+  locator.registerLazySingleton<ReservationSubmitRepo>(() => ReservationSubmitRepo());
 }

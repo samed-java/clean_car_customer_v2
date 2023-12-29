@@ -93,7 +93,7 @@ class ReservationInfoCard extends StatelessWidget {
               PaddedButton(
                   frontText: "Ətraflı",
                   onPressed: () {
-                    Go.to(Pager.reservationDetail());
+                    //Go.to(Pager.reservationDetail());
                   })
             ],
           )
