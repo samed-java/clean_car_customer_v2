@@ -21,6 +21,7 @@ class _FilterBoxContentState extends State<FilterBoxContent> {
   @override
   Widget build(BuildContext context) {
     final cubit = widget.topContext.read<HomeCubit>();
+    cubit.getCities();
     return AlertDialog(
       backgroundColor: ColorManager.mainBackgroundColor,
       insetPadding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 0),
@@ -34,139 +35,177 @@ class _FilterBoxContentState extends State<FilterBoxContent> {
         ),
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
-          child: ValueListenableBuilder<FilterFieldActiveStatus>(
-              valueListenable: cubit.activeStatus,
-              builder: (context, value, child) {
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Filterlə",
-                          style: getSemiBoldStyle(
-                            color: ColorManager.mainBlue,
-                            fontSize: 18,
-                          ),
+          child:
+              // ValueListenableBuilder<FilterFieldActiveStatus>(
+              //     valueListenable: cubit.activeStatus,
+              //     builder: (context, value, child) {
+              //       return
+              Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Filterlə",
+                    style: getSemiBoldStyle(
+                      color: ColorManager.mainBlue,
+                      fontSize: 18,
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Go.back();
+                    },
+                    child: SizedBox(
+                      child: Padding(
+                        padding: Paddings.all6,
+                        child: SvgPicture.asset(
+                          IconAssets.exit,
+                          height: 16.h,
+                          width: 16.w,
                         ),
-                        InkWell(
-                          onTap: () {
-                            Go.back();
-                          },
-                          child: SizedBox(
-                            child: Padding(
-                              padding: Paddings.all6,
-                              child: SvgPicture.asset(
-                                IconAssets.exit,
-                                height: 16.h,
-                                width: 16.w,
-                              ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Gaps.h10,
+              // Şəhər
+
+              StreamBuilder<int?>(
+                  stream: cubit.selectedCity.stream,
+                  builder: (context, snap) {
+                    return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Şəhər",
+                            style: getRegularStyle(
+                              color: ColorManager.thirdBlack,
+                              fontSize: 14,
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                    Gaps.h10,
-                    // Şəhər
-                    Text(
-                      "Şəhər",
-                      style: getRegularStyle(
-                        color: ColorManager.thirdBlack,
-                        fontSize: 14,
-                      ),
-                    ),
-                    CustomDropdown<int>(
-                      items: cubit.cities,
-                      child: (item) =>
-                          Text((item as Region?)?.title ?? "------"),
-                      selectedItems: cubit.selectedCity,
-                      onChanged: (value) {
-                        if (value != null) {
-                          cubit.selectedCity = value;
-                          cubit.getRegions(value);
-                        }
-                      },
-                    ),
+                          CustomDropdown<int>(
+                            items: cubit.cities,
+                            child: (item) =>
+                                Text((item as Region?)?.title ?? "------"),
+                            selectedItems: snap.data,
+                            onChanged: (value) {
+                              if (value != null) {
+                                cubit.selectedCity.sink.add(value);
+                                //cubit.getRegions(value);
+                              }
+                            },
+                          )
+                        ]);
+                  }),
 
-                    Gaps.h16,
-                    // Bölgə
-                    Text(
-                      "Bölgə",
-                      style: getRegularStyle(
-                        color: ColorManager.thirdBlack,
-                        fontSize: 14,
-                      ),
-                    ),
-                    CustomDropdown<int>(
-                      items: cubit.regions,
-                      child: (item) =>
-                          Text((item as Region?)?.title ?? "------"),
-                      selectedItems: cubit.selectedRegion,
-                      onChanged: (value) {
-                        if (value != null) {
-                          cubit.selectedRegion=value;
-                          cubit.getVillages(value);
-                        }
-                      },
-                    ),
+              Gaps.h16,
+              // Bölgə
 
-                    Gaps.h16,
-                    // Qəsəbə
-                    Text(
-                      "Qəsəbə",
-                      style: getRegularStyle(
-                        color: ColorManager.thirdBlack,
-                        fontSize: 14,
-                      ),
-                    ),
-                    CustomDropdown<int>(
-                      items: cubit.villages,
-                      child: (item) =>
-                          Text((item as Region?)?.title ?? "------"),
-                      selectedItems: cubit.selectedVillage,
-                      onChanged: (value) {
-                        if (value != null) {
-                          cubit.selectedVillage=value;
-                          //cubit.getVillages(value);
-                        }
-                      },
-                    ),
+              //if (value.city)
+              StreamBuilder<int?>(
+                  stream: cubit.selectedRegion.stream,
+                  builder: (context, snap) {
+                    if (cubit.regions.isNotEmpty) {
+                      return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Bölgə",
+                              style: getRegularStyle(
+                                color: ColorManager.thirdBlack,
+                                fontSize: 14,
+                              ),
+                            ),
+                            CustomDropdown<int>(
+                              items: cubit.regions,
+                              child: (item) =>
+                                  Text((item as Region?)?.title ?? "------"),
+                              selectedItems: snap.data,
+                              onChanged: (value) {
+                                if (value != null) {
+                                  cubit.selectedRegion.sink.add(value);
+                                  //cubit.getVillages(value);
+                                }
+                              },
+                            )
+                          ]);
+                    }
+                    return const SizedBox.shrink();
+                  }),
 
-                    Gaps.h16,
-                    Text(
-                      "Xidmət növü",
-                      style: getRegularStyle(
-                        color: ColorManager.thirdBlack,
-                        fontSize: 14,
-                      ),
-                    ),
-                    Gaps.h2,
-                    //const CustomDropDownButton(defaultValue: "Xidmət növü seç"),
-                    Gaps.h16,
-                    Text(
-                      "Qiymətləndirmə",
-                      style: getRegularStyle(
-                        color: ColorManager.thirdBlack,
-                        fontSize: 14,
-                      ),
-                    ),
-                    Gaps.h2,
-                    const Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        StarBox(text: "1"),
-                        StarBox(text: "2"),
-                        StarBox(text: "3"),
-                        StarBox(text: "4"),
-                        StarBox(text: "5"),
-                      ],
-                    ),
-                    Gaps.h16,
-                    CustomButton(frontText: "Qəbul Et", onPressed: () {})
-                  ],
-                );
-              }),
+              Gaps.h16,
+              // Qəsəbə
+
+              //if (value.village)
+              StreamBuilder<int?>(
+                  stream: cubit.selectedVillage.stream,
+                  builder: (context, snap) {
+                    if (cubit.villages.isNotEmpty) {
+                      return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Qəsəbə",
+                              style: getRegularStyle(
+                                color: ColorManager.thirdBlack,
+                                fontSize: 14,
+                              ),
+                            ),
+                            CustomDropdown<int>(
+                              items: cubit.villages,
+                              child: (item) =>
+                                  Text((item as Region?)?.title ?? "------"),
+                              selectedItems: snap.data,
+                              onChanged: (value) {
+                                if (value != null) {
+                                  cubit.selectedVillage.sink.add(value);
+                                  //cubit.getVillages(value);
+                                }
+                              },
+                            )
+                          ]);
+                    }
+                    return const SizedBox.shrink();
+                  }),
+
+              Gaps.h16,
+              Text(
+                "Xidmət növü",
+                style: getRegularStyle(
+                  color: ColorManager.thirdBlack,
+                  fontSize: 14,
+                ),
+              ),
+              Gaps.h2,
+              //const CustomDropDownButton(defaultValue: "Xidmət növü seç"),
+              Gaps.h16,
+              Text(
+                "Qiymətləndirmə",
+                style: getRegularStyle(
+                  color: ColorManager.thirdBlack,
+                  fontSize: 14,
+                ),
+              ),
+              Gaps.h2,
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  StarBox(text: "1"),
+                  StarBox(text: "2"),
+                  StarBox(text: "3"),
+                  StarBox(text: "4"),
+                  StarBox(text: "5"),
+                ],
+              ),
+              Gaps.h16,
+              CustomButton(frontText: "Qəbul Et", onPressed: () {})
+            ],
+            //   );
+            // }
+          ),
         ),
       ),
     );

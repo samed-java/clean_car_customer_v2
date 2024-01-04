@@ -66,14 +66,13 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> {
           padding: Paddings.horizontal8,
           //alignment: Alignment.center,
           decoration: BoxDecoration(
-            color: ColorManager.mainWhite,
-            borderRadius: BorderRadius.all(RadiusManager.radiusCircular4)
-          ),
+              color: ColorManager.mainWhite,
+              borderRadius: BorderRadius.all(RadiusManager.radiusCircular4)),
           child: ClipRRect(
             borderRadius: BorderRadius.all(RadiusManager.radiusCircular4),
             child: DropdownButtonHideUnderline(
               child: DropdownButtonFormField<T>(
-                validator: (value){
+                validator: (value) {
                   setState(() {
                     errorText = widget.validator?.call(value);
                   });
@@ -88,25 +87,23 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> {
                 borderRadius: BorderRadius.all(RadiusManager.radiusCircular4),
                 dropdownColor: ColorManager.mainWhite,
                 decoration: InputDecoration(
-                  labelText: widget.labelText,
-                  suffixIcon: const Icon(Icons.keyboard_arrow_down_sharp),
-                  errorText: '',
-                  errorStyle: const TextStyle(
-                    color: Colors.transparent,
-                    fontSize: 0,
-                    height: 0
-                  ),
-                  errorBorder: InputBorder.none,
-                  border: InputBorder.none
-                ),
+                    labelText: widget.labelText,
+                    suffixIcon: const Icon(Icons.keyboard_arrow_down_sharp),
+                    errorText: '',
+                    errorStyle: const TextStyle(
+                        color: Colors.transparent, fontSize: 0, height: 0),
+                    errorBorder: InputBorder.none,
+                    border: InputBorder.none),
                 style: getMediumStyle(
                     color: ColorManager.mainBlack, fontSize: FontSize.s14),
-                items: widget.items?.entries
-                    .map((e) => DropdownMenuItem<T>(
-                          value: e.key,
-                          child: widget.child(e.value),
-                        ))
-                    .toList(),
+                items: widget.items?.isNotEmpty ?? false
+                    ? widget.items!.entries
+                        .map((e) => DropdownMenuItem<T>(
+                              value: e.key,
+                              child: widget.child(e.value),
+                            ))
+                        .toList()
+                    : [],
               ),
             ),
           ),

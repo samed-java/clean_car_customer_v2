@@ -14,7 +14,7 @@ class ClientInterceptor extends Interceptor {
     if (token != null) {
       print(token);
       print(options.uri);
-      Position position = await Geolocator.getCurrentPosition();
+      //Position position = await Geolocator.getCurrentPosition();
       options.headers['Authorization'] = "Bearer $token";
       options.headers['Accept-Language'] = "en";
       // options.headers['lat'] = "${position.latitude}";

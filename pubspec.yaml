@@ -51,6 +51,7 @@ dependencies:
   string_mask: ^1.0.0
   equatable: any
   animate_to: any
+  rxdart: any
 
 
 
