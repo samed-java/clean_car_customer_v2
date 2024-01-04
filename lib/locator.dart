@@ -21,9 +21,12 @@ final locator = GetIt.I;
 
 void setUpLocator() {
   locator.registerLazySingleton<StorageService>(() => StorageService()..init());
-  Dio clientGlobal =
-      Dio(BaseOptions(validateStatus: (status) => (status! < 500)))
-        ..interceptors.add(ClientInterceptor());
+  Dio clientGlobal = Dio(BaseOptions(
+      validateStatus: (status) => (status! < 500),
+      connectTimeout: Duration(seconds: 20),
+      sendTimeout: Duration(seconds: 20),
+      receiveTimeout: Duration(seconds: 20)))
+    ..interceptors.add(ClientInterceptor());
 
   locator.registerLazySingleton<Dio>(() => clientGlobal);
   locator.registerLazySingleton<GlobalService>(() => GlobalService());
@@ -34,9 +37,12 @@ void setUpLocator() {
   locator.registerLazySingleton<BranchsRepository>(() => BranchsRepository());
   locator.registerLazySingleton<OffersRepository>(() => OffersRepository());
   locator.registerLazySingleton<LoginRepository>(() => LoginRepository());
-  locator.registerLazySingleton<ProfileInfoRepository>(() => ProfileInfoRepository());
+  locator.registerLazySingleton<ProfileInfoRepository>(
+      () => ProfileInfoRepository());
   locator.registerLazySingleton<MyCarsRepository>(() => MyCarsRepository());
   locator.registerLazySingleton<BanTypesRepository>(() => BanTypesRepository());
-  locator.registerLazySingleton<ReservationParametersRepository>(() => ReservationParametersRepository());
-  locator.registerLazySingleton<ReservationSubmitRepo>(() => ReservationSubmitRepo());
+  locator.registerLazySingleton<ReservationParametersRepository>(
+      () => ReservationParametersRepository());
+  locator.registerLazySingleton<ReservationSubmitRepo>(
+      () => ReservationSubmitRepo());
 }

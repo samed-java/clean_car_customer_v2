@@ -105,8 +105,7 @@ class MyCarsCubit extends Cubit<MyCarsState> with BaseErrorHandler {
       numberController.clear();
       selectedBanType = null;
       execute();
-    },
-        otherErrorAction: (e, s) {
+    }, otherErrorAction: (e, s) {
       // if (e is DataIsNullError) {
       //   print("lazimli eroorrrrrr");
       //   Go.back();
@@ -115,7 +114,8 @@ class MyCarsCubit extends Cubit<MyCarsState> with BaseErrorHandler {
       //   selectedBanType = null;
       //   execute();
       // }
-    })..execute();
+    })
+      ..execute();
   }
 
   void getBanTypes() {
@@ -140,7 +140,7 @@ class MyCarsCubit extends Cubit<MyCarsState> with BaseErrorHandler {
   }
 
   Map<int, String> get banTypesIdToName {
-    List<Ban> bans = _storage.getBanTypes() != null
+    List<Ban> bans = (_storage.getBanTypes() != null)
         ? BanTypesResModel.fromJson(_storage.getBanTypes()!).bans
         : [];
     var map = Map<int, String>.fromEntries(

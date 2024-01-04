@@ -160,8 +160,11 @@ class _ChooseCarRadioButtonState extends State<ChooseCarRadioButton> {
                               backgroundColor: ColorManager.mainBackgroundColor,
                               child: Center(
                                 child: CachedNetworkImage(
-                                  imageUrl:
-                                      widget.cars.elementAt(index).banType.icon,
+                                  imageUrl: widget.cars
+                                          .elementAt(index)
+                                          .banType
+                                          ?.icon ??
+                                      "",
                                 ),
                               ),
                             ),

@@ -12,13 +12,9 @@ import '../data/model/res/my_cars_res_model.dart';
 import 'car_info_dialog.dart';
 
 class MyCarCard extends StatelessWidget {
-
   final Car car;
 
-  const MyCarCard(
-      {super.key,
-        required this.car
-        });
+  const MyCarCard({super.key, required this.car});
 
   @override
   Widget build(BuildContext context) {
@@ -33,11 +29,13 @@ class MyCarCard extends StatelessWidget {
         child: Row(
           children: [
             CircleAvatar(
-              backgroundColor: ColorManager.mainBackgroundColor,
-              radius: 24.r,
-              child: CachedNetworkImage(imageUrl: car.banType.icon,)
-                  //: SvgPicture.asset(ImageAssets.jeep),
-            ),
+                backgroundColor: ColorManager.mainBackgroundColor,
+                radius: 24.r,
+                child: CachedNetworkImage(
+                  imageUrl: car.banType?.icon ?? '',
+                )
+                //: SvgPicture.asset(ImageAssets.jeep),
+                ),
             Gaps.w12,
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -56,12 +54,16 @@ class MyCarCard extends StatelessWidget {
               ],
             ),
             Expanded(child: Gaps.empty),
-            PaddedButton(frontText: "Ətraflı", onPressed: () {
-              context.read<MyCarsCubit>().nameController.text = car.carModel;
-              context.read<MyCarsCubit>().numberController.text = car.carNumber;
-              context.read<MyCarsCubit>().selectedBanType = car.banType.id;
-              carInfoDialog(context,selectedCarId: car.id);
-            })
+            PaddedButton(
+                frontText: "Ətraflı",
+                onPressed: () {
+                  context.read<MyCarsCubit>().nameController.text =
+                      car.carModel;
+                  context.read<MyCarsCubit>().numberController.text =
+                      car.carNumber;
+                  context.read<MyCarsCubit>().selectedBanType = car.banType?.id;
+                  carInfoDialog(context, selectedCarId: car.id);
+                })
           ],
         ),
       ),

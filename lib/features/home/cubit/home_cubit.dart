@@ -18,7 +18,8 @@ part 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> with BaseErrorHandler {
   HomeCubit() : super(HomeInitial()) {
-    activeStatus =  ValueNotifier<FilterFieldActiveStatus>(const FilterFieldActiveStatus(
+    activeStatus =
+        ValueNotifier<FilterFieldActiveStatus>(const FilterFieldActiveStatus(
       city: true,
       region: false,
       village: false,
@@ -40,21 +41,18 @@ class HomeCubit extends Cubit<HomeState> with BaseErrorHandler {
   @override
   Future<void> onProgress() async {
     emit(HomeLoading());
-    try{
-      var result = await locator.get<BranchsRepository>().fetch(
-          queryParameters: FilterReqModel(
-              villageId: selectedVillage,
-              cityId: selectedCity,
-              regionId: selectedRegion
-          )
-      );
-      print(result);
-      emit(HomeSuccess(data: result));
-    }catch(e,s){
-      print(e);
-      print(s);
-    }
-
+    //try{
+    var result = await locator.get<BranchsRepository>().fetch(
+        queryParameters: FilterReqModel(
+            villageId: selectedVillage,
+            cityId: selectedCity,
+            regionId: selectedRegion));
+    print(result);
+    emit(HomeSuccess(data: result));
+    // }catch(e,s){
+    //   print(e);
+    //   print(s);
+    // }
   }
 
   @override
@@ -69,6 +67,7 @@ class HomeCubit extends Cubit<HomeState> with BaseErrorHandler {
     print(s);
     emit(HomeFail(message: "Unknown Error"));
   }
+
   @override
   void onDataIsNullError(DataIsNullError e) {
     print(e);
@@ -122,8 +121,6 @@ class HomeCubit extends Cubit<HomeState> with BaseErrorHandler {
     return villages;
   }
 }
-
-
 
 class FilterFieldActiveStatus {
   final bool city;

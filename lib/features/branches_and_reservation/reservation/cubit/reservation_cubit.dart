@@ -64,7 +64,7 @@ class ReservationCubit extends Cubit<ReservationState> with BaseErrorHandler {
     var result = await locator.get<ReservationParametersRepository>().fetch(
         queryParameters: ReservationParametersReqModel(
             washingId: selectedBranch.value?.id,
-            banId: selectedCar.value?.banType.id,
+            banId: selectedCar.value?.banType?.id,
             date: selectedDate.value != null
                 ? DateFormat('dd.MM.yyyy').format(selectedDate.value!)
                 : null));
@@ -86,30 +86,24 @@ class ReservationCubit extends Cubit<ReservationState> with BaseErrorHandler {
     super.onOtherError(e, s);
   }
 
-
-  void reserve(){
-    ErrorHandler(
-      progressAction: () async {
-        emit(ReservationLoading());
-        var result = locator.get<ReservationSubmitRepo>().send(ReservationSubmitReqModel(
-            washingId: selectedBranch.value!.id.toString(),
-            serviceId: selectedService.value!.serviceId.toString(),
-            carId: selectedCar.value!.id.toString(),
-            day: DateFormat('dd.MM.yyyy').format(selectedDate.value!),
-            time: selectedTime.value!.time,
-            price: selectedService.value!.price
-
-        ));
-        emit(ReservationSuccess());
-      },
-      socketExceptionAction: (e){
-        emit(ReservationError());
-    },
-      otherErrorAction: (e,s){
-        print(e);
-        print(s);
-        emit(ReservationError());
-      }
-    ).execute();
+  void reserve() {
+    ErrorHandler(progressAction: () async {
+      emit(ReservationLoading());
+      var result = locator.get<ReservationSubmitRepo>().send(
+          ReservationSubmitReqModel(
+              washingId: selectedBranch.value!.id.toString(),
+              serviceId: selectedService.value!.serviceId.toString(),
+              carId: selectedCar.value!.id.toString(),
+              day: DateFormat('dd.MM.yyyy').format(selectedDate.value!),
+              time: selectedTime.value!.time,
+              price: selectedService.value!.price));
+      emit(ReservationSuccess());
+    }, socketExceptionAction: (e) {
+      emit(ReservationError());
+    }, otherErrorAction: (e, s) {
+      print(e);
+      print(s);
+      emit(ReservationError());
+    }).execute();
   }
 }

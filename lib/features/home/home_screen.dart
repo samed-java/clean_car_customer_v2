@@ -96,7 +96,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: BlocBuilder<HomeCubit, HomeState>(
                         builder: (context, state) {
                           if (state is HomeSuccess) {
-                            state.data.washings.length;
+                            //state.data.washings.length;
                             return ListView.builder(
                               physics: const BouncingScrollPhysics(),
                               scrollDirection: Axis.horizontal,

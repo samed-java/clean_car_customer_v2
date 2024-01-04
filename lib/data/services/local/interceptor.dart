@@ -8,16 +8,17 @@ import '../../../locator.dart';
 class ClientInterceptor extends Interceptor {
   var _storage = locator.get<StorageService>();
   @override
-  void onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
+  void onRequest(
+      RequestOptions options, RequestInterceptorHandler handler) async {
     String? token = locator.get<StorageService>().getAccessToken();
-    if(token != null) {
+    if (token != null) {
       print(token);
       print(options.uri);
-      Position position = await  Geolocator.getCurrentPosition();
+      Position position = await Geolocator.getCurrentPosition();
       options.headers['Authorization'] = "Bearer $token";
       options.headers['Accept-Language'] = "en";
-      options.headers['lat'] = "${position.latitude}";
-      options.headers['lon'] = "${position.longitude}";
+      // options.headers['lat'] = "${position.latitude}";
+      // options.headers['lon'] = "${position.longitude}";
     }
     handler.next(options);
   }

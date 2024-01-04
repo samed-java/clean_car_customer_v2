@@ -2,7 +2,6 @@ import 'dart:io';
 import 'errors.dart';
 
 mixin BaseErrorHandler {
-
   Future<void> onProgress();
   void onSocketException(SocketException e) {}
   void onResponseBodyIsNullError(ResponseBodyIsNullError e) {}
@@ -17,19 +16,19 @@ mixin BaseErrorHandler {
       onSocketException.call(e);
     } catch (e, s) {
       if (e is DataIsNullError) {
-        onDataIsNullError(e);
+        onDataIsNullError.call(e);
       } else if (e is ResponseBodyIsNullError) {
-        onResponseBodyIsNullError(e);
+        onResponseBodyIsNullError.call(e);
       } else if (e is NotSuccessError) {
-        onNotSuccessError(e);
+        onNotSuccessError.call(e);
       } else {
-        onOtherError(e, s);
+        onOtherError.call(e, s);
       }
     }
   }
 }
 
-class ErrorHandler with BaseErrorHandler{
+class ErrorHandler with BaseErrorHandler {
   ErrorHandler(
       {required this.progressAction,
       this.dataIsNullErrorAction,

@@ -45,12 +45,15 @@ class Pager {
       );
   static Widget get main => MultiBlocProvider(
         providers: [
-          BlocProvider<OffersCubit>(
-            create: (context) => OffersCubit()..execute(),
-          ),
           BlocProvider<HomeCubit>(
+            lazy: false,
             create: (context) => HomeCubit()..execute(),
           ),
+          BlocProvider<OffersCubit>(
+            lazy: false,
+            create: (context) => OffersCubit()..execute(),
+          ),
+          
         ],
         child: const MainScreen(),
       );
