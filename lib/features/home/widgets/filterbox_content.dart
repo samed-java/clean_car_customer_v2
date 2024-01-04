@@ -73,9 +73,11 @@ class _FilterBoxContentState extends State<FilterBoxContent> {
               Gaps.h10,
               // Şəhər
 
-              StreamBuilder<int?>(
-                  stream: cubit.selectedCity.stream,
-                  builder: (context, snap) {
+              ValueListenableBuilder<int?>(
+                  valueListenable: cubit.selectedCity,
+                  builder: (context, value, child) {
+                    print("rebuild cities");
+
                     return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -90,12 +92,12 @@ class _FilterBoxContentState extends State<FilterBoxContent> {
                             items: cubit.cities,
                             child: (item) =>
                                 Text((item as Region?)?.title ?? "------"),
-                            selectedItems: snap.data,
+                            selectedItems: value,
                             onChanged: (value) {
-                              if (value != null) {
-                                cubit.selectedCity.sink.add(value);
-                                //cubit.getRegions(value);
-                              }
+                              //if (value != null) {
+                              cubit.selectedCity.value = value;
+                              //cubit.getRegions(value);
+                              //}
                             },
                           )
                         ]);
@@ -105,9 +107,10 @@ class _FilterBoxContentState extends State<FilterBoxContent> {
               // Bölgə
 
               //if (value.city)
-              StreamBuilder<int?>(
-                  stream: cubit.selectedRegion.stream,
-                  builder: (context, snap) {
+              ValueListenableBuilder<int?>(
+                  valueListenable: cubit.selectedRegion,
+                  builder: (context, value, child) {
+                    print("rebuild regions");
                     if (cubit.regions.isNotEmpty) {
                       return Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -123,12 +126,12 @@ class _FilterBoxContentState extends State<FilterBoxContent> {
                               items: cubit.regions,
                               child: (item) =>
                                   Text((item as Region?)?.title ?? "------"),
-                              selectedItems: snap.data,
+                              selectedItems: value,
                               onChanged: (value) {
-                                if (value != null) {
-                                  cubit.selectedRegion.sink.add(value);
-                                  //cubit.getVillages(value);
-                                }
+                                //if (value != null) {
+                                cubit.selectedRegion.value = value;
+                                //cubit.getVillages(value);
+                                //}
                               },
                             )
                           ]);
@@ -140,9 +143,11 @@ class _FilterBoxContentState extends State<FilterBoxContent> {
               // Qəsəbə
 
               //if (value.village)
-              StreamBuilder<int?>(
-                  stream: cubit.selectedVillage.stream,
-                  builder: (context, snap) {
+              ValueListenableBuilder<int?>(
+                  valueListenable: cubit.selectedVillage,
+                  builder: (context, value, child) {
+                    print("rebuild villages");
+
                     if (cubit.villages.isNotEmpty) {
                       return Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -158,12 +163,12 @@ class _FilterBoxContentState extends State<FilterBoxContent> {
                               items: cubit.villages,
                               child: (item) =>
                                   Text((item as Region?)?.title ?? "------"),
-                              selectedItems: snap.data,
+                              selectedItems: value,
                               onChanged: (value) {
-                                if (value != null) {
-                                  cubit.selectedVillage.sink.add(value);
-                                  //cubit.getVillages(value);
-                                }
+                                //if (value != null) {
+                                cubit.selectedVillage.value = value;
+                                //cubit.getVillages(value);
+                                //}
                               },
                             )
                           ]);

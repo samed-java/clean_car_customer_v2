@@ -47,13 +47,20 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> {
   @override
   void initState() {
     super.initState();
+    print("initial id ${widget.selectedItems}");
+    _changeSelectItems(widget.selectedItems);
     errorText = widget.errorText;
-    _selectedItems = widget.selectedItems;
   }
 
   void _changeSelectItems(T? data) {
-    _selectedItems = data;
     widget.onChanged.call(data);
+    _selectedItems = data;
+  }
+
+  @override
+  void didUpdateWidget(covariant CustomDropdown<T> oldWidget) {
+    _changeSelectItems(widget.selectedItems);
+    super.didUpdateWidget(oldWidget);
   }
 
   @override
@@ -79,7 +86,8 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> {
                   return errorText;
                 },
                 isDense: true,
-                value: _selectedItems,
+                value:
+                    widget.items?.isNotEmpty ?? false ? _selectedItems : null,
                 onChanged: _changeSelectItems,
                 // isExpanded: true,
                 iconSize: 0,

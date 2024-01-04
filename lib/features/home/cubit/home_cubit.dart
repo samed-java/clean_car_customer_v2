@@ -6,10 +6,10 @@ import 'package:clean_car_customer_v2/features/home/data/model/res/regions_res_m
 import 'package:clean_car_customer_v2/features/home/data/repo/filial_repo.dart';
 import 'package:clean_car_customer_v2/features/home/data/repo/regions_repo.dart';
 import 'package:clean_car_customer_v2/utils/extensions/model_extensions/obj_list_to_map.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:clean_car_customer_v2/locator.dart';
 import 'package:clean_car_customer_v2/utils/errors/base_error_handler.dart';
-import 'package:rxdart/rxdart.dart';
 import '../../../utils/errors/errors.dart';
 
 part 'home_state.dart';
@@ -18,18 +18,18 @@ class HomeCubit extends Cubit<HomeState> with BaseErrorHandler {
   HomeCubit() : super(HomeInitial()) {
     _getFilterParams();
 
-    selectedCity.stream.listen((event) {
-      print(event);
-      getRegions(event);
-      selectedRegion.sink.add(0);
-      print(regions);
+    selectedCity.addListener(() {
+      print("city id:  ${selectedCity.value}");
+      selectedRegion.value = 0;
+      selectedRegion.notifyListeners();
+      getRegions(selectedCity.value);
     });
 
-    selectedRegion.stream.listen((event) {
-      print(event);
-      getVillages(event);
-      selectedVillage.sink.add(0);
-      print(villages);
+    selectedRegion.addListener(() {
+      print("region id:  ${selectedRegion.value}");
+      selectedVillage.value = 0;
+      selectedVillage.notifyListeners();
+      getVillages(selectedRegion.value);
     });
   }
   final StorageService _storageService = locator.get<StorageService>();
@@ -37,9 +37,9 @@ class HomeCubit extends Cubit<HomeState> with BaseErrorHandler {
   Map<int, Region?> cities = <int, Region?>{};
   Map<int, Region?> regions = <int, Region?>{};
   Map<int, Region?> villages = <int, Region?>{};
-  BehaviorSubject<int?> selectedCity = BehaviorSubject<int?>();
-  BehaviorSubject<int?> selectedRegion = BehaviorSubject<int?>();
-  BehaviorSubject<int?> selectedVillage = BehaviorSubject<int?>();
+  ValueNotifier<int?> selectedCity = ValueNotifier<int?>(0);
+  ValueNotifier<int?> selectedRegion = ValueNotifier<int?>(0);
+  ValueNotifier<int?> selectedVillage = ValueNotifier<int?>(0);
 
   //late ValueNotifier<FilterFieldActiveStatus> activeStatus;
 
@@ -49,9 +49,9 @@ class HomeCubit extends Cubit<HomeState> with BaseErrorHandler {
     //try{
     var result = await locator.get<BranchsRepository>().fetch(
         queryParameters: FilterReqModel(
-            villageId: selectedVillage.stream.valueOrNull,
-            cityId: selectedCity.stream.valueOrNull,
-            regionId: selectedRegion.stream.valueOrNull));
+            villageId: selectedVillage.value,
+            cityId: selectedCity.value,
+            regionId: selectedRegion.value));
     print(result);
     emit(HomeSuccess(data: result));
     // }catch(e,s){
@@ -107,32 +107,39 @@ class HomeCubit extends Cubit<HomeState> with BaseErrorHandler {
     Map<int, Region?> regionInit = {0: null};
     regionInit.addAll(regionList);
     cities = regionInit;
+    print(
+        "cities ${cities.map<int, dynamic>((key, value) => MapEntry<int, dynamic>(key, value?.id))}");
   }
 
   getRegions(int? id) {
     Map<int, Region?> regionList = id != null
-        ? (cities[id]?.regions?.objToMap<int, Region>(
-                key: (e) => e.parentId!, value: (e) => e) ??
+        ? (cities[id]
+                ?.regions
+                ?.objToMap<int, Region>(key: (e) => e.id, value: (e) => e) ??
             {})
         : {};
     Map<int, Region?> regionInit = {0: null};
     regionInit.addAll(regionList);
     regions = regionInit;
-    print(regions);
+    print(
+        "regions ${regions.map<int, dynamic>((key, value) => MapEntry<int, dynamic>(key, value?.id))}");
     // villages = {};
   }
 
   getVillages(int? id) {
     Map<int, Region?> regionList = id != null
-        ? (regions[id]?.villages?.objToMap<int, Region>(
-                key: (e) => e.parentId!, value: (e) => e) ??
+        ? (regions[id]
+                ?.villages
+                ?.objToMap<int, Region>(key: (e) => e.id!, value: (e) => e) ??
             {})
         : {};
 
     Map<int, Region?> regionInit = {0: null};
     regionInit.addAll(regionList);
     villages = regionInit;
-    print(villages);
+
+    print(
+        "villages ${villages.map<int, dynamic>((key, value) => MapEntry<int, dynamic>(key, value?.id))}");
   }
 }
 
