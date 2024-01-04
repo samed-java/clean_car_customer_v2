@@ -9,14 +9,15 @@ import '../../branches_and_reservation/reservation/data/model/res/reservation_pa
 import '../my_cars/data/model/res/my_cars_res_model.dart';
 
 class ReservationDetailScreen extends StatelessWidget {
-  const ReservationDetailScreen({super.key, this.isNew = false,
-  required this.branch,
-    required this.car,
-    required this.service,
-    required this.date,
-    required this.time,
-    this.onSubmit
-  });
+  const ReservationDetailScreen(
+      {super.key,
+      this.isNew = false,
+      required this.branch,
+      required this.car,
+      required this.service,
+      required this.date,
+      required this.time,
+      this.onSubmit});
   final bool isNew;
   final Branch branch;
   final Car car;

@@ -27,7 +27,9 @@ class ReservationContent extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(width: 1.sw,),
+          SizedBox(
+            width: 1.sw,
+          ),
           Padding(
             padding: Paddings.horizontal16,
             child: const ReservationLocationCard(),
@@ -59,39 +61,54 @@ class ReservationContent extends StatelessWidget {
           Gaps.h24,
           ValueListenableBuilder<Time?>(
               valueListenable: context.read<ReservationCubit>().selectedTime,
-              builder: (context, value,child) {
-                if (value!=null) {
+              builder: (context, value, child) {
+                if (value != null) {
                   return ZoomIn(
                       child: Padding(
                     padding: Paddings.horizontal16,
                     child: BlocListener<ReservationCubit, ReservationState>(
-  listener: (context, state) {
-    if(state is ReservationSuccess){
-      PageTransitionUtils.navigateWithFadeInTransition(
-          context,
-          Pager.splash(
-              svgAssets: ImageAssets.calendar,
-              headerText: "Rezerv edildi!!!",
-              subText:
-              "Rezerv etmə prosesiniz uğurla təsdiqləndi ",
-              page: Pager.main));
-    }
-  },
-  child: CustomButton(
-                      frontText: "Rezerv Et",
-                      onPressed: () {
-                        Go.to(Pager.reservationDetail(
-                            isNew: true,
-                            branch: context.read<ReservationCubit>().selectedBranch.value!,
-                            car: context.read<ReservationCubit>().selectedCar.value!,
-                            service: context.read<ReservationCubit>().selectedService.value!,
-                            date: context.read<ReservationCubit>().selectedDate.value!,
-                            time: context.read<ReservationCubit>().selectedTime.value!,
-                          onSubmit: ()=>context.read<ReservationCubit>().reserve()
-                        ));
+                      listener: (context, state) {
+                        if (state is ReservationSuccess) {
+                          PageTransitionUtils.navigateWithFadeInTransition(
+                              context,
+                              Pager.splash(
+                                  svgAssets: ImageAssets.calendar,
+                                  headerText: "Rezerv edildi!!!",
+                                  subText:
+                                      "Rezerv etmə prosesiniz uğurla təsdiqləndi ",
+                                  page: Pager.main));
+                        }
                       },
+                      child: CustomButton(
+                        frontText: "Rezerv Et",
+                        onPressed: () {
+                          Go.to(Pager.reservationDetail(
+                              isNew: true,
+                              branch: context
+                                  .read<ReservationCubit>()
+                                  .selectedBranch
+                                  .value!,
+                              car: context
+                                  .read<ReservationCubit>()
+                                  .selectedCar
+                                  .value!,
+                              service: context
+                                  .read<ReservationCubit>()
+                                  .selectedService
+                                  .value!,
+                              date: context
+                                  .read<ReservationCubit>()
+                                  .selectedDate
+                                  .value!,
+                              time: context
+                                  .read<ReservationCubit>()
+                                  .selectedTime
+                                  .value!,
+                              onSubmit: () =>
+                                  context.read<ReservationCubit>().reserve()));
+                        },
+                      ),
                     ),
-),
                   ));
                 } else {
                   return const ReservationContentLoading();

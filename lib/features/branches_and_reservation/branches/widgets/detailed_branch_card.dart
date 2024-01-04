@@ -8,8 +8,6 @@ import 'package:flutter_bounce/flutter_bounce.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../../utils/dynamic_constants/data/model/response/regions_response_model.dart';
-
 class DetailedBranchCard extends StatelessWidget {
   const DetailedBranchCard({super.key, required this.model});
   final Washing model;
@@ -20,10 +18,10 @@ class DetailedBranchCard extends StatelessWidget {
     return Bounce(
       duration: const Duration(milliseconds: 100),
       onPressed: () {
-        Go.to(Pager.branch);
+        Go.to(Pager.branch(model));
       },
       child: Hero(
-        tag: "salam",
+        tag: '${model.id}-${model.title}',
         child: Container(
           height: height * (160 / 816),
           width: width * (336 / 375),
@@ -40,7 +38,9 @@ class DetailedBranchCard extends StatelessWidget {
                   right: 0,
                   bottom: 0,
                   child: CachedNetworkImage(
-                    imageUrl: model.images.isNotEmpty?model.images.first.image:"https://wavescarwash.co.uk/images/pageImages/Coventry4RebrandPhotos-23102069.jpeg",
+                    imageUrl: model.images.isNotEmpty
+                        ? model.images.first.image
+                        : "https://wavescarwash.co.uk/images/pageImages/Coventry4RebrandPhotos-23102069.jpeg",
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -113,7 +113,7 @@ class DetailedBranchCard extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               Text(
-                                "5",
+                                model.rating,
                                 style: getMediumStyle(
                                     color: ColorManager.mainBlack,
                                     fontSize: 14),

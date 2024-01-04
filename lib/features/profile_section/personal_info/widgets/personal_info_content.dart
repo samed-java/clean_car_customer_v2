@@ -3,7 +3,6 @@ import 'package:clean_car_customer_v2/features/profile_section/personal_info/cub
 import 'package:clean_car_customer_v2/features/profile_section/personal_info/cubit/profile_info/profile_info_state.dart';
 import 'package:clean_car_customer_v2/features/profile_section/personal_info/widgets/personal_info_card.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:string_mask/string_mask.dart';
 
@@ -17,7 +16,7 @@ class PersonalInfoContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ProfileInfoCubit, ProfileInfoState>(
       builder: (context, state) {
-        if(state is ProfileInfoSuccess){
+        if (state is ProfileInfoSuccess) {
           return SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
             child: Column(
@@ -35,18 +34,26 @@ class PersonalInfoContent extends StatelessWidget {
                 Gaps.h16,
                 PersonalInfoCard(
                   headerText: "Telefon nömrəsi",
-                  subText: StringMask.apply_(state.profileInfoModel.user.phone.toString(), "+###-##-###-##-##", null),
+                  subText: StringMask.apply_(
+                      state.profileInfoModel.user.phone.toString(),
+                      "+###-##-###-##-##",
+                      null),
                 ),
                 Gaps.h16,
               ],
             ),
           );
-        }else if(state is ProfileInfoLoading){
-          return const Center(child: CupertinoActivityIndicator(),);
-        }else if(state is ProfileInfoErrorState){
-          return  Center(child: Text(state.error,style: getMediumStyle(
-              color: ColorManager.mainBlue, fontSize: 16),));
-        }else{
+        } else if (state is ProfileInfoLoading) {
+          return const Center(
+            child: CupertinoActivityIndicator(),
+          );
+        } else if (state is ProfileInfoErrorState) {
+          return Center(
+              child: Text(
+            state.error,
+            style: getMediumStyle(color: ColorManager.mainBlue, fontSize: 16),
+          ));
+        } else {
           return const SizedBox.shrink();
         }
       },

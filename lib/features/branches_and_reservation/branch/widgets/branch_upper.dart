@@ -5,11 +5,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bounce/flutter_bounce.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:clean_car_customer_v2/features/home/data/model/res/branchs_res_model.dart'
+    as wash;
 
 class BranchUpper extends StatelessWidget {
-  const BranchUpper({
-    super.key,
-  });
+  const BranchUpper({super.key, required this.model});
+
+  // final List<model.Image> imgUrls;
+
+  final wash.Washing model;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +21,11 @@ class BranchUpper extends StatelessWidget {
 
     return Stack(
       children: [
-        SizedBox(height: 350.h, child: const BranchImage()),
+        SizedBox(
+            height: 350.h,
+            child: BranchImage(
+              imgUrls: model.images,
+            )),
         Positioned(
           top: topSafeAreaHeight,
           right: 0,
@@ -36,7 +44,7 @@ class BranchUpper extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Text(
-                      "5",
+                      model.rating,
                       style: getMediumStyle(
                           color: ColorManager.mainBlack, fontSize: 14),
                     ),

@@ -1,3 +1,4 @@
+import 'package:clean_car_customer_v2/features/profile_section/reservations/data/repo/reservations_repository.dart';
 import 'package:clean_car_customer_v2/utils/language/repo/language_repository.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
@@ -39,6 +40,8 @@ void setUpLocator() {
   locator.registerLazySingleton<LoginRepository>(() => LoginRepository());
   locator.registerLazySingleton<ProfileInfoRepository>(
       () => ProfileInfoRepository());
+  locator.registerLazySingleton<ReservationsRepository>(
+      () => ReservationsRepository());
   locator.registerLazySingleton<MyCarsRepository>(() => MyCarsRepository());
   locator.registerLazySingleton<BanTypesRepository>(() => BanTypesRepository());
   locator.registerLazySingleton<ReservationParametersRepository>(

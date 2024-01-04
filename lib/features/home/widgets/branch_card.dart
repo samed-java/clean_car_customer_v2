@@ -7,8 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bounce/flutter_bounce.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '';
-
 
 class BranchCard extends StatelessWidget {
   const BranchCard({Key? key, required this.model}) : super(key: key);
@@ -18,10 +16,10 @@ class BranchCard extends StatelessWidget {
     return Bounce(
       duration: const Duration(milliseconds: 100),
       onPressed: () {
-        Go.to(Pager.branch);
+        Go.to(Pager.branch(model));
       },
       child: Hero(
-        tag: "salam",
+        tag: '${model.id}-${model.title}',
         child: Container(
           margin: Paddings.horizontal8,
           decoration: BoxDecoration(
@@ -40,7 +38,9 @@ class BranchCard extends StatelessWidget {
                   right: 0,
                   bottom: 0,
                   child: CachedNetworkImage(
-                    imageUrl: model.images.isNotEmpty?model.images.first.image:"https://wavescarwash.co.uk/images/pageImages/Coventry4RebrandPhotos-23102069.jpeg",
+                    imageUrl: model.images.isNotEmpty
+                        ? model.images.first.image
+                        : "https://wavescarwash.co.uk/images/pageImages/Coventry4RebrandPhotos-23102069.jpeg",
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -67,10 +67,19 @@ class BranchCard extends StatelessWidget {
                     alignment: Alignment.bottomCenter,
                     child: Material(
                       color: Colors.transparent,
-                      child: Text(
-                        model.title,
-                        style: getSemiBoldStyle(
-                            color: ColorManager.mainWhite, fontSize: 16),
+                      child: Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(4),
+                            child: Text(
+                              model.title.length > 15
+                                  ? "${model.title.substring(0, 12)}..."
+                                  : model.title,
+                              style: getSemiBoldStyle(
+                                  color: ColorManager.mainWhite, fontSize: 16),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
@@ -94,7 +103,7 @@ class BranchCard extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               Text(
-                                "5",
+                                model.rating,
                                 style: getMediumStyle(
                                     color: ColorManager.mainBlack,
                                     fontSize: 14),

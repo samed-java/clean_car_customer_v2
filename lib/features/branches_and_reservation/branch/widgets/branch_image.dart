@@ -1,11 +1,16 @@
 import 'package:clean_car_customer_v2/components/custom_dots.dart';
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
 import 'package:flutter/material.dart';
+import 'package:clean_car_customer_v2/features/home/data/model/res/branchs_res_model.dart'
+    as model;
 
 class BranchImage extends StatefulWidget {
   const BranchImage({
     super.key,
+    required this.imgUrls,
   });
+
+  final List<model.Image> imgUrls;
 
   @override
   State<BranchImage> createState() => _BranchImageState();
@@ -14,8 +19,16 @@ class BranchImage extends StatefulWidget {
 class _BranchImageState extends State<BranchImage> {
   int _currentPage = 0;
   final PageController _pageController = PageController();
+
   @override
   Widget build(BuildContext context) {
+    final List<String> images = widget.imgUrls.isEmpty
+        ? [
+            "https://wavescarwash.co.uk/images/pageImages/Coventry4RebrandPhotos-23102069.jpeg",
+            // Diğer yerel fotoğraflar buraya eklenebilir
+          ]
+        : widget.imgUrls.map((image) => image.image).toList();
+
     return Stack(
       children: [
         PageView(
@@ -28,20 +41,22 @@ class _BranchImageState extends State<BranchImage> {
               },
             );
           },
-          children: [
-            buildImage(
-                "https://wavescarwash.co.uk/images/pageImages/Coventry4RebrandPhotos-23102069.jpeg"),
-            buildImage(
-                "https://wavescarwash.co.uk/images/pageImages/Coventry4RebrandPhotos-23102069.jpeg"),
-            buildImage(
-                "https://wavescarwash.co.uk/images/pageImages/Coventry4RebrandPhotos-23102069.jpeg"),
-            buildImage(
-                "https://wavescarwash.co.uk/images/pageImages/Coventry4RebrandPhotos-23102069.jpeg"),
-            buildImage(
-                "https://wavescarwash.co.uk/images/pageImages/Coventry4RebrandPhotos-23102069.jpeg"),
-            buildImage(
-                "https://wavescarwash.co.uk/images/pageImages/Coventry4RebrandPhotos-23102069.jpeg"),
-          ],
+          // children: [
+          //   buildImage(widget.imgUrls.isEmpty
+          //       ? "https://wavescarwash.co.uk/images/pageImages/Coventry4RebrandPhotos-23102069.jpeg"
+          //       : widget.imgUrls[0].image),
+          //   buildImage(
+          //       "https://wavescarwash.co.uk/images/pageImages/Coventry4RebrandPhotos-23102069.jpeg"),
+          //   buildImage(
+          //       "https://wavescarwash.co.uk/images/pageImages/Coventry4RebrandPhotos-23102069.jpeg"),
+          //   buildImage(
+          //       "https://wavescarwash.co.uk/images/pageImages/Coventry4RebrandPhotos-23102069.jpeg"),
+          //   buildImage(
+          //       "https://wavescarwash.co.uk/images/pageImages/Coventry4RebrandPhotos-23102069.jpeg"),
+          //   buildImage(
+          //       "https://wavescarwash.co.uk/images/pageImages/Coventry4RebrandPhotos-23102069.jpeg"),
+          // ],
+          children: images.map(buildImage).toList(),
         ),
         Align(
           alignment: Alignment.bottomCenter,
@@ -49,7 +64,7 @@ class _BranchImageState extends State<BranchImage> {
             padding: Paddings.all16,
             child: CustomDots(
               currentPage: _currentPage,
-              number: 6,
+              number: widget.imgUrls.length,
               onColor: ColorManager.mainWhite,
               offColor: ColorManager.secondaryWhite,
             ),

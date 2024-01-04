@@ -1,6 +1,6 @@
 import 'package:clean_car_customer_v2/components/custom_button.dart';
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
-import 'package:clean_car_customer_v2/features/branches_and_reservation/branch/widgets/banch_car_type.dart';
+import 'package:clean_car_customer_v2/features/branches_and_reservation/branch/widgets/branch_car_type.dart';
 import 'package:clean_car_customer_v2/features/branches_and_reservation/branch/widgets/branch_info.dart';
 import 'package:clean_car_customer_v2/features/branches_and_reservation/branch/widgets/branch_note.dart';
 import 'package:clean_car_customer_v2/features/branches_and_reservation/branch/widgets/branch_upper.dart';
@@ -9,8 +9,12 @@ import 'package:clean_car_customer_v2/utils/pager/pager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../home/data/model/res/branchs_res_model.dart' as wash;
+
 class BranchScreen extends StatefulWidget {
-  const BranchScreen({Key? key}) : super(key: key);
+  const BranchScreen({Key? key, required this.model}) : super(key: key);
+
+  final wash.Washing model;
 
   @override
   State<BranchScreen> createState() => _BranchScreenState();
@@ -49,10 +53,12 @@ class _BranchScreenState extends State<BranchScreen> {
             expandedHeight: 300.h,
             floating: false,
             pinned: false,
-            flexibleSpace: const FlexibleSpaceBar(
+            flexibleSpace: FlexibleSpaceBar(
               background: Hero(
-                tag: "salam",
-                child: BranchUpper(),
+                tag: '${widget.model.id}-${widget.model.title}',
+                child: BranchUpper(
+                  model: widget.model,
+                ),
               ),
             ),
           ),
@@ -68,20 +74,24 @@ class _BranchScreenState extends State<BranchScreen> {
                         Padding(
                           padding: Paddings.vertical16,
                           child: Text(
-                            "Nizami filialı",
+                            widget.model.title,
                             style: getSemiBoldStyle(
                                 color: ColorManager.secondaryBlack,
                                 fontSize: 18),
                           ),
                         ),
-                      const BranchInfoWidget(),
+                      BranchInfoWidget(
+                        model: widget.model,
+                      ),
                       Gaps.h16,
                       ClipRRect(
                         borderRadius:
                             BorderRadius.all(RadiusManager.radiusCircular6),
-                        child: const SizedBox(
+                        child: SizedBox(
                           height: 200,
-                          child: BranchCarType(),
+                          child: BranchCarType(
+                            services: widget.model.services,
+                          ),
                         ),
                       ),
                       Gaps.h16,
@@ -122,7 +132,7 @@ class _BranchScreenState extends State<BranchScreen> {
                     Image.asset(IconAssets.backButton),
                     Gaps.w16,
                     Text(
-                      "Nizami filialı",
+                      widget.model.title,
                       style: getSemiBoldStyle(
                           color: ColorManager.secondaryBlack, fontSize: 18),
                     ),

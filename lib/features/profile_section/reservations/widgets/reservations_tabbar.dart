@@ -1,23 +1,22 @@
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
+import 'package:clean_car_customer_v2/features/profile_section/reservations/data/model/reservations_model.dart';
 import 'package:clean_car_customer_v2/features/profile_section/reservations/widgets/reservations_info_card.dart';
-import 'package:clean_car_customer_v2/utils/enum/status_types.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ReservationsTabBar extends StatelessWidget {
-  const ReservationsTabBar({super.key});
+  const ReservationsTabBar({
+    Key? key,
+    required this.model,
+  }) : super(key: key);
+
+  final ReservationsResModel model;
 
   @override
   Widget build(BuildContext context) {
-    List<StatusType> list1 = [
-      StatusType.accepted,
-      StatusType.finished,
-      StatusType.accepted,
-      StatusType.waiting,
-      StatusType.rejected,
-      StatusType.finished,
-      StatusType.waiting
-    ];
+    List<Active> activeReservations = model.reservations.active;
+    List<dynamic> historyReservations = model.reservations.history;
+
     return DefaultTabController(
       length: 2,
       child: Column(
@@ -59,33 +58,33 @@ class ReservationsTabBar extends StatelessWidget {
                 Padding(
                   padding: Paddings.all16,
                   child: ListView.builder(
-                      physics: const BouncingScrollPhysics(),
-                      itemCount: list1.length,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: Paddings.vertical8,
-                          child: ReservationInfoCard(
-                            statusType: list1[index],
-                          ),
-                        );
-                      }),
+                    physics: const BouncingScrollPhysics(),
+                    itemCount: activeReservations.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: Paddings.vertical8,
+                        child: ReservationInfoCard(
+                          activeReservation: activeReservations[index],
+                        ),
+                      );
+                    },
+                  ),
                 ),
                 Padding(
                   padding: Paddings.all16,
                   child: ListView.builder(
-                      physics: const BouncingScrollPhysics(),
-                      itemCount: list1.length,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: Paddings.vertical8,
-                          child: ReservationInfoCard(
-                            statusType: list1[index],
-                          ),
-                        );
-                      }),
+                    physics: const BouncingScrollPhysics(),
+                    itemCount: historyReservations.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: Paddings.vertical8,
+                        child: ReservationInfoCard(
+                          activeReservation: historyReservations[index],
+                        ),
+                      );
+                    },
+                  ),
                 ),
-
-                // Content for Tab 3
               ],
             ),
           ),

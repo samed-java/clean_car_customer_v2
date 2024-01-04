@@ -5,6 +5,7 @@ import 'package:clean_car_customer_v2/features/branches_and_reservation/reservat
 import 'package:clean_car_customer_v2/features/demo2.dart';
 import 'package:clean_car_customer_v2/features/evaluation/evaluation_screen.dart';
 import 'package:clean_car_customer_v2/features/home/cubit/home_cubit.dart';
+import 'package:clean_car_customer_v2/features/home/data/model/res/branchs_res_model.dart';
 import 'package:clean_car_customer_v2/features/home/home_screen.dart';
 import 'package:clean_car_customer_v2/features/login/cubit/login_cubit.dart';
 import 'package:clean_car_customer_v2/features/login/login_screen.dart';
@@ -20,6 +21,7 @@ import 'package:clean_car_customer_v2/features/profile_section/my_cars/my_cars_s
 import 'package:clean_car_customer_v2/features/profile_section/personal_info/personal_info_screen.dart';
 import 'package:clean_car_customer_v2/features/profile_section/profile/profile_screen.dart';
 import 'package:clean_car_customer_v2/features/profile_section/reservation_details/reservation_detail_screen.dart';
+import 'package:clean_car_customer_v2/features/profile_section/reservations/cubit/reservations_cubit.dart';
 import 'package:clean_car_customer_v2/features/profile_section/reservations/reservations_screen.dart';
 import 'package:clean_car_customer_v2/features/splash/splash_begin_screen.dart';
 import 'package:clean_car_customer_v2/features/splash/splash_screen.dart';
@@ -53,7 +55,6 @@ class Pager {
             lazy: false,
             create: (context) => OffersCubit()..execute(),
           ),
-          
         ],
         child: const MainScreen(),
       );
@@ -63,22 +64,32 @@ class Pager {
       );
   static Widget get home => const HomeScreen();
   static Widget get branches => const BranchesScreen();
-  static Widget get branch => const BranchScreen();
-  static Widget reservation([Branch? branch]) => MultiBlocProvider(providers: [
-      BlocProvider(create: (context)=> ReservationCubit(branch: branch)..execute()),
-      BlocProvider(
-          lazy: false,
-          create: (context)=> MyCarsCubit()..getBanTypes())
-  ],child: const ReservationScreen(),);
+  static Widget branch(Washing model) => BranchScreen(
+        model: model,
+      );
+  static Widget reservation([Branch? branch]) => MultiBlocProvider(
+        providers: [
+          BlocProvider(
+              create: (context) => ReservationCubit(branch: branch)..execute()),
+          BlocProvider(
+              lazy: false, create: (context) => MyCarsCubit()..getBanTypes())
+        ],
+        child: const ReservationScreen(),
+      );
   static Widget get profile => const ProfileScreen();
   static Widget get personalInfo => BlocProvider(
         create: (context) => ProfileInfoCubit()..execute(),
         child: const PersonalInfoScreen(),
       );
-  static Widget get reservations => const ReservationsScreen();
+  static Widget get reservations => BlocProvider<ReservationsCubit>(
+        create: (context) => ReservationsCubit()..onProgress(),
+        child: const ReservationsScreen(),
+      );
   static Widget get evaluation => const EvaluationScreen();
   static Widget get myCars => BlocProvider(
-      create: (context)=> MyCarsCubit()..getBanTypes()..execute(),
+      create: (context) => MyCarsCubit()
+        ..getBanTypes()
+        ..execute(),
       child: const MyCarsScreen());
   static Widget get splashBegin => const SplashBeginScreen();
   static Widget get demo2 => const Demo2();
@@ -87,13 +98,14 @@ class Pager {
         offer: offer,
       );
 
-  static Widget reservationDetail({bool isNew = false,
-  required Branch branch,
-  required Car car,
-  required Service service,
-  required DateTime date,
-  required Time time,
-  Function? onSubmit}) {
+  static Widget reservationDetail(
+      {bool isNew = false,
+      required Branch branch,
+      required Car car,
+      required Service service,
+      required DateTime date,
+      required Time time,
+      Function? onSubmit}) {
     return ReservationDetailScreen(
       isNew: isNew,
       branch: branch,

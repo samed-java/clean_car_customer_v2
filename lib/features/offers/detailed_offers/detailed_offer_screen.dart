@@ -1,6 +1,6 @@
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
-import 'package:clean_car_customer_v2/features/branches_and_reservation/branch/widgets/branch_info.dart';
 import 'package:clean_car_customer_v2/features/offers/detailed_offers/widgets/detailed_offers_image.dart';
+import 'package:clean_car_customer_v2/features/offers/detailed_offers/widgets/offer_info.dart';
 import 'package:clean_car_customer_v2/features/offers/detailed_offers/widgets/offer_widget.dart';
 import 'package:clean_car_customer_v2/utils/pager/go.dart';
 import 'package:flutter/material.dart';
@@ -77,7 +77,7 @@ class _DetailedOfferScreenState extends State<DetailedOfferScreen> {
                         offerContent: widget.offer.content,
                       ),
                       Gaps.h16,
-                      const BranchInfoWidget(),
+                      const OfferInfoWidget(),
                       Gaps.h24,
                     ],
                   ),

@@ -1,12 +1,9 @@
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
-import 'package:clean_car_customer_v2/features/home/data/model/res/branchs_res_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class BranchInfoWidget extends StatelessWidget {
-  const BranchInfoWidget({super.key, this.model});
-
-  final Washing? model;
+class OfferInfoWidget extends StatelessWidget {
+  const OfferInfoWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +38,8 @@ class BranchInfoWidget extends StatelessWidget {
                               color: ColorManager.mainBlack, fontSize: 14),
                         ),
                         TextSpan(
-                          text: model!.phone ?? '0557306040',
+                          // text: model!.phone ?? '0557306040',
+                          text: '0557306040',
                           style: getMediumStyle(
                               color: ColorManager.mainBlack, fontSize: 14),
                         ),
@@ -70,7 +68,8 @@ class BranchInfoWidget extends StatelessWidget {
                               color: ColorManager.mainBlack, fontSize: 14),
                         ),
                         TextSpan(
-                          text: ' ${model!.startHour}-${model!.endHour}',
+                          // text: ' ${model!.startHour}-${model!.endHour}',
+                          text: '09:00 - 18:00',
                           style: getMediumStyle(
                               color: ColorManager.mainBlack, fontSize: 14),
                         ),
@@ -100,7 +99,8 @@ class BranchInfoWidget extends StatelessWidget {
                                 color: ColorManager.mainBlack, fontSize: 14),
                           ),
                           TextSpan(
-                            text: model!.address,
+                            // text: model!.address.substring(7),
+                            text: 'Address',
                             style: getMediumStyle(
                                 color: ColorManager.mainBlack, fontSize: 14),
                           ),
