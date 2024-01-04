@@ -95,12 +95,12 @@ class BranchCard extends StatelessWidget {
                           borderRadius:
                               BorderRadius.all(RadiusManager.radiusCircular4),
                         ),
-                        width: 41.w,
+                        width: 50.w,
                         height: 28.h,
                         child: Padding(
                           padding: Paddings.horizontal4,
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               Text(
                                 model.rating,
@@ -108,6 +108,7 @@ class BranchCard extends StatelessWidget {
                                     color: ColorManager.mainBlack,
                                     fontSize: 14),
                               ),
+                              8.horizontalSpace,
                               SvgPicture.asset(IconAssets.star)
                             ],
                           ),

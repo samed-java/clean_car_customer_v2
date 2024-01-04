@@ -4,6 +4,7 @@ class ApiKeys {
 
   static const String getLanguages = "$_baseUrl/getCustomerWords";
   static const String getRegions = "$_baseUrl/regions";
+  static const String getServices = "$_baseUrl/services";
   static const String getBranchs = "$_baseUrl/washings";
   static const String signUp = "$_baseUrl/customerRegister";
   static const String login = "$_baseUrl/sendCustomerOtp";

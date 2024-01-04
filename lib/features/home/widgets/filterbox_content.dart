@@ -1,8 +1,11 @@
+import 'dart:developer';
+
 import 'package:clean_car_customer_v2/components/custom_button.dart';
 import 'package:clean_car_customer_v2/components/custom_dropdown_button.dart';
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
 import 'package:clean_car_customer_v2/features/home/cubit/home_cubit.dart';
 import 'package:clean_car_customer_v2/features/home/data/model/res/regions_res_model.dart';
+import 'package:clean_car_customer_v2/features/home/data/model/res/services_res_model.dart';
 import 'package:clean_car_customer_v2/features/home/widgets/star_box.dart';
 import 'package:clean_car_customer_v2/utils/pager/go.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +25,7 @@ class _FilterBoxContentState extends State<FilterBoxContent> {
   Widget build(BuildContext context) {
     final cubit = widget.topContext.read<HomeCubit>();
     cubit.getCities();
+    cubit.getServices();
     return AlertDialog(
       backgroundColor: ColorManager.mainBackgroundColor,
       insetPadding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 0),
@@ -177,15 +181,36 @@ class _FilterBoxContentState extends State<FilterBoxContent> {
                   }),
 
               Gaps.h16,
-              Text(
-                "Xidmət növü",
-                style: getRegularStyle(
-                  color: ColorManager.thirdBlack,
-                  fontSize: 14,
-                ),
-              ),
-              Gaps.h2,
-              //const CustomDropDownButton(defaultValue: "Xidmət növü seç"),
+              ValueListenableBuilder<int?>(
+                  valueListenable: cubit.selectedService,
+                  builder: (context, value, child) {
+                    print("rebuild services");
+
+                    return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Xidmət növü",
+                            style: getRegularStyle(
+                              color: ColorManager.thirdBlack,
+                              fontSize: 14,
+                            ),
+                          ),
+                          CustomDropdown<int>(
+                            items: cubit.services,
+                            child: (item) =>
+                                Text((item as ServiceItem?)?.title ?? "------"),
+                            selectedItems: value,
+                            onChanged: (value) {
+                              //if (value != null) {
+                              cubit.selectedService.value = value;
+                              //cubit.getRegions(value);
+                              //}
+                            },
+                          )
+                        ]);
+                  }),
+
               Gaps.h16,
               Text(
                 "Qiymətləndirmə",
@@ -206,7 +231,11 @@ class _FilterBoxContentState extends State<FilterBoxContent> {
                 ],
               ),
               Gaps.h16,
-              CustomButton(frontText: "Qəbul Et", onPressed: () {})
+              CustomButton(
+                  frontText: "Qəbul Et",
+                  onPressed: () {
+                    cubit.execute();
+                  })
             ],
             //   );
             // }

@@ -1,3 +1,5 @@
+import '../../../my_cars/data/model/res/my_cars_res_model.dart';
+
 class ReservationsResModel {
   Reservations reservations;
 
@@ -81,34 +83,6 @@ class Active {
         "day": day,
         "time": time,
         "status": status,
-      };
-}
-
-class Car {
-  int id;
-  String carModel;
-  String carNumber;
-  BanType banType;
-
-  Car({
-    required this.id,
-    required this.carModel,
-    required this.carNumber,
-    required this.banType,
-  });
-
-  factory Car.fromJson(Map<String, dynamic> json) => Car(
-        id: json["id"],
-        carModel: json["car_model"],
-        carNumber: json["car_number"],
-        banType: BanType.fromJson(json["ban_type"]),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "car_model": carModel,
-        "car_number": carNumber,
-        "ban_type": banType.toJson(),
       };
 }
 

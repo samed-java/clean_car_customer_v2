@@ -5,12 +5,14 @@ import 'package:clean_car_customer_v2/features/home/data/model/res/branchs_res_m
 import 'package:clean_car_customer_v2/features/home/data/model/res/regions_res_model.dart';
 import 'package:clean_car_customer_v2/features/home/data/repo/filial_repo.dart';
 import 'package:clean_car_customer_v2/features/home/data/repo/regions_repo.dart';
+import 'package:clean_car_customer_v2/features/home/data/repo/services_repo.dart';
 import 'package:clean_car_customer_v2/utils/extensions/model_extensions/obj_list_to_map.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:clean_car_customer_v2/locator.dart';
 import 'package:clean_car_customer_v2/utils/errors/base_error_handler.dart';
 import '../../../utils/errors/errors.dart';
+import '../data/model/res/services_res_model.dart';
 
 part 'home_state.dart';
 
@@ -34,12 +36,15 @@ class HomeCubit extends Cubit<HomeState> with BaseErrorHandler {
   }
   final StorageService _storageService = locator.get<StorageService>();
   late final RegionResModel _regionResModel;
+  late final ServicesResModel _servicesResModel;
   Map<int, Region?> cities = <int, Region?>{};
   Map<int, Region?> regions = <int, Region?>{};
   Map<int, Region?> villages = <int, Region?>{};
+  Map<int, ServiceItem?> services = <int, ServiceItem?>{};
   ValueNotifier<int?> selectedCity = ValueNotifier<int?>(0);
   ValueNotifier<int?> selectedRegion = ValueNotifier<int?>(0);
   ValueNotifier<int?> selectedVillage = ValueNotifier<int?>(0);
+  ValueNotifier<int?> selectedService = ValueNotifier<int?>(0);
 
   //late ValueNotifier<FilterFieldActiveStatus> activeStatus;
 
@@ -49,9 +54,12 @@ class HomeCubit extends Cubit<HomeState> with BaseErrorHandler {
     //try{
     var result = await locator.get<BranchsRepository>().fetch(
         queryParameters: FilterReqModel(
-            villageId: selectedVillage.value,
-            cityId: selectedCity.value,
-            regionId: selectedRegion.value));
+            villageId:
+                selectedVillage.value == 0 ? null : selectedVillage.value,
+            cityId: selectedCity.value == 0 ? null : selectedCity.value,
+            serviceId:
+                selectedService.value == 0 ? null : selectedService.value,
+            regionId: selectedRegion.value == 0 ? null : selectedRegion.value));
     print(result);
     emit(HomeSuccess(data: result));
     // }catch(e,s){
@@ -93,10 +101,14 @@ class HomeCubit extends Cubit<HomeState> with BaseErrorHandler {
 
   void _getFilterParams() {
     ErrorHandler(progressAction: () async {
-      var result = await locator.get<RegionsRepository>().fetch();
-      _storageService.setRegions(result.toJson());
-      _regionResModel = result;
+      var regions = await locator.get<RegionsRepository>().fetch();
+      _storageService.setRegions(regions.toJson());
+      _regionResModel = regions;
+      var services = await locator.get<ServicesRepository>().fetch();
+      _storageService.setServices(services.toJson());
+      _servicesResModel = services;
       getCities();
+      getServices();
     }).execute();
   }
 
@@ -109,6 +121,17 @@ class HomeCubit extends Cubit<HomeState> with BaseErrorHandler {
     cities = regionInit;
     print(
         "cities ${cities.map<int, dynamic>((key, value) => MapEntry<int, dynamic>(key, value?.id))}");
+  }
+
+  getServices() {
+    Map<int, ServiceItem?> serviceList = _servicesResModel.services
+        .objToMap<int, ServiceItem>(key: (e) => e.id, value: (e) => e);
+    print(cities);
+    Map<int, ServiceItem?> serviceInit = {0: null};
+    serviceInit.addAll(serviceList);
+    services = serviceInit;
+    print(
+        "services ${services.map<int, dynamic>((key, value) => MapEntry<int, dynamic>(key, value?.id))}");
   }
 
   getRegions(int? id) {

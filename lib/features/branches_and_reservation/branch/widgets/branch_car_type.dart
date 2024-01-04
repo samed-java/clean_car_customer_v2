@@ -8,15 +8,17 @@ class BranchCarType extends StatelessWidget {
     required this.services,
   }) : super(key: key);
 
-  final dynamic services;
+  final Map<String, dynamic> services;
 
   @override
   Widget build(BuildContext context) {
     print('====');
     print(services);
 
-    List<dynamic> sedanServices = services['Sedan'] ?? [];
-    List<dynamic> jeepServices = services['Jeep'] ?? [];
+    List<Map<String, dynamic>> sedanServices =
+        services['Sedan'] ?? <Map<String, dynamic>>[];
+    List<Map<String, dynamic>> jeepServices =
+        services['Jeep'] ?? <Map<String, dynamic>>[];
 
     // List<dynamic> sedanServices = [];
     // List<dynamic> jeepServices = [];
@@ -64,7 +66,7 @@ class BranchCarType extends StatelessWidget {
     );
   }
 
-  Widget buildServiceList(List<dynamic> services) {
+  Widget buildServiceList(List<Map<String, dynamic>> services) {
     return Container(
       color: ColorManager.mainWhite,
       child: Padding(

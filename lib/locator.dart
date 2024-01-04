@@ -10,6 +10,7 @@ import 'features/branches_and_reservation/reservation/data/repo/reservation_para
 import 'features/branches_and_reservation/reservation/data/repo/reservation_submit_repo.dart';
 import 'features/home/data/repo/filial_repo.dart';
 import 'features/home/data/repo/regions_repo.dart';
+import 'features/home/data/repo/services_repo.dart';
 import 'features/login/data/repo/login_repository.dart';
 import 'features/offers/data/repo/offers_repo.dart';
 import 'features/onboadding_and_sign_up/otp/data/repository/otp_repository.dart';
@@ -44,6 +45,7 @@ void setUpLocator() {
       () => ReservationsRepository());
   locator.registerLazySingleton<MyCarsRepository>(() => MyCarsRepository());
   locator.registerLazySingleton<BanTypesRepository>(() => BanTypesRepository());
+  locator.registerLazySingleton<ServicesRepository>(() => ServicesRepository());
   locator.registerLazySingleton<ReservationParametersRepository>(
       () => ReservationParametersRepository());
   locator.registerLazySingleton<ReservationSubmitRepo>(

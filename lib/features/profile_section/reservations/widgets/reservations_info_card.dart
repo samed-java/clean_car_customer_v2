@@ -1,9 +1,13 @@
 import 'package:clean_car_customer_v2/components/padded_button.dart';
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
+import 'package:clean_car_customer_v2/features/branches_and_reservation/reservation/data/model/res/reservation_parameters_res_model.dart';
 import 'package:clean_car_customer_v2/features/profile_section/reservations/data/model/reservations_model.dart';
 import 'package:clean_car_customer_v2/utils/enum/status_types.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../../utils/pager/go.dart';
+import '../../../../utils/pager/pager.dart';
 
 class ReservationInfoCard extends StatelessWidget {
   final Active activeReservation;
@@ -74,7 +78,29 @@ class ReservationInfoCard extends StatelessWidget {
               PaddedButton(
                 frontText: "Ətraflı",
                 onPressed: () {
-                  //Go.to(Pager.reservationDetail());
+                  Go.to(Pager.reservationDetail(
+                      service: Service(
+                          serviceId: 0,
+                          title: activeReservation.service,
+                          icon: "",
+                          price: activeReservation.price),
+                      branch: Branch(
+                          id: 0,
+                          washingName: activeReservation.washingName,
+                          address: activeReservation.washingAddress),
+                      car: activeReservation.car,
+                      date: DateTime(
+                          int.parse(activeReservation.day.split('.').last),
+                          int.parse(
+                              activeReservation.day.split('.').elementAt(1)),
+                          int.parse(
+                              activeReservation.day.split('.').elementAt(0))),
+                      time: Time(
+                          time: activeReservation.time,
+                          isReserved:
+                              true) //Car(id: 0, carModel: activeReservation., carNumber: carNumber, banType: banType),
+
+                      ));
                 },
               ),
             ],

@@ -47,7 +47,6 @@ class StorageService {
     return instance.read<String>(StorageKeys.number);
   }
 
-
   Future<void> setLang(Map<String, dynamic> lang) async {
     await instance.write(StorageKeys.lang, json.encode(lang));
   }
@@ -79,6 +78,23 @@ class StorageService {
       return json.decode(data);
     } else {
       throw Exception("Languages not initialized");
+    }
+  }
+
+  Future<void> setServices(Map<String, dynamic> lang) async {
+    await instance.write(StorageKeys.services, json.encode(lang));
+  }
+
+  Future<bool> get hasServices async {
+    return (await instance.read(StorageKeys.services)) != null;
+  }
+
+  Map<String, dynamic>? getServices() {
+    var data = instance.read<String>(StorageKeys.services);
+    if (data != null) {
+      return json.decode(data);
+    } else {
+      throw Exception("Services not initialized");
     }
   }
 
