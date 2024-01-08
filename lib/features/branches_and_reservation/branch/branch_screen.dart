@@ -88,7 +88,7 @@ class _BranchScreenState extends State<BranchScreen> {
                         borderRadius:
                             BorderRadius.all(RadiusManager.radiusCircular6),
                         child: SizedBox(
-                          height: 200,
+                          height: widget.model.services.isNotEmpty?200:0,
                           child: BranchCarType(
                             services: widget.model.services,
                           ),

@@ -1,4 +1,5 @@
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
+import 'package:clean_car_customer_v2/features/home/data/model/res/branchs_res_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -8,23 +9,23 @@ class BranchCarType extends StatelessWidget {
     required this.services,
   }) : super(key: key);
 
-  final Map<String, dynamic> services;
+  final List<WashingService> services;
 
   @override
   Widget build(BuildContext context) {
     print('====');
     print(services);
 
-    List<Map<String, dynamic>> sedanServices =
-        services['Sedan'] ?? <Map<String, dynamic>>[];
-    List<Map<String, dynamic>> jeepServices =
-        services['Jeep'] ?? <Map<String, dynamic>>[];
+    // List<Map<String, dynamic>> sedanServices =
+    //     services['Sedan'] ?? <Map<String, dynamic>>[];
+    // List<Map<String, dynamic>> jeepServices =
+    //     services['Jeep'] ?? <Map<String, dynamic>>[];
 
     // List<dynamic> sedanServices = [];
     // List<dynamic> jeepServices = [];
 
-    return DefaultTabController(
-      length: 2,
+    return services.length >0?DefaultTabController(
+      length: services.length,
       child: Column(
         children: [
           Container(
@@ -37,13 +38,10 @@ class BranchCarType extends StatelessWidget {
             child: TabBar(
               indicatorColor: ColorManager.mainBlue,
               indicatorWeight: 3,
-              tabs: const [
-                Tab(
-                  text: 'Sedan',
-                ),
-                Tab(
-                  text: 'Jeep',
-                ),
+              tabs: [
+                ...services.map((e) => Tab(
+                  text: e.ban,
+                ),)
               ],
               labelColor: ColorManager.mainBlue,
               labelStyle:
@@ -56,17 +54,16 @@ class BranchCarType extends StatelessWidget {
           Expanded(
             child: TabBarView(
               children: [
-                buildServiceList(sedanServices),
-                buildServiceList(jeepServices),
+                ...services.map((e) => buildServiceList(e.services),)
               ],
             ),
           ),
         ],
       ),
-    );
+    ):const SizedBox.shrink();
   }
 
-  Widget buildServiceList(List<Map<String, dynamic>> services) {
+  Widget buildServiceList(List<ServiceService> services) {
     return Container(
       color: ColorManager.mainWhite,
       child: Padding(
@@ -76,7 +73,7 @@ class BranchCarType extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: services.map<Widget>((service) {
             return Text(
-              "${service['title']} - ${service['price']} AZN",
+              "${service.title} - ${service.price} AZN",
               style:
                   getMediumStyle(color: ColorManager.mainBlack, fontSize: 14),
             );
