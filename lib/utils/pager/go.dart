@@ -6,8 +6,8 @@ class Go {
   Go._();
   static BuildContext get _context => NavigationService.instance.context;
 
-  static to(Widget widget) {
-    Navigator.push(_context, CupertinoPageRoute(builder: (context) => widget));
+  static Future to(Widget widget) {
+    return Navigator.push(_context, CupertinoPageRoute(builder: (context) => widget));
   }
 
   static replaceAndGo(Widget widget) {

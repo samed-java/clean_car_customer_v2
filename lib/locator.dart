@@ -18,6 +18,7 @@ import 'features/onboadding_and_sign_up/signup/data/repository/sign_up_repositor
 import 'features/profile_section/my_cars/data/repo/ban_types_repo.dart';
 import 'features/profile_section/my_cars/data/repo/my_cars_repo.dart';
 import 'features/profile_section/personal_info/data/repo/profile_info_repository.dart';
+import 'features/profile_section/settings/features/change_lang/data/repo/languages_repo.dart';
 
 final locator = GetIt.I;
 
@@ -50,4 +51,6 @@ void setUpLocator() {
       () => ReservationParametersRepository());
   locator.registerLazySingleton<ReservationSubmitRepo>(
       () => ReservationSubmitRepo());
+  locator.registerLazySingleton<LanguagesRepository>(
+      () => LanguagesRepository());
 }

@@ -59,6 +59,7 @@ class CustomSearchBar extends StatelessWidget {
                       onPressed: () {
                         searchController?.clear();
                         focusNode.unfocus();
+                        onSubmit?.call();
                         SystemChannels.textInput.invokeMethod("TextInput.hide");
                         isBack.value = !isBack.value;
 

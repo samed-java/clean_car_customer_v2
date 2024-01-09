@@ -9,6 +9,6 @@ import '../../../generated/l10n.dart';
 
 extension LocaleExtension on BuildContext {
     void get initLocalization => InitializeLanguage.init();
-    void changeOrRefreshLang({String? langCode}) => InitializeLanguage.changeOrRefreshLang(langCode: langCode);
+    void changeOrRefreshLang() => InitializeLanguage.changeOrRefreshLang();
     CustomerLangData get locale => locator.get<CustomerLangData>();
 }

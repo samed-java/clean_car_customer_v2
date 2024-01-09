@@ -22,6 +22,7 @@ import 'package:clean_car_customer_v2/features/profile_section/profile/profile_s
 import 'package:clean_car_customer_v2/features/profile_section/reservation_details/reservation_detail_screen.dart';
 import 'package:clean_car_customer_v2/features/profile_section/reservations/cubit/reservations_cubit.dart';
 import 'package:clean_car_customer_v2/features/profile_section/reservations/reservations_screen.dart';
+import 'package:clean_car_customer_v2/features/profile_section/settings/features/change_lang/cubit/languages_cubit.dart';
 import 'package:clean_car_customer_v2/features/splash/splash_begin_screen.dart';
 import 'package:clean_car_customer_v2/features/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -33,6 +34,8 @@ import '../../features/offers/data/model/res/offers_res_model.dart';
 import '../../features/profile_section/my_cars/cubit/my_cars_cubit.dart';
 import '../../features/profile_section/my_cars/data/model/res/my_cars_res_model.dart';
 import '../../features/profile_section/personal_info/cubit/profile_info/profile_info_cubit.dart';
+import '../../features/profile_section/settings/features/change_lang/presentation/languages.dart';
+import '../../features/profile_section/settings/settings.dart';
 
 class Pager {
   static Widget get onboarding => const OnboardingScreen();
@@ -83,6 +86,17 @@ class Pager {
   static Widget get reservations => BlocProvider<ReservationsCubit>(
         create: (context) => ReservationsCubit()..onProgress(),
         child: const ReservationsScreen(),
+      );
+
+  static Widget get settings =>  const SettingsScreen();
+
+  static Widget get contacts => BlocProvider<ReservationsCubit>(
+        create: (context) => ReservationsCubit()..onProgress(),
+        child: const ReservationsScreen(),
+      );
+  static Widget get languages => BlocProvider<LanguagesCubit>(
+        create: (context) => LanguagesCubit()..execute(),
+        child: const LanguagesScreen(),
       );
   static Widget get evaluation => const EvaluationScreen();
   static Widget get myCars => BlocProvider(

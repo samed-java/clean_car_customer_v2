@@ -3,6 +3,7 @@ class ApiKeys {
   static const String _baseUrl = "https://cleancar.az/api";
 
   static const String getLanguages = "$_baseUrl/getCustomerWords";
+  static const String languages = "$_baseUrl/languages";
   static const String getRegions = "$_baseUrl/regions";
   static const String getServices = "$_baseUrl/services";
   static const String getBranchs = "$_baseUrl/washings";

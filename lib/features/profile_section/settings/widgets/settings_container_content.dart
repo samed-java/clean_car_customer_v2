@@ -8,9 +8,15 @@ import 'package:clean_car_customer_v2/utils/pager/pager.dart';
 
 import 'package:flutter/material.dart';
 
-class ProfileContainerContent extends StatelessWidget {
-  const ProfileContainerContent({super.key});
+class SettingsContainerContent extends StatefulWidget {
+  const SettingsContainerContent({super.key});
 
+  @override
+  State<SettingsContainerContent> createState() =>
+      _SettingsContainerContentState();
+}
+
+class _SettingsContainerContentState extends State<SettingsContainerContent> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -20,35 +26,17 @@ class ProfileContainerContent extends StatelessWidget {
           Gaps.h8,
           ProfileContainerArrow(
             onPressed: () {
-              Go.to(Pager.personalInfo);
+              Go.to(Pager.contacts);
             },
-            headerText: context.locale.personalinformation,
+            headerText: context.locale.contactus,
           ),
           Gaps.h16,
           ProfileContainerArrow(
             onPressed: () {
-              Go.to(Pager.myCars);
+              Go.to(Pager.languages);
             },
-            headerText: context.locale.cars,
+            headerText: context.locale.languages,
           ),
-          Gaps.h16,
-          ProfileContainerArrow(
-            onPressed: () {
-              Go.to(Pager.reservations);
-            },
-            headerText: context.locale.reservations,
-          ),
-          Gaps.h16,
-          ProfileContainerArrow(
-            onPressed: () {
-              Go.to(Pager.settings);
-            },
-            headerText: context.locale.adjustments,
-          ),
-          Gaps.h16,
-          const ProfileContainerSwitch(),
-          Gaps.h16,
-          const ProfileExitContainer(),
         ],
       ),
     );

@@ -1,5 +1,6 @@
 import 'package:clean_car_customer_v2/features/home/data/model/res/branchs_res_model.dart';
 import 'package:clean_car_customer_v2/features/profile_section/reservations/data/model/reservations_model.dart';
+import 'package:clean_car_customer_v2/features/profile_section/settings/features/change_lang/data/model/res/languages_res_model.dart';
 
 import '../../../../features/branches_and_reservation/reservation/data/model/res/reservation_parameters_res_model.dart';
 import '../../../../features/branches_and_reservation/reservation/data/model/res/reservation_submit_res_model.dart';
@@ -32,6 +33,8 @@ class FactoryGenerator {
         ReservationParametersResModel.fromJson(json),
     ReservationSubmitResModel: (json) =>
         ReservationSubmitResModel.fromJson(json),
+    LanguagesResModel: (json) =>
+        LanguagesResModel.fromJson(json),
   };
 
   static T? createObject<T>(Map<String, dynamic>? body) {
