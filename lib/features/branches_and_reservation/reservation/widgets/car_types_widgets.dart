@@ -1,8 +1,7 @@
 import 'package:animate_do/animate_do.dart';
-import 'package:clean_car_customer_v2/constants/res/asset_manager.dart';
 import 'package:clean_car_customer_v2/features/branches_and_reservation/reservation/widgets/car_type_button.dart';
 import 'package:clean_car_customer_v2/features/branches_and_reservation/reservation/widgets/reservation_location_card.dart';
-import 'package:clean_car_customer_v2/utils/enum/washing_types.dart';
+import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -38,7 +37,7 @@ class _CarTypesWidgetsState extends State<CarTypesWidgets> {
                   Padding(
                     padding: Paddings.horizontal16,
                     child: Text(
-                      "Xidməti seç",
+                      context.locale.selectservice,
                       style: getMediumStyle(
                         color: ColorManager.mainBlack,
                         fontSize: 14,

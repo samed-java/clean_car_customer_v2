@@ -1,8 +1,13 @@
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
+import 'package:clean_car_customer_v2/features/branches_and_reservation/reservation/data/model/res/reservation_parameters_res_model.dart';
 import 'package:flutter/material.dart';
 
+import '../../../home/data/model/res/branchs_res_model.dart';
+
 class BranchNoteWidget extends StatelessWidget {
-  const BranchNoteWidget({super.key});
+  const BranchNoteWidget({super.key,required this.model});
+
+  final Washing model;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +29,7 @@ class BranchNoteWidget extends StatelessWidget {
               ),
               TextSpan(
                 text:
-                    ': Avtoyumada İFOAM firmasının məhsullarından istifadə olunur',
+                    ': ${model.description}',
                 style:
                     getMediumStyle(color: ColorManager.mainBlack, fontSize: 14),
               ),

@@ -3,6 +3,7 @@ import 'package:clean_car_customer_v2/components/custom_checkbar.dart';
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
 import 'package:clean_car_customer_v2/features/onboadding_and_sign_up/signup/components/terms_and_agreement.dart';
 import 'package:clean_car_customer_v2/features/onboadding_and_sign_up/signup/data/cubit/sign_up_cubit.dart';
+import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
 import 'package:clean_car_customer_v2/utils/pager/go.dart';
 import 'package:clean_car_customer_v2/utils/pager/pager.dart';
 import 'package:clean_car_customer_v2/utils/validators/is_email_valid.dart';
@@ -38,7 +39,7 @@ class _SignupFormWidgetState extends State<SignupFormWidget> {
               children: [
                 Gaps.w4,
                 Text(
-                  "Telefon nömrəsi",
+                  context.locale.phonenumber,
                   style: getRegularStyle(
                       color: ColorManager.thirdBlack, fontSize: 14),
                   textAlign: TextAlign.left,
@@ -76,7 +77,7 @@ class _SignupFormWidgetState extends State<SignupFormWidget> {
               children: [
                 Gaps.w4,
                 Text(
-                  "Tam ad",
+                  context.locale.fullname,
                   style: getRegularStyle(
                       color: ColorManager.thirdBlack, fontSize: 14),
                   textAlign: TextAlign.left,
@@ -113,7 +114,7 @@ class _SignupFormWidgetState extends State<SignupFormWidget> {
               children: [
                 Gaps.w4,
                 Text(
-                  "E-mail",
+                  context.locale.email,
                   style: getRegularStyle(
                       color: ColorManager.thirdBlack, fontSize: 14),
                   textAlign: TextAlign.left,
@@ -156,7 +157,7 @@ class _SignupFormWidgetState extends State<SignupFormWidget> {
                   text: TextSpan(
                     children: [
                       TextSpan(
-                        text: 'Şərtlər və qaydalar',
+                        text: context.locale.termsandconditions,
                         style: getUnderlineStyle(
                             color: ColorManager.mainBlue, fontSize: 14),
                         recognizer: TapGestureRecognizer()
@@ -167,7 +168,7 @@ class _SignupFormWidgetState extends State<SignupFormWidget> {
                           },
                       ),
                       TextSpan(
-                        text: ' ilə razıyam',
+                        text: ' ${context.locale.agreewith}',
                         style: getRegularStyle(
                             color: ColorManager.mainBlack, fontSize: 14),
                       ),
@@ -184,7 +185,7 @@ class _SignupFormWidgetState extends State<SignupFormWidget> {
                 valueListenable: cubit.isCheckedRememberMe,
                 builder: (context, value, _) {
                   return CustomButton(
-                    frontText: "Davam Et",
+                    frontText: context.locale.continu,
                     onPressed: () {
                       cubit.signUp();
                       // if (_formKey.currentState!.validate()) {

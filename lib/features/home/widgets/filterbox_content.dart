@@ -7,6 +7,7 @@ import 'package:clean_car_customer_v2/features/home/cubit/home_cubit.dart';
 import 'package:clean_car_customer_v2/features/home/data/model/res/regions_res_model.dart';
 import 'package:clean_car_customer_v2/features/home/data/model/res/services_res_model.dart';
 import 'package:clean_car_customer_v2/features/home/widgets/star_box.dart';
+import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
 import 'package:clean_car_customer_v2/utils/pager/go.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -51,7 +52,7 @@ class _FilterBoxContentState extends State<FilterBoxContent> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Filterlə",
+                    context.locale.filter,
                     style: getSemiBoldStyle(
                       color: ColorManager.mainBlue,
                       fontSize: 18,
@@ -86,7 +87,7 @@ class _FilterBoxContentState extends State<FilterBoxContent> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Şəhər",
+                            context.locale.city,
                             style: getRegularStyle(
                               color: ColorManager.thirdBlack,
                               fontSize: 14,
@@ -120,7 +121,7 @@ class _FilterBoxContentState extends State<FilterBoxContent> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "Bölgə",
+                              context.locale.region,
                               style: getRegularStyle(
                                 color: ColorManager.thirdBlack,
                                 fontSize: 14,
@@ -157,7 +158,7 @@ class _FilterBoxContentState extends State<FilterBoxContent> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "Qəsəbə",
+                              context.locale.township,
                               style: getRegularStyle(
                                 color: ColorManager.thirdBlack,
                                 fontSize: 14,
@@ -190,7 +191,7 @@ class _FilterBoxContentState extends State<FilterBoxContent> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Xidmət növü",
+                            context.locale.servicetype,
                             style: getRegularStyle(
                               color: ColorManager.thirdBlack,
                               fontSize: 14,
@@ -211,28 +212,28 @@ class _FilterBoxContentState extends State<FilterBoxContent> {
                         ]);
                   }),
 
-              Gaps.h16,
-              Text(
-                "Qiymətləndirmə",
-                style: getRegularStyle(
-                  color: ColorManager.thirdBlack,
-                  fontSize: 14,
-                ),
-              ),
-              Gaps.h2,
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  StarBox(text: "1"),
-                  StarBox(text: "2"),
-                  StarBox(text: "3"),
-                  StarBox(text: "4"),
-                  StarBox(text: "5"),
-                ],
-              ),
+              // Gaps.h16,
+              // Text(
+              //   "Qiymətləndirmə",
+              //   style: getRegularStyle(
+              //     color: ColorManager.thirdBlack,
+              //     fontSize: 14,
+              //   ),
+              // ),
+              // Gaps.h2,
+              // const Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //   children: [
+              //     StarBox(text: "1"),
+              //     StarBox(text: "2"),
+              //     StarBox(text: "3"),
+              //     StarBox(text: "4"),
+              //     StarBox(text: "5"),
+              //   ],
+              // ),
               Gaps.h16,
               CustomButton(
-                  frontText: "Qəbul Et",
+                  frontText: context.locale.confirm,
                   onPressed: () {
                     cubit.execute();
                   })

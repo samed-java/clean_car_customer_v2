@@ -1,6 +1,6 @@
 import 'package:clean_car_customer_v2/components/custom_button.dart';
-import 'package:clean_car_customer_v2/components/custom_dropdown_button.dart';
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
+import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
 import 'package:clean_car_customer_v2/utils/pager/go.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -37,7 +37,7 @@ class _BranchesFilterContentState extends State<BranchesFilterContent> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Filterlə",
+                    context.locale.filter,
                     style: getSemiBoldStyle(
                       color: ColorManager.mainBlue,
                       fontSize: 18,
@@ -62,7 +62,7 @@ class _BranchesFilterContentState extends State<BranchesFilterContent> {
               ),
               Gaps.h10,
               Text(
-                "Şəhər",
+                context.locale.city,
                 style: getRegularStyle(
                   color: ColorManager.thirdBlack,
                   fontSize: 14,
@@ -75,7 +75,7 @@ class _BranchesFilterContentState extends State<BranchesFilterContent> {
               Gaps.h16,
               // Bölgə
               Text(
-                "Bölgə",
+                context.locale.region,
                 style: getRegularStyle(
                   color: ColorManager.thirdBlack,
                   fontSize: 14,
@@ -88,7 +88,7 @@ class _BranchesFilterContentState extends State<BranchesFilterContent> {
               Gaps.h16,
               // Qəsəbə
               Text(
-                "Qəsəbə",
+                context.locale.township,
                 style: getRegularStyle(
                   color: ColorManager.thirdBlack,
                   fontSize: 14,
@@ -100,7 +100,7 @@ class _BranchesFilterContentState extends State<BranchesFilterContent> {
 
               Gaps.h16,
               Text(
-                "Xidmət növü",
+                context.locale.servicetype,
                 style: getRegularStyle(
                   color: ColorManager.thirdBlack,
                   fontSize: 14,
@@ -111,7 +111,7 @@ class _BranchesFilterContentState extends State<BranchesFilterContent> {
 
               Gaps.h24,
 
-              CustomButton(frontText: "Qəbul Et", onPressed: () {})
+              CustomButton(frontText: context.locale.confirm, onPressed: () {})
             ],
           ),
         ),

@@ -1,5 +1,6 @@
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
 import 'package:clean_car_customer_v2/features/offers/data/model/res/offers_res_model.dart';
+import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
 import 'package:clean_car_customer_v2/utils/pager/go.dart';
 import 'package:clean_car_customer_v2/utils/pager/pager.dart';
 import 'package:flutter/material.dart';
@@ -51,7 +52,7 @@ class OfferCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        offer.title ?? 'Offer',
+                        offer.title ??  context.locale.offer,
                         style: getMediumStyle(
                           color: ColorManager.mainBlack,
                           fontSize: 16.sp,
@@ -60,7 +61,7 @@ class OfferCard extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                       ),
                       Text(
-                        "Avtomobilə qulluq",
+                        offer.content,
                         style: getRegularStyle(
                           color: ColorManager.mainBlack,
                           fontSize: 12.sp,

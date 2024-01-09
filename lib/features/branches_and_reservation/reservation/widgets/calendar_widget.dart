@@ -1,4 +1,5 @@
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
+import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -42,7 +43,7 @@ class _CalendarWidgetState extends State<CalendarWidget> {
                 Padding(
                   padding: Paddings.horizontal16,
                   child: Text(
-                    "Tarixi seç",
+                    context.locale.selectdate,
                     style: getMediumStyle(
                       color: ColorManager.mainBlack,
                       fontSize: 14,

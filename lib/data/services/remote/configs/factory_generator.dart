@@ -34,7 +34,8 @@ class FactoryGenerator {
         ReservationSubmitResModel.fromJson(json),
   };
 
-  static T createObject<T>(Map<String, dynamic> body) {
+  static T? createObject<T>(Map<String, dynamic>? body) {
+    if(body == null) return null;
     if (_factoryGenerator.containsKey(T)) {
       return _factoryGenerator[T]!.call(body);
     } else {

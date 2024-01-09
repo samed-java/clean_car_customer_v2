@@ -45,6 +45,9 @@ class HomeCubit extends Cubit<HomeState> with BaseErrorHandler {
   ValueNotifier<int?> selectedRegion = ValueNotifier<int?>(0);
   ValueNotifier<int?> selectedVillage = ValueNotifier<int?>(0);
   ValueNotifier<int?> selectedService = ValueNotifier<int?>(0);
+  TextEditingController searchController = TextEditingController();
+  BranchsResModel? mainResult;
+  BranchsResModel? filteredResult;
 
   //late ValueNotifier<FilterFieldActiveStatus> activeStatus;
 
@@ -52,16 +55,22 @@ class HomeCubit extends Cubit<HomeState> with BaseErrorHandler {
   Future<void> onProgress() async {
     emit(HomeLoading());
     //try{
-    var result = await locator.get<BranchsRepository>().fetch(
+    mainResult = await locator.get<BranchsRepository>().fetch();
+     filteredResult = await locator.get<BranchsRepository>().fetch(
         queryParameters: FilterReqModel(
             villageId:
                 selectedVillage.value == 0 ? null : selectedVillage.value,
             cityId: selectedCity.value == 0 ? null : selectedCity.value,
             serviceId:
                 selectedService.value == 0 ? null : selectedService.value,
-            regionId: selectedRegion.value == 0 ? null : selectedRegion.value));
-    print(result);
-    emit(HomeSuccess(data: result));
+            regionId: selectedRegion.value == 0 ? null : selectedRegion.value,
+            text: searchController.text.isNotEmpty?searchController.text:null
+            ));
+    //print(result);
+    emit(HomeSuccess(
+        //data: result
+    )
+    );
     // }catch(e,s){
     //   print(e);
     //   print(s);

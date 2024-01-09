@@ -2,6 +2,7 @@ import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
 import 'package:clean_car_customer_v2/features/offers/detailed_offers/widgets/detailed_offers_image.dart';
 import 'package:clean_car_customer_v2/features/offers/detailed_offers/widgets/offer_info.dart';
 import 'package:clean_car_customer_v2/features/offers/detailed_offers/widgets/offer_widget.dart';
+import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
 import 'package:clean_car_customer_v2/utils/pager/go.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -67,7 +68,7 @@ class _DetailedOfferScreenState extends State<DetailedOfferScreen> {
                         Padding(
                           padding: Paddings.vertical16,
                           child: Text(
-                            widget.offer.title ?? 'Offer',
+                            widget.offer.title ?? context.locale.offer,
                             style: getSemiBoldStyle(
                                 color: ColorManager.secondaryBlack,
                                 fontSize: 18),
@@ -103,7 +104,7 @@ class _DetailedOfferScreenState extends State<DetailedOfferScreen> {
                         child: Image.asset(IconAssets.backButton)),
                     Gaps.w16,
                     Text(
-                      "Super təklif",
+                      widget.offer.title??context.locale.offer,
                       style: getSemiBoldStyle(
                           color: ColorManager.secondaryBlack, fontSize: 18),
                     ),

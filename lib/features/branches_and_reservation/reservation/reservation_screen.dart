@@ -1,5 +1,6 @@
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
 import 'package:clean_car_customer_v2/features/branches_and_reservation/reservation/widgets/reservation_content.dart';
+import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
 import 'package:clean_car_customer_v2/utils/pager/go.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -41,7 +42,7 @@ class ReservationScreen extends StatelessWidget {
                   ),
                   Gaps.w4,
                   Text(
-                    "Rezervasiya",
+                    context.locale.reservation,
                     style: getSemiBoldStyle(
                       color: ColorManager.mainWhite,
                       fontSize: 20,

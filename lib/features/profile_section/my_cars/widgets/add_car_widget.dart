@@ -1,5 +1,6 @@
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
 import 'package:clean_car_customer_v2/features/profile_section/my_cars/widgets/car_info_dialog.dart';
+import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bounce/flutter_bounce.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -26,7 +27,7 @@ class AddCarWidget extends StatelessWidget {
           ),
           Gaps.w8,
           Text(
-            "avtomobil əlavə et",
+            context.locale.addcar,
             style: getMediumStyle(color: ColorManager.mainBlue, fontSize: 16),
           )
         ],

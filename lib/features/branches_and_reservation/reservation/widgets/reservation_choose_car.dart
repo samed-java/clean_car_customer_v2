@@ -3,6 +3,7 @@ import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
 import 'package:clean_car_customer_v2/features/branches_and_reservation/reservation/widgets/choose_car_dialog.dart';
 import 'package:clean_car_customer_v2/features/branches_and_reservation/reservation/widgets/reservation_location_card.dart';
 import 'package:clean_car_customer_v2/features/profile_section/my_cars/widgets/car_info_dialog.dart';
+import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bounce/flutter_bounce.dart' as bounce;
@@ -34,7 +35,7 @@ class ReservationChooseCar extends StatelessWidget {
                         Padding(
                           padding: Paddings.horizontal16,
                           child: Text(
-                            "Avtomobili seç",
+                            context.locale.choosecar,
                             style: getMediumStyle(
                               color: ColorManager.mainBlack,
                               fontSize: 14,

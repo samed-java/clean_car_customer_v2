@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:clean_car_customer_v2/components/padded_button.dart';
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
 import 'package:clean_car_customer_v2/utils/enum/car_types.dart';
+import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -55,7 +56,7 @@ class MyCarCard extends StatelessWidget {
             ),
             Expanded(child: Gaps.empty),
             PaddedButton(
-                frontText: "Ətraflı",
+                frontText: context.locale.detailed,
                 onPressed: () {
                   context.read<MyCarsCubit>().nameController.text =
                       car.carModel;

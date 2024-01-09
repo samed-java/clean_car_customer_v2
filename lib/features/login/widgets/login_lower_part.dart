@@ -2,6 +2,7 @@ import 'package:clean_car_customer_v2/components/custom_button.dart';
 import 'package:clean_car_customer_v2/components/custom_checkbar.dart';
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
 import 'package:clean_car_customer_v2/features/login/cubit/login_cubit.dart';
+import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
 import 'package:clean_car_customer_v2/utils/pager/go.dart';
 import 'package:clean_car_customer_v2/utils/pager/pager.dart';
 import 'package:flutter/gestures.dart';
@@ -24,7 +25,7 @@ class LoginLowerPart extends StatelessWidget {
             children: [
               Gaps.w4,
               Text(
-                "Telefon nömrəsi",
+                context.locale.phonenumber,
                 style: getRegularStyle(
                     color: ColorManager.thirdBlack, fontSize: 14),
                 textAlign: TextAlign.left,
@@ -72,7 +73,7 @@ class LoginLowerPart extends StatelessWidget {
               CustomCheckbox(isCheckedNotifier: _isCheckedRememberMe),
               Gaps.w4,
               Text(
-                "Məni yadda saxla",
+                context.locale.rememberme,
                 style: getRegularStyle(color: ColorManager.mainBlack),
               )
             ],
@@ -85,35 +86,35 @@ class LoginLowerPart extends StatelessWidget {
               }
             },
             child: CustomButton(
-              frontText: "Daxil Ol",
+              frontText: context.locale.enter,
               onPressed: () {
                 context.read<LoginCubit>().execute();
               },
             ),
           ),
           Gaps.h16,
-          RichText(
-            textAlign: TextAlign.center,
-            text: TextSpan(
-              children: [
-                TextSpan(
-                  text: 'Hesabın yoxdur?',
-                  style: getRegularStyle(
-                      color: ColorManager.mainBlack, fontSize: 14),
-                ),
-                TextSpan(
-                  text: ' Qeydiyyatdan keç',
-                  style: getRegularStyle(
-                      color: ColorManager.mainBlue, fontSize: 14),
-                  recognizer: TapGestureRecognizer()
-                    ..onTap = () {
-                      Go.to(Pager.onboarding);
-                      // Handle the "Xidmət Şərtlərimiz" link tap
-                    },
-                ),
-              ],
-            ),
-          ),
+          // RichText(
+          //   textAlign: TextAlign.center,
+          //   text: TextSpan(
+          //     children: [
+          //       TextSpan(
+          //         text: context.locale.loginsecondtext,
+          //         style: getRegularStyle(
+          //             color: ColorManager.mainBlack, fontSize: 14),
+          //       ),
+          //       TextSpan(
+          //         text: ' ',
+          //         style: getRegularStyle(
+          //             color: ColorManager.mainBlue, fontSize: 14),
+          //         recognizer: TapGestureRecognizer()
+          //           ..onTap = () {
+          //             Go.to(Pager.onboarding);
+          //             // Handle the "Xidmət Şərtlərimiz" link tap
+          //           },
+          //       ),
+          //     ],
+          //   ),
+          // ),
         ],
       ),
     );

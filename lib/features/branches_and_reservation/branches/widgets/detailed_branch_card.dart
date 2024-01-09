@@ -83,7 +83,7 @@ class DetailedBranchCard extends StatelessWidget {
                           Material(
                             color: Colors.transparent,
                             child: Text(
-                              "Nizami filialı, Xocasən rayonu 158",
+                              "${model.title}, ${model.description}",
                               overflow: TextOverflow.ellipsis,
                               style: getMediumStyle(
                                   color: ColorManager.mainWhite, fontSize: 14),

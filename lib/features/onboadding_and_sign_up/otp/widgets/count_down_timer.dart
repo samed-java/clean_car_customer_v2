@@ -1,6 +1,10 @@
 import 'dart:async';
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
+import 'package:clean_car_customer_v2/features/login/cubit/login_cubit.dart';
+import 'package:clean_car_customer_v2/features/onboadding_and_sign_up/otp/data/cubit/otp_cubit.dart';
+import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CountDownTimer extends StatefulWidget {
   const CountDownTimer({super.key, required this.second});
@@ -43,9 +47,11 @@ class _CountDownTimerState extends State<CountDownTimer> {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: _countdown == 0 ? () {} : null,
+      onPressed: _countdown == 0 ? () {
+        //context.read<LoginCubit>().execute();
+      } : null,
       child: Text(
-        _countdown == 0 ? 'Yenidən göndər' : 'Yenidən göndər (${_countdown}s)',
+        _countdown == 0 ? context.locale.signupfifthtext : '${context.locale.signupfifthtext} (${_countdown}s)',
         style: getRegularStyle(color: ColorManager.mainBlue, fontSize: 14),
       ),
     );

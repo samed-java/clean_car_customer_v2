@@ -1,6 +1,7 @@
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
 import 'package:clean_car_customer_v2/features/profile_section/reservations/data/model/reservations_model.dart';
 import 'package:clean_car_customer_v2/features/profile_section/reservations/widgets/reservations_info_card.dart';
+import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -33,12 +34,12 @@ class ReservationsTabBar extends StatelessWidget {
                 child: TabBar(
                   indicatorColor: HexColor.fromHex("#4283F1"),
                   indicatorWeight: 3,
-                  tabs: const [
+                  tabs: [
                     Tab(
-                      text: 'Aktiv',
+                      text:  context.locale.active,
                     ),
                     Tab(
-                      text: 'Tarixçə',
+                      text: context.locale.history,
                     ),
                   ],
                   labelColor: ColorManager.mainBlue,

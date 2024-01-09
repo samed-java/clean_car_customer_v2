@@ -3,6 +3,7 @@ import 'package:clean_car_customer_v2/components/custom_dots.dart';
 import 'package:clean_car_customer_v2/components/custom_text_button.dart';
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
 import 'package:clean_car_customer_v2/features/onboadding_and_sign_up/onboarding/widgets/build_onboarding.dart';
+import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
 import 'package:clean_car_customer_v2/utils/pager/go.dart';
 import 'package:clean_car_customer_v2/utils/pager/pager.dart';
 import 'package:flutter/material.dart';
@@ -69,21 +70,21 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       children: [
                         BuildOnboardingPage(
                           svgAsset: ImageAssets.onboarding1,
-                          headerText: "Yaxın ərazi!!!",
+                          headerText: "${context.locale.area}!!!",
                           subText:
-                              "Sizə ən yaxın ərazidə yerləşən avtomobil yuma mərkəzlərini bir mobil tətbiqdə cəmlədik",
+                              context.locale.onboardfirsttext,
                         ),
                         BuildOnboardingPage(
                           svgAsset: ImageAssets.onboarding2,
-                          headerText: "Üstün keyfiyyət!!!",
+                          headerText: "${context.locale.superquality}!!",
                           subText:
-                              "Sizi və avtomobilinizi düşünərək yüksək keyfiyyətli xidmətlər təklif edirik",
+                          context.locale.onboardsecondtext,
                         ),
                         BuildOnboardingPage(
                           svgAsset: ImageAssets.onboarding3,
-                          headerText: "Rezervasiya imkanı!!!",
+                          headerText: "${context.locale.possibilityofreservation}!!",
                           subText:
-                              "Avtomobiliniz üçün seçdiyiniz istənilən xidməti öncədən rezerv edin",
+                          context.locale.onboardthirdtext,
                         ),
                       ],
                     ),
@@ -96,7 +97,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       : Padding(
                           padding: Paddings.horizontal16,
                           child: CustomButton(
-                            frontText: "Başla",
+                            frontText: context.locale.start,
                             onPressed: () {
                               Go.removeUntillAndGo(Pager.signup);
                             },
@@ -118,14 +119,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             CustomTextButton(
-                              text: "Keç",
+                              text: context.locale.pass,
                               color: ColorManager.mainWhite,
                               onPressed: () {
                                 Go.removeUntillAndGo(Pager.signup);
                               },
                             ),
                             CustomTextButton(
-                              text: "Növbəti",
+                              text: context.locale.next,
                               color: ColorManager.mainWhite,
                               onPressed: () {
                                 if (_currentPage == 2) {

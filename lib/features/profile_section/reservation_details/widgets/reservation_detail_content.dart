@@ -1,6 +1,7 @@
 import 'package:clean_car_customer_v2/components/custom_button.dart';
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
 import 'package:clean_car_customer_v2/features/profile_section/reservation_details/widgets/reservation_detail_card.dart';
+import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
 import 'package:clean_car_customer_v2/utils/pager/pager.dart';
 import 'package:clean_car_customer_v2/utils/pager/transition.dart';
 import 'package:flutter/material.dart';
@@ -35,7 +36,7 @@ class ReservationDetailContent extends StatelessWidget {
       child: Column(
         children: [
           ReservationDetailCard(
-            headerText: "Ünvan",
+            headerText: context.locale.address,
             content: Row(
               children: [
                 SvgPicture.asset(IconAssets.location),
@@ -61,7 +62,7 @@ class ReservationDetailContent extends StatelessWidget {
                 fontSize: 14,
               ),
             ),
-            headerText: "Avtomobil adı və nömrəsi",
+            headerText: context.locale.vehiclenameandnumber,
           ),
           Gaps.h16,
           ReservationDetailCard(
@@ -72,7 +73,7 @@ class ReservationDetailContent extends StatelessWidget {
                 fontSize: 14,
               ),
             ),
-            headerText: "Xidmət",
+            headerText: context.locale.service,
           ),
           Gaps.h16,
           ReservationDetailCard(
@@ -83,7 +84,7 @@ class ReservationDetailContent extends StatelessWidget {
                 fontSize: 14,
               ),
             ),
-            headerText: "Tarix və saat",
+            headerText: context.locale.dateandtime,
           ),
           Gaps.h16,
           // ReservationDetailCard(
@@ -105,13 +106,13 @@ class ReservationDetailContent extends StatelessWidget {
                 fontSize: 14,
               ),
             ),
-            headerText: "Qiymət",
+            headerText: context.locale.price,
           ),
           Gaps.h16,
           isNew
               ? Gaps.empty
               : CustomButton(
-                  frontText: "Sil",
+                  frontText: context.locale.delete,
                   onPressed: () {},
                   backgroundColor: ColorManager.mainBackgroundColor,
                   foregroundColor: ColorManager.mainRed,
@@ -120,13 +121,13 @@ class ReservationDetailContent extends StatelessWidget {
           Gaps.h12,
           isNew
               ? CustomButton(
-                  frontText: "Təsdiqlə",
+                  frontText: context.locale.confirm,
                   onPressed: () {
                     onSubmit?.call();
                   },
                 )
               : CustomButton(
-                  frontText: "Dəyişiklik Et",
+                  frontText: context.locale.makechange,
                   onPressed: () {
                     onSubmit?.call();
                   },

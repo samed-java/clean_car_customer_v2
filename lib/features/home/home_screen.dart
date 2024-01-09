@@ -10,6 +10,7 @@ import 'package:clean_car_customer_v2/components/custom_searchbar.dart';
 import 'package:clean_car_customer_v2/components/custom_filter_button.dart';
 import 'package:clean_car_customer_v2/features/home/widgets/text_widget.dart';
 import 'package:clean_car_customer_v2/features/offers/cubit/offers_cubit.dart';
+import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -50,6 +51,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     // });
                     // },
                     focusNode: _focusNode,
+                    asButton: true,
+                    onPressed: (){},
                   ),
                   FilterButton(
                     onPressed: () {
@@ -84,8 +87,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           );
                           // widget.onPageChanged?.call(1);
                         },
-                        headerText: "Sizə yaxın mərkəzlər",
-                        buttonText: "hamısı",
+                        headerText: context.locale.centersnearyou,
+                        buttonText: context.locale.all ,
                         textStyle: getRegularStyle(
                             color: ColorManager.mainBlue, fontSize: 16),
                       ),
@@ -100,12 +103,12 @@ class _HomeScreenState extends State<HomeScreen> {
                             return ListView.builder(
                               physics: const BouncingScrollPhysics(),
                               scrollDirection: Axis.horizontal,
-                              itemCount: state.data.washings.length,
+                              itemCount: context.read<HomeCubit>().mainResult!.washings.length,
                               itemBuilder: (context, index) {
                                 return Padding(
                                   padding: EdgeInsets.only(left: 8.w),
                                   child: BranchCard(
-                                    model: state.data.washings[index],
+                                    model: context.read<HomeCubit>().mainResult!.washings[index],
                                   ),
                                 );
                               },
@@ -134,8 +137,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             curve: Curves.easeInOut,
                           );
                         },
-                        buttonText: "hamısı",
-                        headerText: "Ən son təkliflər",
+                        buttonText: context.locale.all,
+                        headerText: context.locale.latestoffers,
                         textStyle: getUnderlineStyle(
                             color: ColorManager.mainBlue, fontSize: 16),
                       ),

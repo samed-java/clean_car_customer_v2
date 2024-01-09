@@ -3,6 +3,7 @@ import 'package:clean_car_customer_v2/components/custom_dropdown_button.dart';
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
 import 'package:clean_car_customer_v2/components/custom_textfield_widget.dart';
 import 'package:clean_car_customer_v2/features/profile_section/my_cars/cubit/my_cars_cubit.dart';
+import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
 import 'package:clean_car_customer_v2/utils/pager/go.dart';
 import 'package:clean_car_customer_v2/utils/services/navigation_service/navigation_service.dart';
 import 'package:flutter/material.dart';
@@ -63,7 +64,7 @@ void carInfoDialog(BuildContext c, {isNew = false,int? selectedCarId}){
                   ),
                   Gaps.h10,
                   Text(
-                    "Avtomobil növü",
+                    context.locale.vehicletype,
                     style: getRegularStyle(
                       color: ColorManager.thirdBlack,
                       fontSize: 14,
@@ -107,7 +108,7 @@ void carInfoDialog(BuildContext c, {isNew = false,int? selectedCarId}){
                   isNew
                       ? Gaps.empty
                       : CustomButton(
-                          frontText: "Sil",
+                          frontText: context.locale.delete,
                           onPressed: () {
                             c.read<MyCarsCubit>().deleteCar(id: selectedCarId!);
                           },
@@ -117,7 +118,7 @@ void carInfoDialog(BuildContext c, {isNew = false,int? selectedCarId}){
                         ),
                   Gaps.h10,
                   CustomButton(
-                      frontText: "Yadda Saxla",
+                      frontText: context.locale.remember,
                       onPressed: () {
                         if (formKey.currentState!.validate()) {
                           if(isNew) {

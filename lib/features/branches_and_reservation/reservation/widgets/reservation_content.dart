@@ -7,6 +7,7 @@ import 'package:clean_car_customer_v2/features/branches_and_reservation/reservat
 import 'package:clean_car_customer_v2/features/branches_and_reservation/reservation/widgets/payment_method_widget.dart';
 import 'package:clean_car_customer_v2/features/branches_and_reservation/reservation/widgets/reservation_choose_car.dart';
 import 'package:clean_car_customer_v2/features/branches_and_reservation/reservation/widgets/reservation_location_card.dart';
+import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
 import 'package:clean_car_customer_v2/utils/pager/go.dart';
 import 'package:clean_car_customer_v2/utils/pager/pager.dart';
 import 'package:flutter/material.dart';
@@ -73,14 +74,14 @@ class ReservationContent extends StatelessWidget {
                               context,
                               Pager.splash(
                                   svgAssets: ImageAssets.calendar,
-                                  headerText: "Rezerv edildi!!!",
+                                  headerText: "${context.locale.booked}!!!",
                                   subText:
-                                      "Rezerv etmə prosesiniz uğurla təsdiqləndi ",
+                                  context.locale.reservationfirsttext,
                                   page: Pager.main));
                         }
                       },
                       child: CustomButton(
-                        frontText: "Rezerv Et",
+                        frontText: context.locale.makereservation,
                         onPressed: () {
                           Go.to(Pager.reservationDetail(
                               isNew: true,

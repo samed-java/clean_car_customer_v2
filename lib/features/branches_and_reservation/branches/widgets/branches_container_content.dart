@@ -21,7 +21,9 @@ class BranchesContent extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            CustomSearchBar(focusNode: _focusNode),
+            CustomSearchBar(focusNode: _focusNode,searchController: context.read<HomeCubit>().searchController,onSubmit: (){
+              context.read<HomeCubit>().execute();
+            },),
             FilterButton(
               onPressed: () {
                 openHomeFilterBox(context, height);
@@ -40,11 +42,11 @@ class BranchesContent extends StatelessWidget {
                     return Padding(
                       padding: Paddings.vertical8,
                       child: DetailedBranchCard(
-                        model: state.data.washings[index],
+                        model: context.read<HomeCubit>().filteredResult!.washings[index],
                       ),
                     );
                   },
-                  itemCount: state.data.washings.length,
+                  itemCount: context.read<HomeCubit>().filteredResult!.washings.length,
                 );
               } else if (state is HomeLoading) {
                 return const Center(

@@ -7,8 +7,10 @@ class HomeInitial extends HomeState {}
 class HomeLoading extends HomeState {}
 
 class HomeSuccess extends HomeState {
-  final BranchsResModel data;
-  HomeSuccess({required this.data});
+  //final BranchsResModel data;
+  HomeSuccess(
+      //{required this.data}
+      );
 }
 
 class HomeFail extends HomeState {

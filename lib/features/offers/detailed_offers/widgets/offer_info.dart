@@ -1,4 +1,5 @@
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
+import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -33,7 +34,7 @@ class OfferInfoWidget extends StatelessWidget {
                     text: TextSpan(
                       children: <TextSpan>[
                         TextSpan(
-                          text: 'Telefon nömrəsi : ',
+                          text: '${context.locale.phonenumber} : ',
                           style: getSemiBoldStyle(
                               color: ColorManager.mainBlack, fontSize: 14),
                         ),
@@ -63,7 +64,7 @@ class OfferInfoWidget extends StatelessWidget {
                     text: TextSpan(
                       children: <TextSpan>[
                         TextSpan(
-                          text: 'İş saatları :',
+                          text: '${context.locale.workinghours} :',
                           style: getSemiBoldStyle(
                               color: ColorManager.mainBlack, fontSize: 14),
                         ),
@@ -94,7 +95,7 @@ class OfferInfoWidget extends StatelessWidget {
                       text: TextSpan(
                         children: <TextSpan>[
                           TextSpan(
-                            text: 'Ünvan : ',
+                            text: '${context.locale.address} : ',
                             style: getSemiBoldStyle(
                                 color: ColorManager.mainBlack, fontSize: 14),
                           ),

@@ -16,8 +16,8 @@ class SignUpResModel {
 }
 
 class User {
-  String name;
-  String email;
+  String? name;
+  String? email;
   int phone;
 
   User({

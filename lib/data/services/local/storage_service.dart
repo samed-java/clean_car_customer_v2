@@ -64,6 +64,24 @@ class StorageService {
     }
   }
 
+  Future<void> setLangCode(String lang) async {
+    await instance.write(StorageKeys.langCode, lang);
+  }
+
+  Future<bool> get hasLangCode async {
+    return (await instance.read(StorageKeys.langCode)) != null;
+  }
+
+  String getLangCode() {
+    var data = instance.read<String>(StorageKeys.langCode)??"en";
+    return data;
+    // if (data != null) {
+    //   return json.decode(data);
+    // } else {
+    //   throw Exception("Languages not initialized");
+    // }
+  }
+
   Future<void> setRegions(Map<String, dynamic> lang) async {
     await instance.write(StorageKeys.regions, json.encode(lang));
   }

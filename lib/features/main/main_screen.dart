@@ -3,6 +3,7 @@ import 'package:clean_car_customer_v2/features/branches_and_reservation/branches
 import 'package:clean_car_customer_v2/features/offers/offers_screen.dart';
 import 'package:clean_car_customer_v2/features/home/home_screen.dart';
 import 'package:clean_car_customer_v2/features/profile_section/profile/profile_screen.dart';
+import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
 import 'package:clean_car_customer_v2/utils/pager/go.dart';
 import 'package:clean_car_customer_v2/utils/pager/pager.dart';
 import 'package:flutter/material.dart';
@@ -58,8 +59,8 @@ class _MainScreenState extends State<MainScreen> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              buildTabItem(0, IconAssets.home, "Ana səhifə"),
-              buildTabItem(1, IconAssets.map, "Filiallar"),
+              buildTabItem(0, IconAssets.home, context.locale.homepage),
+              buildTabItem(1, IconAssets.map, context.locale.branches),
               FloatingActionButton(
                 onPressed: () {
                   Go.to(Pager.reservation());
@@ -70,8 +71,8 @@ class _MainScreenState extends State<MainScreen> {
                 backgroundColor: ColorManager.mainBlue,
                 child: SvgPicture.asset(IconAssets.plus),
               ),
-              buildTabItem(2, IconAssets.starFill, "Təkliflər"),
-              buildTabItem(3, IconAssets.profile, "Hesabım"),
+              buildTabItem(2, IconAssets.starFill, context.locale.offers),
+              buildTabItem(3, IconAssets.profile, context.locale.myaccount),
             ],
           ),
         ),

@@ -1,4 +1,5 @@
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
+import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -30,7 +31,7 @@ class EvaluationInfoCard extends StatelessWidget {
                   text: TextSpan(
                     children: <TextSpan>[
                       TextSpan(
-                        text: 'Xidmət : ',
+                        text: '${context.locale.service} : ',
                         style: getSemiBoldStyle(
                             color: ColorManager.mainBlack, fontSize: 14),
                       ),

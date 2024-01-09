@@ -2,6 +2,7 @@ import 'package:clean_car_customer_v2/constants/res/gaps.dart';
 import 'package:clean_car_customer_v2/features/profile_section/personal_info/cubit/profile_info/profile_info_cubit.dart';
 import 'package:clean_car_customer_v2/features/profile_section/personal_info/cubit/profile_info/profile_info_state.dart';
 import 'package:clean_car_customer_v2/features/profile_section/personal_info/widgets/personal_info_card.dart';
+import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:string_mask/string_mask.dart';
@@ -23,17 +24,17 @@ class PersonalInfoContent extends StatelessWidget {
               children: [
                 Gaps.h8,
                 PersonalInfoCard(
-                  headerText: "Tam ad",
+                  headerText: context.locale.fullname,
                   subText: state.profileInfoModel.user.name,
                 ),
                 Gaps.h16,
                 PersonalInfoCard(
-                  headerText: "Email",
+                  headerText: context.locale.email,
                   subText: state.profileInfoModel.user.email,
                 ),
                 Gaps.h16,
                 PersonalInfoCard(
-                  headerText: "Telefon nömrəsi",
+                  headerText: context.locale.phonenumber,
                   subText: StringMask.apply_(
                       state.profileInfoModel.user.phone.toString(),
                       "+###-##-###-##-##",

@@ -16,12 +16,17 @@ mixin BaseErrorHandler {
       onSocketException.call(e);
     } catch (e, s) {
       if (e is DataIsNullError) {
+        print(e.message);
         onDataIsNullError.call(e);
       } else if (e is ResponseBodyIsNullError) {
+        print(e.message);
         onResponseBodyIsNullError.call(e);
       } else if (e is NotSuccessError) {
+        print(e.message);
         onNotSuccessError.call(e);
       } else {
+        print(e);
+        print(s);
         onOtherError.call(e, s);
       }
     }

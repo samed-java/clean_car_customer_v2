@@ -4,6 +4,8 @@ import 'package:clean_car_customer_v2/features/branches_and_reservation/branch/w
 import 'package:clean_car_customer_v2/features/branches_and_reservation/branch/widgets/branch_info.dart';
 import 'package:clean_car_customer_v2/features/branches_and_reservation/branch/widgets/branch_note.dart';
 import 'package:clean_car_customer_v2/features/branches_and_reservation/branch/widgets/branch_upper.dart';
+import 'package:clean_car_customer_v2/features/branches_and_reservation/reservation/data/model/res/reservation_parameters_res_model.dart';
+import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
 import 'package:clean_car_customer_v2/utils/pager/go.dart';
 import 'package:clean_car_customer_v2/utils/pager/pager.dart';
 import 'package:flutter/material.dart';
@@ -95,19 +97,19 @@ class _BranchScreenState extends State<BranchScreen> {
                         ),
                       ),
                       Gaps.h16,
-                      const BranchNoteWidget(),
+                      //const BranchNoteWidget(),
                       Gaps.h24,
                       CustomButton(
-                        frontText: "Xəritədə Bax",
+                        frontText: context.locale.seemapp,
                         onPressed: () {},
                         foregroundColor: ColorManager.mainBlue,
                         backgroundColor: ColorManager.mainBackgroundColor,
                       ),
                       Gaps.h16,
                       CustomButton(
-                          frontText: "Rezerv Et",
+                          frontText: context.locale.makereservation,
                           onPressed: () {
-                            Go.to(Pager.reservation());
+                            Go.to(Pager.reservation(Branch(id: widget.model.id, washingName: widget.model.title, address: widget.model.address)));
                           }),
                       SizedBox(
                         height: 50.h,

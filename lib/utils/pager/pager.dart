@@ -2,7 +2,6 @@ import 'package:clean_car_customer_v2/features/branches_and_reservation/branch/b
 import 'package:clean_car_customer_v2/features/branches_and_reservation/branches/branches_screen.dart';
 import 'package:clean_car_customer_v2/features/branches_and_reservation/reservation/cubit/reservation_cubit.dart';
 import 'package:clean_car_customer_v2/features/branches_and_reservation/reservation/reservation_screen.dart';
-import 'package:clean_car_customer_v2/features/demo2.dart';
 import 'package:clean_car_customer_v2/features/evaluation/evaluation_screen.dart';
 import 'package:clean_car_customer_v2/features/home/cubit/home_cubit.dart';
 import 'package:clean_car_customer_v2/features/home/data/model/res/branchs_res_model.dart';
@@ -92,7 +91,6 @@ class Pager {
         ..execute(),
       child: const MyCarsScreen());
   static Widget get splashBegin => const SplashBeginScreen();
-  static Widget get demo2 => const Demo2();
 
   static Widget detialedOffer(Offer offer) => DetailedOfferScreen(
         offer: offer,

@@ -43,4 +43,10 @@ class OTPCubit extends Cubit<OTPState> with BaseErrorHandler{
     }
   }
 
+  @override
+  void onNotSuccessError(NotSuccessError e) {
+
+    super.onNotSuccessError(e);
+  }
+
 }

@@ -1,15 +1,24 @@
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
+import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomSearchBar extends StatelessWidget {
   CustomSearchBar({
     super.key,
     required this.focusNode,
+    this.searchController,
+    this.onSubmit,
+    this.onPressed,
+    this.asButton = false
   });
   final ValueNotifier<bool> isBack = ValueNotifier<bool>(false);
-  final TextEditingController searchController = TextEditingController();
+  final TextEditingController? searchController;
   final FocusNode focusNode;
+  final Function? onSubmit;
+  final Function? onPressed;
+  final bool asButton;
   // final Function onFocusChanged;
 
   @override
@@ -23,14 +32,18 @@ class CustomSearchBar extends StatelessWidget {
         builder: (context, value, child) {
           return TextField(
             controller: searchController,
-            // focusNode: focusNode,
+            focusNode: focusNode,
             onTap: () {
               // if (searchController.text.isEmpty) {
               //   onFocusChanged();
               // }
               // isBack.value = !isBack.value;
               // if (focusNode.hasFocus) {}
-              isBack.value = !isBack.value;
+              if(!asButton) {
+                isBack.value = !isBack.value;
+              }else{
+                onPressed?.call();
+              }
             },
             onChanged: (value) {
               // if (value.isNotEmpty) {
@@ -44,9 +57,11 @@ class CustomSearchBar extends StatelessWidget {
               prefixIcon: value
                   ? IconButton(
                       onPressed: () {
-                        searchController.clear();
-                        isBack.value = !isBack.value;
+                        searchController?.clear();
                         focusNode.unfocus();
+                        SystemChannels.textInput.invokeMethod("TextInput.hide");
+                        isBack.value = !isBack.value;
+
                         // onFocusChanged();
                       },
                       icon: Icon(
@@ -61,8 +76,9 @@ class CustomSearchBar extends StatelessWidget {
               hintStyle:
                   getRegularStyle(color: ColorManager.fifthBlack, fontSize: 14),
               contentPadding: Paddings.horizontal16,
-              hintText: "avtoyuma mərkəzi axtar",
+              hintText: context.locale.findacarwash,
               fillColor: ColorManager.mainWhite,
+
               filled: true,
               border: OutlineInputBorder(
                 borderSide: BorderSide.none,
@@ -71,6 +87,8 @@ class CustomSearchBar extends StatelessWidget {
                 ),
               ),
             ),
+            onSubmitted: (val)=>onSubmit?.call(),
+            readOnly: asButton,
           );
         },
       ),

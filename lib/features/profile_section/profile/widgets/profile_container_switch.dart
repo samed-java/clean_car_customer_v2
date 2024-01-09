@@ -1,4 +1,5 @@
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
+import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -27,7 +28,7 @@ class _ProfileContainerSwitchState extends State<ProfileContainerSwitch> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              "Notifikasiyalar",
+              context.locale.notifications,
               style:
                   getMediumStyle(color: ColorManager.mainBlack, fontSize: 16),
             ),

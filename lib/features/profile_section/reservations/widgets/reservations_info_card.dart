@@ -3,6 +3,7 @@ import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
 import 'package:clean_car_customer_v2/features/branches_and_reservation/reservation/data/model/res/reservation_parameters_res_model.dart';
 import 'package:clean_car_customer_v2/features/profile_section/reservations/data/model/reservations_model.dart';
 import 'package:clean_car_customer_v2/utils/enum/status_types.dart';
+import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -63,7 +64,7 @@ class ReservationInfoCard extends StatelessWidget {
                 text: TextSpan(
                   children: <TextSpan>[
                     TextSpan(
-                      text: 'Statusu : ',
+                      text: '${context.locale.status} : ',
                       style: getMediumStyle(
                           color: ColorManager.secondaryBlack, fontSize: 14),
                     ),
@@ -76,7 +77,7 @@ class ReservationInfoCard extends StatelessWidget {
                 ),
               ),
               PaddedButton(
-                frontText: "Ətraflı",
+                frontText: context.locale.detailed,
                 onPressed: () {
                   Go.to(Pager.reservationDetail(
                       service: Service(

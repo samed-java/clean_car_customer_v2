@@ -1,6 +1,7 @@
 import 'package:clean_car_customer_v2/components/custom_upper_part.dart';
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
 import 'package:clean_car_customer_v2/features/onboadding_and_sign_up/signup/widgets/signup_form.dart';
+import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -27,9 +28,9 @@ class SignupScreen extends StatelessWidget {
             child: Column(
               children: [
                 Gaps.h24,
-                const CustomUpperPart(
-                  headerText: "Qeydiyyatdan Keç!!!",
-                  subText: "Sadəcə bir telefon nömrəsi ilə qeydiyyatdan keçin",
+                 CustomUpperPart(
+                  headerText: context.locale.register,
+                  subText: context.locale.signupsixthtext,
                 ),
                 Gaps.h24,
                 BlocListener<SignUpCubit, SignUpState>(

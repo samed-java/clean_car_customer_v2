@@ -1,4 +1,5 @@
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
+import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:html_widget/html_widget.dart';
@@ -21,7 +22,7 @@ class OfferWidget extends StatelessWidget {
             padding: EdgeInsets.only(
                 top: 10.h, bottom: 2.h, left: 10.w, right: 10.w),
             child: Text(
-              "Təklif :",
+              "${context.locale.offer} :",
               style:
                   getSemiBoldStyle(color: ColorManager.mainBlack, fontSize: 14),
             ),

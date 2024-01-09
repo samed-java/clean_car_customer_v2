@@ -6,7 +6,7 @@ void openBranchesFilterBox(BuildContext context, double height) {
   showDialog(
     context: context,
     builder: (BuildContext context) {
-      return BranchesFilterContent();
+      return const BranchesFilterContent();
     },
   );
 }
