@@ -12,6 +12,8 @@ import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
 
 import '../../../../../../utils/errors/errors.dart';
+import '../../../../../../utils/pager/go.dart';
+import '../../../../../../utils/pager/pager.dart';
 
 part 'languages_state.dart';
 
@@ -37,11 +39,13 @@ class LanguagesCubit extends Cubit<LanguagesState> with BaseErrorHandler {
   void changeLanguage(String lang) async {
     selectedLanguage.sink.add(lang);
     await _service.setLangCode(lang);
+    await NavigationService.instance.context.changeOrRefreshLang();
+    Go.removeUntillAndGo(Pager.splashBegin);
   }
 
   @override
   Future<void> close() {
-    NavigationService.instance.context.changeOrRefreshLang();
+
     return super.close();
   }
 

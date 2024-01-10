@@ -29,7 +29,7 @@ class InitializeLanguage {
     }
   }
 
-  static void changeOrRefreshLang() async {
+  static Future<void> changeOrRefreshLang() async {
     await _fetch();
     locator.unregister<CustomerLangData>();
     init();
