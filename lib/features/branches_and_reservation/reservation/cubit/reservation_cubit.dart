@@ -17,8 +17,12 @@ import '../data/model/req/reservation_submit_req_model.dart';
 part 'reservation_state.dart';
 
 class ReservationCubit extends Cubit<ReservationState> with BaseErrorHandler {
-  ReservationCubit({Branch? branch}) : super(ReservationInitial()) {
+  ReservationCubit({Branch? branch,Car? car,Time? time,Service? service,DateTime? dateTime}) : super(ReservationInitial()) {
     selectedBranch = ValueNotifier<Branch?>(branch);
+     selectedCar = ValueNotifier<Car?>(car);
+     selectedTime = ValueNotifier<Time?>(time);
+     selectedService = ValueNotifier<Service?>(service);
+     selectedDate = ValueNotifier<DateTime?>(dateTime);
     selectedCar.addListener(() {
       if (selectedBranch.value != null) {
         execute();
@@ -42,10 +46,10 @@ class ReservationCubit extends Cubit<ReservationState> with BaseErrorHandler {
   }
 
   late ValueNotifier<Branch?> selectedBranch;
-  ValueNotifier<Car?> selectedCar = ValueNotifier<Car?>(null);
-  ValueNotifier<Time?> selectedTime = ValueNotifier<Time?>(null);
-  ValueNotifier<Service?> selectedService = ValueNotifier<Service?>(null);
-  ValueNotifier<DateTime?> selectedDate = ValueNotifier<DateTime?>(null);
+  late ValueNotifier<Car?> selectedCar;
+  late ValueNotifier<Time?> selectedTime;
+  late ValueNotifier<Service?> selectedService;
+  late ValueNotifier<DateTime?> selectedDate ;
 
   void selectBranch(Branch branch) => selectedBranch.value = branch;
   void selectCar(Car car) => selectedCar.value = car;

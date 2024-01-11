@@ -80,6 +80,11 @@ class ReservationInfoCard extends StatelessWidget {
                 frontText: context.locale.detailed,
                 onPressed: () {
                   Go.to(Pager.reservationDetail(
+                    onSubmit: (){
+                      Go.to(Pager.reservation(
+                       
+                      ));
+                    },
                       service: Service(
                           serviceId: 0,
                           title: activeReservation.service,

@@ -109,7 +109,7 @@ class _BranchScreenState extends State<BranchScreen> {
                       CustomButton(
                           frontText: context.locale.makereservation,
                           onPressed: () {
-                            Go.to(Pager.reservation(Branch(id: widget.model.id, washingName: widget.model.title, address: widget.model.address)));
+                            Go.to(Pager.reservation(branch: Branch(id: widget.model.id, washingName: widget.model.title, address: widget.model.address)));
                           }),
                       SizedBox(
                         height: 50.h,

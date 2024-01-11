@@ -72,7 +72,7 @@ class Pager {
   static Widget branch(Washing model) => BranchScreen(
         model: model,
       );
-  static Widget reservation([Branch? branch]) => MultiBlocProvider(
+  static Widget reservation({Branch? branch,Car? car,Time? time,Service? service,DateTime? dateTime}) => MultiBlocProvider(
         providers: [
           BlocProvider(
               create: (context) => ReservationCubit(branch: branch)..execute()),

@@ -41,6 +41,7 @@ class CarTypeButton extends StatelessWidget {
             imageUrl:iconPath,
             height: 28.h,
             width: 28.w,
+            color: !isSelected ? ColorManager.mainBlue : ColorManager.mainWhite,
             // colorFilter: ColorFilter.mode(
             //     isSelected ? ColorManager.mainWhite : ColorManager.mainBlue,
             //     BlendMode.srcIn),
