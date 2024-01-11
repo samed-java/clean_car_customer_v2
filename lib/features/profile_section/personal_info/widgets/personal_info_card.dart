@@ -1,5 +1,9 @@
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
+import 'package:clean_car_customer_v2/features/profile_section/personal_info/cubit/profile_info/profile_info_cubit.dart';
+import 'package:clean_car_customer_v2/utils/pager/go.dart';
+import 'package:clean_car_customer_v2/utils/pager/pager.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bounce/flutter_bounce.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -33,7 +37,9 @@ class PersonalInfoCard extends StatelessWidget {
                         color: ColorManager.mainBlue, fontSize: 16),
                   ),
                   Bounce(
-                    onPressed: () {},
+                    onPressed: () {
+                      Go.to(Pager.personalInfoEdit(context.read<ProfileInfoCubit>()));
+                    },
                     duration: const Duration(milliseconds: 100),
                     child: SizedBox(
                       height: 16.h,

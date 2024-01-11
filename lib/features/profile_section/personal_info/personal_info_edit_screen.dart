@@ -1,21 +1,15 @@
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
-import 'package:clean_car_customer_v2/features/profile_section/profile/widgets/profile_container_content.dart';
-import 'package:clean_car_customer_v2/features/profile_section/settings/widgets/settings_container_content.dart';
+import 'package:clean_car_customer_v2/features/profile_section/personal_info/widgets/personal_info_content.dart';
+import 'package:clean_car_customer_v2/features/profile_section/personal_info/widgets/personal_info_edit_content.dart';
 import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
+import 'package:clean_car_customer_v2/utils/pager/go.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../utils/pager/go.dart';
+class PersonalInfoEditScreen extends StatelessWidget {
+  const PersonalInfoEditScreen({super.key});
 
-class SettingsScreen extends StatefulWidget {
-  const SettingsScreen({super.key});
-
-  @override
-  State<SettingsScreen> createState() => _SettingsScreenState();
-}
-
-class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,7 +43,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ),
                   Gaps.w4,
                   Text(
-                    context.locale.adjustments,
+                    context.locale.personalinformation,
                     style: getSemiBoldStyle(
                       color: ColorManager.mainWhite,
                       fontSize: 20,
@@ -69,9 +63,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ),
                 ),
                 child: Padding(
-                    padding: Paddings.all16,
-                    // child: BranchesContent(),
-                    child: const SettingsContainerContent()),
+                  padding: Paddings.all16,
+                  // child: BranchesContent(),
+                  child: const PersonalInfoEditContent(),
+
+                  // child: Text("salam"),
+                ),
               ),
             ),
           ],

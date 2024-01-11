@@ -1,13 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
-import 'package:clean_car_customer_v2/features/profile_section/profile/widgets/profile_container_content.dart';
 import 'package:clean_car_customer_v2/features/profile_section/settings/features/change_lang/cubit/languages_cubit.dart';
-import 'package:clean_car_customer_v2/features/profile_section/settings/widgets/settings_container_content.dart';
 import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
+
+import '../../../../../../utils/pager/go.dart';
 
 class LanguagesScreen extends StatelessWidget {
   const LanguagesScreen({super.key});
@@ -24,12 +25,34 @@ class LanguagesScreen extends StatelessWidget {
           children: [
             Padding(
               padding: EdgeInsets.only(top: 10.h, bottom: 10.h, left: 20.w),
-              child: Text(
-                context.locale.languages,
-                style: getSemiBoldStyle(
-                  color: ColorManager.mainWhite,
-                  fontSize: 20,
-                ),
+              child: Row(
+                children: [
+                  InkWell(
+                    onTap: () {
+                      Go.back();
+                    },
+                    child: SizedBox(
+                      height: 32.h,
+                      width: 32.w,
+                      child: Padding(
+                        padding: Paddings.all8,
+                        child: SvgPicture.asset(
+                          IconAssets.backButton2,
+                          colorFilter: ColorFilter.mode(
+                              ColorManager.mainWhite, BlendMode.srcIn),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Gaps.w4,
+                  Text(
+                    context.locale.languages,
+                    style: getSemiBoldStyle(
+                      color: ColorManager.mainWhite,
+                      fontSize: 20,
+                    ),
+                  ),
+                ],
               ),
             ),
             Expanded(

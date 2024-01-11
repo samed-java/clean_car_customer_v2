@@ -24,7 +24,7 @@ class PersonalInfoContent extends StatelessWidget {
               children: [
                 Gaps.h8,
                 PersonalInfoCard(
-                  headerText: context.locale.fullname,
+                  headerText: context.locale.name,
                   subText: state.profileInfoModel.user.name,
                 ),
                 Gaps.h16,

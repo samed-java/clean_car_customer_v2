@@ -12,6 +12,7 @@ import '../../../../features/onboadding_and_sign_up/signup/data/model/response/s
 import '../../../../features/profile_section/my_cars/data/model/res/ban_types_res_model.dart';
 import '../../../../features/profile_section/my_cars/data/model/res/my_cars_res_model.dart';
 import '../../../../features/profile_section/personal_info/data/model/res/profile_info_res_model.dart';
+import '../../../../features/profile_section/settings/features/contacts/data/model/res/contacts_res_model.dart';
 import '../../../../utils/language/data/model/response/language_response_model.dart';
 
 class FactoryGenerator {
@@ -35,6 +36,8 @@ class FactoryGenerator {
         ReservationSubmitResModel.fromJson(json),
     LanguagesResModel: (json) =>
         LanguagesResModel.fromJson(json),
+    ContactsResModel: (json) =>
+        ContactsResModel.fromJson(json),
   };
 
   static T? createObject<T>(Map<String, dynamic>? body) {

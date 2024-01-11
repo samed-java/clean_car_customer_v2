@@ -1,11 +1,13 @@
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TextFieldWidget extends StatelessWidget {
-  const TextFieldWidget({super.key, required this.headerText,this.controller,this.validator});
+  const TextFieldWidget({super.key, required this.headerText,this.controller,this.validator, this.inputFormatters});
   final String headerText;
   final TextEditingController? controller;
+  final List<TextInputFormatter>? inputFormatters;
   final String? Function(String?)? validator;
 
   @override
@@ -29,6 +31,7 @@ class TextFieldWidget extends StatelessWidget {
             onChanged: (value) {},
             controller: controller,
             validator: validator,
+            inputFormatters: this.inputFormatters,
             decoration: InputDecoration(
               contentPadding: Paddings.all8,
               filled: true,

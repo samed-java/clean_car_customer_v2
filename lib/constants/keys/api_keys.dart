@@ -17,4 +17,5 @@ class ApiKeys {
   static const String banTypes = "$_baseUrl/bans";
   static const String getWashingServices = "$_baseUrl/getWashingServices";
   static const String reserve = "$_baseUrl/reservations/add";
+  static const String contacts = "$_baseUrl/contacts";
 }

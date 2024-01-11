@@ -17,12 +17,14 @@ import 'package:clean_car_customer_v2/features/onboadding_and_sign_up/signup/com
 import 'package:clean_car_customer_v2/features/onboadding_and_sign_up/signup/data/cubit/sign_up_cubit.dart';
 import 'package:clean_car_customer_v2/features/onboadding_and_sign_up/signup/signup_screen.dart';
 import 'package:clean_car_customer_v2/features/profile_section/my_cars/my_cars_screen.dart';
+import 'package:clean_car_customer_v2/features/profile_section/personal_info/personal_info_edit_screen.dart';
 import 'package:clean_car_customer_v2/features/profile_section/personal_info/personal_info_screen.dart';
 import 'package:clean_car_customer_v2/features/profile_section/profile/profile_screen.dart';
 import 'package:clean_car_customer_v2/features/profile_section/reservation_details/reservation_detail_screen.dart';
 import 'package:clean_car_customer_v2/features/profile_section/reservations/cubit/reservations_cubit.dart';
 import 'package:clean_car_customer_v2/features/profile_section/reservations/reservations_screen.dart';
 import 'package:clean_car_customer_v2/features/profile_section/settings/features/change_lang/cubit/languages_cubit.dart';
+import 'package:clean_car_customer_v2/features/profile_section/settings/features/contacts/cubit/contacts_cubit.dart';
 import 'package:clean_car_customer_v2/features/splash/splash_begin_screen.dart';
 import 'package:clean_car_customer_v2/features/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -35,6 +37,7 @@ import '../../features/profile_section/my_cars/cubit/my_cars_cubit.dart';
 import '../../features/profile_section/my_cars/data/model/res/my_cars_res_model.dart';
 import '../../features/profile_section/personal_info/cubit/profile_info/profile_info_cubit.dart';
 import '../../features/profile_section/settings/features/change_lang/presentation/languages.dart';
+import '../../features/profile_section/settings/features/contacts/presentation/contacts_page.dart';
 import '../../features/profile_section/settings/settings.dart';
 
 class Pager {
@@ -83,6 +86,10 @@ class Pager {
         create: (context) => ProfileInfoCubit()..execute(),
         child: const PersonalInfoScreen(),
       );
+  static Widget  personalInfoEdit(ProfileInfoCubit cubit) => BlocProvider.value(
+        value: cubit,
+        child: const PersonalInfoEditScreen(),
+      );
   static Widget get reservations => BlocProvider<ReservationsCubit>(
         create: (context) => ReservationsCubit()..onProgress(),
         child: const ReservationsScreen(),
@@ -90,9 +97,9 @@ class Pager {
 
   static Widget get settings =>  const SettingsScreen();
 
-  static Widget get contacts => BlocProvider<ReservationsCubit>(
-        create: (context) => ReservationsCubit()..onProgress(),
-        child: const ReservationsScreen(),
+  static Widget get contacts => BlocProvider<ContactsCubit>(
+        create: (context) => ContactsCubit()..execute(),
+        child: const ContactsScreen(),
       );
   static Widget get languages => BlocProvider<LanguagesCubit>(
         create: (context) => LanguagesCubit()..execute(),
