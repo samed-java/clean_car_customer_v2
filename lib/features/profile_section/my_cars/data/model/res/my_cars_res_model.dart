@@ -1,3 +1,5 @@
+import 'package:equatable/equatable.dart';
+
 class CarsResModel {
   List<Car>? cars;
   Car? car;
@@ -22,7 +24,7 @@ class CarsResModel {
       };
 }
 
-class Car {
+class Car extends Equatable{
   int id;
   String carModel;
   String carNumber;
@@ -50,6 +52,10 @@ class Car {
         "car_number": carNumber,
         "ban_type": banType?.toJson(),
       };
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [id];
 }
 
 class BanType {

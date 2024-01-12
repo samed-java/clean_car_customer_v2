@@ -1,12 +1,11 @@
 import 'package:clean_car_customer_v2/components/padded_button.dart';
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
-import 'package:clean_car_customer_v2/features/branches_and_reservation/reservation/data/model/res/reservation_parameters_res_model.dart';
+import 'package:clean_car_customer_v2/features/branches_and_reservation/reservation/data/model/res/reservation_parameters_res_model.dart' as param;
 import 'package:clean_car_customer_v2/features/profile_section/reservations/data/model/reservations_model.dart';
 import 'package:clean_car_customer_v2/utils/enum/status_types.dart';
 import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../../utils/pager/go.dart';
 import '../../../../utils/pager/pager.dart';
 
@@ -36,7 +35,7 @@ class ReservationInfoCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                activeReservation.service,
+                activeReservation.service.title,
                 style:
                     getMediumStyle(color: ColorManager.mainBlack, fontSize: 16),
               ),
@@ -53,7 +52,7 @@ class ReservationInfoCard extends StatelessWidget {
                 color: ColorManager.secondaryBlack, fontSize: 14),
           ),
           Text(
-            activeReservation.washingName,
+            activeReservation.washing.washingName,
             style: getMediumStyle(
                 color: ColorManager.secondaryBlack, fontSize: 14),
           ),
@@ -82,18 +81,22 @@ class ReservationInfoCard extends StatelessWidget {
                   Go.to(Pager.reservationDetail(
                     onSubmit: (){
                       Go.to(Pager.reservation(
-                       
+                          car: activeReservation.car,
+                        service: param.Service(serviceId: activeReservation.service.id,title: activeReservation.service.title,price: activeReservation.price,icon: ""),
+                          time: param.Time(time: activeReservation.time, isReserved: true),
+                        branch: param.Branch(id: activeReservation.washing.id, washingName: activeReservation.washing.washingName, address: activeReservation.washing.washingAddress),
+                        dateTime: DateTime(int.parse(activeReservation.day.split('.').elementAt(2)),int.parse(activeReservation.day.split('.').elementAt(1)),int.parse(activeReservation.day.split('.').elementAt(0)))
                       ));
                     },
-                      service: Service(
-                          serviceId: 0,
-                          title: activeReservation.service,
+                      service: param.Service(
+                          serviceId: activeReservation.service.id,
+                          title: activeReservation.service.title,
                           icon: "",
                           price: activeReservation.price),
-                      branch: Branch(
+                      branch: param.Branch(
                           id: 0,
-                          washingName: activeReservation.washingName,
-                          address: activeReservation.washingAddress),
+                          washingName: activeReservation.washing.washingName,
+                          address: activeReservation.washing.washingAddress),
                       car: activeReservation.car,
                       date: DateTime(
                           int.parse(activeReservation.day.split('.').last),
@@ -101,7 +104,7 @@ class ReservationInfoCard extends StatelessWidget {
                               activeReservation.day.split('.').elementAt(1)),
                           int.parse(
                               activeReservation.day.split('.').elementAt(0))),
-                      time: Time(
+                      time: param.Time(
                           time: activeReservation.time,
                           isReserved:
                               true) //Car(id: 0, carModel: activeReservation., carNumber: carNumber, banType: banType),

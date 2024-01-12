@@ -85,7 +85,7 @@ class Time extends Equatable{
 
   @override
   // TODO: implement props
-  List<Object?> get props =>[time,isReserved];
+  List<Object?> get props =>[time];
 }
 
 class Branch extends Equatable{

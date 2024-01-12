@@ -75,7 +75,7 @@ class Pager {
   static Widget reservation({Branch? branch,Car? car,Time? time,Service? service,DateTime? dateTime}) => MultiBlocProvider(
         providers: [
           BlocProvider(
-              create: (context) => ReservationCubit(branch: branch)..execute()),
+              create: (context) => ReservationCubit(branch: branch,car: car,service: service,time: time,dateTime: dateTime)..execute()),
           BlocProvider(
               lazy: false, create: (context) => MyCarsCubit()..getBanTypes())
         ],
