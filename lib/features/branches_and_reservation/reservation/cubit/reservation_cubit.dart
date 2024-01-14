@@ -13,16 +13,25 @@ import 'package:rxdart/rxdart.dart';
 import '../../../profile_section/my_cars/data/model/res/my_cars_res_model.dart';
 import '../data/model/req/reservation_parameters_req_model.dart';
 import '../data/model/req/reservation_submit_req_model.dart';
+import '../data/repo/reservation_update_repo.dart';
 
 part 'reservation_state.dart';
 
 class ReservationCubit extends Cubit<ReservationState> with BaseErrorHandler {
-  ReservationCubit({Branch? branch,Car? car,Time? time,Service? service,DateTime? dateTime}) : super(ReservationInitial()) {
+  ReservationCubit(
+      {required this.isNew,
+      this.reservationId,
+      Branch? branch,
+      Car? car,
+      Time? time,
+      Service? service,
+      DateTime? dateTime})
+      : super(ReservationInitial()) {
     selectedBranch = ValueNotifier<Branch?>(branch);
-     selectedCar = ValueNotifier<Car?>(car);
-     selectedTime = ValueNotifier<Time?>(time);
-     selectedService = ValueNotifier<Service?>(service);
-     selectedDate = ValueNotifier<DateTime?>(dateTime);
+    selectedCar = ValueNotifier<Car?>(car);
+    selectedTime = ValueNotifier<Time?>(time);
+    selectedService = ValueNotifier<Service?>(service);
+    selectedDate = ValueNotifier<DateTime?>(dateTime);
     selectedCar.addListener(() {
       if (selectedBranch.value != null) {
         execute();
@@ -49,9 +58,10 @@ class ReservationCubit extends Cubit<ReservationState> with BaseErrorHandler {
   late ValueNotifier<Car?> selectedCar;
   late ValueNotifier<Time?> selectedTime;
   late ValueNotifier<Service?> selectedService;
-  late ValueNotifier<DateTime?> selectedDate ;
-
-  void selectBranch(Branch branch) => selectedBranch.value = branch;
+  late ValueNotifier<DateTime?> selectedDate;
+  final bool isNew;
+  final String? reservationId;
+  void selectBranch(Branch? branch) => selectedBranch.value = branch;
   void selectCar(Car car) => selectedCar.value = car;
   void selectTime(Time time) => selectedTime.value = time;
   void selectService(Service service) => selectedService.value = service;
@@ -93,14 +103,21 @@ class ReservationCubit extends Cubit<ReservationState> with BaseErrorHandler {
   void reserve() {
     ErrorHandler(progressAction: () async {
       emit(ReservationLoading());
-      var result = locator.get<ReservationSubmitRepo>().send(
-          ReservationSubmitReqModel(
-              washingId: selectedBranch.value!.id.toString(),
-              serviceId: selectedService.value!.serviceId.toString(),
-              carId: selectedCar.value!.id.toString(),
-              day: DateFormat('dd.MM.yyyy').format(selectedDate.value!),
-              time: selectedTime.value!.time,
-              price: selectedService.value!.price));
+      var model = ReservationSubmitReqModel(
+          washingId: selectedBranch.value!.id.toString(),
+          serviceId: selectedService.value!.serviceId.toString(),
+          carId: selectedCar.value!.id.toString(),
+          day: DateFormat('dd.MM.yyyy').format(selectedDate.value!),
+          time: selectedTime.value!.time,
+          price: selectedService.value!.price);
+      var result;
+      if (!isNew && reservationId != null) {
+        result = locator
+            .get<ReservationUpdateRepo>()
+            .send(model, path: {"id": reservationId});
+      } else {
+        result = locator.get<ReservationSubmitRepo>().send(model);
+      }
       emit(ReservationSuccess());
     }, socketExceptionAction: (e) {
       emit(ReservationError());

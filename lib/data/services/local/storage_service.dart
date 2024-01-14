@@ -7,8 +7,8 @@ import '../../../constants/keys/strorage_keys.dart';
 class StorageService {
   final instance = GetStorage();
 
-  void init() {
-    GetStorage.init();
+  Future<void> init() async {
+    await GetStorage.init();
   }
 
   // void _set<T>(String key, T value) async {
@@ -73,7 +73,7 @@ class StorageService {
   }
 
   String getLangCode() {
-    var data = instance.read<String>(StorageKeys.langCode)??"en";
+    var data = instance.read<String>(StorageKeys.langCode) ?? '';
     return data;
     // if (data != null) {
     //   return json.decode(data);

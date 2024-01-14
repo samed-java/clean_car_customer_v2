@@ -13,6 +13,7 @@ class PersonalInfoEditScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       backgroundColor: ColorManager.mainBlue,
       body: SafeArea(
         top: true,

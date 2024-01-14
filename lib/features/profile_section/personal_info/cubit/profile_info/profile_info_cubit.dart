@@ -9,7 +9,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:clean_car_customer_v2/features/profile_section/personal_info/cubit/profile_info/profile_info_state.dart';
 
+import '../../../../../data/services/local/storage_service.dart';
 import '../../../../../utils/pager/go.dart';
+import '../../../../../utils/pager/pager.dart';
 
 class ProfileInfoCubit extends Cubit<ProfileInfoState> with BaseErrorHandler {
   ProfileInfoCubit() : super(ProfileInfoInitial());
@@ -45,7 +47,9 @@ class ProfileInfoCubit extends Cubit<ProfileInfoState> with BaseErrorHandler {
   }
 
   void updateData() async {
+    print("saaalaaaam");
     ErrorHandler(progressAction: () async {
+      print("saaalaaaamlaaar");
       await locator.get<ProfileInfoRepository>().update(EditProfileReqModel(
           name: name.text, email: email.text, phone: phone.text));
       Go.back();
@@ -54,21 +58,26 @@ class ProfileInfoCubit extends Cubit<ProfileInfoState> with BaseErrorHandler {
     }, otherErrorAction: (e, s) {
       print(e);
       print(s);
-    });
+    }, dataIsNullErrorAction: (e) {
+      print(e.message);
+    }, responseBodyIsNullErrorAction: (e) {
+      print(e.message);
+    }, notSuccessErrorAction: (e) {
+      print(e.message);
+    }).execute();
   }
+
   void deleteAccount() async {
     ErrorHandler(progressAction: () async {
-      await locator.get<ProfileInfoRepository>().update(EditProfileReqModel(
-          name: name.text, email: email.text, phone: phone.text));
+      await locator.get<ProfileInfoRepository>().delete();
     }, socketExceptionAction: (SocketException e) {
       print(e.message);
     }, otherErrorAction: (e, s) {
       print(e);
       print(s);
-    },
-    dataIsNullErrorAction: (DataIsNullError e){
-      Go.back();
-    }
-    );
+    }, dataIsNullErrorAction: (DataIsNullError e) async {
+      await locator.get<StorageService>().instance.erase();
+      Go.removeUntillAndGo(Pager.splashBegin);
+    }).execute();
   }
 }

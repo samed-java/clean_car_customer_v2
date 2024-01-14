@@ -20,16 +20,17 @@ part 'my_cars_state.dart';
 class MyCarsCubit extends Cubit<MyCarsState> with BaseErrorHandler {
   MyCarsCubit() : super(MyCarsInitial());
   final StorageService _storage = locator.get<StorageService>();
-
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   int? selectedBanType;
+  CarsResModel? result;
   TextEditingController nameController = TextEditingController();
   TextEditingController numberController = TextEditingController();
 
   @override
   Future<void> onProgress() async {
-    emit(MyCarsLoading());
-    var result = await locator<MyCarsRepository>().fetch();
-    emit(MyCarsSuccess(data: result));
+    if (result == null) emit(MyCarsLoading());
+    result = await locator<MyCarsRepository>().fetch();
+    emit(MyCarsSuccess(data: result!));
   }
 
   @override
@@ -52,32 +53,40 @@ class MyCarsCubit extends Cubit<MyCarsState> with BaseErrorHandler {
 
   void addCar() {
     ErrorHandler(progressAction: () async {
-      await locator<MyCarsRepository>().addCar(
-          data: AddCarsReqModel(
-              carModel: nameController.text,
-              carNumber: numberController.text,
-              banId: selectedBanType!.toString()));
-      Go.back();
-      nameController.clear();
-      numberController.clear();
-      selectedBanType = null;
-      execute();
+      if (formKey.currentState!.validate()) {
+        await locator<MyCarsRepository>().addCar(
+            data: AddCarsReqModel(
+                carModel: nameController.text,
+                carNumber: numberController.text,
+                banId: selectedBanType!.toString()));
+        Go.back();
+        clearData();
+      }
     }).execute();
+  }
+
+  void clearData() {
+    nameController.clear();
+    numberController.clear();
+    selectedBanType = null;
+    execute();
   }
 
   void updateCar({required int id}) {
     ErrorHandler(progressAction: () async {
-      await locator<MyCarsRepository>().updateCar(
-          data: AddCarsReqModel(
-              carModel: nameController.text,
-              carNumber: numberController.text,
-              banId: selectedBanType!.toString()),
-          id: id);
-      Go.back();
-      nameController.clear();
-      numberController.clear();
-      selectedBanType = null;
-      execute();
+      if (formKey.currentState!.validate()) {
+        await locator<MyCarsRepository>().updateCar(
+            data: AddCarsReqModel(
+                carModel: nameController.text,
+                carNumber: numberController.text,
+                banId: selectedBanType!.toString()),
+            id: id);
+        Go.back();
+        nameController.clear();
+        numberController.clear();
+        selectedBanType = null;
+        execute();
+      }
     }).execute();
   }
 

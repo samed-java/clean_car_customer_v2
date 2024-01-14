@@ -28,15 +28,15 @@ class SignupScreen extends StatelessWidget {
             child: Column(
               children: [
                 Gaps.h24,
-                 CustomUpperPart(
+                CustomUpperPart(
                   headerText: context.locale.register,
                   subText: context.locale.signupsixthtext,
                 ),
                 Gaps.h24,
                 BlocListener<SignUpCubit, SignUpState>(
                   listener: (context, state) {
-                    if(state is SignUpRegistered || state is SignUpNotRegistered){
-                      Go.to(Pager.otp);
+                    if (state is SignUpRegistered) {
+                      Go.to(Pager.main);
                     }
                   },
                   child: SignupFormWidget(),

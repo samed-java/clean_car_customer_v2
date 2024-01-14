@@ -78,7 +78,7 @@ class _DetailedOfferScreenState extends State<DetailedOfferScreen> {
                         offerContent: widget.offer.content,
                       ),
                       Gaps.h16,
-                      const OfferInfoWidget(),
+                      //const OfferInfoWidget(),
                       Gaps.h24,
                     ],
                   ),
@@ -104,7 +104,7 @@ class _DetailedOfferScreenState extends State<DetailedOfferScreen> {
                         child: Image.asset(IconAssets.backButton)),
                     Gaps.w16,
                     Text(
-                      widget.offer.title??context.locale.offer,
+                      widget.offer.title ?? context.locale.offer,
                       style: getSemiBoldStyle(
                           color: ColorManager.secondaryBlack, fontSize: 18),
                     ),

@@ -1,11 +1,12 @@
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
 import 'package:clean_car_customer_v2/features/branches_and_reservation/reservation/data/model/res/reservation_parameters_res_model.dart';
+import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
 import 'package:flutter/material.dart';
 
 import '../../../home/data/model/res/branchs_res_model.dart';
 
 class BranchNoteWidget extends StatelessWidget {
-  const BranchNoteWidget({super.key,required this.model});
+  const BranchNoteWidget({super.key, required this.model});
 
   final Washing model;
 
@@ -23,13 +24,12 @@ class BranchNoteWidget extends StatelessWidget {
           text: TextSpan(
             children: <TextSpan>[
               TextSpan(
-                text: 'Qeyd ',
+                text: '${context.locale.note} ',
                 style: getSemiBoldStyle(
                     color: ColorManager.mainBlue, fontSize: 14),
               ),
               TextSpan(
-                text:
-                    ': ${model.description}',
+                text: ': ${model.description}',
                 style:
                     getMediumStyle(color: ColorManager.mainBlack, fontSize: 14),
               ),

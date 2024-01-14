@@ -10,6 +10,7 @@ import 'package:flutter_bounce/flutter_bounce.dart' as bounce;
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../../../utils/pager/go.dart';
 import '../../../profile_section/my_cars/data/model/res/my_cars_res_model.dart';
 import '../cubit/reservation_cubit.dart';
 import '../data/model/res/reservation_parameters_res_model.dart';
@@ -51,18 +52,25 @@ class ReservationChooseCar extends StatelessWidget {
                                 child: SizedBox(
                                   height: 44.h,
                                   child: TextFormField(
-                                    onTap: () {
+                                    onTap: () async {
                                       chooseCarDialog(context,
                                           cars: snapshot.data!.cars!,
-                                          car: value,
-                                          onSelect: (car) => cubit.selectCar(car));
+                                          car: value, onSelect: (car) async {
+                                        cubit.selectCar(car);
+                                        await Future.delayed(
+                                            DurationConstant.ms300);
+                                        Go.back();
+                                      });
                                     },
                                     readOnly: true,
                                     cursorColor: ColorManager.thirdBlack,
-                                    controller: TextEditingController(text:value?.carModel),
+                                    controller: TextEditingController(
+                                        text: value?.carModel),
                                     onChanged: (value) {},
                                     decoration: InputDecoration(
-                                      suffixIcon: Image.asset(IconAssets.arrowDown),
+                                      hintText: "Nissan Skyline R35 GTR",
+                                      suffixIcon:
+                                          Image.asset(IconAssets.arrowDown),
                                       contentPadding: Paddings.all8,
                                       filled: true,
                                       fillColor: ColorManager.mainWhite,
@@ -78,7 +86,10 @@ class ReservationChooseCar extends StatelessWidget {
                               Gaps.w16,
                               bounce.Bounce(
                                 onPressed: () {
-                                  carInfoDialog(context, isNew: true);
+                                  carInfoDialog(context, isNew: true,
+                                      onFinish: (value) {
+                                    cubit.execute();
+                                  });
                                 },
                                 duration: const Duration(milliseconds: 80),
                                 child: Container(
@@ -94,7 +105,8 @@ class ReservationChooseCar extends StatelessWidget {
                                     child: SvgPicture.asset(
                                       IconAssets.plus,
                                       colorFilter: ColorFilter.mode(
-                                          ColorManager.mainBlue, BlendMode.srcIn),
+                                          ColorManager.mainBlue,
+                                          BlendMode.srcIn),
                                     ),
                                   ),
                                 ),

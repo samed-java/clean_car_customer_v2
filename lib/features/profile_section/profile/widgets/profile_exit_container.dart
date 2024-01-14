@@ -1,7 +1,12 @@
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
+import 'package:clean_car_customer_v2/data/services/local/storage_service.dart';
+import 'package:clean_car_customer_v2/locator.dart';
 import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../../utils/pager/go.dart';
+import '../../../../utils/pager/pager.dart';
 
 class ProfileExitContainer extends StatelessWidget {
   const ProfileExitContainer({super.key});
@@ -22,7 +27,10 @@ class ProfileExitContainer extends StatelessWidget {
         child: Material(
           color: Colors.transparent,
           child: InkWell(
-            onTap: () {},
+            onTap: () async {
+              await locator.get<StorageService>().instance.erase();
+              Go.removeUntillAndGo(Pager.splashBegin);
+            },
             child: SizedBox(
               width: double.infinity,
               child: Padding(

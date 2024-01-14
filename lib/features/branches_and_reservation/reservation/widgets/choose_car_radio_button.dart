@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
+import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -85,8 +86,9 @@ class _ChooseBranchRadioButtonState extends State<ChooseBranchRadioButton> {
                                 value: widget.branchs.elementAt(index),
                                 groupValue: selectedRadio,
                                 onChanged: (Branch? value) {
+                                  widget.onSelect.call(value!);
                                   setState(() {
-                                    selectedRadio = value!;
+                                    selectedRadio = value;
                                   });
                                 },
                               ),
@@ -137,73 +139,78 @@ class _ChooseCarRadioButtonState extends State<ChooseCarRadioButton> {
           Gaps.h12,
           SizedBox(
             height: 250.h,
-            child: ListView.separated(
-                shrinkWrap: true,
-                itemBuilder: (context, index) => GestureDetector(
-                      onTap: () {
-                        widget.onSelect.call(widget.cars.elementAt(index));
-                        setState(() {
-                          selectedRadio = widget.cars.elementAt(index);
-                        });
-                      },
-                      child: Container(
-                        padding: Paddings.all10,
-                        decoration: BoxDecoration(
-                          color: ColorManager.mainWhite,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Row(
-                          children: [
-                            CircleAvatar(
-                              radius: 24.r,
-                              backgroundColor: ColorManager.mainBackgroundColor,
-                              child: Center(
-                                child: CachedNetworkImage(
-                                  imageUrl: widget.cars
-                                          .elementAt(index)
-                                          .banType
-                                          ?.icon ??
-                                      "",
-                                ),
-                              ),
+            child: widget.cars.isNotEmpty
+                ? ListView.separated(
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) => GestureDetector(
+                          onTap: () {
+                            widget.onSelect.call(widget.cars.elementAt(index));
+                            setState(() {
+                              selectedRadio = widget.cars.elementAt(index);
+                            });
+                          },
+                          child: Container(
+                            padding: Paddings.all10,
+                            decoration: BoxDecoration(
+                              color: ColorManager.mainWhite,
+                              borderRadius: BorderRadius.circular(10),
                             ),
-                            Gaps.w8,
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                            child: Row(
                               children: [
-                                Text(
-                                  widget.cars.elementAt(index).carModel,
-                                  style: getMediumStyle(
-                                      color: ColorManager.mainBlack,
-                                      fontSize: 14),
+                                CircleAvatar(
+                                  radius: 24.r,
+                                  backgroundColor:
+                                      ColorManager.mainBackgroundColor,
+                                  child: Center(
+                                    child: CachedNetworkImage(
+                                      imageUrl: widget.cars
+                                              .elementAt(index)
+                                              .banType
+                                              ?.icon ??
+                                          "",
+                                    ),
+                                  ),
                                 ),
-                                Text(
-                                  widget.cars.elementAt(index).carNumber,
-                                  style: getMediumStyle(
-                                      color: ColorManager.secondaryBlack,
-                                      fontSize: 12),
+                                Gaps.w8,
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      widget.cars.elementAt(index).carModel,
+                                      style: getMediumStyle(
+                                          color: ColorManager.mainBlack,
+                                          fontSize: 14),
+                                    ),
+                                    Text(
+                                      widget.cars.elementAt(index).carNumber,
+                                      style: getMediumStyle(
+                                          color: ColorManager.secondaryBlack,
+                                          fontSize: 12),
+                                    ),
+                                  ],
+                                ),
+                                Expanded(child: Gaps.empty),
+                                Transform.scale(
+                                  scale: 1.4,
+                                  child: Radio<Car>(
+                                    value: widget.cars.elementAt(index),
+                                    groupValue: selectedRadio,
+                                    onChanged: (Car? value) {
+                                      setState(() {
+                                        selectedRadio = value!;
+                                      });
+                                    },
+                                  ),
                                 ),
                               ],
                             ),
-                            Expanded(child: Gaps.empty),
-                            Transform.scale(
-                              scale: 1.4,
-                              child: Radio<Car>(
-                                value: widget.cars.elementAt(index),
-                                groupValue: selectedRadio,
-                                onChanged: (Car? value) {
-                                  setState(() {
-                                    selectedRadio = value!;
-                                  });
-                                },
-                              ),
-                            ),
-                          ],
+                          ),
                         ),
-                      ),
-                    ),
-                separatorBuilder: (context, index) => Gaps.h8,
-                itemCount: widget.cars.length),
+                    separatorBuilder: (context, index) => Gaps.h8,
+                    itemCount: widget.cars.length)
+                : Center(
+                    child: Text(context.locale.addcar),
+                  ),
           ),
           Gaps.h10,
         ],

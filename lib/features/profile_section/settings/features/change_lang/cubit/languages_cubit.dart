@@ -36,7 +36,7 @@ class LanguagesCubit extends Cubit<LanguagesState> with BaseErrorHandler {
     //}
   }
 
-  void changeLanguage(String lang) async {
+  Future<void> changeLanguage(String lang) async {
     selectedLanguage.sink.add(lang);
     await _service.setLangCode(lang);
     await NavigationService.instance.context.changeOrRefreshLang();
@@ -45,7 +45,6 @@ class LanguagesCubit extends Cubit<LanguagesState> with BaseErrorHandler {
 
   @override
   Future<void> close() {
-
     return super.close();
   }
 

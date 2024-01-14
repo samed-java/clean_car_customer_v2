@@ -23,6 +23,8 @@ class HomeCubit extends Cubit<HomeState> with BaseErrorHandler {
     selectedCity.addListener(() {
       print("city id:  ${selectedCity.value}");
       selectedRegion.value = 0;
+      _filteredParameters[0] = selectedCity.value == 0 ? 0 : 1;
+      print(_filteredParameters);
       selectedRegion.notifyListeners();
       getRegions(selectedCity.value);
     });
@@ -30,13 +32,26 @@ class HomeCubit extends Cubit<HomeState> with BaseErrorHandler {
     selectedRegion.addListener(() {
       print("region id:  ${selectedRegion.value}");
       selectedVillage.value = 0;
+      _filteredParameters[1] = selectedRegion.value == 0 ? 0 : 1;
+      print(_filteredParameters);
       selectedVillage.notifyListeners();
       getVillages(selectedRegion.value);
+    });
+
+    selectedVillage.addListener(() {
+      _filteredParameters[2] = selectedVillage.value == 0 ? 0 : 1;
+      print(_filteredParameters);
+    });
+
+    selectedService.addListener(() {
+      _filteredParameters[3] = selectedService.value == 0 ? 0 : 1;
+      print(_filteredParameters);
     });
   }
   final StorageService _storageService = locator.get<StorageService>();
   late final RegionResModel _regionResModel;
   late final ServicesResModel _servicesResModel;
+  final FocusNode focusNode = FocusNode();
   Map<int, Region?> cities = <int, Region?>{};
   Map<int, Region?> regions = <int, Region?>{};
   Map<int, Region?> villages = <int, Region?>{};
@@ -49,6 +64,13 @@ class HomeCubit extends Cubit<HomeState> with BaseErrorHandler {
   BranchsResModel? mainResult;
   BranchsResModel? filteredResult;
 
+  final List<int> _filteredParameters = [0, 0, 0, 0];
+
+  bool get isFilterNotEmpty =>
+      _filteredParameters.fold<int>(
+          0, (previousValue, e) => previousValue + e) >
+      0;
+
   //late ValueNotifier<FilterFieldActiveStatus> activeStatus;
 
   @override
@@ -56,7 +78,7 @@ class HomeCubit extends Cubit<HomeState> with BaseErrorHandler {
     emit(HomeLoading());
     //try{
     mainResult = await locator.get<BranchsRepository>().fetch();
-     filteredResult = await locator.get<BranchsRepository>().fetch(
+    filteredResult = await locator.get<BranchsRepository>().fetch(
         queryParameters: FilterReqModel(
             villageId:
                 selectedVillage.value == 0 ? null : selectedVillage.value,
@@ -64,13 +86,13 @@ class HomeCubit extends Cubit<HomeState> with BaseErrorHandler {
             serviceId:
                 selectedService.value == 0 ? null : selectedService.value,
             regionId: selectedRegion.value == 0 ? null : selectedRegion.value,
-            text: searchController.text.isNotEmpty?searchController.text:null
-            ));
+            text: searchController.text.isNotEmpty
+                ? searchController.text
+                : null));
     //print(result);
     emit(HomeSuccess(
         //data: result
-    )
-    );
+        ));
     // }catch(e,s){
     //   print(e);
     //   print(s);
@@ -124,12 +146,12 @@ class HomeCubit extends Cubit<HomeState> with BaseErrorHandler {
   getCities() {
     Map<int, Region?> regionList = _regionResModel.regions
         .objToMap<int, Region>(key: (e) => e.id, value: (e) => e);
-    print(cities);
+    //print(cities);
     Map<int, Region?> regionInit = {0: null};
     regionInit.addAll(regionList);
     cities = regionInit;
-    print(
-        "cities ${cities.map<int, dynamic>((key, value) => MapEntry<int, dynamic>(key, value?.id))}");
+    // print(
+    //     "cities ${cities.map<int, dynamic>((key, value) => MapEntry<int, dynamic>(key, value?.id))}");
   }
 
   getServices() {
@@ -139,8 +161,8 @@ class HomeCubit extends Cubit<HomeState> with BaseErrorHandler {
     Map<int, ServiceItem?> serviceInit = {0: null};
     serviceInit.addAll(serviceList);
     services = serviceInit;
-    print(
-        "services ${services.map<int, dynamic>((key, value) => MapEntry<int, dynamic>(key, value?.id))}");
+    // print(
+    //     "services ${services.map<int, dynamic>((key, value) => MapEntry<int, dynamic>(key, value?.id))}");
   }
 
   getRegions(int? id) {
@@ -153,8 +175,8 @@ class HomeCubit extends Cubit<HomeState> with BaseErrorHandler {
     Map<int, Region?> regionInit = {0: null};
     regionInit.addAll(regionList);
     regions = regionInit;
-    print(
-        "regions ${regions.map<int, dynamic>((key, value) => MapEntry<int, dynamic>(key, value?.id))}");
+    // print(
+    //     "regions ${regions.map<int, dynamic>((key, value) => MapEntry<int, dynamic>(key, value?.id))}");
     // villages = {};
   }
 
@@ -170,8 +192,16 @@ class HomeCubit extends Cubit<HomeState> with BaseErrorHandler {
     regionInit.addAll(regionList);
     villages = regionInit;
 
-    print(
-        "villages ${villages.map<int, dynamic>((key, value) => MapEntry<int, dynamic>(key, value?.id))}");
+    // print(
+    //     "villages ${villages.map<int, dynamic>((key, value) => MapEntry<int, dynamic>(key, value?.id))}");
+  }
+
+  void clearFilter() {
+    selectedCity.value = 0;
+    selectedRegion.value = 0;
+    selectedVillage.value = 0;
+    selectedService.value = 0;
+    execute();
   }
 }
 

@@ -11,12 +11,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-void carInfoDialog(BuildContext c, {isNew = false,int? selectedCarId}){
-  assert(isNew||selectedCarId!=null);
+void carInfoDialog(BuildContext c,
+    {isNew = false, int? selectedCarId, Function(dynamic)? onFinish}) {
+  assert(isNew || selectedCarId != null);
   showDialog(
     context: c,
     builder: (BuildContext context) {
-      GlobalKey<FormState> formKey = GlobalKey<FormState>();
+      //GlobalKey<FormState> formKey = GlobalKey<FormState>();
       return AlertDialog(
         backgroundColor: ColorManager.mainBackgroundColor,
         insetPadding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 0),
@@ -31,7 +32,7 @@ void carInfoDialog(BuildContext c, {isNew = false,int? selectedCarId}){
           child: SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
             child: Form(
-              key: formKey,
+              key: c.read<MyCarsCubit>().formKey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -48,6 +49,7 @@ void carInfoDialog(BuildContext c, {isNew = false,int? selectedCarId}){
                       InkWell(
                         onTap: () {
                           Go.back();
+                          c.read<MyCarsCubit>().clearData();
                         },
                         child: SizedBox(
                           child: Padding(
@@ -72,8 +74,9 @@ void carInfoDialog(BuildContext c, {isNew = false,int? selectedCarId}){
                   ),
                   Gaps.h2,
                   CustomDropdown<int>(
+                    labelText: context.locale.vehicletype,
                     selectedItems: c.read<MyCarsCubit>().selectedBanType,
-                    child: (data) => Text(data ?? "-----"),
+                    child: (data) => Text(data ?? "------"),
                     validator: (id) {
                       if (id == null) {
                         return "Ban bos ola bilmez";
@@ -86,20 +89,22 @@ void carInfoDialog(BuildContext c, {isNew = false,int? selectedCarId}){
                   ),
                   Gaps.h16,
                   TextFieldWidget(
-                    headerText: "Ad",
+                    headerText: context.locale.name,
+                    hintText: "Nissan Skyline R35 GTR",
                     controller: c.read<MyCarsCubit>().nameController,
                     validator: (value) {
-                      if ((value?.isEmpty)??true)  {
+                      if ((value?.isEmpty) ?? true) {
                         return "Ad bos ola bilmez";
                       }
                     },
                   ),
                   Gaps.h16,
                   TextFieldWidget(
-                    headerText: "Nömrə",
+                    headerText: context.locale.number,
+                    hintText: "10-OO-001",
                     controller: c.read<MyCarsCubit>().numberController,
                     validator: (value) {
-                      if ((value?.isEmpty)??true) {
+                      if ((value?.isEmpty) ?? true) {
                         return "Nomre bos ola bilmez";
                       }
                     },
@@ -120,13 +125,23 @@ void carInfoDialog(BuildContext c, {isNew = false,int? selectedCarId}){
                   CustomButton(
                       frontText: context.locale.remember,
                       onPressed: () {
-                        if (formKey.currentState!.validate()) {
-                          if(isNew) {
-                            c.read<MyCarsCubit>().addCar();
-                          }else{
-                            c.read<MyCarsCubit>().updateCar(id: selectedCarId!);
-                          }
+                        // if (c
+                        //         .read<MyCarsCubit>()
+                        //         .nameController
+                        //         .text
+                        //         .isNotEmpty &&
+                        //     c
+                        //         .read<MyCarsCubit>()
+                        //         .numberController
+                        //         .text
+                        //         .isNotEmpty &&
+                        //     c.read<MyCarsCubit>().selectedBanType != null) {
+                        if (isNew) {
+                          c.read<MyCarsCubit>().addCar();
+                        } else {
+                          c.read<MyCarsCubit>().updateCar(id: selectedCarId!);
                         }
+                        //}
                       })
                 ],
               ),
@@ -135,5 +150,5 @@ void carInfoDialog(BuildContext c, {isNew = false,int? selectedCarId}){
         ),
       );
     },
-  );
+  ).then((value) => onFinish?.call(value));
 }

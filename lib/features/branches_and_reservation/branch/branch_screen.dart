@@ -6,6 +6,7 @@ import 'package:clean_car_customer_v2/features/branches_and_reservation/branch/w
 import 'package:clean_car_customer_v2/features/branches_and_reservation/branch/widgets/branch_upper.dart';
 import 'package:clean_car_customer_v2/features/branches_and_reservation/reservation/data/model/res/reservation_parameters_res_model.dart';
 import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
+import 'package:clean_car_customer_v2/utils/map/map_opener.dart';
 import 'package:clean_car_customer_v2/utils/pager/go.dart';
 import 'package:clean_car_customer_v2/utils/pager/pager.dart';
 import 'package:flutter/material.dart';
@@ -90,18 +91,25 @@ class _BranchScreenState extends State<BranchScreen> {
                         borderRadius:
                             BorderRadius.all(RadiusManager.radiusCircular6),
                         child: SizedBox(
-                          height: widget.model.services.isNotEmpty?200:0,
+                          height: widget.model.services.isNotEmpty ? 200 : 0,
                           child: BranchCarType(
                             services: widget.model.services,
                           ),
                         ),
                       ),
                       Gaps.h16,
-                      //const BranchNoteWidget(),
+                      BranchNoteWidget(
+                        model: widget.model,
+                      ),
                       Gaps.h24,
                       CustomButton(
                         frontText: context.locale.seemapp,
-                        onPressed: () {},
+                        onPressed: () {
+                          MapOpener.open(
+                              context: context,
+                              lat: double.parse(widget.model.lat),
+                              long: double.parse(widget.model.lon));
+                        },
                         foregroundColor: ColorManager.mainBlue,
                         backgroundColor: ColorManager.mainBackgroundColor,
                       ),
@@ -109,7 +117,11 @@ class _BranchScreenState extends State<BranchScreen> {
                       CustomButton(
                           frontText: context.locale.makereservation,
                           onPressed: () {
-                            Go.to(Pager.reservation(branch: Branch(id: widget.model.id, washingName: widget.model.title, address: widget.model.address)));
+                            Go.to(Pager.reservation(
+                                branch: Branch(
+                                    id: widget.model.id,
+                                    washingName: widget.model.title,
+                                    address: widget.model.address)));
                           }),
                       SizedBox(
                         height: 50.h,

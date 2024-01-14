@@ -9,6 +9,7 @@ import '../../../../features/home/data/model/res/services_res_model.dart';
 import '../../../../features/login/data/model/res/login_res_model.dart';
 import '../../../../features/offers/data/model/res/offers_res_model.dart';
 import '../../../../features/onboadding_and_sign_up/signup/data/model/response/sign_up_res_model.dart';
+import '../../../../features/onboadding_and_sign_up/signup/data/model/response/terms_res_model.dart';
 import '../../../../features/profile_section/my_cars/data/model/res/ban_types_res_model.dart';
 import '../../../../features/profile_section/my_cars/data/model/res/my_cars_res_model.dart';
 import '../../../../features/profile_section/personal_info/data/model/res/profile_info_res_model.dart';
@@ -34,14 +35,13 @@ class FactoryGenerator {
         ReservationParametersResModel.fromJson(json),
     ReservationSubmitResModel: (json) =>
         ReservationSubmitResModel.fromJson(json),
-    LanguagesResModel: (json) =>
-        LanguagesResModel.fromJson(json),
-    ContactsResModel: (json) =>
-        ContactsResModel.fromJson(json),
+    LanguagesResModel: (json) => LanguagesResModel.fromJson(json),
+    ContactsResModel: (json) => ContactsResModel.fromJson(json),
+    TermsResModel: (json) => TermsResModel.fromJson(json),
   };
 
   static T? createObject<T>(Map<String, dynamic>? body) {
-    if(body == null) return null;
+    if (body == null) return null;
     if (_factoryGenerator.containsKey(T)) {
       return _factoryGenerator[T]!.call(body);
     } else {

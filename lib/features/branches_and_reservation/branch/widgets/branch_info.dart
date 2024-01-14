@@ -41,12 +41,12 @@ class BranchInfoWidget extends StatelessWidget {
                           style: getSemiBoldStyle(
                               color: ColorManager.mainBlack, fontSize: 14),
                         ),
-                        if(model!.phone!=null)
-                        TextSpan(
-                          text: model!.phone ?? '0557306040',
-                          style: getMediumStyle(
-                              color: ColorManager.mainBlack, fontSize: 14),
-                        ),
+                        if (model!.phone != null)
+                          TextSpan(
+                            text: model!.phone.toString(),
+                            style: getMediumStyle(
+                                color: ColorManager.mainBlack, fontSize: 14),
+                          ),
                       ],
                     ),
                   ),

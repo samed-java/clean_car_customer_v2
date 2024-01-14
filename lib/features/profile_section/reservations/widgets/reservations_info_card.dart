@@ -1,6 +1,7 @@
 import 'package:clean_car_customer_v2/components/padded_button.dart';
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
-import 'package:clean_car_customer_v2/features/branches_and_reservation/reservation/data/model/res/reservation_parameters_res_model.dart' as param;
+import 'package:clean_car_customer_v2/features/branches_and_reservation/reservation/data/model/res/reservation_parameters_res_model.dart'
+    as param;
 import 'package:clean_car_customer_v2/features/profile_section/reservations/data/model/reservations_model.dart';
 import 'package:clean_car_customer_v2/utils/enum/status_types.dart';
 import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
@@ -79,15 +80,38 @@ class ReservationInfoCard extends StatelessWidget {
                 frontText: context.locale.detailed,
                 onPressed: () {
                   Go.to(Pager.reservationDetail(
-                    onSubmit: (){
-                      Go.to(Pager.reservation(
-                          car: activeReservation.car,
-                        service: param.Service(serviceId: activeReservation.service.id,title: activeReservation.service.title,price: activeReservation.price,icon: ""),
-                          time: param.Time(time: activeReservation.time, isReserved: true),
-                        branch: param.Branch(id: activeReservation.washing.id, washingName: activeReservation.washing.washingName, address: activeReservation.washing.washingAddress),
-                        dateTime: DateTime(int.parse(activeReservation.day.split('.').elementAt(2)),int.parse(activeReservation.day.split('.').elementAt(1)),int.parse(activeReservation.day.split('.').elementAt(0)))
-                      ));
-                    },
+                      onSubmit: () {
+                        Go.to(Pager.reservation(
+                            isNew: false,
+                            id: activeReservation.status == "1"
+                                ? activeReservation.id.toString()
+                                : null,
+                            car: activeReservation.car,
+                            service: param.Service(
+                                serviceId: activeReservation.service.id,
+                                title: activeReservation.service.title,
+                                price: activeReservation.price,
+                                icon: ""),
+                            time: param.Time(
+                                time: activeReservation.time, isReserved: true),
+                            branch: param.Branch(
+                                id: activeReservation.washing.id,
+                                washingName:
+                                    activeReservation.washing.washingName,
+                                address:
+                                    activeReservation.washing.washingAddress),
+                            dateTime: activeReservation.status == "1"
+                                ? DateTime(
+                                    int.parse(activeReservation.day
+                                        .split('.')
+                                        .elementAt(2)),
+                                    int.parse(activeReservation.day
+                                        .split('.')
+                                        .elementAt(1)),
+                                    int.parse(
+                                        activeReservation.day.split('.').elementAt(0)))
+                                : DateTime.now()));
+                      },
                       service: param.Service(
                           serviceId: activeReservation.service.id,
                           title: activeReservation.service.title,

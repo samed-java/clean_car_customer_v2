@@ -19,7 +19,8 @@ class PersonalInfoEditContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<ProfileInfoCubit>();
-    return BlocBuilder<ProfileInfoCubit, ProfileInfoState>(
+    return SingleChildScrollView(
+        child: BlocBuilder<ProfileInfoCubit, ProfileInfoState>(
       builder: (context, state) {
         if (state is ProfileInfoSuccess) {
           return Column(
@@ -44,7 +45,8 @@ class PersonalInfoEditContent extends StatelessWidget {
               ),
               Gaps.h16,
               CustomButton(
-                  frontText: context.locale.remember, onPressed: () => cubit.updateData()),
+                  frontText: context.locale.remember,
+                  onPressed: () => cubit.updateData()),
               Gaps.h16,
               CustomButton(
                 frontText: context.locale.delete,
@@ -70,6 +72,6 @@ class PersonalInfoEditContent extends StatelessWidget {
           return const SizedBox.shrink();
         }
       },
-    );
+    ));
   }
 }

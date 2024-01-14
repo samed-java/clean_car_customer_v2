@@ -4,8 +4,15 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TextFieldWidget extends StatelessWidget {
-  const TextFieldWidget({super.key, required this.headerText,this.controller,this.validator, this.inputFormatters});
+  const TextFieldWidget(
+      {super.key,
+      required this.headerText,
+      this.controller,
+      this.validator,
+      this.inputFormatters,
+      this.hintText});
   final String headerText;
+  final String? hintText;
   final TextEditingController? controller;
   final List<TextInputFormatter>? inputFormatters;
   final String? Function(String?)? validator;
@@ -33,6 +40,7 @@ class TextFieldWidget extends StatelessWidget {
             validator: validator,
             inputFormatters: this.inputFormatters,
             decoration: InputDecoration(
+              hintText: hintText,
               contentPadding: Paddings.all8,
               filled: true,
               fillColor: ColorManager.mainWhite,

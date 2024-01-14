@@ -67,60 +67,83 @@ class LanguagesScreen extends StatelessWidget {
                 ),
                 child: Padding(
                   padding: Paddings.all16,
-                  child: BlocBuilder<LanguagesCubit,LanguagesState>(
-                    builder: (context,state){
-                      if(state is LanguagesSuccess){
+                  child: BlocBuilder<LanguagesCubit, LanguagesState>(
+                    builder: (context, state) {
+                      if (state is LanguagesSuccess) {
                         return StreamBuilder(
-                          stream: context.read<LanguagesCubit>().selectedLanguage,
-                            builder: (context,value){
-                            return ListView.separated(
-                              separatorBuilder: (_,__)=>16.verticalSpace,
-                              itemBuilder: (context,index){
-                              return GestureDetector(
-                                onTap: () async {
-                                    context.read<LanguagesCubit>().changeLanguage(state.data.languages.elementAt(index).code);
-                                },
-                                child: Container(
-                                  width: 1.sw,
-                                  height: 72.h,
-                                  padding: Paddings.all16,
-                                  decoration: BoxDecoration(
-                                    color: value.data == state.data.languages.elementAt(index).code ? ColorManager.mainBlue : ColorManager.mainWhite,
-                                    borderRadius: BorderRadius.circular(6.r),
-                                  ),
-                                  child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                                    CachedNetworkImage(
-                                      imageUrl:state.data.languages.elementAt(index).icon,
-                                      height: 28.h,
-                                      width: 28.w,
-                                      // colorFilter: ColorFilter.mode(
-                                      //     isSelected ? ColorManager.mainWhite : ColorManager.mainBlue,
-                                      //     BlendMode.srcIn),
-                                    ),
-                                    16.horizontalSpace,
-                                    Text(
-                                      state.data.languages.elementAt(index).title,
-                                      style: getMediumStyle(
-                                        color:
-                                        value.data == state.data.languages.elementAt(index).code ? ColorManager.mainWhite : ColorManager.mainBlack,
-                                        fontSize: 14,
+                            stream:
+                                context.read<LanguagesCubit>().selectedLanguage,
+                            builder: (context, value) {
+                              return ListView.separated(
+                                separatorBuilder: (_, __) => 16.verticalSpace,
+                                itemBuilder: (context, index) {
+                                  return GestureDetector(
+                                    onTap: () async {
+                                      await context
+                                          .read<LanguagesCubit>()
+                                          .changeLanguage(state.data.languages
+                                              .elementAt(index)
+                                              .code);
+                                    },
+                                    child: Container(
+                                      width: 1.sw,
+                                      height: 72.h,
+                                      padding: Paddings.all16,
+                                      decoration: BoxDecoration(
+                                        color: value.data ==
+                                                state.data.languages
+                                                    .elementAt(index)
+                                                    .code
+                                            ? ColorManager.mainBlue
+                                            : ColorManager.mainWhite,
+                                        borderRadius:
+                                            BorderRadius.circular(6.r),
                                       ),
+                                      child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            CachedNetworkImage(
+                                              imageUrl: state.data.languages
+                                                  .elementAt(index)
+                                                  .icon,
+                                              height: 28.h,
+                                              width: 28.w,
+                                              // colorFilter: ColorFilter.mode(
+                                              //     isSelected ? ColorManager.mainWhite : ColorManager.mainBlue,
+                                              //     BlendMode.srcIn),
+                                            ),
+                                            16.horizontalSpace,
+                                            Text(
+                                              state.data.languages
+                                                  .elementAt(index)
+                                                  .title,
+                                              style: getMediumStyle(
+                                                color: value.data ==
+                                                        state.data.languages
+                                                            .elementAt(index)
+                                                            .code
+                                                    ? ColorManager.mainWhite
+                                                    : ColorManager.mainBlack,
+                                                fontSize: 14,
+                                              ),
+                                            ),
+                                          ]),
                                     ),
-
-                                  ]),
-                                ),
+                                  );
+                                },
+                                itemCount: state.data.languages.length,
                               );
-                            },
-                            itemCount: state.data.languages.length,
-                            );
-                            }
-
+                            });
+                      } else if (state is LanguagesLoading) {
+                        return const Center(
+                          child: CupertinoActivityIndicator(),
                         );
-                      }else if(state is LanguagesLoading){
-                        return const Center(child: CupertinoActivityIndicator(),);
-                      }else if(state is LanguagesFail){
-                        return const Center(child: Text("Unknown error occured"),);
-                      }else{
+                      } else if (state is LanguagesFail) {
+                        return const Center(
+                          child: Text("Unknown error occured"),
+                        );
+                      } else {
                         return const SizedBox.shrink();
                       }
                     },

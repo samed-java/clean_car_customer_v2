@@ -129,6 +129,7 @@ class CustomerLangData {
   final String frequentlyaskedquestions;
   final String contactus;
   final String languages;
+  final String note;
 
   CustomerLangData(
       {required this.area,
@@ -230,6 +231,7 @@ class CustomerLangData {
       required this.ritefirsttext,
       required this.frequentlyaskedquestions,
       required this.contactus,
+      required this.note,
       required this.languages});
 
   factory CustomerLangData.fromJson(Map<String, dynamic> json) =>
@@ -334,6 +336,7 @@ class CustomerLangData {
         frequentlyaskedquestions: json['frequently_asked_questions'],
         contactus: json['contact_us'],
         languages: json['languages'],
+        note: json['note'],
       );
 
   Map<String, dynamic> toJson() {
@@ -438,6 +441,7 @@ class CustomerLangData {
       'frequently_asked_questions': frequentlyaskedquestions,
       'contact_us': contactus,
       'languages': languages,
+      'note': note,
     };
   }
 }

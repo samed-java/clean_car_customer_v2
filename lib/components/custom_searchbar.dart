@@ -5,18 +5,19 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomSearchBar extends StatelessWidget {
-  CustomSearchBar({
-    super.key,
-    required this.focusNode,
-    this.searchController,
-    this.onSubmit,
-    this.onPressed,
-    this.asButton = false
-  });
+  CustomSearchBar(
+      {super.key,
+      required this.focusNode,
+      this.searchController,
+      this.onSubmit,
+      this.onChange,
+      this.onPressed,
+      this.asButton = false});
   final ValueNotifier<bool> isBack = ValueNotifier<bool>(false);
   final TextEditingController? searchController;
   final FocusNode focusNode;
   final Function? onSubmit;
+  final Function(String)? onChange;
   final Function? onPressed;
   final bool asButton;
   // final Function onFocusChanged;
@@ -39,19 +40,13 @@ class CustomSearchBar extends StatelessWidget {
               // }
               // isBack.value = !isBack.value;
               // if (focusNode.hasFocus) {}
-              if(!asButton) {
-                isBack.value = !isBack.value;
-              }else{
+              if (!asButton) {
+                isBack.value = true;
+              } else {
                 onPressed?.call();
               }
             },
-            onChanged: (value) {
-              // if (value.isNotEmpty) {
-              //   isBack.value = true;
-              // } else {
-              //   isBack.value = false;
-              // }
-            },
+            onChanged: onChange,
             cursorColor: ColorManager.thirdBlack,
             decoration: InputDecoration(
               prefixIcon: value
@@ -60,8 +55,9 @@ class CustomSearchBar extends StatelessWidget {
                         searchController?.clear();
                         focusNode.unfocus();
                         onSubmit?.call();
+                        onChange?.call(searchController?.text ?? '');
                         SystemChannels.textInput.invokeMethod("TextInput.hide");
-                        isBack.value = !isBack.value;
+                        isBack.value = false;
 
                         // onFocusChanged();
                       },
@@ -79,7 +75,6 @@ class CustomSearchBar extends StatelessWidget {
               contentPadding: Paddings.horizontal16,
               hintText: context.locale.findacarwash,
               fillColor: ColorManager.mainWhite,
-
               filled: true,
               border: OutlineInputBorder(
                 borderSide: BorderSide.none,
@@ -88,7 +83,7 @@ class CustomSearchBar extends StatelessWidget {
                 ),
               ),
             ),
-            onSubmitted: (val)=>onSubmit?.call(),
+            onSubmitted: (val) => onSubmit?.call(),
             readOnly: asButton,
           );
         },

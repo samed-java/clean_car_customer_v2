@@ -8,11 +8,12 @@ import 'package:clean_car_customer_v2/utils/errors/errors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../utils/services/navigation_service/navigation_service.dart';
 import '../repository/otp_repository.dart';
 
 part 'otp_state.dart';
 
-class OTPCubit extends Cubit<OTPState> with BaseErrorHandler{
+class OTPCubit extends Cubit<OTPState> with BaseErrorHandler {
   OTPCubit() : super(OTPInitial());
   final formKey = GlobalKey<FormState>();
   final TextEditingController otpController = TextEditingController();
@@ -23,7 +24,6 @@ class OTPCubit extends Cubit<OTPState> with BaseErrorHandler{
     execute();
   }
 
-
   @override
   Future<void> onProgress() async {
     if (otpController.text.isNotEmpty) {
@@ -31,8 +31,7 @@ class OTPCubit extends Cubit<OTPState> with BaseErrorHandler{
       var result = await _otpRepo.send(OtpReqModel(
           phone: _storageService.getPhoneNumber()!,
           otpToken: _storageService.getOtpToken()!,
-          otpCode: int.parse(otpController.text)
-      ));
+          otpCode: int.parse(otpController.text)));
       if (result.token != null) {
         _storageService.setAccessToken(result.token);
         emit(OTPRegistered());
@@ -45,8 +44,41 @@ class OTPCubit extends Cubit<OTPState> with BaseErrorHandler{
 
   @override
   void onNotSuccessError(NotSuccessError e) {
-
+    ScaffoldMessenger.of(NavigationService.instance.context)
+        .showSnackBar(const SnackBar(content: Text("Wrong otp")));
+    emit(OTPFailed());
     super.onNotSuccessError(e);
   }
 
+  @override
+  void onOtherError(Object e, StackTrace s) {
+    ScaffoldMessenger.of(NavigationService.instance.context)
+        .showSnackBar(const SnackBar(content: Text("Unknown error")));
+    emit(OTPFailed());
+    super.onOtherError(e, s);
+  }
+
+  @override
+  void onSocketException(SocketException e) {
+    ScaffoldMessenger.of(NavigationService.instance.context)
+        .showSnackBar(const SnackBar(content: Text("Internet error")));
+    emit(OTPFailed());
+    super.onSocketException(e);
+  }
+
+  @override
+  void onDataIsNullError(DataIsNullError e) {
+    ScaffoldMessenger.of(NavigationService.instance.context)
+        .showSnackBar(const SnackBar(content: Text("Unknown error")));
+    emit(OTPFailed());
+    super.onDataIsNullError(e);
+  }
+
+  @override
+  void onResponseBodyIsNullError(ResponseBodyIsNullError e) {
+    ScaffoldMessenger.of(NavigationService.instance.context)
+        .showSnackBar(const SnackBar(content: Text("Unknown error")));
+    emit(OTPFailed());
+    super.onResponseBodyIsNullError(e);
+  }
 }

@@ -60,6 +60,7 @@ class _FilterBoxContentState extends State<FilterBoxContent> {
                   ),
                   InkWell(
                     onTap: () {
+                      cubit.clearFilter();
                       Go.back();
                     },
                     child: SizedBox(
@@ -236,6 +237,7 @@ class _FilterBoxContentState extends State<FilterBoxContent> {
                   frontText: context.locale.confirm,
                   onPressed: () {
                     cubit.execute();
+                    Go.back();
                   })
             ],
             //   );

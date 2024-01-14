@@ -53,18 +53,18 @@ class Pager {
   static Widget get main => MultiBlocProvider(
         providers: [
           BlocProvider<HomeCubit>(
-            lazy: false,
+            //lazy: true,
             create: (context) => HomeCubit()..execute(),
           ),
           BlocProvider<OffersCubit>(
-            lazy: false,
+            //lazy: false,
             create: (context) => OffersCubit()..execute(),
           ),
         ],
         child: const MainScreen(),
       );
   static Widget get signup => BlocProvider<SignUpCubit>(
-        create: (context) => SignUpCubit(),
+        create: (context) => SignUpCubit()..init(),
         child: SignupScreen(),
       );
   static Widget get home => const HomeScreen();
@@ -72,10 +72,26 @@ class Pager {
   static Widget branch(Washing model) => BranchScreen(
         model: model,
       );
-  static Widget reservation({Branch? branch,Car? car,Time? time,Service? service,DateTime? dateTime}) => MultiBlocProvider(
+  static Widget reservation(
+          {bool isNew = true,
+          String? id,
+          Branch? branch,
+          Car? car,
+          Time? time,
+          Service? service,
+          DateTime? dateTime}) =>
+      MultiBlocProvider(
         providers: [
           BlocProvider(
-              create: (context) => ReservationCubit(branch: branch,car: car,service: service,time: time,dateTime: dateTime)..execute()),
+              create: (context) => ReservationCubit(
+                  isNew: isNew,
+                  reservationId: id,
+                  branch: branch,
+                  car: car,
+                  service: service,
+                  time: time,
+                  dateTime: dateTime)
+                ..execute()),
           BlocProvider(
               lazy: false, create: (context) => MyCarsCubit()..getBanTypes())
         ],
@@ -86,7 +102,7 @@ class Pager {
         create: (context) => ProfileInfoCubit()..execute(),
         child: const PersonalInfoScreen(),
       );
-  static Widget  personalInfoEdit(ProfileInfoCubit cubit) => BlocProvider.value(
+  static Widget personalInfoEdit(ProfileInfoCubit cubit) => BlocProvider.value(
         value: cubit,
         child: const PersonalInfoEditScreen(),
       );
@@ -95,7 +111,7 @@ class Pager {
         child: const ReservationsScreen(),
       );
 
-  static Widget get settings =>  const SettingsScreen();
+  static Widget get settings => const SettingsScreen();
 
   static Widget get contacts => BlocProvider<ContactsCubit>(
         create: (context) => ContactsCubit()..execute(),

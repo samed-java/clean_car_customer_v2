@@ -52,6 +52,9 @@ dependencies:
   equatable: any
   animate_to: any
   rxdart: any
+  map_launcher: any
+  google_maps_flutter: any
+  dartz: any
 
 
 

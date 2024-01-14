@@ -1,4 +1,5 @@
 import 'package:clean_car_customer_v2/components/custom_filter_button.dart';
+import 'package:clean_car_customer_v2/components/custom_filter_reset_button.dart';
 import 'package:clean_car_customer_v2/components/custom_searchbar.dart';
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
 import 'package:clean_car_customer_v2/features/branches_and_reservation/branches/widgets/branches_filter_dialog.dart';
@@ -6,12 +7,12 @@ import 'package:clean_car_customer_v2/features/branches_and_reservation/branches
 import 'package:clean_car_customer_v2/features/home/widgets/filter_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../home/cubit/home_cubit.dart';
 
 class BranchesContent extends StatelessWidget {
   BranchesContent({super.key});
-  final FocusNode _focusNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +22,32 @@ class BranchesContent extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            CustomSearchBar(focusNode: _focusNode,searchController: context.read<HomeCubit>().searchController,onSubmit: (){
-              context.read<HomeCubit>().execute();
-            },),
+            Expanded(
+              child: CustomSearchBar(
+                focusNode: context.read<HomeCubit>().focusNode,
+                searchController: context.read<HomeCubit>().searchController,
+                onSubmit: () {
+                  context.read<HomeCubit>().execute();
+                },
+              ),
+            ),
+            16.horizontalSpace,
+            BlocBuilder<HomeCubit, HomeState>(builder: (context, state) {
+              print(context.read<HomeCubit>().isFilterNotEmpty);
+              if (context.read<HomeCubit>().isFilterNotEmpty) {
+                return Row(
+                  children: [
+                    FilterResetButton(
+                      onPressed: () {
+                        context.read<HomeCubit>().clearFilter();
+                      },
+                    ),
+                    16.horizontalSpace
+                  ],
+                );
+              }
+              return SizedBox.shrink();
+            }),
             FilterButton(
               onPressed: () {
                 openHomeFilterBox(context, height);
@@ -42,11 +66,15 @@ class BranchesContent extends StatelessWidget {
                     return Padding(
                       padding: Paddings.vertical8,
                       child: DetailedBranchCard(
-                        model: context.read<HomeCubit>().filteredResult!.washings[index],
+                        model: context
+                            .read<HomeCubit>()
+                            .filteredResult!
+                            .washings[index],
                       ),
                     );
                   },
-                  itemCount: context.read<HomeCubit>().filteredResult!.washings.length,
+                  itemCount:
+                      context.read<HomeCubit>().filteredResult!.washings.length,
                 );
               } else if (state is HomeLoading) {
                 return const Center(

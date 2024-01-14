@@ -5,19 +5,20 @@ class ProfileInfoResModel {
     required this.user,
   });
 
-  factory ProfileInfoResModel.fromJson(Map<String, dynamic> json) => ProfileInfoResModel(
-    user: User.fromJson(json["user"]),
-  );
+  factory ProfileInfoResModel.fromJson(Map<String, dynamic> json) =>
+      ProfileInfoResModel(
+        user: User.fromJson(json["user"]),
+      );
 
   Map<String, dynamic> toJson() => {
-    "user": user.toJson(),
-  };
+        "user": user.toJson(),
+      };
 }
 
 class User {
   String name;
   String email;
-  int phone;
+  String phone;
 
   User({
     required this.name,
@@ -26,14 +27,14 @@ class User {
   });
 
   factory User.fromJson(Map<String, dynamic> json) => User(
-    name: json["name"],
-    email: json["email"],
-    phone: json["phone"],
-  );
+        name: json["name"],
+        email: json["email"],
+        phone: json["phone"].toString(),
+      );
 
   Map<String, dynamic> toJson() => {
-    "name": name,
-    "email": email,
-    "phone": phone,
-  };
+        "name": name,
+        "email": email,
+        "phone": phone,
+      };
 }

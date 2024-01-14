@@ -3,6 +3,7 @@ import 'package:clean_car_customer_v2/constants/res/color_manager.dart';
 import 'package:clean_car_customer_v2/constants/res/gaps.dart';
 import 'package:clean_car_customer_v2/constants/res/paddings.dart';
 import 'package:clean_car_customer_v2/constants/res/styles_manager.dart';
+import 'package:clean_car_customer_v2/features/branches_and_reservation/branches/widgets/branches_filter_dialog.dart';
 import 'package:clean_car_customer_v2/features/home/cubit/home_cubit.dart';
 import 'package:clean_car_customer_v2/features/home/widgets/filter_dialog.dart';
 import 'package:clean_car_customer_v2/features/home/widgets/branch_card.dart';
@@ -52,10 +53,23 @@ class _HomeScreenState extends State<HomeScreen> {
                     // },
                     focusNode: _focusNode,
                     asButton: true,
-                    onPressed: (){},
+                    onPressed: () {
+                      widget.pageController?.animateToPage(
+                        1,
+                        duration: const Duration(milliseconds: 300),
+                        curve: Curves.easeInOut,
+                      );
+                      context.read<HomeCubit>().focusNode.requestFocus();
+                    },
                   ),
                   FilterButton(
                     onPressed: () {
+                      widget.pageController?.animateToPage(
+                        1,
+                        duration: const Duration(milliseconds: 300),
+                        curve: Curves.easeInOut,
+                      );
+                      //openBranchesFilterBox(context, height);
                       openHomeFilterBox(context, height);
                     },
                   ),
@@ -88,7 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           // widget.onPageChanged?.call(1);
                         },
                         headerText: context.locale.centersnearyou,
-                        buttonText: context.locale.all ,
+                        buttonText: context.locale.all,
                         textStyle: getRegularStyle(
                             color: ColorManager.mainBlue, fontSize: 16),
                       ),
@@ -103,12 +117,19 @@ class _HomeScreenState extends State<HomeScreen> {
                             return ListView.builder(
                               physics: const BouncingScrollPhysics(),
                               scrollDirection: Axis.horizontal,
-                              itemCount: context.read<HomeCubit>().mainResult!.washings.length,
+                              itemCount: context
+                                  .read<HomeCubit>()
+                                  .mainResult!
+                                  .washings
+                                  .length,
                               itemBuilder: (context, index) {
                                 return Padding(
                                   padding: EdgeInsets.only(left: 8.w),
                                   child: BranchCard(
-                                    model: context.read<HomeCubit>().mainResult!.washings[index],
+                                    model: context
+                                        .read<HomeCubit>()
+                                        .mainResult!
+                                        .washings[index],
                                   ),
                                 );
                               },

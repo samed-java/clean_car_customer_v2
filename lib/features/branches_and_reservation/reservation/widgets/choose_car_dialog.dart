@@ -7,7 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../../../components/custom_searchbar.dart';
 import '../data/model/res/reservation_parameters_res_model.dart';
+import 'choose_branch_content.dart';
 
 void chooseCarDialog(
   BuildContext context, {
@@ -60,8 +62,10 @@ void chooseCarDialog(
                     ),
                   ],
                 ),
-                ChooseCarRadioButton(cars: cars, onSelect: onSelect, selected: car,
-
+                ChooseCarRadioButton(
+                  cars: cars,
+                  onSelect: onSelect,
+                  selected: car,
                 ),
               ],
             ),
@@ -87,48 +91,10 @@ void chooseBranch(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(6.r),
         ),
-        content: Container(
-          width: 320.w,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(6.r),
-          ),
-          child: SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Filial seçin",
-                      style: getSemiBoldStyle(
-                        color: ColorManager.mainBlue,
-                        fontSize: 18,
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        Go.back();
-                      },
-                      child: SizedBox(
-                        child: Padding(
-                          padding: Paddings.all6,
-                          child: SvgPicture.asset(
-                            IconAssets.exit,
-                            height: 16.h,
-                            width: 16.w,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                ChooseBranchRadioButton(
-                  branchs: branchs, onSelect: onSelect, selected: selected,
-                ),
-              ],
-            ),
-          ),
+        content: ChooseBranchContent(
+          branchs: branchs,
+          onSelect: onSelect,
+          selected: selected,
         ),
       );
     },

@@ -6,18 +6,25 @@ import 'package:clean_car_customer_v2/features/login/data/repo/login_repository.
 import 'package:clean_car_customer_v2/locator.dart';
 import 'package:clean_car_customer_v2/utils/errors/base_error_handler.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../utils/services/navigation_service/navigation_service.dart';
 part 'login_state.dart';
 
-class LoginCubit extends Cubit<LoginState> with BaseErrorHandler{
+class LoginCubit extends Cubit<LoginState> with BaseErrorHandler {
   LoginCubit() : super(LoginInitial());
 
-  TextEditingController phoneController =  TextEditingController(text: "994 ");
+  final ValueNotifier<bool> isCheckedRememberMe = ValueNotifier<bool>(true);
+
+  TextEditingController phoneController = TextEditingController(text: "994 ");
 
   @override
   Future<void> onProgress() async {
     emit(LoginLoading());
-    var result = await locator.get<LoginRepository>().send(LoginReqModel(phone: phoneController.text.replaceAll(" ", '')));
+    var result = await locator
+        .get<LoginRepository>()
+        .send(LoginReqModel(phone: phoneController.text.replaceAll(" ", '')));
     locator.get<StorageService>().setOtpToken(result.otpToken);
     locator.get<StorageService>().setPhoneNumber(result.phone);
     emit(LoginSuccess());
@@ -25,12 +32,16 @@ class LoginCubit extends Cubit<LoginState> with BaseErrorHandler{
 
   @override
   void onSocketException(SocketException e) {
+    ScaffoldMessenger.of(NavigationService.instance.context)
+        .showSnackBar(const SnackBar(content: Text("Internet error")));
     emit(LoginFail());
     super.onSocketException(e);
   }
 
   @override
   void onOtherError(Object e, StackTrace s) {
+    ScaffoldMessenger.of(NavigationService.instance.context)
+        .showSnackBar(const SnackBar(content: Text("Unknown error")));
     emit(LoginFail());
     super.onOtherError(e, s);
   }

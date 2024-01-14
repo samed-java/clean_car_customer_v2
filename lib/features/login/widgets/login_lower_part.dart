@@ -13,7 +13,6 @@ import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class LoginLowerPart extends StatelessWidget {
   LoginLowerPart({super.key});
-  final ValueNotifier<bool> _isCheckedRememberMe = ValueNotifier<bool>(false);
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +69,9 @@ class LoginLowerPart extends StatelessWidget {
           Row(
             children: [
               Gaps.w4,
-              CustomCheckbox(isCheckedNotifier: _isCheckedRememberMe),
+              CustomCheckbox(
+                  isCheckedNotifier:
+                      context.read<LoginCubit>().isCheckedRememberMe),
               Gaps.w4,
               Text(
                 context.locale.rememberme,
@@ -81,7 +82,7 @@ class LoginLowerPart extends StatelessWidget {
           Gaps.h32,
           BlocListener<LoginCubit, LoginState>(
             listener: (context, state) {
-              if(state is LoginSuccess){
+              if (state is LoginSuccess) {
                 Go.to(Pager.otp);
               }
             },

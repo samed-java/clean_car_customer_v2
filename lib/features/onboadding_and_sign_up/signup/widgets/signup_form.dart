@@ -9,6 +9,7 @@ import 'package:clean_car_customer_v2/utils/pager/pager.dart';
 import 'package:clean_car_customer_v2/utils/validators/is_email_valid.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 // ignore: must_be_immutable
@@ -35,42 +36,42 @@ class _SignupFormWidgetState extends State<SignupFormWidget> {
         padding: Paddings.all16,
         child: Column(
           children: [
-            Row(
-              children: [
-                Gaps.w4,
-                Text(
-                  context.locale.phonenumber,
-                  style: getRegularStyle(
-                      color: ColorManager.thirdBlack, fontSize: 14),
-                  textAlign: TextAlign.left,
-                ),
-                Expanded(child: Gaps.empty)
-              ],
-            ),
-            Gaps.h2,
-            TextFormField(
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter your number';
-                }
-                return null;
-              },
-              keyboardType: TextInputType.phone,
-              cursorColor: ColorManager.thirdBlack,
-              controller: cubit.numberController,
-              onChanged: (value) {},
-              decoration: InputDecoration(
-                contentPadding: Paddings.all8,
-                filled: true,
-                fillColor: ColorManager.mainWhite,
-                border: OutlineInputBorder(
-                  borderSide: BorderSide.none,
-                  borderRadius: BorderRadius.all(RadiusManager.radiusCircular6),
-                ),
-              ),
-            ),
-
-            Gaps.h10,
+            // Row(
+            //   children: [
+            //     Gaps.w4,
+            //     Text(
+            //       context.locale.phonenumber,
+            //       style: getRegularStyle(
+            //           color: ColorManager.thirdBlack, fontSize: 14),
+            //       textAlign: TextAlign.left,
+            //     ),
+            //     Expanded(child: Gaps.empty)
+            //   ],
+            // ),
+            // Gaps.h2,
+            // TextFormField(
+            //   validator: (value) {
+            //     if (value == null || value.isEmpty) {
+            //       return 'Please enter your number';
+            //     }
+            //     return null;
+            //   },
+            //   keyboardType: TextInputType.phone,
+            //   cursorColor: ColorManager.thirdBlack,
+            //   controller: cubit.numberController,
+            //   onChanged: (value) {},
+            //   decoration: InputDecoration(
+            //     contentPadding: Paddings.all8,
+            //     filled: true,
+            //     fillColor: ColorManager.mainWhite,
+            //     border: OutlineInputBorder(
+            //       borderSide: BorderSide.none,
+            //       borderRadius: BorderRadius.all(RadiusManager.radiusCircular6),
+            //     ),
+            //   ),
+            // ),
+            //
+            // Gaps.h10,
 
             //! Second Part
             Row(
@@ -161,7 +162,9 @@ class _SignupFormWidgetState extends State<SignupFormWidget> {
                         style: getUnderlineStyle(
                             color: ColorManager.mainBlue, fontSize: 14),
                         recognizer: TapGestureRecognizer()
-                          ..onTap = () {
+                          ..onTap = () async {
+                            await SystemChannels.textInput
+                                .invokeMethod("TextInput.hide");
                             Go.to(Pager.termsAndAgreement(
                               signUpCubit: cubit,
                             ));

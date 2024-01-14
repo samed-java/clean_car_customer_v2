@@ -11,22 +11,20 @@ class InitializeLanguage {
   static Future<void> _fetch() async {
     var repo = locator.get<LanguageRepository>();
     var data = await repo.fetch();
-    if (data != null) {
-      _storageService.setLang(data.words.customer.toJson());
-    } else {
-      throw Exception("Language not found");
-    }
+    await _storageService.setLang(data.words.customer.toJson());
   }
 
-  static void init() async {
-    if (await _storageService.hasLang) {
-      CustomerLangData lang =
-          CustomerLangData.fromJson(_storageService.getLang()!);
-      locator.registerSingleton<CustomerLangData>(lang);
-    } else {
-      await _fetch();
-      init();
-    }
+  static Future<void> init() async {
+    // if (await _storageService.hasLang) {
+    await _fetch();
+    CustomerLangData lang =
+        CustomerLangData.fromJson(_storageService.getLang()!);
+    locator.registerSingleton<CustomerLangData>(lang);
+    // }
+    // else {
+    //await _fetch();
+    //   init();
+    // }
   }
 
   static Future<void> changeOrRefreshLang() async {
