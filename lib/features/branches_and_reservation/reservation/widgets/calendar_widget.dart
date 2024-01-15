@@ -66,7 +66,7 @@ class _CalendarWidgetState extends State<CalendarWidget> {
                           valueListenable: cubit.selectedDate,
                           builder: (context, value,child) {
                             return TableCalendar(
-
+                              availableGestures: AvailableGestures.none,
                               calendarStyle: CalendarStyle(
                                 outsideDecoration: BoxDecoration(
                                   shape: BoxShape.rectangle,

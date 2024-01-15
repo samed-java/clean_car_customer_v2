@@ -10,12 +10,14 @@ class TextFieldWidget extends StatelessWidget {
       this.controller,
       this.validator,
       this.inputFormatters,
+        this.capitalize = false,
       this.hintText});
   final String headerText;
   final String? hintText;
   final TextEditingController? controller;
   final List<TextInputFormatter>? inputFormatters;
   final String? Function(String?)? validator;
+  final bool capitalize;
 
   @override
   Widget build(BuildContext context) {
@@ -38,9 +40,13 @@ class TextFieldWidget extends StatelessWidget {
             onChanged: (value) {},
             controller: controller,
             validator: validator,
-            inputFormatters: this.inputFormatters,
+            inputFormatters: inputFormatters,
+            textCapitalization:capitalize? TextCapitalization.characters:TextCapitalization.none,
             decoration: InputDecoration(
               hintText: hintText,
+              hintStyle: TextStyle(
+                color: Colors.grey.withOpacity(0.5),
+              ),
               contentPadding: Paddings.all8,
               filled: true,
               fillColor: ColorManager.mainWhite,

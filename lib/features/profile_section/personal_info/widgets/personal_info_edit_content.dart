@@ -40,7 +40,7 @@ class PersonalInfoEditContent extends StatelessWidget {
                 headerText: context.locale.phonenumber,
                 controller: cubit.phone,
                 inputFormatters: [
-                  MaskTextInputFormatter(mask: "+###-##-###-##-##")
+                  //MaskTextInputFormatter(mask: "+###-##-###-##-##")
                 ],
               ),
               Gaps.h16,

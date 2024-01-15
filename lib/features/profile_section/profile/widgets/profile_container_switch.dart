@@ -1,4 +1,6 @@
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
+import 'package:clean_car_customer_v2/data/services/local/storage_service.dart';
+import 'package:clean_car_customer_v2/locator.dart';
 import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -13,7 +15,13 @@ class ProfileContainerSwitch extends StatefulWidget {
 }
 
 class _ProfileContainerSwitchState extends State<ProfileContainerSwitch> {
-  bool _isSwitched = false;
+  late bool _isSwitched;
+
+  @override
+  void initState() {
+    _isSwitched = locator.get<StorageService>().getNotificationEnabled();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -40,6 +48,7 @@ class _ProfileContainerSwitchState extends State<ProfileContainerSwitch> {
                 value: _isSwitched,
                 onChanged: (newValue) {
                   setState(() {
+                    locator.get<StorageService>().setNotificationEnabled(newValue);
                     _isSwitched = newValue;
                   });
                 },

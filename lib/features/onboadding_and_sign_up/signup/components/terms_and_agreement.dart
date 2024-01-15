@@ -2,6 +2,7 @@ import 'package:clean_car_customer_v2/components/custom_button.dart';
 import 'package:clean_car_customer_v2/components/custom_checkbar.dart';
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
 import 'package:clean_car_customer_v2/features/onboadding_and_sign_up/signup/data/cubit/sign_up_cubit.dart';
+import 'package:clean_car_customer_v2/features/onboadding_and_sign_up/signup/data/model/response/terms_res_model.dart';
 import 'package:clean_car_customer_v2/features/onboadding_and_sign_up/signup/signup_screen.dart';
 import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
 import 'package:clean_car_customer_v2/utils/pager/go.dart';
@@ -49,34 +50,46 @@ class TermsAndAgreementScreen extends StatelessWidget {
                       height: 330.h,
                       child: Padding(
                         padding: Paddings.horizontal32,
-                        child: ListView.separated(
-                            itemBuilder: (context, index) {
-                              return Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    (cubit.terms?.terms ?? [])
-                                        .elementAt(index)
-                                        .title,
-                                    style: getBoldStyle(
-                                        color: ColorManager.secondaryBlack,
-                                        fontSize: 14),
-                                  ),
-                                  Gaps.h16,
-                                  Text(
-                                    (cubit.terms?.terms ?? [])
-                                        .elementAt(index)
-                                        .content,
-                                    style: getRegularStyle(
-                                        color: ColorManager.secondaryBlack,
-                                        fontSize: 14),
-                                  )
-                                ],
+                        child: StreamBuilder<TermsResModel>(
+                          stream: cubit.terms,
+                          builder: (context, snapshot) {
+                            if(snapshot.hasData){
+                              return ListView.separated(
+                                  itemBuilder: (context, index) {
+                                    return Column(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          (snapshot.data?.terms ?? [])
+                                              .elementAt(index)
+                                              .title,
+                                          style: getBoldStyle(
+                                              color: ColorManager.secondaryBlack,
+                                              fontSize: 14),
+                                        ),
+                                        Gaps.h16,
+                                        Text(
+                                          (snapshot.data?.terms ?? [])
+                                              .elementAt(index)
+                                              .content,
+                                          style: getRegularStyle(
+                                              color: ColorManager.secondaryBlack,
+                                              fontSize: 14),
+                                        )
+                                      ],
+                                    );
+                                  },
+                                  separatorBuilder: (_, __) => 16.verticalSpace,
+                                  itemCount: (snapshot.data?.terms ?? []).length);
+                            }
+                            else{
+                              return const Center(
+                                child: CupertinoActivityIndicator(),
                               );
-                            },
-                            separatorBuilder: (_, __) => 16.verticalSpace,
-                            itemCount: (cubit.terms?.terms ?? []).length),
+                            }
+                          }
+                        ),
                       ),
                     ),
                     Gaps.h10,

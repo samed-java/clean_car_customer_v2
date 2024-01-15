@@ -83,7 +83,7 @@ class DetailedBranchCard extends StatelessWidget {
                           Material(
                             color: Colors.transparent,
                             child: Text(
-                              "${model.title}, ${model.description}",
+                              model.address,
                               overflow: TextOverflow.ellipsis,
                               style: getMediumStyle(
                                   color: ColorManager.mainWhite, fontSize: 14),

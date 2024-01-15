@@ -69,6 +69,9 @@ class ReservationChooseCar extends StatelessWidget {
                                     onChanged: (value) {},
                                     decoration: InputDecoration(
                                       hintText: "Nissan Skyline R35 GTR",
+                                      hintStyle: TextStyle(
+                                        color: Colors.grey.withOpacity(0.5),
+                                      ),
                                       suffixIcon:
                                           Image.asset(IconAssets.arrowDown),
                                       contentPadding: Paddings.all8,

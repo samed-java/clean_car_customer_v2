@@ -102,7 +102,7 @@ class _MainScreenState extends State<MainScreen> {
             colorFilter: ColorFilter.mode(
               _currentIndex == index
                   ? ColorManager.mainBlack
-                  : ColorManager.thirdBlack,
+                  : ColorManager.fourthBlack,
               BlendMode.srcIn,
             ),
           ),

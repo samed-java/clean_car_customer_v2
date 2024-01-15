@@ -38,7 +38,10 @@ class PersonalInfoCard extends StatelessWidget {
                   ),
                   Bounce(
                     onPressed: () {
-                      Go.to(Pager.personalInfoEdit(context.read<ProfileInfoCubit>()));
+                      Go.to(Pager.personalInfoEdit(
+                              context.read<ProfileInfoCubit>()))
+                          .then((value) =>
+                              context.read<ProfileInfoCubit>().execute());
                     },
                     duration: const Duration(milliseconds: 100),
                     child: SizedBox(

@@ -55,6 +55,7 @@ dependencies:
   map_launcher: any
   google_maps_flutter: any
   dartz: any
+  url_launcher: any
 
 
 

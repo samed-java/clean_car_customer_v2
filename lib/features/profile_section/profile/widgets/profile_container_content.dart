@@ -1,4 +1,5 @@
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
+import 'package:clean_car_customer_v2/features/onboadding_and_sign_up/signup/data/cubit/sign_up_cubit.dart';
 import 'package:clean_car_customer_v2/features/profile_section/profile/widgets/profile_container_arrow.dart';
 import 'package:clean_car_customer_v2/features/profile_section/profile/widgets/profile_container_switch.dart';
 import 'package:clean_car_customer_v2/features/profile_section/profile/widgets/profile_exit_container.dart';
@@ -47,6 +48,13 @@ class ProfileContainerContent extends StatelessWidget {
           ),
           Gaps.h16,
           const ProfileContainerSwitch(),
+          Gaps.h16,
+          ProfileContainerArrow(
+            onPressed: () {
+              Go.to(Pager.termsAndAgreement(signUpCubit: SignUpCubit()..init()));
+            },
+            headerText: context.locale.termsandconditions,
+          ),
           Gaps.h16,
           const ProfileExitContainer(),
         ],

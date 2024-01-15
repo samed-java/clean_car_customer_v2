@@ -95,7 +95,10 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> {
                 borderRadius: BorderRadius.all(RadiusManager.radiusCircular4),
                 dropdownColor: ColorManager.mainWhite,
                 decoration: InputDecoration(
-                    labelText: widget.labelText,
+                    hintText: widget.labelText,
+                    hintStyle: TextStyle(
+                      color: Colors.grey.withOpacity(0.5),
+                    ),
                     suffixIcon: const Icon(Icons.keyboard_arrow_down_sharp),
                     errorText: '',
                     errorStyle: const TextStyle(

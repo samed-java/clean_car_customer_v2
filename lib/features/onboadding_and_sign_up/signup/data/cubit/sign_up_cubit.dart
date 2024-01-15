@@ -11,13 +11,19 @@ import 'package:clean_car_customer_v2/utils/errors/errors.dart';
 import 'package:clean_car_customer_v2/utils/services/navigation_service/navigation_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rxdart/rxdart.dart';
 
 import '../repository/terms_repository.dart';
 
 part 'sign_up_state.dart';
 
 class SignUpCubit extends Cubit<SignUpState> with BaseErrorHandler {
-  SignUpCubit() : super(SignUpInitial());
+  SignUpCubit() : super(SignUpInitial()){
+    isCheckedRememberMe = ValueNotifier<bool>(_storageService.getTerms());
+    isCheckedRememberMe.addListener(() {
+       _storageService.setTerms(isCheckedRememberMe.value);
+    });
+  }
   final formKey = GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
@@ -25,12 +31,12 @@ class SignUpCubit extends Cubit<SignUpState> with BaseErrorHandler {
   final _signUpRepo = locator.get<SignUpRepository>();
   final _termsConditionsRepo = locator.get<TermsRepository>();
   final StorageService _storageService = locator.get<StorageService>();
-  ValueNotifier<bool> isCheckedRememberMe = ValueNotifier<bool>(false);
-  TermsResModel? terms;
+  late ValueNotifier<bool> isCheckedRememberMe;
+  BehaviorSubject<TermsResModel> terms = BehaviorSubject<TermsResModel>();
 
   void init() {
     ErrorHandler(progressAction: () async {
-      terms = await _termsConditionsRepo.fetch();
+      terms.value = await _termsConditionsRepo.fetch();
     }, socketExceptionAction: (e) {
       ScaffoldMessenger.of(NavigationService.instance.context)
           .showSnackBar(SnackBar(content: Text("Internet error")));

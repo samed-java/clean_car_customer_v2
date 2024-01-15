@@ -2,6 +2,7 @@ import 'package:clean_car_customer_v2/components/custom_button.dart';
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
 import 'package:clean_car_customer_v2/features/profile_section/reservation_details/widgets/reservation_detail_card.dart';
 import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
+import 'package:clean_car_customer_v2/utils/map/map_opener.dart';
 import 'package:clean_car_customer_v2/utils/pager/pager.dart';
 import 'package:clean_car_customer_v2/utils/pager/transition.dart';
 import 'package:flutter/material.dart';
@@ -36,6 +37,9 @@ class ReservationDetailContent extends StatelessWidget {
       child: Column(
         children: [
           ReservationDetailCard(
+            onTap: (){
+              MapOpener.open(context: context, lat: double.parse(branch.lat), long: double.parse(branch.lon));
+            },
             headerText: context.locale.address,
             content: Row(
               children: [

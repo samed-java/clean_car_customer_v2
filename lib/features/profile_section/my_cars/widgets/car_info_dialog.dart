@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 void carInfoDialog(BuildContext c,
     {isNew = false, int? selectedCarId, Function(dynamic)? onFinish}) {
@@ -40,7 +41,7 @@ void carInfoDialog(BuildContext c,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "Avtomobil məlumatları",
+                        context.locale.choosecar,
                         style: getSemiBoldStyle(
                           color: ColorManager.mainBlue,
                           fontSize: 18,
@@ -103,6 +104,10 @@ void carInfoDialog(BuildContext c,
                     headerText: context.locale.number,
                     hintText: "10-OO-001",
                     controller: c.read<MyCarsCubit>().numberController,
+                    capitalize: true,
+                    inputFormatters: [
+                      MaskTextInputFormatter(mask:"##-AA-###")
+                    ],
                     validator: (value) {
                       if ((value?.isEmpty) ?? true) {
                         return "Nomre bos ola bilmez";

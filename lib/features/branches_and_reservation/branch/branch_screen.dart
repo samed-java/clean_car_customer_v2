@@ -78,6 +78,7 @@ class _BranchScreenState extends State<BranchScreen> {
                           padding: Paddings.vertical16,
                           child: Text(
                             widget.model.title,
+                            // overflow: TextOverflow.ellipsis,
                             style: getSemiBoldStyle(
                                 color: ColorManager.secondaryBlack,
                                 fontSize: 18),
@@ -91,7 +92,7 @@ class _BranchScreenState extends State<BranchScreen> {
                         borderRadius:
                             BorderRadius.all(RadiusManager.radiusCircular6),
                         child: SizedBox(
-                          height: widget.model.services.isNotEmpty ? 200 : 0,
+                          height: widget.model.services.isNotEmpty ? 300.h : 0,
                           child: BranchCarType(
                             services: widget.model.services,
                           ),
@@ -121,7 +122,10 @@ class _BranchScreenState extends State<BranchScreen> {
                                 branch: Branch(
                                     id: widget.model.id,
                                     washingName: widget.model.title,
-                                    address: widget.model.address)));
+                                    address: widget.model.address,
+                                    lat:widget.model.lat,
+                                    lon:widget.model.lon,
+                                )));
                           }),
                       SizedBox(
                         height: 50.h,
@@ -145,10 +149,13 @@ class _BranchScreenState extends State<BranchScreen> {
                   children: [
                     Image.asset(IconAssets.backButton),
                     Gaps.w16,
-                    Text(
-                      widget.model.title,
-                      style: getSemiBoldStyle(
-                          color: ColorManager.secondaryBlack, fontSize: 18),
+                    Expanded(
+                      child: Text(
+                        widget.model.title,
+                        overflow: TextOverflow.ellipsis,
+                        style: getSemiBoldStyle(
+                            color: ColorManager.secondaryBlack, fontSize: 18),
+                      ),
                     ),
                   ],
                 ),

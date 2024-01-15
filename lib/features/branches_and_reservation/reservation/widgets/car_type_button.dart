@@ -37,6 +37,7 @@ class CarTypeButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(6.r),
         ),
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+          16.verticalSpace,
           CachedNetworkImage(
             imageUrl:iconPath,
             height: 28.h,
@@ -46,9 +47,10 @@ class CarTypeButton extends StatelessWidget {
             //     isSelected ? ColorManager.mainWhite : ColorManager.mainBlue,
             //     BlendMode.srcIn),
           ),
-          Gaps.h10,
+          Spacer(),
           Text(
             header,
+            textAlign: TextAlign.center,
             style: getMediumStyle(
               color:
                   isSelected ? ColorManager.mainWhite : ColorManager.mainBlack,

@@ -42,6 +42,7 @@ class Active {
   String day;
   String time;
   String status;
+  String statusLabel;
   Washing washing;
   Car car;
   Service service;
@@ -55,6 +56,7 @@ class Active {
     required this.washing,
     required this.car,
     required this.service,
+    required this.statusLabel
   });
 
   factory Active.fromJson(Map<String, dynamic> json) => Active(
@@ -63,6 +65,7 @@ class Active {
     day: json["day"],
     time: json["time"],
     status: json["status"],
+    statusLabel: json["status_label"],
     washing: Washing.fromJson(json["washing"]),
     car: Car.fromJson(json["car"]),
     service: Service.fromJson(json["service"]),
@@ -77,6 +80,7 @@ class Active {
     "washing": washing.toJson(),
     "car": car.toJson(),
     "service": service.toJson(),
+    "status_label": statusLabel,
   };
 }
 
@@ -156,23 +160,31 @@ class Washing {
   int id;
   String washingName;
   String washingAddress;
+  String lat;
+  String lon;
 
   Washing({
     required this.id,
     required this.washingName,
     required this.washingAddress,
+    required this.lat,
+    required this.lon
   });
 
   factory Washing.fromJson(Map<String, dynamic> json) => Washing(
     id: json["id"],
     washingName: json["washing_name"],
     washingAddress: json["washing_address"],
+    lat: json["lat"],
+      lon: json["lon"]
   );
 
   Map<String, dynamic> toJson() => {
     "id": id,
     "washing_name": washingName,
     "washing_address": washingAddress,
+    "lat": lat,
+    "lon": lon,
   };
 }
 

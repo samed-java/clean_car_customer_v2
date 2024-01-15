@@ -10,4 +10,7 @@ class StorageKeys {
   static const String services = "services";
   static const String banTypes = "ban_types";
   static const String number = "number";
+  static const String notification = "notification";
+  static const String rememberMe = "remember_me";
+  static const String terms = "terms";
 }

@@ -196,6 +196,7 @@ class _ChooseCarRadioButtonState extends State<ChooseCarRadioButton> {
                                     value: widget.cars.elementAt(index),
                                     groupValue: selectedRadio,
                                     onChanged: (Car? value) {
+                                      widget.onSelect.call(value!);
                                       setState(() {
                                         selectedRadio = value!;
                                       });

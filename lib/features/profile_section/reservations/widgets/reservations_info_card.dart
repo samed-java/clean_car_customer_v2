@@ -7,6 +7,7 @@ import 'package:clean_car_customer_v2/utils/enum/status_types.dart';
 import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 import '../../../../utils/pager/go.dart';
 import '../../../../utils/pager/pager.dart';
 
@@ -41,7 +42,7 @@ class ReservationInfoCard extends StatelessWidget {
                     getMediumStyle(color: ColorManager.mainBlack, fontSize: 16),
               ),
               Text(
-                "${activeReservation.price} ₼",
+                "${formatCurrency(double.parse(activeReservation.price))}",//₼",
                 style:
                     getMediumStyle(color: ColorManager.mainBlue, fontSize: 14),
               ),
@@ -69,7 +70,7 @@ class ReservationInfoCard extends StatelessWidget {
                           color: ColorManager.secondaryBlack, fontSize: 14),
                     ),
                     TextSpan(
-                      text: getStatusText(statusType),
+                      text: activeReservation.statusLabel,//getStatusText(activeReservation.status),
                       style: getMediumStyle(
                           color: getStatusColor(statusType), fontSize: 14),
                     ),
@@ -99,7 +100,12 @@ class ReservationInfoCard extends StatelessWidget {
                                 washingName:
                                     activeReservation.washing.washingName,
                                 address:
-                                    activeReservation.washing.washingAddress),
+                                    activeReservation.washing.washingAddress,
+                                lat:
+                                    activeReservation.washing.lat,
+                                lon:
+                                    activeReservation.washing.lon
+                            ),
                             dateTime: activeReservation.status == "1"
                                 ? DateTime(
                                     int.parse(activeReservation.day
@@ -120,7 +126,12 @@ class ReservationInfoCard extends StatelessWidget {
                       branch: param.Branch(
                           id: 0,
                           washingName: activeReservation.washing.washingName,
-                          address: activeReservation.washing.washingAddress),
+                          address: activeReservation.washing.washingAddress,
+                          lat:
+                          activeReservation.washing.lat,
+                          lon:
+                          activeReservation.washing.lon
+                      ),
                       car: activeReservation.car,
                       date: DateTime(
                           int.parse(activeReservation.day.split('.').last),
@@ -187,4 +198,9 @@ class ReservationInfoCard extends StatelessWidget {
         return StatusType.unknown;
     }
   }
+}
+
+String formatCurrency(double amount) {
+  NumberFormat formatter = NumberFormat.currency(locale: 'az_AZ', symbol: 'AZN');
+  return formatter.format(amount);
 }

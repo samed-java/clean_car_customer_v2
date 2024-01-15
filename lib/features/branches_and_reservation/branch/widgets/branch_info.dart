@@ -1,8 +1,11 @@
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
 import 'package:clean_car_customer_v2/features/home/data/model/res/branchs_res_model.dart';
 import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
+import 'package:clean_car_customer_v2/utils/launcher/launch_phone.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class BranchInfoWidget extends StatelessWidget {
   const BranchInfoWidget({super.key, this.model});
@@ -43,9 +46,13 @@ class BranchInfoWidget extends StatelessWidget {
                         ),
                         if (model!.phone != null)
                           TextSpan(
+                            recognizer: TapGestureRecognizer()
+                  ..onTap = () async {
+                      await call(model!.phone);
+                  },
                             text: model!.phone.toString(),
                             style: getMediumStyle(
-                                color: ColorManager.mainBlack, fontSize: 14),
+                                color: ColorManager.mainBlue, fontSize: 14),
                           ),
                       ],
                     ),
@@ -83,6 +90,7 @@ class BranchInfoWidget extends StatelessWidget {
               ],
             ),
             Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
                   padding: const EdgeInsets.only(

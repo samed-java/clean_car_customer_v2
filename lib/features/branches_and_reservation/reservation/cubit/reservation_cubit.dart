@@ -61,6 +61,7 @@ class ReservationCubit extends Cubit<ReservationState> with BaseErrorHandler {
   late ValueNotifier<DateTime?> selectedDate;
   final bool isNew;
   final String? reservationId;
+  // final ScrollController scrollController = ScrollController();
   void selectBranch(Branch? branch) => selectedBranch.value = branch;
   void selectCar(Car car) => selectedCar.value = car;
   void selectTime(Time time) => selectedTime.value = time;

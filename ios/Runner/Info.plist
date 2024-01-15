@@ -69,5 +69,10 @@
         <string>copilot</string>
         <string>com.sygic.aura</string>
     </array>
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+      <string>sms</string>
+      <string>tel</string>
+    </array>
 </dict>
 </plist>

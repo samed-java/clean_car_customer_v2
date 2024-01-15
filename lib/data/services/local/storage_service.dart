@@ -164,4 +164,27 @@ class StorageService {
   String? getRefreshToken() {
     return instance.read<String>(StorageKeys.refreshToken);
   }
+
+  void setNotificationEnabled(bool data) async {
+      await instance.write(StorageKeys.notification, data);
+  }
+
+  bool getNotificationEnabled() {
+    return instance.read<bool>(StorageKeys.notification)??false;
+  }
+  void setRememberMe(bool data) async {
+      await instance.write(StorageKeys.rememberMe, data);
+  }
+
+  bool getRememberMe() {
+    return instance.read<bool>(StorageKeys.rememberMe)??false;
+  }
+
+  void setTerms(bool data) async {
+      await instance.write(StorageKeys.terms, data);
+  }
+
+  bool getTerms() {
+    return instance.read<bool>(StorageKeys.terms)??false;
+  }
 }

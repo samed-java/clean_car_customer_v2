@@ -20,8 +20,16 @@ class ReservationLocationCard extends StatelessWidget {
         stream: cubit.params,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return FadeInDown(
-              animate: (snapshot.data!.washings?.isNotEmpty) ?? false,
+            return bounce.Bounce(
+              onPressed: () {
+                chooseBranch(context,
+                    branchs: snapshot.data!.washings!,
+                    selected: cubit.selectedBranch.value,
+                    onSelect: (value) {
+                      cubit.selectBranch(value);
+                    });
+              },
+              duration: const Duration(milliseconds: 100),
               child: Container(
                 width: double.infinity,
                 decoration: BoxDecoration(
@@ -109,7 +117,7 @@ class ReservationLocationCard extends StatelessWidget {
               ),
             );
           } else {
-            return ReservationContentLoading();
+            return const ReservationContentLoading();
           }
         });
   }
