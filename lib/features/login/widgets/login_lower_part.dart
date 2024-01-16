@@ -80,42 +80,51 @@ class LoginLowerPart extends StatelessWidget {
             ],
           ),
           Gaps.h32,
-          BlocListener<LoginCubit, LoginState>(
+          BlocConsumer<LoginCubit, LoginState>(
             listener: (context, state) {
               if (state is LoginSuccess) {
                 Go.to(Pager.otp);
               }
             },
-            child: CustomButton(
-              frontText: context.locale.enter,
-              onPressed: () {
-                context.read<LoginCubit>().execute();
-              },
-            ),
+            builder: (context, state) {
+              if (state is LoginLoading) {
+                return Container(
+                  height: 44.h,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: ColorManager.mainBlue),
+                    color: ColorManager.mainBlue,
+                    borderRadius: BorderRadius.circular(6.r),
+                  ),
+                  child: const Center(
+                    child: Padding(
+                        padding: EdgeInsets.all(4.0),
+                        child: CircularProgressIndicator()),
+                  ),
+                );
+              } else if (state is LoginInitial) {
+                return CustomButton(
+                  frontText: context.locale.enter,
+                  onPressed: () {
+                    context.read<LoginCubit>().execute();
+                  },
+                );
+              } else if (state is LoginFail) {
+                return CustomButton(
+                  frontText: context.locale.enter,
+                  onPressed: () {
+                    context.read<LoginCubit>().execute();
+                  },
+                );
+              }
+              return CustomButton(
+                frontText: context.locale.enter,
+                onPressed: () {
+                  context.read<LoginCubit>().execute();
+                },
+              );
+            },
           ),
           Gaps.h16,
-          // RichText(
-          //   textAlign: TextAlign.center,
-          //   text: TextSpan(
-          //     children: [
-          //       TextSpan(
-          //         text: context.locale.loginsecondtext,
-          //         style: getRegularStyle(
-          //             color: ColorManager.mainBlack, fontSize: 14),
-          //       ),
-          //       TextSpan(
-          //         text: ' ',
-          //         style: getRegularStyle(
-          //             color: ColorManager.mainBlue, fontSize: 14),
-          //         recognizer: TapGestureRecognizer()
-          //           ..onTap = () {
-          //             Go.to(Pager.onboarding);
-          //             // Handle the "Xidmət Şərtlərimiz" link tap
-          //           },
-          //       ),
-          //     ],
-          //   ),
-          // ),
         ],
       ),
     );

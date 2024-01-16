@@ -13,17 +13,7 @@ import '../../locator.dart';
 class SplashBeginScreen extends StatefulWidget {
   const SplashBeginScreen({
     Key? key,
-    // this.duration = 1000,
-    // required this.page,
-    // required this.headerText,
-    // required this.subText,
-    // required this.svgAsset,
   }) : super(key: key);
-  // final int duration;
-  // final String svgAsset;
-  // final String headerText;
-  // final String subText;
-  // final Widget page;
 
   @override
   State<SplashBeginScreen> createState() => _SplashBeginScreenState();

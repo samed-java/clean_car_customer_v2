@@ -13,54 +13,55 @@ class BranchCarType extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('====');
-    print(services);
-
-    // List<Map<String, dynamic>> sedanServices =
-    //     services['Sedan'] ?? <Map<String, dynamic>>[];
-    // List<Map<String, dynamic>> jeepServices =
-    //     services['Jeep'] ?? <Map<String, dynamic>>[];
-
-    // List<dynamic> sedanServices = [];
-    // List<dynamic> jeepServices = [];
-
-    return services.length >0?DefaultTabController(
-      length: services.length,
-      child: Column(
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              color: ColorManager.mainWhite,
-              borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(6.r),
-                  topRight: Radius.circular(6.r)),
-            ),
-            child: TabBar(
-              indicatorColor: ColorManager.mainBlue,
-              indicatorWeight: 3,
-              tabs: [
-                ...services.map((e) => Tab(
-                  text: e.ban,
-                ),)
-              ],
-              labelColor: ColorManager.mainBlue,
-              labelStyle:
-                  getSemiBoldStyle(color: ColorManager.mainBlue, fontSize: 14),
-              unselectedLabelColor: ColorManager.mainBlack,
-              unselectedLabelStyle:
-                  getMediumStyle(color: ColorManager.mainBlack, fontSize: 14),
-            ),
-          ),
-          Expanded(
-            child: TabBarView(
+    return services.isNotEmpty
+        ? DefaultTabController(
+            length: services.length,
+            child: Column(
               children: [
-                ...services.map((e) => buildServiceList(e.services),)
+                Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: ColorManager.mainWhite,
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(6.r),
+                        topRight: Radius.circular(6.r)),
+                  ),
+                  child: TabBar(
+                    isScrollable: services.length == 2 ? false : true,
+                    indicatorColor: ColorManager.mainBlue,
+                    indicatorWeight: 3,
+                    tabs: [
+                      ...services.map(
+                        (e) => Tab(
+                          text: e.ban,
+                        ),
+                      )
+                    ],
+                    labelPadding: services.length == 2
+                        ? null
+                        : EdgeInsets.symmetric(horizontal: 50.w),
+                    labelColor: ColorManager.mainBlue,
+                    labelStyle: getSemiBoldStyle(
+                        color: ColorManager.mainBlue, fontSize: 14),
+                    unselectedLabelColor: ColorManager.mainBlack,
+                    unselectedLabelStyle: getMediumStyle(
+                        color: ColorManager.mainBlack, fontSize: 14),
+                  ),
+                ),
+                Expanded(
+                  child: TabBarView(
+                    // physics: const BouncingScrollPhysics(),
+                    children: [
+                      ...services.map(
+                        (e) => buildServiceList(e.services),
+                      )
+                    ],
+                  ),
+                ),
               ],
             ),
-          ),
-        ],
-      ),
-    ):const SizedBox.shrink();
+          )
+        : const SizedBox.shrink();
   }
 
   Widget buildServiceList(List<ServiceService> services) {

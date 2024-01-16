@@ -2,6 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
 import 'package:clean_car_customer_v2/features/profile_section/settings/features/contacts/cubit/contacts_cubit.dart';
 import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
+import 'package:clean_car_customer_v2/utils/launcher/launc_mail.dart';
+import 'package:clean_car_customer_v2/utils/launcher/launc_url.dart';
+import 'package:clean_car_customer_v2/utils/launcher/launch_phone.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -82,8 +85,19 @@ class ContactsScreen extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: state.list
-                                      .map((e) => Padding(
-                                            padding: Paddings.bottom16,
+                                      .map(
+                                        (e) => Padding(
+                                          padding: Paddings.bottom16,
+                                          child: GestureDetector(
+                                            onTap: () {
+                                              if (e.type == "phone") {
+                                                call(e.link);
+                                              } else if (e.type == "email") {
+                                                launchEmail(e.link);
+                                              } else {
+                                                goSite(e.link);
+                                              }
+                                            },
                                             child: Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.start,
@@ -99,14 +113,16 @@ class ContactsScreen extends StatelessWidget {
                                                 Text(
                                                   "${e.title} :",
                                                   style: getSemiBoldStyle(
-                                                      color:
-                                                          ColorManager.mainBlack),
+                                                      color: ColorManager
+                                                          .mainBlack),
                                                 ),
                                                 8.horizontalSpace,
                                                 Text(e.text),
                                               ],
                                             ),
-                                          ))
+                                          ),
+                                        ),
+                                      )
                                       .toList());
                             } else if (state is ContactsLoading) {
                               return const Center(
