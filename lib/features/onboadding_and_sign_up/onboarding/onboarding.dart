@@ -71,20 +71,18 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         BuildOnboardingPage(
                           svgAsset: ImageAssets.onboarding1,
                           headerText: "${context.locale.area}!!!",
-                          subText:
-                              context.locale.onboardfirsttext,
+                          subText: context.locale.onboardfirsttext,
                         ),
                         BuildOnboardingPage(
                           svgAsset: ImageAssets.onboarding2,
                           headerText: "${context.locale.superquality}!!",
-                          subText:
-                          context.locale.onboardsecondtext,
+                          subText: context.locale.onboardsecondtext,
                         ),
                         BuildOnboardingPage(
                           svgAsset: ImageAssets.onboarding3,
-                          headerText: "${context.locale.possibilityofreservation}!!",
-                          subText:
-                          context.locale.onboardthirdtext,
+                          headerText:
+                              "${context.locale.possibilityofreservation}!!",
+                          subText: context.locale.onboardthirdtext,
                         ),
                       ],
                     ),
@@ -107,8 +105,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 ],
               ),
             ),
-
-            // bura alt terefdi
             _currentPage == 2
                 ? Gaps.empty
                 : Expanded(

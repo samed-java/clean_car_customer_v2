@@ -191,9 +191,6 @@ class _SignupFormWidgetState extends State<SignupFormWidget> {
                     frontText: context.locale.continu,
                     onPressed: () {
                       cubit.signUp();
-                      // if (_formKey.currentState!.validate()) {
-                      //   Go.to(Pager.otp);
-                      // }
                     },
                     isDisable: value ? false : true,
                   );
