@@ -69,12 +69,13 @@ class BranchCard extends StatelessWidget {
                       color: Colors.transparent,
                       child: Row(
                         children: [
-                          Padding(
+                          Container(
+                            width: 148.w,
+
                             padding: const EdgeInsets.all(4),
                             child: Text(
-                              model.title.length > 15
-                                  ? "${model.title.substring(0, 12)}..."
-                                  : model.title,
+                              model.title,
+                              overflow: TextOverflow.ellipsis,
                               style: getSemiBoldStyle(
                                   color: ColorManager.mainWhite, fontSize: 16),
                             ),
@@ -95,7 +96,7 @@ class BranchCard extends StatelessWidget {
                           borderRadius:
                               BorderRadius.all(RadiusManager.radiusCircular4),
                         ),
-                        width: 50.w,
+                        width: 55.w,
                         height: 28.h,
                         child: Padding(
                           padding: Paddings.horizontal4,

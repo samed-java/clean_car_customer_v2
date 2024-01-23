@@ -28,7 +28,7 @@ class Washing {
   double? distance;
   String? mainImage;
   List<Image> images;
-  List<WashingService> services;
+  List<WashingService>? services;
 
   Washing({
     required this.id,
@@ -61,7 +61,7 @@ class Washing {
     distance: json["distance"]?.toDouble(),
     mainImage: json["main_image"],
     images: List<Image>.from(json["images"].map((x) => Image.fromJson(x))),
-    services: List<WashingService>.from(json["services"].map((x) => WashingService.fromJson(x))),
+    services: json["services"]?.map((x) => WashingService.fromJson(x)).toList(),
   );
 
   Map<String, dynamic> toJson() => {
@@ -78,7 +78,7 @@ class Washing {
     "distance": distance,
     "main_image": mainImage,
     "images": List<dynamic>.from(images.map((x) => x.toJson())),
-    "services": List<dynamic>.from(services.map((x) => x.toJson())),
+    "services": services?.map((x) => x.toJson()).toList(),
   };
 }
 

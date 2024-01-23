@@ -36,7 +36,7 @@ class BranchUpper extends StatelessWidget {
                 color: ColorManager.mainWhite,
                 borderRadius: BorderRadius.all(RadiusManager.radiusCircular4),
               ),
-              width: 50.w,
+              width: 55.w,
               height: 28.h,
               child: Padding(
                 padding: Paddings.horizontal4,

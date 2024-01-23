@@ -9,13 +9,13 @@ class BranchCarType extends StatelessWidget {
     required this.services,
   }) : super(key: key);
 
-  final List<WashingService> services;
+  final List<WashingService>? services;
 
   @override
   Widget build(BuildContext context) {
-    return services.isNotEmpty
+    return services?.isNotEmpty??false
         ? DefaultTabController(
-            length: services.length,
+            length: services!.length,
             child: Column(
               children: [
                 Container(
@@ -27,17 +27,17 @@ class BranchCarType extends StatelessWidget {
                         topRight: Radius.circular(6.r)),
                   ),
                   child: TabBar(
-                    isScrollable: services.length == 2 ? false : true,
+                    isScrollable: services!.length == 2 ? false : true,
                     indicatorColor: ColorManager.mainBlue,
                     indicatorWeight: 3,
                     tabs: [
-                      ...services.map(
+                      ...services!.map(
                         (e) => Tab(
                           text: e.ban,
                         ),
                       )
                     ],
-                    labelPadding: services.length == 2
+                    labelPadding: services!.length == 2
                         ? null
                         : EdgeInsets.symmetric(horizontal: 50.w),
                     labelColor: ColorManager.mainBlue,
@@ -52,7 +52,7 @@ class BranchCarType extends StatelessWidget {
                   child: TabBarView(
                     // physics: const BouncingScrollPhysics(),
                     children: [
-                      ...services.map(
+                      ...services!.map(
                         (e) => buildServiceList(e.services),
                       )
                     ],
