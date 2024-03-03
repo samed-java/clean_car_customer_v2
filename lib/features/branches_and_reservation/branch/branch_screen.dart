@@ -92,7 +92,9 @@ class _BranchScreenState extends State<BranchScreen> {
                         borderRadius:
                             BorderRadius.all(RadiusManager.radiusCircular6),
                         child: SizedBox(
-                          height: (widget.model.services?.isNotEmpty??false) ? 300.h : 0,
+                          height: (widget.model.services?.isNotEmpty ?? false)
+                              ? 300.h
+                              : 0,
                           child: BranchCarType(
                             services: widget.model.services,
                           ),
@@ -120,12 +122,12 @@ class _BranchScreenState extends State<BranchScreen> {
                           onPressed: () {
                             Go.to(Pager.reservation(
                                 branch: Branch(
-                                    id: widget.model.id,
-                                    washingName: widget.model.title,
-                                    address: widget.model.address,
-                                    lat:widget.model.lat,
-                                    lon:widget.model.lon,
-                                )));
+                              id: widget.model.id,
+                              washingName: widget.model.title,
+                              address: widget.model.address,
+                              lat: widget.model.lat,
+                              lon: widget.model.lon,
+                            )));
                           }),
                       SizedBox(
                         height: 50.h,
@@ -147,7 +149,15 @@ class _BranchScreenState extends State<BranchScreen> {
                 padding: Paddings.all10,
                 child: Row(
                   children: [
-                    Image.asset(IconAssets.backButton),
+                    InkWell(
+                      onTap: () {
+                        Go.back();
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Image.asset(IconAssets.backButton),
+                      ),
+                    ),
                     Gaps.w16,
                     Expanded(
                       child: Text(

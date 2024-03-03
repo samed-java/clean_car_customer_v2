@@ -9,11 +9,11 @@ class BranchCarType extends StatelessWidget {
     required this.services,
   }) : super(key: key);
 
-  final List<WashingService>? services;
+  final List<WashingService?>? services;
 
   @override
   Widget build(BuildContext context) {
-    return services?.isNotEmpty??false
+    return services?.isNotEmpty ?? false
         ? DefaultTabController(
             length: services!.length,
             child: Column(
@@ -33,7 +33,7 @@ class BranchCarType extends StatelessWidget {
                     tabs: [
                       ...services!.map(
                         (e) => Tab(
-                          text: e.ban,
+                          text: e?.ban,
                         ),
                       )
                     ],
@@ -53,7 +53,7 @@ class BranchCarType extends StatelessWidget {
                     // physics: const BouncingScrollPhysics(),
                     children: [
                       ...services!.map(
-                        (e) => buildServiceList(e.services),
+                        (e) => buildServiceList(e?.services),
                       )
                     ],
                   ),
@@ -64,7 +64,7 @@ class BranchCarType extends StatelessWidget {
         : const SizedBox.shrink();
   }
 
-  Widget buildServiceList(List<ServiceService> services) {
+  Widget buildServiceList(List<ServiceService>? services) {
     return Container(
       color: ColorManager.mainWhite,
       child: Padding(
@@ -72,13 +72,15 @@ class BranchCarType extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: services.map<Widget>((service) {
-            return Text(
-              "${service.title} - ${service.price} AZN",
-              style:
-                  getMediumStyle(color: ColorManager.mainBlack, fontSize: 14),
-            );
-          }).toList(),
+          children: services == null
+              ? [Gaps.empty]
+              : services.map<Widget>((service) {
+                  return Text(
+                    "${service.title} - ${service.price} AZN",
+                    style: getMediumStyle(
+                        color: ColorManager.mainBlack, fontSize: 14),
+                  );
+                }).toList(),
         ),
       ),
     );

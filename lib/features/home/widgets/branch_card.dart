@@ -71,7 +71,6 @@ class BranchCard extends StatelessWidget {
                         children: [
                           Container(
                             width: 148.w,
-
                             padding: const EdgeInsets.all(4),
                             child: Text(
                               model.title,
