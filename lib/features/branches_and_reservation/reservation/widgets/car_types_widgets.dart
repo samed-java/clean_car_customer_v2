@@ -27,6 +27,7 @@ class _CarTypesWidgetsState extends State<CarTypesWidgets> {
     return StreamBuilder<ReservationParametersResModel>(
         stream: cubit.params,
         builder: (context, snapshot) {
+          print(snapshot.data);
           if (snapshot.hasData) {
             if (snapshot.data!.services != null) {
               return ZoomIn(
@@ -81,7 +82,11 @@ class _CarTypesWidgetsState extends State<CarTypesWidgets> {
                 ],
               ));
             } else {
-              return const SizedBox.shrink();
+              return Gaps.empty;
+
+              // const Center(
+              //   child: Text("No service available for your car"),
+              // );
             }
           } else {
             return const ReservationContentLoading();

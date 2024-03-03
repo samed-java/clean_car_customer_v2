@@ -84,6 +84,10 @@ class ReservationCubit extends Cubit<ReservationState> with BaseErrorHandler {
                 ? DateFormat('dd.MM.yyyy').format(selectedDate.value!)
                 : null));
     if (result != null) {
+      print("==============");
+      print(result.services);
+      print("==============");
+
       params.value = result;
     }
   }

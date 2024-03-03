@@ -1,7 +1,6 @@
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TextFieldWidget extends StatelessWidget {
   const TextFieldWidget(
@@ -10,7 +9,7 @@ class TextFieldWidget extends StatelessWidget {
       this.controller,
       this.validator,
       this.inputFormatters,
-        this.capitalize = false,
+      this.capitalize = false,
       this.hintText});
   final String headerText;
   final String? hintText;
@@ -41,7 +40,9 @@ class TextFieldWidget extends StatelessWidget {
             controller: controller,
             validator: validator,
             inputFormatters: inputFormatters,
-            textCapitalization:capitalize? TextCapitalization.characters:TextCapitalization.none,
+            textCapitalization: capitalize
+                ? TextCapitalization.characters
+                : TextCapitalization.none,
             decoration: InputDecoration(
               hintText: hintText,
               hintStyle: TextStyle(

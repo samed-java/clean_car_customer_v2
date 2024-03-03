@@ -117,13 +117,13 @@ class WashingService {
   });
 
   factory WashingService.fromJson(Map<String, dynamic> json) => WashingService(
-        ban: json["ban"],
+        ban: json["ban_id"],
         services: List<ServiceService>.from(
             json["services"].map((x) => ServiceService.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
-        "ban": ban,
+        "ban_id": ban,
         "services": List<dynamic>.from(services.map((x) => x.toJson())),
       };
 }

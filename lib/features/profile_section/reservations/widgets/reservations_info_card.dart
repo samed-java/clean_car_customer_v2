@@ -28,6 +28,9 @@ class ReservationInfoCard extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(6.r),
         color: ColorManager.mainWhite,
+        border: statusType == StatusType.unknown
+            ? Border.all(color: getStatusColor(statusType))
+            : null,
       ),
       child: Padding(
         padding:
@@ -42,7 +45,7 @@ class ReservationInfoCard extends StatelessWidget {
                     getMediumStyle(color: ColorManager.mainBlack, fontSize: 16),
               ),
               Text(
-                "${formatCurrency(double.parse(activeReservation.price))}",//₼",
+                "${formatCurrency(double.parse(activeReservation.price))}", //₼",
                 style:
                     getMediumStyle(color: ColorManager.mainBlue, fontSize: 14),
               ),
@@ -70,7 +73,8 @@ class ReservationInfoCard extends StatelessWidget {
                           color: ColorManager.secondaryBlack, fontSize: 14),
                     ),
                     TextSpan(
-                      text: activeReservation.statusLabel,//getStatusText(activeReservation.status),
+                      text: activeReservation
+                          .statusLabel, //getStatusText(activeReservation.status),
                       style: getMediumStyle(
                           color: getStatusColor(statusType), fontSize: 14),
                     ),
@@ -101,11 +105,8 @@ class ReservationInfoCard extends StatelessWidget {
                                     activeReservation.washing.washingName,
                                 address:
                                     activeReservation.washing.washingAddress,
-                                lat:
-                                    activeReservation.washing.lat,
-                                lon:
-                                    activeReservation.washing.lon
-                            ),
+                                lat: activeReservation.washing.lat,
+                                lon: activeReservation.washing.lon),
                             dateTime: activeReservation.status == "1"
                                 ? DateTime(
                                     int.parse(activeReservation.day
@@ -114,8 +115,9 @@ class ReservationInfoCard extends StatelessWidget {
                                     int.parse(activeReservation.day
                                         .split('.')
                                         .elementAt(1)),
-                                    int.parse(
-                                        activeReservation.day.split('.').elementAt(0)))
+                                    int.parse(activeReservation.day
+                                        .split('.')
+                                        .elementAt(0)))
                                 : DateTime.now()));
                       },
                       service: param.Service(
@@ -127,11 +129,8 @@ class ReservationInfoCard extends StatelessWidget {
                           id: 0,
                           washingName: activeReservation.washing.washingName,
                           address: activeReservation.washing.washingAddress,
-                          lat:
-                          activeReservation.washing.lat,
-                          lon:
-                          activeReservation.washing.lon
-                      ),
+                          lat: activeReservation.washing.lat,
+                          lon: activeReservation.washing.lon),
                       car: activeReservation.car,
                       date: DateTime(
                           int.parse(activeReservation.day.split('.').last),
@@ -154,21 +153,6 @@ class ReservationInfoCard extends StatelessWidget {
     );
   }
 
-  String getStatusText(StatusType statusType) {
-    switch (statusType) {
-      case StatusType.accepted:
-        return 'Təsdiq edildi';
-      case StatusType.rejected:
-        return 'Ləğv edildi';
-      case StatusType.finished:
-        return 'Tamamlandı';
-      case StatusType.waiting:
-        return 'Gözləmədədir';
-      default:
-        return 'Bilinmir';
-    }
-  }
-
   Color getStatusColor(StatusType statusType) {
     switch (statusType) {
       case StatusType.accepted:
@@ -177,7 +161,7 @@ class ReservationInfoCard extends StatelessWidget {
         return ColorManager.mainRed;
       case StatusType.finished:
         return ColorManager.secondaryGreen;
-      case StatusType.waiting:
+      case StatusType.unknown:
         return ColorManager.secondaryOrange;
       default:
         return Colors.black;
@@ -186,14 +170,14 @@ class ReservationInfoCard extends StatelessWidget {
 
   StatusType getStatusTypeFromStatus(String status) {
     switch (status) {
-      case 'accepted':
+      case '1':
         return StatusType.accepted;
-      case 'rejected':
+      case '2':
         return StatusType.rejected;
-      case 'finished':
+      case '3':
         return StatusType.finished;
-      case 'waiting':
-        return StatusType.waiting;
+      case '4':
+        return StatusType.unknown;
       default:
         return StatusType.unknown;
     }
@@ -201,6 +185,7 @@ class ReservationInfoCard extends StatelessWidget {
 }
 
 String formatCurrency(double amount) {
-  NumberFormat formatter = NumberFormat.currency(locale: 'az_AZ', symbol: 'AZN');
+  NumberFormat formatter =
+      NumberFormat.currency(locale: 'az_AZ', symbol: 'AZN');
   return formatter.format(amount);
 }

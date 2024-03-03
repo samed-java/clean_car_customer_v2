@@ -45,21 +45,6 @@ class ReservationContent extends StatelessWidget {
           Gaps.h16,
           const HourButtonWidget(),
           Gaps.h16,
-          // Padding(
-          //   padding: Paddings.horizontal16,
-          //   child: Text(
-          //     "Ödəniş növünü seç",
-          //     style: getSemiBoldStyle(
-          //       color: ColorManager.mainBlack,
-          //       fontSize: 16,
-          //     ),
-          //   ),
-          // ),
-          // Gaps.h10,
-          // Padding(
-          //   padding: Paddings.horizontal16,
-          //   child: const PaymentMethodWidget(),
-          // ),
           Gaps.h24,
           ValueListenableBuilder<Time?>(
               valueListenable: context.read<ReservationCubit>().selectedTime,
@@ -76,8 +61,7 @@ class ReservationContent extends StatelessWidget {
                               Pager.splash(
                                   svgAssets: ImageAssets.calendar,
                                   headerText: "${context.locale.booked}!!!",
-                                  subText:
-                                  context.locale.reservationfirsttext,
+                                  subText: context.locale.reservationfirsttext,
                                   page: Pager.main));
                         }
                       },
