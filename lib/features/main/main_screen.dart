@@ -92,29 +92,32 @@ class _MainScreenState extends State<MainScreen> {
           );
         });
       },
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          SvgPicture.asset(
-            icon,
-            width: 24.w,
-            height: 24.h,
-            colorFilter: ColorFilter.mode(
-              _currentIndex == index
-                  ? ColorManager.mainBlack
-                  : ColorManager.fourthBlack,
-              BlendMode.srcIn,
+      child: Padding(
+        padding: EdgeInsets.all(20.r),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            SvgPicture.asset(
+              icon,
+              width: 24.w,
+              height: 24.h,
+              colorFilter: ColorFilter.mode(
+                _currentIndex == index
+                    ? ColorManager.mainBlack
+                    : ColorManager.fourthBlack,
+                BlendMode.srcIn,
+              ),
             ),
-          ),
-          Text(
-            label,
-            style: TextStyle(
-              color: _currentIndex == index
-                  ? ColorManager.mainBlack
-                  : ColorManager.thirdBlack,
-            ),
-          ),
-        ],
+            // Text(
+            //   label,
+            //   style: TextStyle(
+            //     color: _currentIndex == index
+            //         ? ColorManager.mainBlack
+            //         : ColorManager.thirdBlack,
+            //   ),
+            // ),
+          ],
+        ),
       ),
     );
   }

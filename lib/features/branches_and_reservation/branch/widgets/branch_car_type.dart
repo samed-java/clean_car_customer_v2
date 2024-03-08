@@ -51,7 +51,6 @@ class BranchCarType extends StatelessWidget {
                 ),
                 Expanded(
                   child: TabBarView(
-                    // physics: const BouncingScrollPhysics(),
                     children: [
                       ...services!.map(
                         (e) => buildServiceList(e.services),
@@ -70,19 +69,26 @@ class BranchCarType extends StatelessWidget {
       color: ColorManager.mainWhite,
       child: Padding(
         padding: Paddings.horizontal16,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: services == null
-              ? [Gaps.empty]
-              : services.map<Widget>((service) {
-                  return Text(
-                    "${service.title} - ${service.price} AZN",
-                    style: getMediumStyle(
-                        color: ColorManager.mainBlack, fontSize: 14),
-                  );
-                }).toList(),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: services == null
+                ? [Gaps.empty]
+                : services.map<Widget>(
+                    (service) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8),
+                        child: Text(
+                          "${service.title} - ${service.price} AZN",
+                          style: getMediumStyle(
+                              color: ColorManager.mainBlack, fontSize: 14),
+                        ),
+                      );
+                    },
+                  ).toList(),
+          ),
         ),
       ),
     );
