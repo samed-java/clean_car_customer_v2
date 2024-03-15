@@ -26,6 +26,13 @@ class _SettingsContainerContentState extends State<SettingsContainerContent> {
           Gaps.h8,
           ProfileContainerArrow(
             onPressed: () {
+              Go.to(Pager.faq);
+            },
+            headerText: "context.locale.faq",
+          ),
+          Gaps.h8,
+          ProfileContainerArrow(
+            onPressed: () {
               Go.to(Pager.contacts);
             },
             headerText: context.locale.contactus,

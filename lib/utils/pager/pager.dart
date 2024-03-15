@@ -25,6 +25,8 @@ import 'package:clean_car_customer_v2/features/profile_section/reservations/cubi
 import 'package:clean_car_customer_v2/features/profile_section/reservations/reservations_screen.dart';
 import 'package:clean_car_customer_v2/features/profile_section/settings/features/change_lang/cubit/languages_cubit.dart';
 import 'package:clean_car_customer_v2/features/profile_section/settings/features/contacts/cubit/contacts_cubit.dart';
+import 'package:clean_car_customer_v2/features/profile_section/settings/features/faq/cubit/faq_cubit.dart';
+import 'package:clean_car_customer_v2/features/profile_section/settings/features/faq/presentation/faq_screen.dart';
 import 'package:clean_car_customer_v2/features/splash/splash_begin_screen.dart';
 import 'package:clean_car_customer_v2/features/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -169,6 +171,11 @@ class Pager {
         headerText: headerText,
         subText: subText,
         page: page,
+      );
+
+  static Widget get faq => BlocProvider(
+        create: (context) => FaqCubit()..execute(),
+        child: const FAQScreen(),
       );
 
   Pager._();
