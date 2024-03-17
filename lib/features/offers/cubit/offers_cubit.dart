@@ -13,6 +13,8 @@ part 'offers_state.dart';
 class OffersCubit extends Cubit<OffersState> with BaseErrorHandler {
   OffersCubit() : super(OffersInitial());
 
+  OfferResModel? result;
+
   @override
   void execute() {
     // TODO: implement execute
@@ -21,9 +23,9 @@ class OffersCubit extends Cubit<OffersState> with BaseErrorHandler {
 
   @override
   Future<void> onProgress() async {
-    emit(OffersLoading());
-    var result = await locator.get<OffersRepository>().fetch();
-    emit(OffersSuccess(data: result));
+    if(result==null) emit(OffersLoading());
+    result = await locator.get<OffersRepository>().fetch();
+    emit(OffersSuccess(data: result!));
   }
 
   @override

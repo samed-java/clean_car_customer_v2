@@ -78,7 +78,9 @@ class Pager {
         model: model,
       );
   static Widget reservation(
-          {bool isNew = true,
+          {
+            bool isNew = true,
+            bool isRenewNew = false,
           String? id,
           Branch? branch,
           Car? car,
@@ -90,6 +92,7 @@ class Pager {
           BlocProvider(
               create: (context) => ReservationCubit(
                   isNew: isNew,
+                  isRenew: isRenewNew,
                   reservationId: id,
                   branch: branch,
                   car: car,

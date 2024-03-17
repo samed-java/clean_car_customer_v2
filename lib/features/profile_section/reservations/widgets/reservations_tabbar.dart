@@ -3,7 +3,10 @@ import 'package:clean_car_customer_v2/features/profile_section/reservations/data
 import 'package:clean_car_customer_v2/features/profile_section/reservations/widgets/reservations_info_card.dart';
 import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../cubit/reservations_cubit.dart';
 
 class ReservationsTabBar extends StatelessWidget {
   const ReservationsTabBar({
@@ -58,32 +61,42 @@ class ReservationsTabBar extends StatelessWidget {
               children: [
                 Padding(
                   padding: Paddings.all16,
-                  child: ListView.builder(
-                    physics: const BouncingScrollPhysics(),
-                    itemCount: activeReservations.length,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: Paddings.vertical8,
-                        child: ReservationInfoCard(
-                          activeReservation: activeReservations[index],
-                        ),
-                      );
+                  child: RefreshIndicator(
+                    onRefresh: () async {
+                      context.read<ReservationsCubit>().execute();
                     },
+                    child: ListView.builder(
+                      physics: const AlwaysScrollableScrollPhysics(),
+                      itemCount: activeReservations.length,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: Paddings.vertical8,
+                          child: ReservationInfoCard(
+                            activeReservation: activeReservations[index],
+                          ),
+                        );
+                      },
+                    ),
                   ),
                 ),
                 Padding(
                   padding: Paddings.all16,
-                  child: ListView.builder(
-                    physics: const BouncingScrollPhysics(),
-                    itemCount: historyReservations.length,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: Paddings.vertical8,
-                        child: ReservationInfoCard(
-                          activeReservation: historyReservations[index],
-                        ),
-                      );
-                    },
+                  child: RefreshIndicator(
+                      onRefresh: () async {
+                        context.read<ReservationsCubit>().execute();
+                      },
+                    child: ListView.builder(
+                      physics: const AlwaysScrollableScrollPhysics(),
+                      itemCount: historyReservations.length,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: Paddings.vertical8,
+                          child: ReservationInfoCard(
+                            activeReservation: historyReservations[index],
+                          ),
+                        );
+                      },
+                    ),
                   ),
                 ),
               ],

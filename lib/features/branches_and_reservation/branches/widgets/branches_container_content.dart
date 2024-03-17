@@ -6,6 +6,7 @@ import 'package:clean_car_customer_v2/features/branches_and_reservation/branches
 import 'package:clean_car_customer_v2/features/branches_and_reservation/branches/widgets/detailed_branch_card.dart';
 import 'package:clean_car_customer_v2/features/home/widgets/filter_dialog.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -60,21 +61,26 @@ class BranchesContent extends StatelessWidget {
           child: BlocBuilder<HomeCubit, HomeState>(
             builder: (context, state) {
               if (state is HomeSuccess) {
-                return ListView.builder(
-                  physics: const BouncingScrollPhysics(),
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: Paddings.vertical8,
-                      child: DetailedBranchCard(
-                        model: context
-                            .read<HomeCubit>()
-                            .filteredResult!
-                            .washings[index],
-                      ),
-                    );
+                return RefreshIndicator(
+                  onRefresh: () async {
+                    context.read<HomeCubit>().execute();
                   },
-                  itemCount:
-                      context.read<HomeCubit>().filteredResult!.washings.length,
+                  child: ListView.builder(
+                    physics: const BouncingScrollPhysics(),
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: Paddings.vertical8,
+                        child: DetailedBranchCard(
+                          model: context
+                              .read<HomeCubit>()
+                              .filteredResult!
+                              .washings[index],
+                        ),
+                      );
+                    },
+                    itemCount:
+                        context.read<HomeCubit>().filteredResult!.washings.length,
+                  ),
                 );
               } else if (state is HomeLoading) {
                 return const Center(

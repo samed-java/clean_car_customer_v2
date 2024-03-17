@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
+import '../../../../utils/snacks/snacks.dart';
 import '../../../profile_section/my_cars/data/model/res/my_cars_res_model.dart';
 import '../data/model/req/reservation_parameters_req_model.dart';
 import '../data/model/req/reservation_submit_req_model.dart';
@@ -19,7 +20,9 @@ part 'reservation_state.dart';
 
 class ReservationCubit extends Cubit<ReservationState> with BaseErrorHandler {
   ReservationCubit(
-      {required this.isNew,
+      {
+        required this.isNew,
+        required this.isRenew,
       this.reservationId,
       Branch? branch,
       Car? car,
@@ -60,6 +63,7 @@ class ReservationCubit extends Cubit<ReservationState> with BaseErrorHandler {
   late ValueNotifier<Service?> selectedService;
   late ValueNotifier<DateTime?> selectedDate;
   final bool isNew;
+  final bool isRenew;
   final String? reservationId;
   // final ScrollController scrollController = ScrollController();
   void selectBranch(Branch? branch) => selectedBranch.value = branch;
@@ -114,22 +118,28 @@ class ReservationCubit extends Cubit<ReservationState> with BaseErrorHandler {
           carId: selectedCar.value!.id.toString(),
           day: DateFormat('dd.MM.yyyy').format(selectedDate.value!),
           time: selectedTime.value!.time,
-          price: selectedService.value!.price);
+          price: selectedService.value!.price,
+          status: (!isNew&&!isRenew)?1:null
+      );
       var result;
-      if (!isNew && reservationId != null) {
-        result = locator
+      if (!isNew && reservationId != null && !isRenew) {
+        print(model.toJson());
+        result = await locator
             .get<ReservationUpdateRepo>()
             .send(model, path: {"id": reservationId});
       } else {
-        result = locator.get<ReservationSubmitRepo>().send(model);
+        result = await locator.get<ReservationSubmitRepo>().send(model);
       }
       emit(ReservationSuccess());
     }, socketExceptionAction: (e) {
       emit(ReservationError());
+      Snacks.showCustomSnack(message: "Connection error",isSucces: false);
     }, otherErrorAction: (e, s) {
       print(e);
       print(s);
       emit(ReservationError());
+      Snacks.showCustomSnack(message: "Unknown error occured",isSucces: false);
+
     }).execute();
   }
 }

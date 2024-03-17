@@ -77,7 +77,7 @@ class HomeCubit extends Cubit<HomeState> with BaseErrorHandler {
 
   @override
   Future<void> onProgress() async {
-    emit(HomeLoading());
+    if(mainResult==null) emit(HomeLoading());
     //try{
     mainResult = await locator.get<BranchsRepository>().fetch();
     filteredResult = await locator.get<BranchsRepository>().fetch(

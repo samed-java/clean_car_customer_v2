@@ -11,14 +11,16 @@ part 'reservations_state.dart';
 class ReservationsCubit extends Cubit<ReservationsState> with BaseErrorHandler {
   ReservationsCubit() : super(ReservationsInitial());
 
+  ReservationsResModel? result;
+
   @override
   Future<void> onProgress() async {
-    emit(ReservationsLoading());
-    var result = await locator.get<ReservationsRepository>().fetch();
+    if(result==null) emit(ReservationsLoading());
+    result = await locator.get<ReservationsRepository>().fetch();
     print("------------");
     print(result);
     if (result != null) {
-      emit(ReservationsSuccess(result));
+      emit(ReservationsSuccess(result!));
     } else {
       emit(ReservationsErrorState("No data"));
     }

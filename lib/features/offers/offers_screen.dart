@@ -47,15 +47,20 @@ class OffersScreen extends StatelessWidget {
                   child: BlocBuilder<OffersCubit, OffersState>(
                     builder: (context, state) {
                       if(state is OffersSuccess){
-                        return ListView.builder(
-                            physics: const BouncingScrollPhysics(),
-                            itemCount: state.data.offers.length,
-                            itemBuilder: (context, index) {
-                              return Padding(
-                                padding: Paddings.vertical8,
-                                child: OfferCard(offer: state.data.offers.elementAt(index),),
-                              );
-                            });
+                        return RefreshIndicator(
+                          onRefresh: () async {
+                            context.read<OffersCubit>().execute();
+                          },
+                          child: ListView.builder(
+                              physics: const BouncingScrollPhysics(),
+                              itemCount: state.data.offers.length,
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                  padding: Paddings.vertical8,
+                                  child: OfferCard(offer: state.data.offers.elementAt(index),),
+                                );
+                              }),
+                        );
                       }
                       else if(state is OffersLoading){
                         return const Center(child: CupertinoActivityIndicator(),);
