@@ -8,6 +8,7 @@ import 'package:clean_car_customer_v2/features/onboadding_and_sign_up/signup/dat
 import 'package:clean_car_customer_v2/locator.dart';
 import 'package:clean_car_customer_v2/utils/errors/base_error_handler.dart';
 import 'package:clean_car_customer_v2/utils/errors/errors.dart';
+import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
 import 'package:clean_car_customer_v2/utils/services/navigation_service/navigation_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,10 +19,10 @@ import '../repository/terms_repository.dart';
 part 'sign_up_state.dart';
 
 class SignUpCubit extends Cubit<SignUpState> with BaseErrorHandler {
-  SignUpCubit() : super(SignUpInitial()){
+  SignUpCubit() : super(SignUpInitial()) {
     isCheckedRememberMe = ValueNotifier<bool>(_storageService.getTerms());
     isCheckedRememberMe.addListener(() {
-       _storageService.setTerms(isCheckedRememberMe.value);
+      _storageService.setTerms(isCheckedRememberMe.value);
     });
   }
   final formKey = GlobalKey<FormState>();
@@ -49,22 +50,28 @@ class SignUpCubit extends Cubit<SignUpState> with BaseErrorHandler {
 
   @override
   void onDataIsNullError(DataIsNullError e) {
-    ScaffoldMessenger.of(NavigationService.instance.context)
-        .showSnackBar(SnackBar(content: Text("Unknown error")));
+    ScaffoldMessenger.of(NavigationService.instance.context).showSnackBar(
+        SnackBar(
+            content:
+                Text(NavigationService.instance.context.locale.unknownError)));
     emit(SignUpFailed());
   }
 
   @override
   void onNotSuccessError(NotSuccessError e) {
-    ScaffoldMessenger.of(NavigationService.instance.context)
-        .showSnackBar(SnackBar(content: Text("Unknown error")));
+    ScaffoldMessenger.of(NavigationService.instance.context).showSnackBar(
+        SnackBar(
+            content:
+                Text(NavigationService.instance.context.locale.unknownError)));
     emit(SignUpFailed());
   }
 
   @override
   void onOtherError(Object e, StackTrace s) {
-    ScaffoldMessenger.of(NavigationService.instance.context)
-        .showSnackBar(SnackBar(content: Text("Unknown error")));
+    ScaffoldMessenger.of(NavigationService.instance.context).showSnackBar(
+        SnackBar(
+            content:
+                Text(NavigationService.instance.context.locale.unknownError)));
     emit(SignUpFailed());
   }
 
@@ -89,8 +96,10 @@ class SignUpCubit extends Cubit<SignUpState> with BaseErrorHandler {
 
   @override
   void onResponseBodyIsNullError(ResponseBodyIsNullError e) {
-    ScaffoldMessenger.of(NavigationService.instance.context)
-        .showSnackBar(SnackBar(content: Text("Unknown error")));
+    ScaffoldMessenger.of(NavigationService.instance.context).showSnackBar(
+        SnackBar(
+            content:
+                Text(NavigationService.instance.context.locale.unknownError)));
     emit(SignUpFailed());
   }
 

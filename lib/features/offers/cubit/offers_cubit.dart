@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:clean_car_customer_v2/features/offers/data/repo/offers_repo.dart';
 import 'package:clean_car_customer_v2/locator.dart';
 import 'package:clean_car_customer_v2/utils/errors/base_error_handler.dart';
+import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
+import 'package:clean_car_customer_v2/utils/services/navigation_service/navigation_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../data/model/res/offers_res_model.dart';
 
@@ -33,6 +35,7 @@ class OffersCubit extends Cubit<OffersState> with BaseErrorHandler {
   void onOtherError(e, s) {
     print(e);
     print(s);
-    emit(OffersFail(message: "Unknown error"));
+    emit(OffersFail(
+        message: NavigationService.instance.context.locale.unknownError));
   }
 }

@@ -129,8 +129,8 @@ class ContactsScreen extends StatelessWidget {
                                 child: CupertinoActivityIndicator(),
                               );
                             } else if (state is ContactsFail) {
-                              return const Center(
-                                child: Text("Unknown error occured"),
+                              return Center(
+                                child: Text(context.locale.unknownError),
                               );
                             } else {
                               return const SizedBox.shrink();

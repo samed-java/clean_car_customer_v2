@@ -5,6 +5,7 @@ import 'package:clean_car_customer_v2/features/onboadding_and_sign_up/otp/data/m
 import 'package:clean_car_customer_v2/locator.dart';
 import 'package:clean_car_customer_v2/utils/errors/base_error_handler.dart';
 import 'package:clean_car_customer_v2/utils/errors/errors.dart';
+import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -52,8 +53,10 @@ class OTPCubit extends Cubit<OTPState> with BaseErrorHandler {
 
   @override
   void onOtherError(Object e, StackTrace s) {
-    ScaffoldMessenger.of(NavigationService.instance.context)
-        .showSnackBar(const SnackBar(content: Text("Unknown error")));
+    ScaffoldMessenger.of(NavigationService.instance.context).showSnackBar(
+        SnackBar(
+            content:
+                Text(NavigationService.instance.context.locale.unknownError)));
     emit(OTPFailed());
     super.onOtherError(e, s);
   }
@@ -68,16 +71,20 @@ class OTPCubit extends Cubit<OTPState> with BaseErrorHandler {
 
   @override
   void onDataIsNullError(DataIsNullError e) {
-    ScaffoldMessenger.of(NavigationService.instance.context)
-        .showSnackBar(const SnackBar(content: Text("Unknown error")));
+    ScaffoldMessenger.of(NavigationService.instance.context).showSnackBar(
+        SnackBar(
+            content:
+                Text(NavigationService.instance.context.locale.unknownError)));
     emit(OTPFailed());
     super.onDataIsNullError(e);
   }
 
   @override
   void onResponseBodyIsNullError(ResponseBodyIsNullError e) {
-    ScaffoldMessenger.of(NavigationService.instance.context)
-        .showSnackBar(const SnackBar(content: Text("Unknown error")));
+    ScaffoldMessenger.of(NavigationService.instance.context).showSnackBar(
+        SnackBar(
+            content:
+                Text(NavigationService.instance.context.locale.unknownError)));
     emit(OTPFailed());
     super.onResponseBodyIsNullError(e);
   }

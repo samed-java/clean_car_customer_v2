@@ -21,6 +21,7 @@ class ReservationInfoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(activeReservation.id);
     StatusType statusType = getStatusTypeFromStatus(activeReservation.status);
 
     return Container(
@@ -85,6 +86,7 @@ class ReservationInfoCard extends StatelessWidget {
                 frontText: context.locale.detailed,
                 onPressed: () {
                   Go.to(Pager.reservationDetail(
+                      reservation: activeReservation,
                       onSubmit: () {
                         Go.to(Pager.reservation(
                             isNew: false,

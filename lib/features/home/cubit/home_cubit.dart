@@ -6,7 +6,9 @@ import 'package:clean_car_customer_v2/features/home/data/model/res/regions_res_m
 import 'package:clean_car_customer_v2/features/home/data/repo/filial_repo.dart';
 import 'package:clean_car_customer_v2/features/home/data/repo/regions_repo.dart';
 import 'package:clean_car_customer_v2/features/home/data/repo/services_repo.dart';
+import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
 import 'package:clean_car_customer_v2/utils/extensions/model_extensions/obj_list_to_map.dart';
+import 'package:clean_car_customer_v2/utils/services/navigation_service/navigation_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:clean_car_customer_v2/locator.dart';
@@ -109,7 +111,8 @@ class HomeCubit extends Cubit<HomeState> with BaseErrorHandler {
   void onOtherError(Object e, StackTrace s) {
     print(e);
     print(s);
-    emit(HomeFail(message: "Unknown Error"));
+    emit(HomeFail(
+        message: NavigationService.instance.context.locale.unknownError));
   }
 
   @override

@@ -4,7 +4,6 @@ import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
 import 'package:clean_car_customer_v2/features/branches_and_reservation/reservation/widgets/calendar_widget.dart';
 import 'package:clean_car_customer_v2/features/branches_and_reservation/reservation/widgets/car_types_widgets.dart';
 import 'package:clean_car_customer_v2/features/branches_and_reservation/reservation/widgets/hour_button_widget.dart';
-import 'package:clean_car_customer_v2/features/branches_and_reservation/reservation/widgets/payment_method_widget.dart';
 import 'package:clean_car_customer_v2/features/branches_and_reservation/reservation/widgets/reservation_choose_car.dart';
 import 'package:clean_car_customer_v2/features/branches_and_reservation/reservation/widgets/reservation_location_card.dart';
 import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';

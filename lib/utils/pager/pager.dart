@@ -20,8 +20,11 @@ import 'package:clean_car_customer_v2/features/profile_section/my_cars/my_cars_s
 import 'package:clean_car_customer_v2/features/profile_section/personal_info/personal_info_edit_screen.dart';
 import 'package:clean_car_customer_v2/features/profile_section/personal_info/personal_info_screen.dart';
 import 'package:clean_car_customer_v2/features/profile_section/profile/profile_screen.dart';
+import 'package:clean_car_customer_v2/features/profile_section/reservation_details/cubit/change_status_cubit.dart';
 import 'package:clean_car_customer_v2/features/profile_section/reservation_details/reservation_detail_screen.dart';
 import 'package:clean_car_customer_v2/features/profile_section/reservations/cubit/reservations_cubit.dart';
+import 'package:clean_car_customer_v2/features/profile_section/reservations/data/model/reservations_model.dart'
+    as m;
 import 'package:clean_car_customer_v2/features/profile_section/reservations/reservations_screen.dart';
 import 'package:clean_car_customer_v2/features/profile_section/settings/features/change_lang/cubit/languages_cubit.dart';
 import 'package:clean_car_customer_v2/features/profile_section/settings/features/contacts/cubit/contacts_cubit.dart';
@@ -135,22 +138,28 @@ class Pager {
         offer: offer,
       );
 
-  static Widget reservationDetail(
-      {bool isNew = false,
-      required Branch branch,
-      required Car car,
-      required Service service,
-      required DateTime date,
-      required Time time,
-      Function? onSubmit}) {
-    return ReservationDetailScreen(
-      isNew: isNew,
-      branch: branch,
-      car: car,
-      service: service,
-      date: date,
-      time: time,
-      onSubmit: onSubmit,
+  static Widget reservationDetail({
+    bool isNew = false,
+    required Branch branch,
+    required Car car,
+    required Service service,
+    required DateTime date,
+    required Time time,
+    m.Active? reservation,
+    Function? onSubmit,
+  }) {
+    return BlocProvider(
+      create: (context) => ChangeStatusCubit(),
+      child: ReservationDetailScreen(
+        isNew: isNew,
+        branch: branch,
+        car: car,
+        service: service,
+        date: date,
+        time: time,
+        onSubmit: onSubmit,
+        reservation: reservation,
+      ),
     );
   }
 

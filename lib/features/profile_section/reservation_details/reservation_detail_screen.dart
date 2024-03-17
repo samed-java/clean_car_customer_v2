@@ -1,5 +1,7 @@
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
 import 'package:clean_car_customer_v2/features/profile_section/reservation_details/widgets/reservation_detail_content.dart';
+import 'package:clean_car_customer_v2/features/profile_section/reservations/data/model/reservations_model.dart'
+    as m;
 import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
 import 'package:clean_car_customer_v2/utils/pager/go.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +20,7 @@ class ReservationDetailScreen extends StatelessWidget {
       required this.service,
       required this.date,
       required this.time,
+      this.reservation,
       this.onSubmit});
   final bool isNew;
   final Branch branch;
@@ -26,6 +29,7 @@ class ReservationDetailScreen extends StatelessWidget {
   final DateTime date;
   final Time time;
   final Function? onSubmit;
+  final m.Active? reservation;
 
   @override
   Widget build(BuildContext context) {
@@ -89,9 +93,9 @@ class ReservationDetailScreen extends StatelessWidget {
                     date: date,
                     time: time,
                     onSubmit: onSubmit,
+                    reservation: reservation,
                   ),
                 ),
-                // child: const MyCarsContent(),
               ),
             ),
           ],

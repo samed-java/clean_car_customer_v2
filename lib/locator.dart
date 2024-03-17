@@ -1,3 +1,4 @@
+import 'package:clean_car_customer_v2/features/profile_section/reservation_details/data/repo/change_status_repository.dart';
 import 'package:clean_car_customer_v2/features/profile_section/reservations/data/repo/reservations_repository.dart';
 import 'package:clean_car_customer_v2/features/profile_section/settings/features/faq/data/repository/faq_repository.dart';
 import 'package:clean_car_customer_v2/utils/language/repo/language_repository.dart';
@@ -62,4 +63,6 @@ Future<void> setUpLocator() async {
   locator.registerLazySingleton<ReservationUpdateRepo>(
       () => ReservationUpdateRepo());
   locator.registerLazySingleton<TermsRepository>(() => TermsRepository());
+  locator.registerLazySingleton<ChangeStatusEnableDisableRepository>(
+      () => ChangeStatusEnableDisableRepository());
 }

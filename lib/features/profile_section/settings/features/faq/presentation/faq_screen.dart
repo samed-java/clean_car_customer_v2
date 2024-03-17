@@ -42,7 +42,7 @@ class FAQScreen extends StatelessWidget {
                   ),
                   Gaps.w4,
                   Text(
-                    "context.locale.faq",
+                    context.locale.frequentlyaskedquestions,
                     style: getSemiBoldStyle(
                       color: ColorManager.mainWhite,
                       fontSize: 20,

@@ -5,6 +5,7 @@ import 'package:clean_car_customer_v2/features/login/data/model/req/login_req_mo
 import 'package:clean_car_customer_v2/features/login/data/repo/login_repository.dart';
 import 'package:clean_car_customer_v2/locator.dart';
 import 'package:clean_car_customer_v2/utils/errors/base_error_handler.dart';
+import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -40,8 +41,10 @@ class LoginCubit extends Cubit<LoginState> with BaseErrorHandler {
 
   @override
   void onOtherError(Object e, StackTrace s) {
-    ScaffoldMessenger.of(NavigationService.instance.context)
-        .showSnackBar(const SnackBar(content: Text("Unknown error")));
+    ScaffoldMessenger.of(NavigationService.instance.context).showSnackBar(
+        SnackBar(
+            content:
+                Text(NavigationService.instance.context.locale.unknownError)));
     emit(LoginFail());
     super.onOtherError(e, s);
   }

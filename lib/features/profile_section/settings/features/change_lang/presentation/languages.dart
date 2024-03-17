@@ -140,8 +140,8 @@ class LanguagesScreen extends StatelessWidget {
                           child: CupertinoActivityIndicator(),
                         );
                       } else if (state is LanguagesFail) {
-                        return const Center(
-                          child: Text("Unknown error occured"),
+                        return Center(
+                          child: Text(context.locale.unknownError),
                         );
                       } else {
                         return const SizedBox.shrink();
