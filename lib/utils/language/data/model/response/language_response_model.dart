@@ -131,6 +131,10 @@ class CustomerLangData {
   final String languages;
   final String note;
   final String unknownError;
+  final String toCancel;
+  final String notEmptyName;
+  final String notEmptyPhone;
+  final String refresh;
 
   CustomerLangData({
     required this.area,
@@ -235,6 +239,10 @@ class CustomerLangData {
     required this.note,
     required this.languages,
     required this.unknownError,
+    required this.toCancel,
+    required this.notEmptyName,
+    required this.notEmptyPhone,
+    required this.refresh,
   });
 
   factory CustomerLangData.fromJson(Map<String, dynamic> json) =>
@@ -341,6 +349,10 @@ class CustomerLangData {
         languages: json['languages'],
         note: json['note'],
         unknownError: json['unknown_error'],
+        toCancel: json['to_cancel'],
+        notEmptyName: json['not_empty_name'],
+        notEmptyPhone: json['not_empty_phone'],
+        refresh: json['refresh'],
       );
 
   Map<String, dynamic> toJson() {
@@ -446,7 +458,11 @@ class CustomerLangData {
       'contact_us': contactus,
       'languages': languages,
       'note': note,
+      'to_cancel': toCancel,
       'unknown_error': unknownError,
+      'not_empty_name': notEmptyName,
+      'not_empty_phone': notEmptyPhone,
+      'refresh': refresh,
     };
   }
 }

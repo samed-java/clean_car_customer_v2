@@ -138,7 +138,7 @@ class ReservationDetailContent extends StatelessWidget {
                 }
               },
               child: CustomButton(
-                frontText: context.locale.delete,
+                frontText: context.locale.toCancel,
                 onPressed: () {
                   context.read<ChangeStatusCubit>().changeStatus(
                     reservation!,
@@ -160,7 +160,7 @@ class ReservationDetailContent extends StatelessWidget {
               },
             )
                 : CustomButton(
-              frontText: "Yenile",
+              frontText: context.locale.refresh,
               onPressed: () {
                 onSubmit?.call();
               },

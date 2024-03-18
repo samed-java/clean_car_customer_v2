@@ -95,7 +95,7 @@ void carInfoDialog(BuildContext c,
                     controller: c.read<MyCarsCubit>().nameController,
                     validator: (value) {
                       if ((value?.isEmpty) ?? true) {
-                        return "Ad bos ola bilmez";
+                        return context.locale.notEmptyName;
                       }
                     },
                   ),
@@ -110,7 +110,7 @@ void carInfoDialog(BuildContext c,
                     ],
                     validator: (value) {
                       if ((value?.isEmpty) ?? true) {
-                        return "Nomre bos ola bilmez";
+                        return context.locale.notEmptyPhone;
                       }
                     },
                   ),
