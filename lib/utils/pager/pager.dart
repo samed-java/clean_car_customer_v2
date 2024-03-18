@@ -171,18 +171,21 @@ class Pager {
         value: signUpCubit,
         child: TermsAndAgreementScreen(),
       );
-  static Widget splash({
-    int? duration,
-    required String svgAssets,
-    required String headerText,
-    required String subText,
-    required Widget page,
-  }) =>
+  static Widget splash(
+      {int? duration,
+        required String svgAssets,
+        required String headerText,
+        required String subText,
+        Widget? page,
+        Color? backgroundColor,
+        int? backCount}) =>
       SplashScreen(
         svgAsset: svgAssets,
         headerText: headerText,
         subText: subText,
         page: page,
+        backgroundColor: backgroundColor,
+        backCount: backCount,
       );
 
   static Widget get faq => BlocProvider(

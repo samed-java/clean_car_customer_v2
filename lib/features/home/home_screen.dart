@@ -45,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
             physics: const AlwaysScrollableScrollPhysics(),
             child: SizedBox(
               width: 1.sw,
-              height: 660.h,
+              height:MediaQuery.of(context).size.height * ((772-kToolbarHeight-MediaQuery.of(context).padding.top - MediaQuery.of(context).padding.bottom) / 812),
               child: Column(
                 children: [
                   Gaps.h16,

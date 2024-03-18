@@ -35,6 +35,10 @@ dependencies:
   get_it: any
   flutter_bloc: any
 
+  #firebase
+  firebase_messaging: any
+  firebase_core: any
+  flutter_local_notifications: any
   #design
   animate_do: ^3.0.2
   searchfield: ^0.8.9
@@ -66,8 +70,6 @@ dev_dependencies:
   #network
   get_storage: any
   flutter_localization: any
-  firebase_messaging: any
-  flutter_local_notifications: any
   flutter_lints: ^2.0.0
 
 

@@ -21,10 +21,13 @@ class ChangeStatusCubit extends Cubit<ChangeStatusState> with BaseErrorHandler {
       progressAction: () async {
         await locator
             .get<ChangeStatusEnableDisableRepository>()
-            .send(ChangeStatusReqModel(id: model.id, status: status));
+            .send(ChangeStatusReqModel(reservationId: model.id, status: status));
       },
       notSuccessErrorAction: (e) {},
       responseBodyIsNullErrorAction: (e) {},
+      dataIsNullErrorAction: (e){
+        emit(ChangeStatusSuccess());
+      },
       otherErrorAction: (e, s) {},
     ).execute();
   }

@@ -22,5 +22,5 @@ class ApiKeys {
   static const String contacts = "$_baseUrl/contacts";
   static const String terms = "$_baseUrl/getCustomerTerm";
   static const String faqs = "$_baseUrl/customerFaqs";
-  static const String customerChangeStatus = "$_baseUrl/washing_change_status";
+  static const String customerChangeStatus = "$_baseUrl/customerChangeStatus";
 }

@@ -2,6 +2,7 @@ import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
 import 'package:clean_car_customer_v2/data/services/local/storage_service.dart';
 import 'package:clean_car_customer_v2/locator.dart';
 import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
+import 'package:clean_car_customer_v2/utils/services/firebase/firebase_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -28,7 +29,11 @@ class ProfileExitContainer extends StatelessWidget {
           color: Colors.transparent,
           child: InkWell(
             onTap: () async {
+              await FirebaseService.firebaseMessaging.unsubscribeFromTopic(
+                  "customer${locator.get<StorageService>().getPhoneNumber()!}");
+              var oldLangCode = locator.get<StorageService>().getLangCode();
               await locator.get<StorageService>().instance.erase();
+              await locator.get<StorageService>().setLangCode(oldLangCode);
               Go.removeUntillAndGo(Pager.splashBegin);
             },
             child: SizedBox(

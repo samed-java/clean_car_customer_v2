@@ -1,7 +1,6 @@
 import 'dart:developer';
 import 'package:clean_car_customer_v2/data/services/local/storage_service.dart';
 import 'package:dio/dio.dart';
-import 'package:geolocator/geolocator.dart';
 
 import '../../../locator.dart';
 

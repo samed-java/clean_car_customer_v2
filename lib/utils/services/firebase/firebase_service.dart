@@ -7,6 +7,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 import 'fcm_provider.dart';
+import 'firebase_options.dart';
 
 class FirebaseService {
   static FirebaseMessaging? _firebaseMessaging;
@@ -15,10 +16,11 @@ class FirebaseService {
 
   static Future<void> initializeFirebase() async {
     await Firebase.initializeApp(
-        // options: DefaultFirebaseOptions.currentPlatform
+        options: DefaultFirebaseOptions.currentPlatform
         );
     Firebase.app();
     FirebaseService._firebaseMessaging = FirebaseMessaging.instance;
+    print(await FirebaseService.firebaseMessaging.getToken());
     await FirebaseService.initializeLocalNotifications();
     await FCMProvider.onMessage();
     await FirebaseService.onBackgroundMsg();
@@ -32,7 +34,7 @@ class FirebaseService {
 
   static Future<void> initializeLocalNotifications() async {
     const InitializationSettings initSettings = InitializationSettings(
-        android: AndroidInitializationSettings("icon_name"),
+        android: AndroidInitializationSettings("@mipmap/ic_launcher"),
         iOS: DarwinInitializationSettings());
 
     /// on did receive notification response = for when app is opened via notification while in foreground on android

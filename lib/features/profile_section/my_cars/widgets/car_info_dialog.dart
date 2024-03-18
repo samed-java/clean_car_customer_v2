@@ -91,7 +91,7 @@ void carInfoDialog(BuildContext c,
                   Gaps.h16,
                   TextFieldWidget(
                     headerText: context.locale.name,
-                    hintText: "Nissan Skyline R35 GTR",
+                    hintText: "Mercedes E-Class",
                     controller: c.read<MyCarsCubit>().nameController,
                     validator: (value) {
                       if ((value?.isEmpty) ?? true) {
