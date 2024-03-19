@@ -58,6 +58,13 @@ class FirebaseService {
       priority: Priority.max,
       importance: Importance.max,
     ),
+          iOS: DarwinNotificationDetails(
+              presentAlert: true,
+              presentBadge: true,
+              presentBanner: true,
+              presentList: true,
+              presentSound: true
+          )
   );
 
   // for receiving message when app is in background or foreground

@@ -23,7 +23,7 @@
     </queries>
 
     <application
-        android:label="clean_car_customer_v2"
+        android:label="Clean Car Customer"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <activity

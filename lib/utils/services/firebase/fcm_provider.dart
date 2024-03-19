@@ -36,18 +36,36 @@ class FCMProvider  {
     FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
       //if (FCMProvider._refreshNotifications != null) await FCMProvider._refreshNotifications!(true);
       // if this is available when Platform.isIOS, you'll receive the notification twice 
-      if (Platform.isAndroid) {
+      // if (Platform.isAndroid) {
         await FirebaseService.localNotificationsPlugin.show(
           0, message.notification!.title,
           message.notification!.body,
           FirebaseService.platformChannelSpecifics,
           payload: message.data.toString(),
         );
-      }
+      // }
     });
   }
 
   static Future<void> backgroundHandler(RemoteMessage message) async {
 
   }
+
+  static onMessageRoute(Function(RemoteMessage message) onMessage){
+    FirebaseMessaging.onMessage.listen((message) async {
+      onMessage.call(message);
+    });
+  }
+
+  static onMessageOpenRoute(Function(RemoteMessage message) onMessage){
+    FirebaseMessaging.onMessageOpenedApp.listen((message) async {
+      onMessage.call(message);
+    });
+  }
+  static onInitMessageOpenRoute(Function(RemoteMessage message) onMessage) async {
+    RemoteMessage? message =await FirebaseMessaging.instance.getInitialMessage();
+    if(message!=null) onMessage.call(message);
+  }
+
+
 }

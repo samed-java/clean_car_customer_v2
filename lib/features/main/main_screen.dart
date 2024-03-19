@@ -6,6 +6,8 @@ import 'package:clean_car_customer_v2/features/profile_section/profile/profile_s
 import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
 import 'package:clean_car_customer_v2/utils/pager/go.dart';
 import 'package:clean_car_customer_v2/utils/pager/pager.dart';
+import 'package:clean_car_customer_v2/utils/services/firebase/fcm_provider.dart';
+import 'package:clean_car_customer_v2/utils/services/firebase/firebase_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -23,6 +25,11 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   void initState() {
+    FCMProvider.onInitMessageOpenRoute((message){});
+    FCMProvider.onMessageOpenRoute((message){});
+    FCMProvider.onMessageRoute((message){
+      print("qaqaaa");
+    });
     super.initState();
   }
 
