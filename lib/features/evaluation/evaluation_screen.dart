@@ -3,9 +3,15 @@ import 'package:clean_car_customer_v2/features/evaluation/widgets/evaluation_con
 import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
+
+import '../../utils/pager/go.dart';
 
 class EvaluationScreen extends StatelessWidget {
-  const EvaluationScreen({super.key});
+  const EvaluationScreen({super.key, required this.branch, required this.service});
+
+  final String branch;
+  final String service;
 
   @override
   Widget build(BuildContext context) {
@@ -18,13 +24,35 @@ class EvaluationScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: EdgeInsets.only(top: 10.h, bottom: 10.h, left: 20.w),
-              child: Text(
-                context.locale.evaluation,
-                style: getSemiBoldStyle(
-                  color: ColorManager.mainWhite,
-                  fontSize: 20,
-                ),
+              padding: EdgeInsets.only(top: 10.h, bottom: 10.h,),
+              child: Row(
+                children: [
+                  InkWell(
+                    onTap: () {
+                      Go.back();
+                    },
+                    child: SizedBox(
+                      height: 32.h,
+                      width: 32.w,
+                      child: Padding(
+                        padding: Paddings.all8,
+                        child: SvgPicture.asset(
+                          IconAssets.backButton2,
+                          colorFilter: ColorFilter.mode(
+                              ColorManager.mainWhite, BlendMode.srcIn),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Gaps.w4,
+                  Text(
+                    context.locale.evaluation,
+                    style: getSemiBoldStyle(
+                      color: ColorManager.mainWhite,
+                      fontSize: 20,
+                    ),
+                  ),
+                ],
               ),
             ),
             Expanded(
@@ -40,7 +68,7 @@ class EvaluationScreen extends StatelessWidget {
                 child: Padding(
                   padding: Paddings.all16,
                   // child: BranchesContent(),
-                  child: const EvaluationContent(),
+                  child: EvaluationContent(service: service,branch: branch,),
                 ),
               ),
             ),

@@ -5,7 +5,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class EvaluationInfoCard extends StatelessWidget {
-  const EvaluationInfoCard({super.key});
+  const EvaluationInfoCard({super.key, required this.branch, required this.service});
+
+  final String branch;
+  final String service;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +39,7 @@ class EvaluationInfoCard extends StatelessWidget {
                             color: ColorManager.mainBlack, fontSize: 14),
                       ),
                       TextSpan(
-                        text: 'Kimyəvi təmizləmə',
+                        text: service,
                         style: getMediumStyle(
                             color: ColorManager.mainBlack, fontSize: 14),
                       ),
@@ -54,12 +57,12 @@ class EvaluationInfoCard extends StatelessWidget {
                   text: TextSpan(
                     children: <TextSpan>[
                       TextSpan(
-                        text: 'Filial : ',
+                        text: '${context.locale.branch} : ',
                         style: getSemiBoldStyle(
                             color: ColorManager.mainBlack, fontSize: 14),
                       ),
                       TextSpan(
-                        text: 'Nizami',
+                        text: branch,
                         style: getMediumStyle(
                             color: ColorManager.mainBlack, fontSize: 14),
                       ),

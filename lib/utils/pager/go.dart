@@ -28,8 +28,8 @@ class Go {
     Navigator.popUntil(_context, (route) => false);
   }
 
-  static canBack() {
-    Navigator.canPop(_context);
+  static bool canBack() {
+    return Navigator.canPop(_context);
   }
 
   static maybeBack() {

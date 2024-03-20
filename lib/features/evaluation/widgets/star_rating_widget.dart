@@ -13,7 +13,7 @@ class StarRating extends StatefulWidget {
 }
 
 class _StarRatingState extends State<StarRating> {
-  int selectedStars = 0;
+  int selectedStars = 5;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class _StarRatingState extends State<StarRating> {
           onTap: () {
             setState(() {
               if (index + 1 == selectedStars) {
-                selectedStars = 0;
+                //selectedStars = 0;
               } else {
                 selectedStars = index + 1;
               }

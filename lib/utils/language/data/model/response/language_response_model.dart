@@ -66,6 +66,7 @@ class CustomerLangData {
   final String latestoffers;
   final String homepage;
   final String branches;
+  final String branch;
   final String offers;
   final String myaccount;
   final String filter;
@@ -243,11 +244,13 @@ class CustomerLangData {
     required this.notEmptyName,
     required this.notEmptyPhone,
     required this.refresh,
+    required this.branch,
   });
 
   factory CustomerLangData.fromJson(Map<String, dynamic> json) =>
       CustomerLangData(
         area: json['area'],
+        branch: json['branch'],
         superquality: json['super_quality'],
         possibilityofreservation: json['possibility_of_reservation'],
         onboardfirsttext: json['onboard_first_text'],
@@ -463,6 +466,7 @@ class CustomerLangData {
       'not_empty_name': notEmptyName,
       'not_empty_phone': notEmptyPhone,
       'refresh': refresh,
+      'branch': branch,
     };
   }
 }

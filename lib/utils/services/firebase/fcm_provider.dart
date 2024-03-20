@@ -34,6 +34,8 @@ class FCMProvider  {
   
   static Future<void> onMessage() async {
     FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
+      print(message.toString());
+      print(message.data);
       //if (FCMProvider._refreshNotifications != null) await FCMProvider._refreshNotifications!(true);
       // if this is available when Platform.isIOS, you'll receive the notification twice 
       // if (Platform.isAndroid) {

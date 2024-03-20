@@ -1,13 +1,14 @@
+import 'dart:convert';
+
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
 import 'package:clean_car_customer_v2/features/branches_and_reservation/branches/branches_screen.dart';
-import 'package:clean_car_customer_v2/features/offers/offers_screen.dart';
 import 'package:clean_car_customer_v2/features/home/home_screen.dart';
+import 'package:clean_car_customer_v2/features/offers/offers_screen.dart';
 import 'package:clean_car_customer_v2/features/profile_section/profile/profile_screen.dart';
 import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
 import 'package:clean_car_customer_v2/utils/pager/go.dart';
 import 'package:clean_car_customer_v2/utils/pager/pager.dart';
 import 'package:clean_car_customer_v2/utils/services/firebase/fcm_provider.dart';
-import 'package:clean_car_customer_v2/utils/services/firebase/firebase_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -25,12 +26,55 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   void initState() {
-    FCMProvider.onInitMessageOpenRoute((message){});
-    FCMProvider.onMessageOpenRoute((message){});
+
+
+    FCMProvider.onInitMessageOpenRoute((message){
+      if(message.data.isNotEmpty){
+        if(message.data["data"]!=null) {
+          Map<String,dynamic> data = json.decode(message.data["data"]) as Map<String,dynamic>;
+          if(data["type"]=="rating") {
+            Go.to(Pager.rating(
+                reservationId: data["reservation_id"].toString(),
+                branch: data["branch"].toString(),
+                service: data["service"].toString()
+            ));       // }
+          }
+        }
+      }
+    });
+    FCMProvider.onMessageOpenRoute((message){
+      if(message.data.isNotEmpty){
+        if(message.data["data"]!=null) {
+          Map<String,dynamic> data = json.decode(message.data["data"]) as Map<String,dynamic>;
+          if(data["type"]=="rating") {
+            Go.to(Pager.rating(
+                reservationId: data["reservation_id"].toString(),
+                branch: data["branch"].toString(),
+                service: data["service"].toString()
+            ));       // }
+          }
+        }
+      }
+    });
     FCMProvider.onMessageRoute((message){
-      print("qaqaaa");
+      if(message.data.isNotEmpty){
+        if(message.data["data"]!=null) {
+          Map<String,dynamic> data = json.decode(message.data["data"]) as Map<String,dynamic>;
+          if(data["type"]=="rating") {
+            Go.to(Pager.rating(
+            reservationId: data["reservation_id"].toString(),
+            branch: data["branch"].toString(),
+            service: data["service"].toString()
+        ));       // }
+          }
+        }
+      }
     });
     super.initState();
+
+    // Timer(Duration(seconds: 3), () {
+    //   Go.to(Pager.rating('733'));
+    // });
   }
 
   @override

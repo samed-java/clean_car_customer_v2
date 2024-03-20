@@ -39,7 +39,7 @@ class OTPCubit extends Cubit<OTPState> with BaseErrorHandler {
         if (locator.get<StorageService>().getLangCode().isEmpty) {
           await locator.get<StorageService>().setLangCode("az");
         }
-        await FirebaseService.firebaseMessaging.subscribeToTopic("customer${_storageService.getPhoneNumber()!}");
+        await FirebaseService.firebaseMessaging.subscribeToTopic("customer${_storageService.getPhoneNumber()!}").then((value) => print("subscribed"));
         emit(OTPRegistered());
       } else {
         _storageService.setPhoneNumber(result.user.phone.toString());

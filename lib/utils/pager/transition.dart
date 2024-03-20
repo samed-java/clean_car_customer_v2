@@ -9,6 +9,13 @@ class PageTransitionUtils {
       (route) => false,
     );
   }
+  static void navigateFadeInTransition(
+      BuildContext context, Widget destination) {
+    Navigator.push(
+      context,
+      _fadeRouteBuilder(destination),
+    );
+  }
 
   static void navigateWithFadeOutTransition(
       BuildContext context, Widget destination) {

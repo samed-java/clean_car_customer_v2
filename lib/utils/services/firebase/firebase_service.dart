@@ -5,7 +5,7 @@ import 'dart:io';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-
+import 'package:permission_handler/permission_handler.dart';
 import 'fcm_provider.dart';
 import 'firebase_options.dart';
 
@@ -19,7 +19,13 @@ class FirebaseService {
         options: DefaultFirebaseOptions.currentPlatform
         );
     Firebase.app();
+    await FirebaseService.firebaseMessaging.requestPermission(
+      alert: true
+    );
+
+    await FirebaseService.localNotificationsPlugin.pendingNotificationRequests();
     FirebaseService._firebaseMessaging = FirebaseMessaging.instance;
+    await Permission.notification.request();
     print(await FirebaseService.firebaseMessaging.getToken());
     await FirebaseService.initializeLocalNotifications();
     await FCMProvider.onMessage();

@@ -17,6 +17,7 @@ void main() async {
 
 init() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // await Permission.notification.request();
   await FirebaseService.initializeFirebase();
   Geolocator.requestPermission();
   await setUpLocator();
@@ -26,6 +27,15 @@ init() async {
   if (locator.get<StorageService>().getLangCode().isEmpty) {
     await locator.get<StorageService>().setLangCode("az");
   }
+
+  // await Permission.notification.isGranted.then((value) async {
+    if( locator.get<StorageService>().getPhoneNumber()!=null){
+      await FirebaseService.firebaseMessaging.subscribeToTopic("customer${locator.get<StorageService>().getPhoneNumber()!}");
+      print("subscibed     jbfiahdviuoahegn");
+
+    }
+  // });
+
 
   await InitializeLanguage.init();
 

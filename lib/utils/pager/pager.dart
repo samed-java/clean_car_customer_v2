@@ -2,6 +2,7 @@ import 'package:clean_car_customer_v2/features/branches_and_reservation/branch/b
 import 'package:clean_car_customer_v2/features/branches_and_reservation/branches/branches_screen.dart';
 import 'package:clean_car_customer_v2/features/branches_and_reservation/reservation/cubit/reservation_cubit.dart';
 import 'package:clean_car_customer_v2/features/branches_and_reservation/reservation/reservation_screen.dart';
+import 'package:clean_car_customer_v2/features/evaluation/cubit/rating_cubit.dart';
 import 'package:clean_car_customer_v2/features/evaluation/evaluation_screen.dart';
 import 'package:clean_car_customer_v2/features/home/cubit/home_cubit.dart';
 import 'package:clean_car_customer_v2/features/home/data/model/res/branchs_res_model.dart';
@@ -129,7 +130,7 @@ class Pager {
         create: (context) => LanguagesCubit()..execute(),
         child: const LanguagesScreen(),
       );
-  static Widget get evaluation => const EvaluationScreen();
+  // static Widget get evaluation => const EvaluationScreen();
   static Widget get myCars => BlocProvider(
       create: (context) => MyCarsCubit()
         ..getBanTypes()
@@ -191,6 +192,15 @@ class Pager {
   static Widget get faq => BlocProvider(
         create: (context) => FaqCubit()..execute(),
         child: const FAQScreen(),
+      );
+
+  static Widget rating({
+    required String reservationId,
+    required String service,
+    required String branch,
+  }) => BlocProvider(
+        create: (context) => RatingCubit(reservationId),
+        child: EvaluationScreen(service: service,branch: branch,),
       );
 
   Pager._();

@@ -4,16 +4,28 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CommentTextField extends StatefulWidget {
-  const CommentTextField({super.key});
+  const CommentTextField({super.key, required this.controller});
+  final TextEditingController controller;
 
   @override
   State<CommentTextField> createState() => _CommentTextFieldState();
 }
 
+
+
 class _CommentTextFieldState extends State<CommentTextField> {
+
+  @override
+  void dispose() {
+    widget.controller.dispose();
+    super.dispose();
+  }
+
+
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
+      controller: widget.controller,
       maxLines: 6, // Set to null for unlimited lines
       minLines: 4, // Set the minimum number of lines
       decoration: InputDecoration(

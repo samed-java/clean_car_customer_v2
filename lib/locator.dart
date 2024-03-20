@@ -11,6 +11,7 @@ import 'data/services/remote/global_service.dart';
 import 'features/branches_and_reservation/reservation/data/repo/reservation_parameters_repo.dart';
 import 'features/branches_and_reservation/reservation/data/repo/reservation_submit_repo.dart';
 import 'features/branches_and_reservation/reservation/data/repo/reservation_update_repo.dart';
+import 'features/evaluation/data/repo/rating_repo.dart';
 import 'features/home/data/repo/filial_repo.dart';
 import 'features/home/data/repo/regions_repo.dart';
 import 'features/home/data/repo/services_repo.dart';
@@ -65,4 +66,6 @@ Future<void> setUpLocator() async {
   locator.registerLazySingleton<TermsRepository>(() => TermsRepository());
   locator.registerLazySingleton<ChangeStatusEnableDisableRepository>(
       () => ChangeStatusEnableDisableRepository());
+  locator.registerLazySingleton<RatingRepository>(
+      () => RatingRepository());
 }

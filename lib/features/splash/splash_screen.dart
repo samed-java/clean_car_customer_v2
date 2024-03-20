@@ -39,7 +39,8 @@ class _SplashScreenState extends State<SplashScreen> {
             context, widget.page!);
       } else {
         for(int i = 0;i<(widget.backCount??1);i++){
-          Go.back();
+          print(Go.canBack());
+          if(Go.canBack()) Go.back();
         }
       }
     });
