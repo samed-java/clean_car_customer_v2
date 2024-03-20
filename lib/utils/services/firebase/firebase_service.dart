@@ -25,7 +25,11 @@ class FirebaseService {
 
     await FirebaseService.localNotificationsPlugin.pendingNotificationRequests();
     FirebaseService._firebaseMessaging = FirebaseMessaging.instance;
-    await Permission.notification.request();
+    var status = await Permission.notification.status;
+    print(status);
+    if(status.isDenied){
+      await Permission.notification.request();
+    }
     print(await FirebaseService.firebaseMessaging.getToken());
     await FirebaseService.initializeLocalNotifications();
     await FCMProvider.onMessage();
