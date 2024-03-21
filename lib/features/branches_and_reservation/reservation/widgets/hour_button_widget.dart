@@ -24,7 +24,7 @@ class HourButtonWidget extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             if (snapshot.data!.times != null) {
-              return ZoomIn(
+              return FadeInDown(
                   child: Column(
                 children: [
                   Padding(

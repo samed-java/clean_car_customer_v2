@@ -7,6 +7,7 @@ import 'package:clean_car_customer_v2/features/branches_and_reservation/reservat
 import 'package:clean_car_customer_v2/locator.dart';
 import 'package:clean_car_customer_v2/utils/errors/base_error_handler.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
@@ -43,6 +44,7 @@ class ReservationCubit extends Cubit<ReservationState> with BaseErrorHandler {
     selectedDate.addListener(() {
       if (selectedService.value != null) {
         execute();
+
       }
     });
     selectedBranch.addListener(() {
@@ -65,12 +67,21 @@ class ReservationCubit extends Cubit<ReservationState> with BaseErrorHandler {
   final bool isNew;
   final bool isRenew;
   final String? reservationId;
-  // final ScrollController scrollController = ScrollController();
+  final ScrollController scrollController = ScrollController();
   void selectBranch(Branch? branch) => selectedBranch.value = branch;
   void selectCar(Car car) => selectedCar.value = car;
-  void selectTime(Time time) => selectedTime.value = time;
+  void selectTime(Time time) {
+    selectedTime.value = time;
+    scrollController.animateTo(
+      1.sh,
+      curve: Curves.easeOut,
+      duration: const Duration(milliseconds: 300),
+    );
+  }
   void selectService(Service service) => selectedService.value = service;
-  void selectDate(DateTime date) => selectedDate.value = date;
+  void selectDate(DateTime date) {
+    selectedDate.value = date;
+  }
 
   //late ValueNotifier<int> washingId;
   BehaviorSubject<ReservationParametersResModel> params =
@@ -93,6 +104,13 @@ class ReservationCubit extends Cubit<ReservationState> with BaseErrorHandler {
       print("==============");
 
       params.value = result;
+      if(selectedDate.value!=null){
+        scrollController.jumpTo(
+          1.sh,
+          // curve: Curves.easeOut,
+          // duration: const Duration(milliseconds: 300),
+        );
+      }
     }
   }
 

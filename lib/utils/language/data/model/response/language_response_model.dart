@@ -52,6 +52,7 @@ class CustomerLangData {
   final String confirm;
   final String confirmed;
   final String signupsixthtext;
+  final String cancel_action;
   final String termsandconditions;
   final String goback;
   final String agreewith;
@@ -245,6 +246,7 @@ class CustomerLangData {
     required this.notEmptyPhone,
     required this.refresh,
     required this.branch,
+    required this.cancel_action,
   });
 
   factory CustomerLangData.fromJson(Map<String, dynamic> json) =>
@@ -356,6 +358,7 @@ class CustomerLangData {
         notEmptyName: json['not_empty_name'],
         notEmptyPhone: json['not_empty_phone'],
         refresh: json['refresh'],
+        cancel_action: json['cancel_action'],
       );
 
   Map<String, dynamic> toJson() {
@@ -467,6 +470,7 @@ class CustomerLangData {
       'not_empty_phone': notEmptyPhone,
       'refresh': refresh,
       'branch': branch,
+      'cancel_action': cancel_action,
     };
   }
 }

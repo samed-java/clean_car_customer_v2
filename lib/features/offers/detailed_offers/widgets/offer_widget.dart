@@ -11,23 +11,23 @@ class OfferWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
-          width: double.infinity,
-          decoration: BoxDecoration(
-            color: ColorManager.mainWhite,
-            borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(6.r), topRight: Radius.circular(6.r)),
-          ),
-          child: Padding(
-            padding: EdgeInsets.only(
-                top: 10.h, bottom: 2.h, left: 10.w, right: 10.w),
-            child: Text(
-              "${context.locale.offer} :",
-              style:
-                  getSemiBoldStyle(color: ColorManager.mainBlack, fontSize: 14),
-            ),
-          ),
-        ),
+        // Container(
+        //   width: double.infinity,
+        //   decoration: BoxDecoration(
+        //     color: ColorManager.mainWhite,
+        //     borderRadius: BorderRadius.only(
+        //         topLeft: Radius.circular(6.r), topRight: Radius.circular(6.r)),
+        //   ),
+        //   child: Padding(
+        //     padding: EdgeInsets.only(
+        //         top: 10.h, bottom: 2.h, left: 10.w, right: 10.w),
+        //     child: Text(
+        //       "${context.locale.offer} :",
+        //       style:
+        //           getSemiBoldStyle(color: ColorManager.mainBlack, fontSize: 14),
+        //     ),
+        //   ),
+        // ),
         Container(
           width: double.infinity,
           decoration: BoxDecoration(

@@ -112,7 +112,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               },
                               headerText: context.locale.centersnearyou,
                               buttonText: context.locale.all,
-                              textStyle: getRegularStyle(
+                              textStyle: getUnderlineStyle(
                                   color: ColorManager.mainBlue, fontSize: 16),
                             ),
                           ),

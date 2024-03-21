@@ -23,8 +23,8 @@ class ReservationContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      // controller: context.read<ReservationCubit>().scrollController,
-      physics: const BouncingScrollPhysics(),
+      controller: context.read<ReservationCubit>().scrollController,
+      physics: const ClampingScrollPhysics(),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

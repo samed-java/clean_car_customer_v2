@@ -130,9 +130,11 @@ class ReservationDetailContent extends StatelessWidget {
                 if(state is ChangeStatusSuccess) {
                   Go.to(Pager.splash(
                       svgAssets: ImageAssets.confirmed,
-                      headerText: "${context.locale.confirmed}!!!",
+                      headerText: "${(context.read<ChangeStatusCubit>().currentStatus??0)==2?
+                          context.locale.cancelled
+                          : context.locale.confirmed}!!!",
                       subText:
-                      context.locale.signupsixthtext,
+                      context.locale.cancel_action,
                       backCount: 2
                   ));
                 }

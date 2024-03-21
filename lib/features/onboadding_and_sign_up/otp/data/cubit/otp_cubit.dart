@@ -11,6 +11,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../utils/services/firebase/firebase_service.dart';
 import '../../../../../utils/services/navigation_service/navigation_service.dart';
+import '../../../../../utils/snacks/snacks.dart';
+import '../../../../login/data/model/req/login_req_model.dart';
+import '../../../../login/data/repo/login_repository.dart';
 import '../repository/otp_repository.dart';
 
 part 'otp_state.dart';
@@ -92,5 +95,22 @@ class OTPCubit extends Cubit<OTPState> with BaseErrorHandler {
                 Text(NavigationService.instance.context.locale.unknownError)));
     emit(OTPFailed());
     super.onResponseBodyIsNullError(e);
+  }
+
+  void resendOTP(){
+    ErrorHandler(
+      progressAction: () async {
+        var result = await locator
+            .get<LoginRepository>()
+            .send(LoginReqModel(phone: locator.get<StorageService>().getPhoneNumber()!.replaceAll(" ", '')));
+        locator.get<StorageService>().setOtpToken(result.otpToken);
+        locator.get<StorageService>().setPhoneNumber(result.phone);
+      },
+      otherErrorAction: (e,s){
+        Snacks.showCustomSnack(message: "Unknown error occured");
+    },      socketExceptionAction: (e){
+        Snacks.showCustomSnack(message: "Connection error");
+    }
+    ).execute();
   }
 }

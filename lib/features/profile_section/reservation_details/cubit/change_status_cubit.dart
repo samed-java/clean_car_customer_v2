@@ -10,6 +10,8 @@ part 'change_status_state.dart';
 class ChangeStatusCubit extends Cubit<ChangeStatusState> with BaseErrorHandler {
   ChangeStatusCubit() : super(ChangeStatusInitial());
 
+  int? currentStatus;
+
   @override
   Future<void> onProgress() async {
     // TODO: implement onProgress
@@ -26,6 +28,7 @@ class ChangeStatusCubit extends Cubit<ChangeStatusState> with BaseErrorHandler {
       notSuccessErrorAction: (e) {},
       responseBodyIsNullErrorAction: (e) {},
       dataIsNullErrorAction: (e){
+        currentStatus = status;
         emit(ChangeStatusSuccess());
       },
       otherErrorAction: (e, s) {},

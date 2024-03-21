@@ -48,11 +48,13 @@ class _CountDownTimerState extends State<CountDownTimer> {
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: _countdown == 0 ? () {
-        //context.read<LoginCubit>().execute();
+        context.read<OTPCubit>().resendOTP();
+        _countdown = widget.second;
+        startTimer();
       } : null,
       child: Text(
         _countdown == 0 ? context.locale.signupfifthtext : '${context.locale.signupfifthtext} (${_countdown}s)',
-        style: getRegularStyle(color: ColorManager.mainBlue, fontSize: 14),
+        style: getRegularStyle(color:_countdown == 0? ColorManager.mainBlue:ColorManager.mainBlack.withOpacity(0.5), fontSize: 14),
       ),
     );
   }
