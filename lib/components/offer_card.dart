@@ -52,10 +52,10 @@ class OfferCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        offer.title ??  context.locale.offer,
+                        offer.title ?? context.locale.offer,
                         style: getMediumStyle(
                           color: ColorManager.mainBlack,
-                          fontSize: 16.sp,
+                          fontSize: 16,
                         ),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
@@ -64,7 +64,7 @@ class OfferCard extends StatelessWidget {
                         offer.content,
                         style: getRegularStyle(
                           color: ColorManager.mainBlack,
-                          fontSize: 12.sp,
+                          fontSize: 12,
                         ),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
@@ -73,7 +73,7 @@ class OfferCard extends StatelessWidget {
                         offer.discount ?? '',
                         style: getMediumStyle(
                           color: ColorManager.mainBlue,
-                          fontSize: 14.sp,
+                          fontSize: 14,
                         ),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,

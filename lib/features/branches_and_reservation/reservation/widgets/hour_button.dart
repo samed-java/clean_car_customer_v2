@@ -22,7 +22,7 @@ class HourButton extends StatelessWidget {
     return isDisabled
         ? Container(
             width: 72.w,
-            height: 28.h,
+            // height: 28.h,
             decoration: BoxDecoration(
               color: ColorManager.mainWhite,
               borderRadius: BorderRadius.circular(6.r),
@@ -45,7 +45,7 @@ class HourButton extends StatelessWidget {
             duration: const Duration(milliseconds: 100),
             child: Container(
               width: 72.w,
-              height: 28.h,
+              // height: 28.h,
               decoration: BoxDecoration(
                 color:
                     isSelected ? ColorManager.mainBlue : ColorManager.mainWhite,

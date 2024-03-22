@@ -26,46 +26,44 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   void initState() {
-
-
-    FCMProvider.onInitMessageOpenRoute((message){
-      if(message.data.isNotEmpty){
-        if(message.data["data"]!=null) {
-          Map<String,dynamic> data = json.decode(message.data["data"]) as Map<String,dynamic>;
-          if(data["type"]=="rating") {
+    FCMProvider.onInitMessageOpenRoute((message) {
+      if (message.data.isNotEmpty) {
+        if (message.data["data"] != null) {
+          Map<String, dynamic> data =
+              json.decode(message.data["data"]) as Map<String, dynamic>;
+          if (data["type"] == "rating") {
             Go.to(Pager.rating(
                 reservationId: data["reservation_id"].toString(),
                 branch: data["branch"].toString(),
-                service: data["service"].toString()
-            ));       // }
+                service: data["service"].toString())); // }
           }
         }
       }
     });
-    FCMProvider.onMessageOpenRoute((message){
-      if(message.data.isNotEmpty){
-        if(message.data["data"]!=null) {
-          Map<String,dynamic> data = json.decode(message.data["data"]) as Map<String,dynamic>;
-          if(data["type"]=="rating") {
+    FCMProvider.onMessageOpenRoute((message) {
+      if (message.data.isNotEmpty) {
+        if (message.data["data"] != null) {
+          Map<String, dynamic> data =
+              json.decode(message.data["data"]) as Map<String, dynamic>;
+          if (data["type"] == "rating") {
             Go.to(Pager.rating(
                 reservationId: data["reservation_id"].toString(),
                 branch: data["branch"].toString(),
-                service: data["service"].toString()
-            ));       // }
+                service: data["service"].toString())); // }
           }
         }
       }
     });
-    FCMProvider.onMessageRoute((message){
-      if(message.data.isNotEmpty){
-        if(message.data["data"]!=null) {
-          Map<String,dynamic> data = json.decode(message.data["data"]) as Map<String,dynamic>;
-          if(data["type"]=="rating") {
+    FCMProvider.onMessageRoute((message) {
+      if (message.data.isNotEmpty) {
+        if (message.data["data"] != null) {
+          Map<String, dynamic> data =
+              json.decode(message.data["data"]) as Map<String, dynamic>;
+          if (data["type"] == "rating") {
             Go.to(Pager.rating(
-            reservationId: data["reservation_id"].toString(),
-            branch: data["branch"].toString(),
-            service: data["service"].toString()
-        ));       // }
+                reservationId: data["reservation_id"].toString(),
+                branch: data["branch"].toString(),
+                service: data["service"].toString())); // }
           }
         }
       }
@@ -85,6 +83,8 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final maxHeight = MediaQuery.of(context).size.height;
+    final isBig = maxHeight > 1000;
     return Scaffold(
       body: PageView(
         physics: const BouncingScrollPhysics(),
@@ -106,7 +106,7 @@ class _MainScreenState extends State<MainScreen> {
       bottomNavigationBar: BottomAppBar(
         elevation: 8.0,
         child: SizedBox(
-          height: 80.0,
+          height: isBig ? 120 : 80.0,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [

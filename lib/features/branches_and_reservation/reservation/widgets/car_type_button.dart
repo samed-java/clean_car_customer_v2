@@ -26,12 +26,14 @@ class CarTypeButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final maxHeight = MediaQuery.of(context).size.height;
+    final isBig = maxHeight > 1000;
     return GestureDetector(
       onTap: () {
         onPressed.call();
       },
       child: Container(
-        width: 128.w,
+        width: isBig ? 200.w : 128.w,
         decoration: BoxDecoration(
           color: isSelected ? ColorManager.mainBlue : ColorManager.mainWhite,
           borderRadius: BorderRadius.circular(6.r),
@@ -39,7 +41,7 @@ class CarTypeButton extends StatelessWidget {
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           16.verticalSpace,
           CachedNetworkImage(
-            imageUrl:iconPath,
+            imageUrl: iconPath,
             height: 28.h,
             width: 28.w,
             color: !isSelected ? ColorManager.mainBlue : ColorManager.mainWhite,
@@ -47,7 +49,7 @@ class CarTypeButton extends StatelessWidget {
             //     isSelected ? ColorManager.mainWhite : ColorManager.mainBlue,
             //     BlendMode.srcIn),
           ),
-          Spacer(),
+          const Spacer(),
           Text(
             header,
             textAlign: TextAlign.center,
