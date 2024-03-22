@@ -29,13 +29,11 @@ init() async {
   }
 
   // await Permission.notification.isGranted.then((value) async {
-    if( locator.get<StorageService>().getPhoneNumber()!=null){
-      await FirebaseService.firebaseMessaging.subscribeToTopic("customer${locator.get<StorageService>().getPhoneNumber()!}");
-      print("subscibed     jbfiahdviuoahegn");
-
-    }
+  if (locator.get<StorageService>().getPhoneNumber() != null) {
+    await FirebaseService.firebaseMessaging.subscribeToTopic(
+        "customer${locator.get<StorageService>().getPhoneNumber()!}");
+  }
   // });
-
 
   await InitializeLanguage.init();
 
