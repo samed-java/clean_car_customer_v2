@@ -30,7 +30,7 @@ class _SettingsContainerContentState extends State<SettingsContainerContent> {
             },
             headerText: context.locale.frequentlyaskedquestions,
           ),
-          Gaps.h8,
+          Gaps.h16,
           ProfileContainerArrow(
             onPressed: () {
               Go.to(Pager.contacts);
