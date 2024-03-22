@@ -65,22 +65,30 @@ class BranchesContent extends StatelessWidget {
                   onRefresh: () async {
                     context.read<HomeCubit>().execute();
                   },
-                  child: ListView.builder(
-                    physics: const BouncingScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: Paddings.vertical8,
-                        child: DetailedBranchCard(
-                          model: context
-                              .read<HomeCubit>()
-                              .filteredResult!
-                              .washings[index],
-                        ),
-                      );
-                    },
-                    itemCount:
-                        context.read<HomeCubit>().filteredResult!.washings.length,
-                  ),
+                  child:
+                      context.read<HomeCubit>().filteredResult!.washings.isEmpty
+                          ? const Center(
+                              child: Text("Empty"),
+                            )
+                          : ListView.builder(
+                              physics: const BouncingScrollPhysics(),
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                  padding: Paddings.vertical8,
+                                  child: DetailedBranchCard(
+                                    model: context
+                                        .read<HomeCubit>()
+                                        .filteredResult!
+                                        .washings[index],
+                                  ),
+                                );
+                              },
+                              itemCount: context
+                                  .read<HomeCubit>()
+                                  .filteredResult!
+                                  .washings
+                                  .length,
+                            ),
                 );
               } else if (state is HomeLoading) {
                 return const Center(

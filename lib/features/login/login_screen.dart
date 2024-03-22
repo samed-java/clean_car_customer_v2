@@ -17,9 +17,8 @@ class LoginScreen extends StatelessWidget {
             children: [
               Gaps.h24,
               CustomUpperPart(
-                headerText: "${context.locale.welcome}!!!",
-                subText:
-                    context.locale.loginfirsttext,
+                headerText: context.locale.welcome,
+                subText: context.locale.loginfirsttext,
               ),
               Gaps.h24,
               LoginLowerPart(),

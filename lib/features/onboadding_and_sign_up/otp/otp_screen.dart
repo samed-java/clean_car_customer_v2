@@ -29,7 +29,7 @@ class OTPScreen extends StatelessWidget {
             // ),
             Gaps.h24,
             CustomUpperPart(
-              headerText: "${context.locale.otpauthentication}!!!",
+              headerText: context.locale.otpauthentication,
               subText: context.locale.signupthirdtext,
             ),
             Gaps.h32,
@@ -74,12 +74,10 @@ class OTPScreen extends StatelessWidget {
                         context,
                         Pager.splash(
                             svgAssets: ImageAssets.confirmed,
-                            headerText: "${context.locale.confirmed}!!!",
-                            subText:
-                                context.locale.signupsixthtext,
+                            headerText: context.locale.confirmed,
+                            subText: context.locale.signupsixthtext,
                             page: Pager.main));
-                  }
-                  else if(state is OTPNotRegistered){
+                  } else if (state is OTPNotRegistered) {
                     Go.to(Pager.onboarding);
                   }
                 },

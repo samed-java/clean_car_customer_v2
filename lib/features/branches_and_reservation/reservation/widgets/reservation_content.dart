@@ -59,7 +59,7 @@ class ReservationContent extends StatelessWidget {
                               context,
                               Pager.splash(
                                   svgAssets: ImageAssets.calendar,
-                                  headerText: "${context.locale.booked}!!!",
+                                  headerText: context.locale.booked,
                                   subText: context.locale.reservationfirsttext,
                                   page: Pager.main));
                         }

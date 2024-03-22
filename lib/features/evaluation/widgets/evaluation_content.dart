@@ -23,7 +23,10 @@ class EvaluationContent extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-          EvaluationInfoCard(service: service, branch: branch,),
+          EvaluationInfoCard(
+            service: service,
+            branch: branch,
+          ),
           Gaps.h24,
           StarCardWidget(
             onRatingChanged: (int rating) {
@@ -31,26 +34,27 @@ class EvaluationContent extends StatelessWidget {
             },
           ),
           Gaps.h24,
-          CommentTextField(controller: cubit.commentController,),
+          CommentTextField(
+            controller: cubit.commentController,
+          ),
           Gaps.h24,
           BlocListener<RatingCubit, RatingState>(
             listener: (context, state) {
-              if(state is RatingSuccess){
+              if (state is RatingSuccess) {
                 PageTransitionUtils.navigateFadeInTransition(
                   context,
                   Pager.splash(
                       svgAssets: ImageAssets.confirmed,
-                      headerText: "${context.locale.sent}!!!",
+                      headerText: context.locale.sent,
                       subText: context.locale.ritefirsttext,
-                      backCount: 2
-                      ),
+                      backCount: 2),
                 );
               }
             },
             child: CustomButton(
               frontText: context.locale.confirm,
               onPressed: () {
-                  cubit.rate();
+                cubit.rate();
               },
             ),
           ),

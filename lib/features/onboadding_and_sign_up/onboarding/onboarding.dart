@@ -70,18 +70,17 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       children: [
                         BuildOnboardingPage(
                           svgAsset: ImageAssets.onboarding1,
-                          headerText: "${context.locale.area}!!!",
+                          headerText: context.locale.area,
                           subText: context.locale.onboardfirsttext,
                         ),
                         BuildOnboardingPage(
                           svgAsset: ImageAssets.onboarding2,
-                          headerText: "${context.locale.superquality}!!",
+                          headerText: context.locale.superquality,
                           subText: context.locale.onboardsecondtext,
                         ),
                         BuildOnboardingPage(
                           svgAsset: ImageAssets.onboarding3,
-                          headerText:
-                              "${context.locale.possibilityofreservation}!!",
+                          headerText: context.locale.possibilityofreservation,
                           subText: context.locale.onboardthirdtext,
                         ),
                       ],
