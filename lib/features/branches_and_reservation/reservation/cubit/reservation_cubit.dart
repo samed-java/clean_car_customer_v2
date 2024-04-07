@@ -59,6 +59,7 @@ class ReservationCubit extends Cubit<ReservationState> with BaseErrorHandler {
   }
 
   late ValueNotifier<Branch?> selectedBranch;
+  bool inProgress = false;
   late ValueNotifier<Car?> selectedCar;
   late ValueNotifier<Time?> selectedTime;
   late ValueNotifier<Service?> selectedService;
@@ -130,6 +131,8 @@ class ReservationCubit extends Cubit<ReservationState> with BaseErrorHandler {
 
   void reserve() {
     ErrorHandler(progressAction: () async {
+      if(inProgress) return;
+      inProgress = true;
       emit(ReservationLoading());
       var model = ReservationSubmitReqModel(
           washingId: selectedBranch.value!.id.toString(),
@@ -149,13 +152,16 @@ class ReservationCubit extends Cubit<ReservationState> with BaseErrorHandler {
         result = await locator.get<ReservationSubmitRepo>().send(model);
       }
       emit(ReservationSuccess());
+      inProgress = false;
     }, socketExceptionAction: (e) {
       emit(ReservationError());
+      inProgress = false;
       Snacks.showCustomSnack(message: "Connection error", isSucces: false);
     }, otherErrorAction: (e, s) {
       print(e);
       print(s);
       emit(ReservationError());
+      inProgress = false;
       Snacks.showCustomSnack(message: "Unknown error occured", isSucces: false);
     }).execute();
   }
