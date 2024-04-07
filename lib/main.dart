@@ -4,7 +4,7 @@ import 'package:clean_car_customer_v2/utils/language/language_init.dart';
 import 'package:clean_car_customer_v2/utils/services/firebase/firebase_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:geolocator/geolocator.dart';
+import 'package:location/location.dart';
 
 import 'data/services/local/storage_service.dart';
 
@@ -19,7 +19,7 @@ init() async {
   WidgetsFlutterBinding.ensureInitialized();
   // await Permission.notification.request();
   await FirebaseService.initializeFirebase();
-  Geolocator.requestPermission();
+  Location.instance.requestPermission();
   await setUpLocator();
   await locator.get<StorageService>().init();
 

@@ -13,6 +13,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:clean_car_customer_v2/locator.dart';
 import 'package:clean_car_customer_v2/utils/errors/base_error_handler.dart';
+import 'package:location/location.dart';
 import '../../../utils/errors/errors.dart';
 import '../data/model/res/services_res_model.dart';
 
@@ -79,9 +80,24 @@ class HomeCubit extends Cubit<HomeState> with BaseErrorHandler {
   Future<void> onProgress() async {
     if(mainResult==null) emit(HomeLoading());
     //try{
-    mainResult = await locator.get<BranchsRepository>().fetch();
+      PermissionStatus status =  await Location.instance.hasPermission();
+      print(status);
+      LocationData? position;
+      if(status == PermissionStatus.granted || status == PermissionStatus.grantedLimited) {
+        position = await Location.instance.getLocation();
+        print(position.latitude);
+        print(position.longitude);
+      }
+    mainResult = await locator.get<BranchsRepository>().fetch(
+      queryParameters: FilterReqModel(
+        lat: position?.latitude?.toString(),
+        lon: position?.longitude?.toString(),
+      )
+    );
     filteredResult = await locator.get<BranchsRepository>().fetch(
         queryParameters: FilterReqModel(
+            lat: position?.latitude?.toString(),
+            lon: position?.longitude?.toString(),
             villageId:
                 selectedVillage.value == 0 ? null : selectedVillage.value,
             cityId: selectedCity.value == 0 ? null : selectedCity.value,

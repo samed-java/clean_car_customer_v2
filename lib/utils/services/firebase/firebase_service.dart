@@ -16,7 +16,7 @@ class FirebaseService {
 
   static Future<void> initializeFirebase() async {
     await Firebase.initializeApp(
-        options: DefaultFirebaseOptions.currentPlatform
+        // options: DefaultFirebaseOptions.currentPlatform
         );
     Firebase.app();
     await FirebaseService.firebaseMessaging.requestPermission(

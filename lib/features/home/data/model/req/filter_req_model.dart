@@ -6,13 +6,17 @@ class FilterReqModel extends BaseRequestModel{
   int? regionId;
   int? villageId;
   String? text;
+  String? lat;
+  String? lon;
 
   FilterReqModel({
     this.serviceId,
     this.cityId,
     this.regionId,
     this.villageId,
-    this.text
+    this.text,
+    this.lat,
+    this.lon
 });
 
   @override
@@ -23,6 +27,8 @@ class FilterReqModel extends BaseRequestModel{
       "region_id":regionId,
       "village_id":villageId,
       "text":text,
+      "lat":lat,
+      "lon":lon
     }..removeWhere((key, value) => value == null);
   }
 
