@@ -37,7 +37,7 @@ dependencies:
 
   #firebase
   firebase_messaging: any
-  firebase_core: any
+  firebase_core: ^2.24.2
   permission_handler: any
   flutter_local_notifications: any
   #design

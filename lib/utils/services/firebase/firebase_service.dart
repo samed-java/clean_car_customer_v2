@@ -16,18 +16,16 @@ class FirebaseService {
 
   static Future<void> initializeFirebase() async {
     await Firebase.initializeApp(
-        // options: DefaultFirebaseOptions.currentPlatform
-        );
+        options: DefaultFirebaseOptions.currentPlatform);
     Firebase.app();
-    await FirebaseService.firebaseMessaging.requestPermission(
-      alert: true
-    );
+    await FirebaseService.firebaseMessaging.requestPermission(alert: true);
 
-    await FirebaseService.localNotificationsPlugin.pendingNotificationRequests();
+    await FirebaseService.localNotificationsPlugin
+        .pendingNotificationRequests();
     FirebaseService._firebaseMessaging = FirebaseMessaging.instance;
     var status = await Permission.notification.status;
     print(status);
-    if(status.isDenied){
+    if (status.isDenied) {
       await Permission.notification.request();
     }
     print(await FirebaseService.firebaseMessaging.getToken());
@@ -62,20 +60,18 @@ class FirebaseService {
 
   static NotificationDetails platformChannelSpecifics =
       const NotificationDetails(
-    android: AndroidNotificationDetails(
-      "high_importance_channel",
-      "High Importance Notifications",
-      priority: Priority.max,
-      importance: Importance.max,
-    ),
+          android: AndroidNotificationDetails(
+            "high_importance_channel",
+            "High Importance Notifications",
+            priority: Priority.max,
+            importance: Importance.max,
+          ),
           iOS: DarwinNotificationDetails(
               presentAlert: true,
               presentBadge: true,
               presentBanner: true,
               presentList: true,
-              presentSound: true
-          )
-  );
+              presentSound: true));
 
   // for receiving message when app is in background or foreground
   static Future<void> onMessage() async {
