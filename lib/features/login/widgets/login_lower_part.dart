@@ -98,7 +98,9 @@ class LoginLowerPart extends StatelessWidget {
                   child: const Center(
                     child: Padding(
                         padding: EdgeInsets.all(4.0),
-                        child: CircularProgressIndicator()),
+                        child: CircularProgressIndicator(
+                          color: Colors.white,
+                        )),
                   ),
                 );
               } else if (state is LoginInitial) {
