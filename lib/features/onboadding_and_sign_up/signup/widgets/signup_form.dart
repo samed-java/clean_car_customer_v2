@@ -127,10 +127,10 @@ class _SignupFormWidgetState extends State<SignupFormWidget> {
             TextFormField(
               keyboardType: TextInputType.emailAddress,
               validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter your email';
-                } else if (!value.isEmailValid()) {
-                  return 'Please enter a valid email';
+                if (value != null && value.isNotEmpty) {
+                  if (!value.isEmailValid()) {
+                    return "Please Enter Valid Email";
+                  }
                 }
                 return null;
               },

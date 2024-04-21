@@ -25,18 +25,18 @@ class PersonalInfoContent extends StatelessWidget {
                 Gaps.h8,
                 PersonalInfoCard(
                   headerText: context.locale.name,
-                  subText: state.profileInfoModel.user.name,
+                  subText: state.profileInfoModel.user.name??"",
                 ),
                 Gaps.h16,
                 PersonalInfoCard(
                   headerText: context.locale.email,
-                  subText: state.profileInfoModel.user.email,
+                  subText: state.profileInfoModel.user.email??"",
                 ),
                 Gaps.h16,
                 PersonalInfoCard(
                   headerText: context.locale.phonenumber,
                   subText: StringMask.apply_(
-                      state.profileInfoModel.user.phone.toString(),
+                      (state.profileInfoModel.user.phone??"").toString(),
                       "+###-##-###-##-##",
                       null),
                 ),

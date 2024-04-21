@@ -12,13 +12,14 @@ class DefaultFirebaseOptions {
         projectId: 'cleancarbaku',
       );
     } else if (Platform.isIOS) {
-      return const FirebaseOptions(
-        apiKey: 'AIzaSyDuOKPRKq8oEgh-AWdDggYvZwhjn1e9HrU',
-        appId: '1:986219836536:ios:dcf9315ff3bcf77261e98d',
-        messagingSenderId: '986219836536',
-        projectId: 'cleancarbaku',
-        iosBundleId: "com.washing.customer",
-      );
+      return null;
+      //   const FirebaseOptions(
+      //   apiKey: 'AIzaSyDuOKPRKq8oEgh-AWdDggYvZwhjn1e9HrU',
+      //   appId: '1:986219836536:ios:dcf9315ff3bcf77261e98d',
+      //   messagingSenderId: '986219836536',
+      //   projectId: 'cleancarbaku',
+      //   iosBundleId: "com.washing.customer",
+      // );
     }
     return null;
   }

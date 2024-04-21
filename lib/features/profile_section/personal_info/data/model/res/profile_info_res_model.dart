@@ -16,9 +16,9 @@ class ProfileInfoResModel {
 }
 
 class User {
-  String name;
-  String email;
-  String phone;
+  String? name;
+  String? email;
+  String? phone;
 
   User({
     required this.name,

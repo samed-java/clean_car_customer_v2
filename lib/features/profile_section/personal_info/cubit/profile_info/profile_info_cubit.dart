@@ -25,9 +25,9 @@ class ProfileInfoCubit extends Cubit<ProfileInfoState> with BaseErrorHandler {
     emit(ProfileInfoLoading());
     var result = await locator.get<ProfileInfoRepository>().fetch();
     if (result != null) {
-      name.text = result.user.name;
-      email.text = result.user.email;
-      phone.text = result.user.phone.toString();
+      name.text = result.user.name??"";
+      email.text = result.user.email??"";
+      phone.text = (result.user.phone??"").toString();
       emit(ProfileInfoSuccess(result));
     } else {
       emit(ProfileInfoErrorState("No data"));
