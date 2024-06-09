@@ -19,16 +19,20 @@ class LoginCubit extends Cubit<LoginState> with BaseErrorHandler {
   final ValueNotifier<bool> isCheckedRememberMe = ValueNotifier<bool>(true);
 
   TextEditingController phoneController = TextEditingController(text: "994 ");
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
 
   @override
   Future<void> onProgress() async {
-    emit(LoginLoading());
-    var result = await locator
-        .get<LoginRepository>()
-        .send(LoginReqModel(phone: phoneController.text.replaceAll(" ", '')));
-    locator.get<StorageService>().setOtpToken(result.otpToken);
-    locator.get<StorageService>().setPhoneNumber(result.phone);
-    emit(LoginSuccess());
+    if(formKey.currentState!.validate()){
+      emit(LoginLoading());
+      var result = await locator
+          .get<LoginRepository>()
+          .send(LoginReqModel(phone: phoneController.text.replaceAll(" ", '')));
+      locator.get<StorageService>().setOtpToken(result.otpToken);
+      locator.get<StorageService>().setPhoneNumber(result.phone);
+      emit(LoginSuccess());
+    }
   }
 
   @override

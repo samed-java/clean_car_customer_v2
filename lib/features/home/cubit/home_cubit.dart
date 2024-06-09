@@ -66,6 +66,8 @@ class HomeCubit extends Cubit<HomeState> with BaseErrorHandler {
   TextEditingController searchController = TextEditingController();
   BranchsResModel? mainResult;
   BranchsResModel? filteredResult;
+  LocationData? position;
+
 
   final List<int> _filteredParameters = [0, 0, 0, 0];
 
@@ -78,15 +80,15 @@ class HomeCubit extends Cubit<HomeState> with BaseErrorHandler {
 
   @override
   Future<void> onProgress() async {
-    if(mainResult==null) emit(HomeLoading());
+    filteredResult = null;
+    if(mainResult==null || filteredResult == null) emit(HomeLoading());
     //try{
       PermissionStatus status =  await Location.instance.hasPermission();
       print(status);
-      LocationData? position;
-      if(status == PermissionStatus.granted || status == PermissionStatus.grantedLimited) {
-        position = await Location.instance.getLocation();
-        print(position.latitude);
-        print(position.longitude);
+      if (position==null && (status == PermissionStatus.granted || status == PermissionStatus.grantedLimited)) {
+      position = await Location.instance.getLocation();
+      print(position?.latitude);
+      print(position?.longitude);
       }
     mainResult = await locator.get<BranchsRepository>().fetch(
       queryParameters: FilterReqModel(
@@ -94,19 +96,21 @@ class HomeCubit extends Cubit<HomeState> with BaseErrorHandler {
         lon: position?.longitude?.toString(),
       )
     );
+
     filteredResult = await locator.get<BranchsRepository>().fetch(
         queryParameters: FilterReqModel(
             lat: position?.latitude?.toString(),
             lon: position?.longitude?.toString(),
             villageId:
-                selectedVillage.value == 0 ? null : selectedVillage.value,
+            selectedVillage.value == 0 ? null : selectedVillage.value,
             cityId: selectedCity.value == 0 ? null : selectedCity.value,
             serviceId:
-                selectedService.value == 0 ? null : selectedService.value,
+            selectedService.value == 0 ? null : selectedService.value,
             regionId: selectedRegion.value == 0 ? null : selectedRegion.value,
             text: searchController.text.isNotEmpty
                 ? searchController.text
                 : null));
+
     //print(result);
     emit(HomeSuccess(
         //data: result
