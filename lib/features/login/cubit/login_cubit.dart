@@ -6,6 +6,7 @@ import 'package:clean_car_customer_v2/features/login/data/repo/login_repository.
 import 'package:clean_car_customer_v2/locator.dart';
 import 'package:clean_car_customer_v2/utils/errors/base_error_handler.dart';
 import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
+import 'package:clean_car_customer_v2/utils/services/firebase/analytics/analytic_logger.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

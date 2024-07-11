@@ -3,6 +3,7 @@ import 'package:clean_car_customer_v2/constants/res/color_manager.dart';
 import 'package:clean_car_customer_v2/features/splash/widgets/splash_begin_animated_icon.dart';
 import 'package:clean_car_customer_v2/utils/pager/pager.dart';
 import 'package:clean_car_customer_v2/utils/pager/transition.dart';
+import 'package:clean_car_customer_v2/utils/services/firebase/analytics/analytic_logger.dart';
 import 'package:flutter/material.dart';
 
 import '../../data/services/local/storage_service.dart';
@@ -24,8 +25,14 @@ class _SplashBeginScreenState extends State<SplashBeginScreen> {
   void initState() {
     Timer(const Duration(milliseconds: 1500), () {
       if (locator.get<StorageService>().getAccessToken() != null) {
+        locator.get<EventLogger>().logOpenApp(data: {
+          "logged_in":true
+        });
         PageTransitionUtils.navigateWithFadeOutTransition(context, Pager.main);
       } else {
+        locator.get<EventLogger>().logOpenApp(data: {
+          "logged_in":false
+        });
         PageTransitionUtils.navigateWithFadeOutTransition(context, Pager.login);
       }
     });

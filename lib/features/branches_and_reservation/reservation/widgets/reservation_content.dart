@@ -13,7 +13,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../locator.dart';
 import '../../../../utils/pager/transition.dart';
+import '../../../../utils/services/firebase/analytics/analytic_logger.dart';
+import '../../../../utils/services/firebase/analytics/event.dart';
 import '../cubit/reservation_cubit.dart';
 import '../data/model/res/reservation_parameters_res_model.dart';
 
@@ -67,6 +70,28 @@ class ReservationContent extends StatelessWidget {
                       child: CustomButton(
                         frontText: context.locale.makereservation,
                         onPressed: () {
+                          locator.get<EventLogger>().logEvent(event: Event.reservation_button_pressed,data: {
+                            "branch": context
+                                .read<ReservationCubit>()
+                                .selectedBranch
+                                .value!,
+                            "car": context
+                                .read<ReservationCubit>()
+                                .selectedCar
+                                .value!,
+                            "service": context
+                                .read<ReservationCubit>()
+                                .selectedService
+                                .value!,
+                            "date": context
+                                .read<ReservationCubit>()
+                                .selectedDate
+                                .value!,
+                            "time": context
+                                .read<ReservationCubit>()
+                                .selectedTime
+                                .value!,
+                          });
                           Go.to(Pager.reservationDetail(
                               isNew: true,
                               branch: context

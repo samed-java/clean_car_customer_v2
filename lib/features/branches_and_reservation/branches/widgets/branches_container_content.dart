@@ -5,6 +5,8 @@ import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
 import 'package:clean_car_customer_v2/features/branches_and_reservation/branches/widgets/branches_filter_dialog.dart';
 import 'package:clean_car_customer_v2/features/branches_and_reservation/branches/widgets/detailed_branch_card.dart';
 import 'package:clean_car_customer_v2/features/home/widgets/filter_dialog.dart';
+import 'package:clean_car_customer_v2/locator.dart';
+import 'package:clean_car_customer_v2/utils/services/firebase/analytics/analytic_logger.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,6 +30,7 @@ class BranchesContent extends StatelessWidget {
                 focusNode: context.read<HomeCubit>().focusNode,
                 searchController: context.read<HomeCubit>().searchController,
                 onSubmit: () {
+                  locator.get<EventLogger>().logSearch(searchTerm: context.read<HomeCubit>().searchController.text);
                   context.read<HomeCubit>().execute();
                 },
               ),
@@ -47,7 +50,7 @@ class BranchesContent extends StatelessWidget {
                   ],
                 );
               }
-              return SizedBox.shrink();
+              return const SizedBox.shrink();
             }),
             FilterButton(
               onPressed: () {

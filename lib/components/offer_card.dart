@@ -3,10 +3,14 @@ import 'package:clean_car_customer_v2/features/offers/data/model/res/offers_res_
 import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
 import 'package:clean_car_customer_v2/utils/pager/go.dart';
 import 'package:clean_car_customer_v2/utils/pager/pager.dart';
+import 'package:clean_car_customer_v2/utils/services/firebase/analytics/event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bounce/flutter_bounce.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import '../locator.dart';
+import '../utils/services/firebase/analytics/analytic_logger.dart';
 
 class OfferCard extends StatelessWidget {
   const OfferCard({super.key, required this.offer});
@@ -17,6 +21,7 @@ class OfferCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Bounce(
       onPressed: () {
+        locator.get<EventLogger>().logEvent(event: Event.select_branch,data: offer.toJson());
         Go.to(Pager.detialedOffer(offer));
       },
       duration: const Duration(milliseconds: 100),

@@ -13,6 +13,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../locator.dart';
+import '../../utils/services/firebase/analytics/analytic_logger.dart';
+import '../../utils/services/firebase/analytics/event.dart';
+
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
 
@@ -114,6 +118,7 @@ class _MainScreenState extends State<MainScreen> {
               buildTabItem(1, IconAssets.map, context.locale.branches),
               FloatingActionButton(
                 onPressed: () {
+                  locator.get<EventLogger>().logEvent(event: Event.go_to_reservation);
                   Go.to(Pager.reservation());
                 },
                 elevation: 0,

@@ -7,12 +7,16 @@ import 'package:clean_car_customer_v2/features/home/cubit/home_cubit.dart';
 import 'package:clean_car_customer_v2/features/home/data/model/res/regions_res_model.dart';
 import 'package:clean_car_customer_v2/features/home/data/model/res/services_res_model.dart';
 import 'package:clean_car_customer_v2/features/home/widgets/star_box.dart';
+import 'package:clean_car_customer_v2/locator.dart';
 import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
 import 'package:clean_car_customer_v2/utils/pager/go.dart';
+import 'package:clean_car_customer_v2/utils/services/firebase/analytics/analytic_logger.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import '../../../utils/services/firebase/analytics/event.dart';
 
 class FilterBoxContent extends StatefulWidget {
   const FilterBoxContent({super.key, required this.topContext});
@@ -236,6 +240,7 @@ class _FilterBoxContentState extends State<FilterBoxContent> {
               CustomButton(
                   frontText: context.locale.confirm,
                   onPressed: () {
+                    locator.get<EventLogger>().logEvent(event: Event.apply_filter);
                     cubit.execute();
                     Go.back();
                   })

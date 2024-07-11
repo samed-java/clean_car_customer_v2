@@ -14,6 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rxdart/rxdart.dart';
 
+import '../../../../../utils/services/firebase/analytics/analytic_logger.dart';
 import '../repository/terms_repository.dart';
 
 part 'sign_up_state.dart';
@@ -85,6 +86,10 @@ class SignUpCubit extends Cubit<SignUpState> with BaseErrorHandler {
           email: emailController.text));
       if (result.token != null) {
         _storageService.setAccessToken(result.token);
+        locator.get<EventLogger>().logSignUp(data:{
+          "phone":result.user.phone,
+          "name":result.user.name,
+        });
         emit(SignUpRegistered());
       }
       // else {

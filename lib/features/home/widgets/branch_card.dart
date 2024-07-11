@@ -1,8 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
 import 'package:clean_car_customer_v2/features/home/data/model/res/branchs_res_model.dart';
+import 'package:clean_car_customer_v2/locator.dart';
 import 'package:clean_car_customer_v2/utils/pager/go.dart';
 import 'package:clean_car_customer_v2/utils/pager/pager.dart';
+import 'package:clean_car_customer_v2/utils/services/firebase/analytics/analytic_logger.dart';
+import 'package:clean_car_customer_v2/utils/services/firebase/analytics/event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bounce/flutter_bounce.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -16,6 +19,7 @@ class BranchCard extends StatelessWidget {
     return Bounce(
       duration: const Duration(milliseconds: 100),
       onPressed: () {
+        locator.get<EventLogger>().logEvent(event: Event.select_branch,data: model.toJson());
         Go.to(Pager.branch(model));
       },
       child: Hero(

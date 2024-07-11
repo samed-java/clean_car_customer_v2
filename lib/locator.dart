@@ -2,6 +2,7 @@ import 'package:clean_car_customer_v2/features/profile_section/reservation_detai
 import 'package:clean_car_customer_v2/features/profile_section/reservations/data/repo/reservations_repository.dart';
 import 'package:clean_car_customer_v2/features/profile_section/settings/features/faq/data/repository/faq_repository.dart';
 import 'package:clean_car_customer_v2/utils/language/repo/language_repository.dart';
+import 'package:clean_car_customer_v2/utils/services/firebase/analytics/analytic_logger.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
@@ -38,6 +39,7 @@ Future<void> setUpLocator() async {
     ..interceptors.add(ClientInterceptor());
 
   locator.registerLazySingleton<Dio>(() => clientGlobal);
+  locator.registerLazySingleton<EventLogger>(() => EventLogger()..init());
   locator.registerLazySingleton<GlobalService>(() => GlobalService());
   locator.registerLazySingleton<LanguageRepository>(() => LanguageRepository());
   locator.registerLazySingleton<SignUpRepository>(() => SignUpRepository());

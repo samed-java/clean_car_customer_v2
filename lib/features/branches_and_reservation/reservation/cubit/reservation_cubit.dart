@@ -7,6 +7,8 @@ import 'package:clean_car_customer_v2/features/branches_and_reservation/reservat
 import 'package:clean_car_customer_v2/features/branches_and_reservation/reservation/data/repo/reservation_submit_repo.dart';
 import 'package:clean_car_customer_v2/locator.dart';
 import 'package:clean_car_customer_v2/utils/errors/base_error_handler.dart';
+import 'package:clean_car_customer_v2/utils/services/firebase/analytics/analytic_logger.dart';
+import 'package:clean_car_customer_v2/utils/services/firebase/analytics/event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
@@ -151,6 +153,7 @@ class ReservationCubit extends Cubit<ReservationState> with BaseErrorHandler {
       } else {
         result = await locator.get<ReservationSubmitRepo>().send(model);
       }
+      locator.get<EventLogger>().logEvent(event: Event.confirm_reservation,data: model.toJson());
       emit(ReservationSuccess());
       inProgress = false;
     }, socketExceptionAction: (e) {

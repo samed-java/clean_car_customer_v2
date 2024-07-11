@@ -9,6 +9,7 @@ import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_e
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../utils/services/firebase/analytics/analytic_logger.dart';
 import '../../../../../utils/services/firebase/firebase_service.dart';
 import '../../../../../utils/services/navigation_service/navigation_service.dart';
 import '../../../../../utils/snacks/snacks.dart';
@@ -43,6 +44,10 @@ class OTPCubit extends Cubit<OTPState> with BaseErrorHandler {
           await locator.get<StorageService>().setLangCode("az");
         }
         await FirebaseService.firebaseMessaging.subscribeToTopic("customer${_storageService.getPhoneNumber()!}").then((value) => print("subscribed"));
+        locator.get<EventLogger>().logLogin(data:{
+          "phone":result.user.phone,
+          "name":result.user.name,
+        });
         emit(OTPRegistered());
       } else {
         _storageService.setPhoneNumber(result.user.phone.toString());
