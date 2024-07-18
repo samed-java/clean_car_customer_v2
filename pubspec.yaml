@@ -35,6 +35,11 @@ dependencies:
   get_it: any
   flutter_bloc: any
 
+  #facebook
+  facebook_app_events: ^0.19.2
+  flutter_meta_sdk: ^1.0.2
+  app_tracking_transparency: any
+
   #firebase
   firebase_messaging: any
   firebase_core: ^2.24.2

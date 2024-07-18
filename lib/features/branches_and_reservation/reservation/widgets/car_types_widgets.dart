@@ -47,7 +47,7 @@ class _CarTypesWidgetsState extends State<CarTypesWidgets> {
                   ),
                   Gaps.h10,
                   SizedBox(
-                    height: 110.h,
+                    height: 120.h,
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       itemCount: snapshot.data!.services!.length,

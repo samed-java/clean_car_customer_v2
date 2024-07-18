@@ -5,7 +5,7 @@ import 'package:clean_car_customer_v2/utils/services/firebase/firebase_service.d
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:location/location.dart';
-
+import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'data/services/local/storage_service.dart';
 
 void main() async {
@@ -19,6 +19,14 @@ init() async {
   WidgetsFlutterBinding.ensureInitialized();
   // await Permission.notification.request();
   await FirebaseService.initializeFirebase();
+  try {
+    var tracking = await AppTrackingTransparency.requestTrackingAuthorization();
+    if(tracking == TrackingStatus.authorized){
+      AppTrackingTransparency.getAdvertisingIdentifier();
+    }
+  } on PlatformException {
+  }
+
   Location.instance.requestPermission();
   await setUpLocator();
   await locator.get<StorageService>().init();

@@ -61,5 +61,22 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>CFBundleURLTypes</key>
+    <array>
+      <dict>
+      <key>CFBundleURLSchemes</key>
+      <array>
+        <string>fb1180200159873112</string>
+      </array>
+      </dict>
+    </array>
+    <key>FacebookAppID</key>
+    <string>1180200159873112</string>
+    <key>FacebookClientToken</key>
+    <string>b5ccfcb4af7111db65a8491d1a357f5b</string>
+    <key>FacebookDisplayName</key>
+    <string>Clean Car Customer</string>
+    <key>NSUserTrackingUsageDescription</key>
+    <string>This identifier will be used to deliver personalized ads to you.</string>
 </dict>
 </plist>

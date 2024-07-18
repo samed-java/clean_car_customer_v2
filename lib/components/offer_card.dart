@@ -21,7 +21,7 @@ class OfferCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Bounce(
       onPressed: () {
-        locator.get<EventLogger>().logEvent(event: Event.select_branch,data: offer.toJson());
+        locator.get<EventLogger>().logEvent(event: Event.select_offer,data: offer.toJson());
         Go.to(Pager.detialedOffer(offer));
       },
       duration: const Duration(milliseconds: 100),

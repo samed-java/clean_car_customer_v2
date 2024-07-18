@@ -89,6 +89,7 @@ class SignUpCubit extends Cubit<SignUpState> with BaseErrorHandler {
         locator.get<EventLogger>().logSignUp(data:{
           "phone":result.user.phone,
           "name":result.user.name,
+          "email":result.user.email
         });
         emit(SignUpRegistered());
       }
