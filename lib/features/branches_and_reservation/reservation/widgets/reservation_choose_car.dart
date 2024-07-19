@@ -60,7 +60,7 @@ class ReservationChooseCar extends StatelessWidget {
                                         await Future.delayed(
                                             DurationConstant.ms300);
                                         Go.back();
-                                      });
+                                      }, cubit: cubit);
                                     },
                                     readOnly: true,
                                     cursorColor: ColorManager.thirdBlack,

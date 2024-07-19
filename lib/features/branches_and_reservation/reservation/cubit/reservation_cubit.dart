@@ -145,8 +145,9 @@ class ReservationCubit extends Cubit<ReservationState> with BaseErrorHandler {
           price: selectedService.value!.price,
           status: (!isNew && !isRenew) ? 1 : null);
       var result;
+      print(model.toJson());
+
       if (!isNew && reservationId != null && !isRenew) {
-        print(model.toJson());
         result = await locator
             .get<ReservationUpdateRepo>()
             .send(model, path: {"id": reservationId});

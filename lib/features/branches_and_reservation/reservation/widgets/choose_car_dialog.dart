@@ -1,4 +1,6 @@
+import 'package:clean_car_customer_v2/components/custom_button.dart';
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
+import 'package:clean_car_customer_v2/features/branches_and_reservation/reservation/cubit/reservation_cubit.dart';
 import 'package:clean_car_customer_v2/features/branches_and_reservation/reservation/widgets/choose_car_radio_button.dart';
 import 'package:clean_car_customer_v2/features/profile_section/my_cars/data/model/res/my_cars_res_model.dart';
 import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
@@ -8,17 +10,19 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../components/custom_searchbar.dart';
+import '../../../profile_section/my_cars/widgets/car_info_dialog.dart';
 import '../data/model/res/reservation_parameters_res_model.dart';
 import 'choose_branch_content.dart';
 
 void chooseCarDialog(
-  BuildContext context, {
+  BuildContext c, {
   required List<Car> cars,
   required Car? car,
+      required ReservationCubit cubit,
   required Function(Car) onSelect,
 }) {
   showDialog(
-    context: context,
+    context: c,
     builder: (BuildContext context) {
       return AlertDialog(
         backgroundColor: ColorManager.mainBackgroundColor,
@@ -67,6 +71,13 @@ void chooseCarDialog(
                   onSelect: onSelect,
                   selected: car,
                 ),
+                CustomButton(frontText: context.locale.addcar, onPressed: (){
+                  Go.back();
+                  carInfoDialog(c, isNew: true,
+                      onFinish: (value) {
+                        cubit.execute();
+                      });
+                })
               ],
             ),
           ),

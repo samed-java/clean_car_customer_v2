@@ -13,7 +13,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 void carInfoDialog(BuildContext c,
-    {isNew = false, int? selectedCarId, Function(dynamic)? onFinish}) {
+    {isNew = false, int? selectedCarId,MyCarsCubit? carsCubit, Function(dynamic)? onFinish}) {
   assert(isNew || selectedCarId != null);
   showDialog(
     context: c,
@@ -33,7 +33,7 @@ void carInfoDialog(BuildContext c,
           child: SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
             child: Form(
-              key: c.read<MyCarsCubit>().formKey,
+              key: carsCubit!=null ? carsCubit.formKey : c.read<MyCarsCubit>().formKey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -50,6 +50,7 @@ void carInfoDialog(BuildContext c,
                       InkWell(
                         onTap: () {
                           Go.back();
+                          carsCubit!=null ? carsCubit.clearData():
                           c.read<MyCarsCubit>().clearData();
                         },
                         child: SizedBox(
@@ -76,23 +77,29 @@ void carInfoDialog(BuildContext c,
                   Gaps.h2,
                   CustomDropdown<int>(
                     labelText: context.locale.vehicletype,
-                    selectedItems: c.read<MyCarsCubit>().selectedBanType,
+                    selectedItems: carsCubit!=null ? carsCubit.selectedBanType: c.read<MyCarsCubit>().selectedBanType,
                     child: (data) => Text(data ?? "------"),
                     validator: (id) {
                       if (id == null) {
                         return "Ban bos ola bilmez";
                       }
                     },
-                    items: c.read<MyCarsCubit>().banTypesIdToName,
+                    items: carsCubit!=null ? carsCubit.banTypesIdToName : c.read<MyCarsCubit>().banTypesIdToName,
                     onChanged: (value) {
-                      c.read<MyCarsCubit>().selectedBanType = value;
+                      if(carsCubit!=null){
+                        carsCubit.selectedBanType = value;
+                      }else {
+                        c
+                            .read<MyCarsCubit>()
+                            .selectedBanType = value;
+                      }
                     },
                   ),
                   Gaps.h16,
                   TextFieldWidget(
                     headerText: context.locale.name,
                     hintText: "Mercedes E-Class",
-                    controller: c.read<MyCarsCubit>().nameController,
+                    controller: carsCubit!=null ? carsCubit.nameController : c.read<MyCarsCubit>().nameController,
                     validator: (value) {
                       if ((value?.isEmpty) ?? true) {
                         return context.locale.notEmptyName;
@@ -103,7 +110,7 @@ void carInfoDialog(BuildContext c,
                   TextFieldWidget(
                     headerText: context.locale.number,
                     hintText: "10-OO-001",
-                    controller: c.read<MyCarsCubit>().numberController,
+                    controller:carsCubit!=null ? carsCubit.numberController: c.read<MyCarsCubit>().numberController,
                     capitalize: true,
                     inputFormatters: [
                       MaskTextInputFormatter(mask:"##-AA-###")
@@ -120,6 +127,7 @@ void carInfoDialog(BuildContext c,
                       : CustomButton(
                           frontText: context.locale.delete,
                           onPressed: () {
+                            carsCubit!=null ? carsCubit.deleteCar(id: selectedCarId!):
                             c.read<MyCarsCubit>().deleteCar(id: selectedCarId!);
                           },
                           borderColor: ColorManager.mainRed,
@@ -142,8 +150,10 @@ void carInfoDialog(BuildContext c,
                         //         .isNotEmpty &&
                         //     c.read<MyCarsCubit>().selectedBanType != null) {
                         if (isNew) {
+                          carsCubit!=null ? carsCubit.addCar():
                           c.read<MyCarsCubit>().addCar();
                         } else {
+                          carsCubit!=null ? carsCubit.updateCar(id: selectedCarId!):
                           c.read<MyCarsCubit>().updateCar(id: selectedCarId!);
                         }
                         //}
