@@ -1,5 +1,7 @@
 import UIKit
 import Flutter
+//import FBSDKSettings
+//import FBSDKCoreKit
 // import Firebase
 
 
@@ -10,6 +12,8 @@ import Flutter
     _ application: UIApplication,
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
+//      FBAdSettings.setAdvertiserTrackingEnabled(true)
+//      Settings.shared.isAdvertiserTrackingEnabled = true
 //     FirebaseApp.configure()
     GeneratedPluginRegistrant.register(with: self)
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)

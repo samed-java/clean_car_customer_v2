@@ -185,7 +185,6 @@ DEPENDENCIES:
   - app_tracking_transparency (from `.symlinks/plugins/app_tracking_transparency/ios`)
   - facebook_app_events (from `.symlinks/plugins/facebook_app_events/ios`)
   - FacebookSDK
-  - FBSDKCoreKit
   - firebase_analytics (from `.symlinks/plugins/firebase_analytics/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
   - firebase_messaging (from `.symlinks/plugins/firebase_messaging/ios`)
@@ -300,6 +299,6 @@ SPEC CHECKSUMS:
   sqflite: 31f7eba61e3074736dff8807a9b41581e4f7f15a
   url_launcher_ios: bbd758c6e7f9fd7b5b1d4cde34d2b95fcce5e812
 
-PODFILE CHECKSUM: e61909931ef7669faf9b1ef912d64183e854fed9
+PODFILE CHECKSUM: 682975d453d3d2dc7b62c1d08bb7ab267badda51
 
 COCOAPODS: 1.15.2
