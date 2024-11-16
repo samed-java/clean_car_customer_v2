@@ -15,13 +15,13 @@ PODS:
   - FacebookSDK/AEMKit (11.2.1):
     - FacebookSDK/Basics
   - FacebookSDK/Basics (11.2.1)
-  - FBAEMKit (17.0.2):
-    - FBSDKCoreKit_Basics (= 17.0.2)
-  - FBAudienceNetwork (6.15.1)
-  - FBSDKCoreKit (17.0.2):
-    - FBAEMKit (= 17.0.2)
-    - FBSDKCoreKit_Basics (= 17.0.2)
-  - FBSDKCoreKit_Basics (17.0.2)
+  - FBAEMKit (17.4.0):
+    - FBSDKCoreKit_Basics (= 17.4.0)
+  - FBAudienceNetwork (6.16.0)
+  - FBSDKCoreKit (17.4.0):
+    - FBAEMKit (= 17.4.0)
+    - FBSDKCoreKit_Basics (= 17.4.0)
+  - FBSDKCoreKit_Basics (17.4.0)
   - Firebase/Analytics (10.18.0):
     - Firebase/Core
   - Firebase/Core (10.18.0):
@@ -265,10 +265,10 @@ SPEC CHECKSUMS:
   app_tracking_transparency: e169b653478da7bb15a6c61209015378ca73e375
   facebook_app_events: acb7c266406d3e3592bcf846d7184172ecfd6492
   FacebookSDK: b9c123df2ed622faadd8b546632ae8048d1f9b28
-  FBAEMKit: 619f96ea65427e8afca240d5b0f4703738dfdf5c
-  FBAudienceNetwork: 80871c3b3057e89ab36d9eb79344be20377e3994
-  FBSDKCoreKit: a5f384db2e9ee84e98494fed8f983d2bd79accff
-  FBSDKCoreKit_Basics: d35c775aaf243a2d731dfae7be3a74b1987285ab
+  FBAEMKit: 58cb5f302cdd715a56d4c1d0dfdd2e423ac1421a
+  FBAudienceNetwork: d1670939884e3a2e0ad98dca98d7e0c841417228
+  FBSDKCoreKit: 94d7461d0cecf441b1ba7c41acfff41daa8ccd41
+  FBSDKCoreKit_Basics: 151b43db8b834d3f0e02f95d36a44ffd36265e45
   Firebase: 414ad272f8d02dfbf12662a9d43f4bba9bec2a06
   firebase_analytics: b3d6dd14c61549a29abb10e9843446a4d8bb53eb
   firebase_core: 0af4a2b24f62071f9bf283691c0ee41556dcb3f5

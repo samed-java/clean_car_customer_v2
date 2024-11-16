@@ -46,6 +46,8 @@ dependencies:
   firebase_analytics: any
   permission_handler: any
   flutter_local_notifications: any
+  carousel_slider: any
+  smooth_page_indicator: any
   #design
   animate_do: ^3.0.2
   searchfield: ^0.8.9

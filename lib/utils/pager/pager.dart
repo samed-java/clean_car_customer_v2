@@ -37,6 +37,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../features/branches_and_reservation/reservation/data/model/res/reservation_parameters_res_model.dart';
+import '../../features/notification/notification_page.dart';
 import '../../features/offers/cubit/offers_cubit.dart';
 import '../../features/offers/data/model/res/offers_res_model.dart';
 import '../../features/profile_section/my_cars/cubit/my_cars_cubit.dart';
@@ -193,6 +194,8 @@ class Pager {
         create: (context) => FaqCubit()..execute(),
         child: const FAQScreen(),
       );
+
+  static Widget get notifications => NotificationPage();
 
   static Widget rating({
     required String reservationId,

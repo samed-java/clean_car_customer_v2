@@ -11,12 +11,14 @@ class ImageAssets {
   static String logo = '$imagePath/logo.svg';
   static String sedan = '$imagePath/sedan.svg';
   static String jeep = '$imagePath/jeep.svg';
+  static String evacuatorAd = '$imagePath/evacuator_ad.svg';
   static String termsAndAgreementLogo =
       '$imagePath/terms_and_agreement_logo.svg';
 }
 
 class IconAssets {
   static String home = '$iconPath/home.svg';
+  static String web = '$iconPath/web.svg';
   static String profile = '$iconPath/profile.svg';
   static String map = '$iconPath/map.svg';
   static String starFill = '$iconPath/star_fill.svg';
@@ -38,6 +40,7 @@ class IconAssets {
   static String location = '$iconPath/location.svg';
   static String card = '$iconPath/card.svg';
   static String cash = '$iconPath/cash.svg';
+  static String notificationIcon = '$iconPath/notification_icon.svg';
 
   // Washing Types
   static String carAuto = '$iconPath/car_auto.svg';

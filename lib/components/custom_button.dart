@@ -13,6 +13,7 @@ class CustomButton extends StatelessWidget {
   late double? height;
   late double? width;
   final String frontText;
+  final Widget? prefixIcon;
   late Function? onPressed;
   late int? time;
   late bool? isDisable;
@@ -29,7 +30,8 @@ class CustomButton extends StatelessWidget {
       this.radius,
       this.isDisable,
       this.disableColor,
-      this.time})
+      this.time,
+      this.prefixIcon})
       : super(key: key) {
     backgroundColor ??= ColorManager.mainBlue;
     height ??= 44.h;
@@ -53,11 +55,16 @@ class CustomButton extends StatelessWidget {
                 color: disableColor,
                 borderRadius: BorderRadius.circular(radius!),
               ),
-              child: Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(4.0),
-                  child: Text(frontText,
-                      style: getButtonStyle(color: foregroundColor!)),
+              child: Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    if (prefixIcon != null) ...[prefixIcon!, 8.horizontalSpace],
+                    Text(frontText,
+                        style: getButtonStyle(color: foregroundColor!)),
+                  ],
                 ),
               ),
             ),
@@ -76,11 +83,19 @@ class CustomButton extends StatelessWidget {
                   color: backgroundColor,
                   borderRadius: BorderRadius.circular(radius!),
                 ),
-                child: Center(
-                  child: Padding(
-                    padding: const EdgeInsets.all(4.0),
-                    child: Text(frontText,
-                        style: getButtonStyle(color: foregroundColor!)),
+                child: Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      if (prefixIcon != null) ...[
+                        prefixIcon!,
+                        8.horizontalSpace
+                      ],
+                      Text(frontText,
+                          style: getButtonStyle(color: foregroundColor!)),
+                    ],
                   ),
                 ),
               ),
