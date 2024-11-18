@@ -48,7 +48,7 @@ class BranchInfoWidget extends StatelessWidget {
                           TextSpan(
                             recognizer: TapGestureRecognizer()
                   ..onTap = () async {
-                      await call(model!.phone);
+                      await call(model!.phone!);
                   },
                             text: model!.phone.toString(),
                             style: getMediumStyle(

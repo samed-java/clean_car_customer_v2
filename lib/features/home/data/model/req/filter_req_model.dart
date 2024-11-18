@@ -5,6 +5,7 @@ class FilterReqModel extends BaseRequestModel{
   int? cityId;
   int? regionId;
   int? villageId;
+  bool? isFullTime;
   String? text;
   String? lat;
   String? lon;
@@ -14,6 +15,7 @@ class FilterReqModel extends BaseRequestModel{
     this.cityId,
     this.regionId,
     this.villageId,
+    this.isFullTime,
     this.text,
     this.lat,
     this.lon
@@ -26,6 +28,7 @@ class FilterReqModel extends BaseRequestModel{
       "city_id":cityId,
       "region_id":regionId,
       "village_id":villageId,
+      "is_fullTime":isFullTime,
       "text":text,
       "lat":lat,
       "lon":lon

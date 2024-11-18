@@ -34,7 +34,7 @@ class BranchCarType extends StatelessWidget {
                     tabs: [
                       ...services!.map((e) {
                         return Tab(
-                          text: e.ban,
+                          text: e.banId,
                         );
                       })
                     ],

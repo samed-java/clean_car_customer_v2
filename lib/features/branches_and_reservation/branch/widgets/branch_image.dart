@@ -10,7 +10,7 @@ class BranchImage extends StatefulWidget {
     required this.imgUrls,
   });
 
-  final List<model.Image> imgUrls;
+  final List<model.ImageModel> imgUrls;
 
   @override
   State<BranchImage> createState() => _BranchImageState();
@@ -27,7 +27,7 @@ class _BranchImageState extends State<BranchImage> {
             "https://wavescarwash.co.uk/images/pageImages/Coventry4RebrandPhotos-23102069.jpeg",
             // Diğer yerel fotoğraflar buraya eklenebilir
           ]
-        : widget.imgUrls.map((image) => image.image).toList();
+        : widget.imgUrls.map((image) => image.image!).toList();
 
     return Stack(
       children: [

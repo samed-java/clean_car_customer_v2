@@ -80,7 +80,7 @@ class _BranchScreenState extends State<BranchScreen> {
                         Padding(
                           padding: Paddings.vertical16,
                           child: Text(
-                            widget.model.title,
+                            widget.model.title!,
                             // overflow: TextOverflow.ellipsis,
                             style: getSemiBoldStyle(
                                 color: ColorManager.secondaryBlack,
@@ -113,8 +113,8 @@ class _BranchScreenState extends State<BranchScreen> {
                         onPressed: () {
                           MapOpener.open(
                               context: context,
-                              lat: double.parse(widget.model.lat),
-                              long: double.parse(widget.model.lon));
+                              lat: double.parse(widget.model.lat!),
+                              long: double.parse(widget.model.lon!));
                         },
                         foregroundColor: ColorManager.mainBlue,
                         backgroundColor: ColorManager.mainBackgroundColor,
@@ -126,11 +126,11 @@ class _BranchScreenState extends State<BranchScreen> {
                             locator.get<EventLogger>().logEvent(event: Event.go_to_reservation,data: widget.model.toJson());
                             Go.to(Pager.reservation(
                                 branch: Branch(
-                              id: widget.model.id,
-                              washingName: widget.model.title,
-                              address: widget.model.address,
-                              lat: widget.model.lat,
-                              lon: widget.model.lon,
+                              id: widget.model.id!,
+                              washingName: widget.model.title!,
+                              address: widget.model.address!,
+                              lat: widget.model.lat!,
+                              lon: widget.model.lon!,
                             )));
                           }),
                       SizedBox(
@@ -165,7 +165,7 @@ class _BranchScreenState extends State<BranchScreen> {
                     Gaps.w16,
                     Expanded(
                       child: Text(
-                        widget.model.title,
+                        widget.model.title!,
                         overflow: TextOverflow.ellipsis,
                         style: getSemiBoldStyle(
                             color: ColorManager.secondaryBlack, fontSize: 18),

@@ -116,7 +116,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 itemCount: context
                                     .read<HomeCubit>()
                                     .mainResult!
-                                    .washings
+                                    .washings!
                                     .length,
                                 itemBuilder: (context, index) {
                                   return Padding(
@@ -125,7 +125,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       model: context
                                           .read<HomeCubit>()
                                           .mainResult!
-                                          .washings[index],
+                                          .washings![index],
                                     ),
                                   );
                                 },
@@ -155,7 +155,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             );
                             // widget.onPageChanged?.call(1);
                           },
-                          headerText: context.locale.centersnearyou,
+                          headerText: "7/24",
                           buttonText: context.locale.all,
                           textStyle: getUnderlineStyle(
                               color: ColorManager.mainBlue, fontSize: 16),
@@ -175,7 +175,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 itemCount: context
                                     .read<HomeCubit>()
                                     .mainResult!
-                                    .washings
+                                    .fullTimeWashings!
                                     .length,
                                 itemBuilder: (context, index) {
                                   return Padding(
@@ -184,7 +184,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       model: context
                                           .read<HomeCubit>()
                                           .mainResult!
-                                          .washings[index],
+                                          .fullTimeWashings![index],
                                     ),
                                   );
                                 },
@@ -212,7 +212,25 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       Gaps.h10,
-                      BannerWidget(),
+                      SizedBox(
+                        child: BlocBuilder<HomeCubit, HomeState>(
+                          builder: (context, state) {
+                            if (state is HomeSuccess) {
+                              //state.data.washings.length;
+                              return BannerWidget(banners: context.read<HomeCubit>().mainResult!.banners!,);
+                            } else if (state is HomeLoading) {
+                              return const Center(
+                                child: CupertinoActivityIndicator(),
+                              );
+                            } else if (state is HomeFail) {
+                              return Center(
+                                child: Text(state.message),
+                              );
+                            }
+                            return const SizedBox.shrink();
+                          },
+                        ),
+                      ),
                       Gaps.h16,
                       const EvacuatorAdWidget(),
                       Gaps.h16,

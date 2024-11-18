@@ -30,7 +30,9 @@ class BranchesContent extends StatelessWidget {
                 focusNode: context.read<HomeCubit>().focusNode,
                 searchController: context.read<HomeCubit>().searchController,
                 onSubmit: () {
-                  locator.get<EventLogger>().logSearch(searchTerm: context.read<HomeCubit>().searchController.text);
+                  locator.get<EventLogger>().logSearch(
+                      searchTerm:
+                          context.read<HomeCubit>().searchController.text);
                   context.read<HomeCubit>().execute();
                 },
               ),
@@ -68,30 +70,33 @@ class BranchesContent extends StatelessWidget {
                   onRefresh: () async {
                     context.read<HomeCubit>().execute();
                   },
-                  child:
-                      context.read<HomeCubit>().filteredResult!.washings.isEmpty
-                          ? const Center(
-                              child: Text("Empty"),
-                            )
-                          : ListView.builder(
-                              physics: const BouncingScrollPhysics(),
-                              itemBuilder: (context, index) {
-                                return Padding(
-                                  padding: Paddings.vertical8,
-                                  child: DetailedBranchCard(
-                                    model: context
-                                        .read<HomeCubit>()
-                                        .filteredResult!
-                                        .washings[index],
-                                  ),
-                                );
-                              },
-                              itemCount: context
-                                  .read<HomeCubit>()
-                                  .filteredResult!
-                                  .washings
-                                  .length,
-                            ),
+                  child: context
+                          .read<HomeCubit>()
+                          .filteredResult!
+                          .washings!
+                          .isEmpty
+                      ? const Center(
+                          child: Text("Empty"),
+                        )
+                      : ListView.builder(
+                          physics: const BouncingScrollPhysics(),
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: Paddings.vertical8,
+                              child: DetailedBranchCard(
+                                model: context
+                                    .read<HomeCubit>()
+                                    .filteredResult!
+                                    .washings![index],
+                              ),
+                            );
+                          },
+                          itemCount: context
+                              .read<HomeCubit>()
+                              .filteredResult!
+                              .washings!
+                              .length,
+                        ),
                 );
               } else if (state is HomeLoading) {
                 return const Center(

@@ -38,8 +38,8 @@ class DetailedBranchCard extends StatelessWidget {
                   right: 0,
                   bottom: 0,
                   child: CachedNetworkImage(
-                    imageUrl: model.images.isNotEmpty
-                        ? model.images.first.image
+                    imageUrl: model.images!.isNotEmpty
+                        ? model.images!.first.image!
                         : "https://wavescarwash.co.uk/images/pageImages/Coventry4RebrandPhotos-23102069.jpeg",
                     fit: BoxFit.cover,
                   ),
@@ -74,7 +74,7 @@ class DetailedBranchCard extends StatelessWidget {
                           Material(
                             color: Colors.transparent,
                             child: Text(
-                              model.title,
+                              model.title!,
                               overflow: TextOverflow.ellipsis,
                               style: getSemiBoldStyle(
                                   color: ColorManager.mainWhite, fontSize: 16),
@@ -83,7 +83,7 @@ class DetailedBranchCard extends StatelessWidget {
                           Material(
                             color: Colors.transparent,
                             child: Text(
-                              model.address,
+                              model.address!,
                               overflow: TextOverflow.ellipsis,
                               style: getMediumStyle(
                                   color: ColorManager.mainWhite, fontSize: 14),
@@ -113,7 +113,7 @@ class DetailedBranchCard extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               Text(
-                                model.rating,
+                                model.rating!,
                                 style: getMediumStyle(
                                     color: ColorManager.mainBlack,
                                     fontSize: 14),

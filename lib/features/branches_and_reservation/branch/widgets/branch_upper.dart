@@ -24,7 +24,7 @@ class BranchUpper extends StatelessWidget {
         SizedBox(
             height: 350.h,
             child: BranchImage(
-              imgUrls: model.images,
+              imgUrls: model.images!,
             )),
         Positioned(
           top: topSafeAreaHeight,
@@ -44,7 +44,7 @@ class BranchUpper extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Text(
-                      model.rating,
+                      model.rating!,
                       style: getMediumStyle(
                           color: ColorManager.mainBlack, fontSize: 14),
                     ),

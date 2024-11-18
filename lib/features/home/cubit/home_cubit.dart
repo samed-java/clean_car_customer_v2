@@ -67,6 +67,9 @@ class HomeCubit extends Cubit<HomeState> with BaseErrorHandler {
   BranchsResModel? mainResult;
   BranchsResModel? filteredResult;
   LocationData? position;
+  bool isFullTime = false;
+
+  void setFullTime(bool value) => isFullTime = value;
 
 
   final List<int> _filteredParameters = [0, 0, 0, 0];
@@ -103,6 +106,7 @@ class HomeCubit extends Cubit<HomeState> with BaseErrorHandler {
             lon: position?.longitude?.toString(),
             villageId:
             selectedVillage.value == 0 ? null : selectedVillage.value,
+            isFullTime: isFullTime,
             cityId: selectedCity.value == 0 ? null : selectedCity.value,
             serviceId:
             selectedService.value == 0 ? null : selectedService.value,

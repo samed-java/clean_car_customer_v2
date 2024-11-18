@@ -17,6 +17,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../utils/services/firebase/analytics/event.dart';
+import 'branch_time_type_selection.dart';
 
 class FilterBoxContent extends StatefulWidget {
   const FilterBoxContent({super.key, required this.topContext});
@@ -52,6 +53,13 @@ class _FilterBoxContentState extends State<FilterBoxContent> {
               Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              BranchTimeTypeSelection(
+                onFullTimeStatusChanged: (isFullTime) {
+                  cubit.setFullTime(isFullTime);
+                },
+                initValue: cubit.isFullTime,
+              ),
+              Gaps.h10,
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -82,7 +90,6 @@ class _FilterBoxContentState extends State<FilterBoxContent> {
               ),
               Gaps.h10,
               // Şəhər
-
               ValueListenableBuilder<int?>(
                   valueListenable: cubit.selectedCity,
                   builder: (context, value, child) {
@@ -240,7 +247,9 @@ class _FilterBoxContentState extends State<FilterBoxContent> {
               CustomButton(
                   frontText: context.locale.confirm,
                   onPressed: () {
-                    locator.get<EventLogger>().logEvent(event: Event.apply_filter);
+                    locator
+                        .get<EventLogger>()
+                        .logEvent(event: Event.apply_filter);
                     cubit.execute();
                     Go.back();
                   })

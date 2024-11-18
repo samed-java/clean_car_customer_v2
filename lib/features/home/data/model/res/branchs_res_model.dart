@@ -1,149 +1,193 @@
 class BranchsResModel {
-  List<Washing> washings;
+  List<Washing>? washings;
+  List<Washing>? fullTimeWashings;
+  List<BannerModel>? banners;
 
   BranchsResModel({
-    required this.washings,
+    this.washings,
+    this.fullTimeWashings,
+    this.banners,
   });
 
-  factory BranchsResModel.fromJson(Map<String, dynamic> json) =>
-      BranchsResModel(
-        washings: List<Washing>.from(
-            json["washings"].map((x) => Washing.fromJson(x))),
-      );
+  factory BranchsResModel.fromJson(Map<String, dynamic> json) => BranchsResModel(
+    washings: json["washings"] == null ? [] : List<Washing>.from(json["washings"]!.map((x) => Washing.fromJson(x))),
+    fullTimeWashings: json["fullTimeWashings"] == null ? [] : List<Washing>.from(json["fullTimeWashings"]!.map((x) => Washing.fromJson(x))),
+    banners: json["banners"] == null ? [] : List<BannerModel>.from(json["banners"]!.map((x) => BannerModel.fromJson(x))),
+  );
 
   Map<String, dynamic> toJson() => {
-        "washings": List<dynamic>.from(washings.map((x) => x.toJson())),
-      };
+    "washings": washings == null ? [] : List<dynamic>.from(washings!.map((x) => x.toJson())),
+    "fullTimeWashings": fullTimeWashings == null ? [] : List<dynamic>.from(fullTimeWashings!.map((x) => x.toJson())),
+    "banners": banners == null ? [] : List<dynamic>.from(banners!.map((x) => x.toJson())),
+  };
+}
+
+class BannerModel {
+  int? id;
+  String? description;
+  String? link;
+  String? image;
+  String? video;
+
+  BannerModel({
+    this.id,
+    this.description,
+    this.link,
+    this.image,
+    this.video,
+  });
+
+  factory BannerModel.fromJson(Map<String, dynamic> json) => BannerModel(
+    id: json["id"],
+    description: json["description"],
+    link: json["link"],
+    image: json["image"],
+    video: json["video"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "description": description,
+    "link": link,
+    "image": image,
+    "video": video,
+  };
 }
 
 class Washing {
-  int id;
-  String title;
-  dynamic phone;
-  String startHour;
-  String endHour;
-  String address;
+  int? id;
+  int? status;
+  String? title;
+  String? phone;
+  String? startHour;
+  String? endHour;
+  String? address;
   String? description;
-  String rating;
-  String lat;
-  String lon;
+  String? rating;
+  String? lat;
+  String? lon;
   double? distance;
   String? mainImage;
-  List<Image> images;
+  List<ImageModel>? images;
   List<WashingService>? services;
 
   Washing({
-    required this.id,
-    required this.title,
-    required this.phone,
-    required this.startHour,
-    required this.endHour,
-    required this.address,
-    required this.description,
-    required this.rating,
-    required this.lat,
-    required this.lon,
-    required this.distance,
-    required this.mainImage,
-    required this.images,
-    required this.services,
+    this.id,
+    this.status,
+    this.title,
+    this.phone,
+    this.startHour,
+    this.endHour,
+    this.address,
+    this.description,
+    this.rating,
+    this.lat,
+    this.lon,
+    this.distance,
+    this.mainImage,
+    this.images,
+    this.services,
   });
 
   factory Washing.fromJson(Map<String, dynamic> json) => Washing(
-        id: json["id"],
-        title: json["title"],
-        phone: json["phone"],
-        startHour: json["start_hour"],
-        endHour: json["end_hour"],
-        address: json["address"],
-        description: json["description"],
-        rating: json["rating"],
-        lat: json["lat"],
-        lon: json["lon"],
-        distance: json["distance"]?.toDouble(),
-        mainImage: json["main_image"],
-        images: List<Image>.from(json["images"].map((x) => Image.fromJson(x))),
-        services: json["services"] != null
-            ? List<WashingService>.from(
-                json["services"].map((x) => WashingService.fromJson(x)))
-            : [],
-      );
+    id: json["id"],
+    status: json["status"],
+    title: json["title"],
+    phone: json["phone"],
+    startHour: json["start_hour"],
+    endHour: json["end_hour"],
+    address: json["address"],
+    description: json["description"],
+    rating: json["rating"],
+    lat: json["lat"],
+    lon: json["lon"],
+    distance: json["distance"]?.toDouble(),
+    mainImage: json["main_image"],
+    images: json["images"] == null ? [] : List<ImageModel>.from(json["images"]!.map((x) => ImageModel.fromJson(x))),
+    services: json["services"] == null ? [] : List<WashingService>.from(json["services"]!.map((x) => WashingService.fromJson(x))),
+  );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
-        "title": title,
-        "phone": phone,
-        "start_hour": startHour,
-        "end_hour": endHour,
-        "address": address,
-        "description": description,
-        "rating": rating,
-        "lat": lat,
-        "lon": lon,
-        "distance": distance,
-        "main_image": mainImage,
-        "images": List<dynamic>.from(images.map((x) => x.toJson())),
-        "services": services?.map((x) => x.toJson()).toList(),
-      };
+    "id": id,
+    "status": status,
+    "title": title,
+    "phone": phone,
+    "start_hour": startHour,
+    "end_hour": endHour,
+    "address": address,
+    "description": description,
+    "rating": rating,
+    "lat": lat,
+    "lon": lon,
+    "distance": distance,
+    "main_image": mainImage,
+    "images": images == null ? [] : List<ImageModel>.from(images!.map((x) => x.toJson())),
+    "services": services == null ? [] : List<WashingService>.from(services!.map((x) => x.toJson())),
+  };
 }
 
-class Image {
-  int id;
-  String image;
+class ImageModel {
+  int? id;
+  String? image;
 
-  Image({
-    required this.id,
-    required this.image,
+  ImageModel({
+    this.id,
+    this.image,
   });
 
-  factory Image.fromJson(Map<String, dynamic> json) => Image(
-        id: json["id"],
-        image: json["image"],
-      );
+  factory ImageModel.fromJson(Map<String, dynamic> json) => ImageModel(
+    id: json["id"],
+    image: json["image"],
+  );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
-        "image": image,
-      };
+    "id": id,
+    "image": image,
+  };
 }
 
 class WashingService {
-  String? ban;
-  List<ServiceService> services;
+  String? banId;
+  List<ServiceService>? services;
 
   WashingService({
-    required this.ban,
-    required this.services,
+    this.banId,
+    this.services,
   });
 
   factory WashingService.fromJson(Map<String, dynamic> json) => WashingService(
-        ban: json["ban_id"],
-        services: List<ServiceService>.from(
-            json["services"].map((x) => ServiceService.fromJson(x))),
-      );
+    banId: json["ban_id"],
+    services: json["services"] == null ? [] : List<ServiceService>.from(json["services"]!.map((x) => ServiceService.fromJson(x))),
+  );
 
   Map<String, dynamic> toJson() => {
-        "ban_id": ban,
-        "services": List<dynamic>.from(services.map((x) => x.toJson())),
-      };
+    "ban_id": banId,
+    "services": services == null ? [] : List<dynamic>.from(services!.map((x) => x.toJson())),
+  };
 }
 
 class ServiceService {
-  String title;
-  String price;
+  int? id;
+  String? title;
+  String? price;
 
   ServiceService({
-    required this.title,
-    required this.price,
+    this.id,
+    this.title,
+    this.price,
   });
 
   factory ServiceService.fromJson(Map<String, dynamic> json) => ServiceService(
-        title: json["title"],
-        price: json["price"],
-      );
+    id: json["id"],
+    title: json["title"]!,
+    price: json["price"],
+  );
 
   Map<String, dynamic> toJson() => {
-        "title": title,
-        "price": price,
-      };
+    "id": id,
+    "title": title,
+    "price": price,
+  };
 }
+
+

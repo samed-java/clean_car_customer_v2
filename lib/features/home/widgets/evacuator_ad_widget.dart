@@ -24,7 +24,7 @@ class EvacuatorAdWidget extends StatelessWidget {
         children: [
           Expanded(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
@@ -37,11 +37,11 @@ class EvacuatorAdWidget extends StatelessWidget {
                     style: getMediumStyle(
                         color: ColorManager.mainBlack,
                         fontSize: AppSize.s14)),
-                Spacer(),
-                SizedBox(
-                    width: 96.w,
-                    child: CustomButton(
-                        frontText: context.locale.detailed, onPressed: () {}))
+                // Spacer(),
+                // SizedBox(
+                //     width: 96.w,
+                //     child: CustomButton(
+                //         frontText: context.locale.detailed, onPressed: () {}))
               ],
             ),
           ),

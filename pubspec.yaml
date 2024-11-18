@@ -69,6 +69,7 @@ dependencies:
   google_maps_flutter: any
   dartz: any
   url_launcher: any
+  cached_video_player_plus: any
 
 
 

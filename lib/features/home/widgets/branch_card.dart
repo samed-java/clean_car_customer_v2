@@ -42,8 +42,8 @@ class BranchCard extends StatelessWidget {
                   right: 0,
                   bottom: 0,
                   child: CachedNetworkImage(
-                    imageUrl: model.images.isNotEmpty
-                        ? model.images.first.image
+                    imageUrl: model.images!.isNotEmpty
+                        ? model.images!.first.image!
                         : "https://wavescarwash.co.uk/images/pageImages/Coventry4RebrandPhotos-23102069.jpeg",
                     fit: BoxFit.cover,
                   ),
@@ -77,7 +77,7 @@ class BranchCard extends StatelessWidget {
                             width: 148.w,
                             padding: const EdgeInsets.all(4),
                             child: Text(
-                              model.title,
+                              model.title!,
                               overflow: TextOverflow.ellipsis,
                               style: getSemiBoldStyle(
                                   color: ColorManager.mainWhite, fontSize: 16),
@@ -107,7 +107,7 @@ class BranchCard extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               Text(
-                                model.rating,
+                                model.rating!,
                                 style: getMediumStyle(
                                     color: ColorManager.mainBlack,
                                     fontSize: 14),
