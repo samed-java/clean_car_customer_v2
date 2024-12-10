@@ -1,7 +1,9 @@
+import 'package:clean_car_customer_v2/constants/res/asset_manager.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:map_launcher/map_launcher.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MapOpener {
   MapOpener._();
@@ -17,6 +19,10 @@ class MapOpener {
     //   });
     // })
     final availableMaps = await MapLauncher.installedMaps;
+    final wazeAvailable =
+        await MapLauncher.isMapAvailable(MapType.google) ?? false;
+
+    print(availableMaps);
 
     // ignore: use_build_context_synchronously
     showModalBottomSheet(
@@ -66,6 +72,24 @@ class MapOpener {
                                   width: 30.0,
                                 ),
                               ),
+                            // if (!wazeAvailable)
+                            //   ListTile(
+                            //     onTap: () async {
+                            //       final wazeUrl =
+                            //           "https://waze.com/ul?ll=$lat,$long&navigate=yes";
+                            //       if (await canLaunchUrl(Uri.parse(wazeUrl))) {
+                            //         await launchUrl(Uri.parse(wazeUrl));
+                            //       } else {
+                            //         print("Could not open Waze.");
+                            //       }
+                            //     },
+                            //     title: Text("Waze"),
+                            //     leading: SvgPicture.asset(
+                            //       IconAssets.location,
+                            //       height: 30.0,
+                            //       width: 30.0,
+                            //     ),
+                            //   )
                           ],
                         ),
                       ],

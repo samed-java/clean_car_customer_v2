@@ -90,25 +90,30 @@ class Time extends Equatable {
 }
 
 class Branch extends Equatable {
-  final int id;
-  final String washingName;
-  final String address;
-  final String lat;
-  final String lon;
+  int id;
+  String washingName;
+  String address;
+  String lat;
+  String lon;
+  List<Product> products;
 
-  const Branch(
-      {required this.id,
-      required this.washingName,
-      required this.address,
-      required this.lat,
-      required this.lon});
+  Branch({
+    required this.id,
+    required this.washingName,
+    required this.address,
+    required this.lat,
+    required this.lon,
+    this.products = const <Product>[],
+  });
 
   factory Branch.fromJson(Map<String, dynamic> json) => Branch(
-      id: json["id"],
-      washingName: json["washing_name"],
-      address: json["address"],
-      lat: json["lat"],
-      lon: json["lon"]);
+        id: json["id"],
+        washingName: json["washing_name"],
+        address: json["address"],
+        lat: json["lat"],
+        lon: json["lon"],
+        products: json["products"]?.map((x) => Product.fromJson(x)).toList()??<Product>[],
+      );
 
   Map<String, dynamic> toJson() => {
         "id": id,
@@ -116,9 +121,64 @@ class Branch extends Equatable {
         "address": address,
         "lat": lat,
         "lon": lon,
+        "products": products.map((x) => x.toJson()).toList(),
       };
 
   @override
   // TODO: implement props
   List<Object?> get props => [id, washingName, address];
+}
+
+class Product extends Equatable {
+  int id;
+  int washingId;
+  String title;
+  String value;
+  String price;
+  DateTime createdAt;
+  DateTime updatedAt;
+  dynamic deletedAt;
+
+  Product({
+    required this.id,
+    required this.washingId,
+    required this.title,
+    required this.value,
+    required this.price,
+    required this.createdAt,
+    required this.updatedAt,
+    required this.deletedAt,
+  });
+
+  factory Product.fromJson(Map<String, dynamic> json) => Product(
+        id: json["id"],
+        washingId: json["washing_id"],
+        title: json["title"],
+        value: json["value"],
+        price: json["price"],
+        createdAt: DateTime.parse(json["created_at"]),
+        updatedAt: DateTime.parse(json["updated_at"]),
+        deletedAt: json["deleted_at"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "washing_id": washingId,
+        "title": title,
+        "value": value,
+        "price": price,
+        "created_at": createdAt.toIso8601String(),
+        "updated_at": updatedAt.toIso8601String(),
+        "deleted_at": deletedAt,
+      };
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [
+        id,
+        washingId,
+        title,
+        value,
+        price,
+      ];
 }

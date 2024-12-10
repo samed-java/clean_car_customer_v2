@@ -3,15 +3,19 @@ import 'package:clean_car_customer_v2/constants/res/asset_manager.dart';
 import 'package:clean_car_customer_v2/constants/res/color_manager.dart';
 import 'package:clean_car_customer_v2/constants/res/gaps.dart';
 import 'package:clean_car_customer_v2/constants/res/paddings.dart';
+import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
 import 'package:clean_car_customer_v2/constants/res/styles_manager.dart';
+import 'package:clean_car_customer_v2/features/campaigns/cubit/campaigns_cubit.dart';
 import 'package:clean_car_customer_v2/features/home/cubit/home_cubit.dart';
 import 'package:clean_car_customer_v2/features/home/widgets/banner.dart';
+import 'package:clean_car_customer_v2/features/home/widgets/campaign_widget.dart';
 import 'package:clean_car_customer_v2/features/home/widgets/evacuator_ad_widget.dart';
 import 'package:clean_car_customer_v2/features/home/widgets/filter_dialog.dart';
 import 'package:clean_car_customer_v2/features/home/widgets/branch_card.dart';
 import 'package:clean_car_customer_v2/components/custom_searchbar.dart';
 import 'package:clean_car_customer_v2/components/custom_filter_button.dart';
 import 'package:clean_car_customer_v2/features/home/widgets/text_widget.dart';
+import 'package:clean_car_customer_v2/features/notification/cubit/notifications_cubit.dart';
 import 'package:clean_car_customer_v2/features/offers/cubit/offers_cubit.dart';
 import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
 import 'package:clean_car_customer_v2/utils/pager/go.dart';
@@ -48,6 +52,8 @@ class _HomeScreenState extends State<HomeScreen> {
           onRefresh: () async {
             context.read<HomeCubit>().execute();
             context.read<OffersCubit>().execute();
+            context.read<CampaignsCubit>().execute();
+            context.read<NotificationsCubit>().execute();
           },
           child: SingleChildScrollView(
             physics: const AlwaysScrollableScrollPhysics(),
@@ -62,13 +68,32 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        SvgPicture.asset(ImageAssets.logo,width: 20,height: 20,),
+                        SvgPicture.asset(
+                          ImageAssets.logo,
+                          width: 20,
+                          height: 20,
+                        ),
                         NotificationButton(
                           onPressed: () {
-                            Go.to(Pager.notifications);
+                            Go.to(Pager.notifications).then((value)=> context.read<NotificationsCubit>().execute());
                           },
                         ),
                       ],
+                    ),
+                  ),
+                  16.verticalSpace,
+                  Padding(
+                    padding: Paddings.horizontal16,
+                    child: CustomSearchBar(
+                      focusNode: _focusNode,
+                      width: 1.sw,
+                      asButton: true,
+                      onPressed: () {
+                        widget.pageController?.animateToPage(1,
+                            duration: DurationConstant.ms100,
+                            curve: Curves.easeInOut);
+                        context.read<HomeCubit>().focusNode.requestFocus();
+                      },
                     ),
                   ),
                   // if (_focusNode.hasFocus)
@@ -125,7 +150,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       model: context
                                           .read<HomeCubit>()
                                           .mainResult!
-                                          .washings![index],
+                                          .washings![index], headTitle: context.locale.all,
                                     ),
                                   );
                                 },
@@ -148,6 +173,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         padding: Paddings.horizontal16,
                         child: TextWidget(
                           onPressed: () {
+                            context.read<HomeCubit>().isFullTime = true;
+                            context.read<HomeCubit>().execute();
                             widget.pageController?.animateToPage(
                               1,
                               duration: const Duration(milliseconds: 300),
@@ -184,7 +211,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       model: context
                                           .read<HomeCubit>()
                                           .mainResult!
-                                          .fullTimeWashings![index],
+                                          .fullTimeWashings![index], headTitle: "7/24",
                                     ),
                                   );
                                 },
@@ -203,10 +230,12 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       Gaps.h16,
+                      CampaignWidget(),
+                      Gaps.h16,
                       Padding(
                         padding: Paddings.horizontal16,
                         child: Text(
-                          "Reklamlar",
+                          context.locale.advertisements,
                           style: getMediumStyle(
                               color: ColorManager.mainBlack, fontSize: 18),
                         ),
@@ -217,7 +246,12 @@ class _HomeScreenState extends State<HomeScreen> {
                           builder: (context, state) {
                             if (state is HomeSuccess) {
                               //state.data.washings.length;
-                              return BannerWidget(banners: context.read<HomeCubit>().mainResult!.banners!,);
+                              return BannerWidget(
+                                banners: context
+                                    .read<HomeCubit>()
+                                    .mainResult!
+                                    .banners!,
+                              );
                             } else if (state is HomeLoading) {
                               return const Center(
                                 child: CupertinoActivityIndicator(),

@@ -1,9 +1,16 @@
+import 'package:clean_car_customer_v2/components/custom_notification_button.dart';
+import 'package:clean_car_customer_v2/components/custom_searchbar.dart';
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
+import 'package:clean_car_customer_v2/features/notification/cubit/notifications_cubit.dart';
+import 'package:clean_car_customer_v2/features/notification/data/model/res/notifications_res_model.dart';
+import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
 import 'package:clean_car_customer_v2/utils/sheets/sheets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bounce/flutter_bounce.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:intl/intl.dart';
 
 import '../../../constants/res/asset_manager.dart';
 import '../../../constants/res/color_manager.dart';
@@ -15,26 +22,26 @@ import '../../../constants/res/styles_manager.dart';
 class NotificationTile extends StatelessWidget {
   const NotificationTile({
     super.key,
-    required this.isReaden,
+    required this.isRead,
+    required this.data,
   });
 
-  final bool isReaden;
+  final bool isRead;
+  final NotificationModel data;
 
   @override
   Widget build(BuildContext context) {
     return Bounce(
       duration: DurationConstant.ms100,
       onPressed: () {
+        context.read<NotificationsCubit>().readNotification(data.id.toString());
         Sheets.showExtraDetailSheet(
-            title: "Nöbəti ödənişsiz Detallı yuma...",
-            content:
-                """Payız mövsümündə, avtomobil baxımı üçün "Continental Avtoservis"i seçən hər bir sürücümüz:
-        - "Clean Car"dan ödənişsiz Detallı Yuma xidməti əldə edəcək.
-        - "Clean Car" ilə servis daxilində göstərilən bütün xidmətlərdən 15%-dək endirimlə yararlana biləcək.
-        Unutmayın, avtomobiliniz evinizdən sonra ən böyük sərmayənizdir!""",
-            endDate: "00.00.0000",
-            actionText: "Vebsayta muraciet edin",
-            actionIcon: SvgPicture.asset(IconAssets.web,width: 16,height: 16,));
+          title: data.title!,
+          content: data.description!,
+          //endDate: "00.00.0000",
+          //actionText: "Vebsayta muraciet edin",
+          //actionIcon: SvgPicture.asset(IconAssets.web,width: 16,height: 16,)
+        );
       },
       child: Container(
         margin: Paddings.vertical8,
@@ -72,10 +79,10 @@ class NotificationTile extends StatelessWidget {
                     height: 20.h,
                     width: 1.sw,
                     child: Text(
-                      "iueiojgiuhgciuehrymwo8chyotwhx8og3hr4cxqwhe",
+                      data.title!,
                       overflow: TextOverflow.ellipsis,
                       style: getMediumStyle(
-                          color: isReaden
+                          color: !isRead
                               ? ColorManager.mainBlack
                               : ColorManager.fourthBlack,
                           fontSize: FontSize.s14),
@@ -85,24 +92,28 @@ class NotificationTile extends StatelessWidget {
                   SizedBox(
                     width: 1.sw,
                     child: Text(
-                      "iueiojgiuhgciuehrymwo8chyotwhx8og3hr4cxqwhe trhewrtbverv ye ryj ertjhvertbyvtrhde",
+                      data.description!,
                       style: getRegularStyle(
                           color: ColorManager.fourthBlack,
                           fontSize: FontSize.s14),
                     ),
                   ),
-                  8.verticalSpace,
-                  SizedBox(
-                    height: 20.h,
-                    width: 1.sw,
-                    child: Text(
-                      "7 saat evvel",
-                      overflow: TextOverflow.ellipsis,
-                      style: getRegularStyle(
-                          color: ColorManager.fourthBlack,
-                          fontSize: FontSize.s14),
+                  if (DateFormat("dd.MM.YYYY").format(DateTime.now()) ==
+                      DateFormat("dd.MM.YYYY").format(data.createdAt!)) ...[
+                    8.verticalSpace,
+                    SizedBox(
+                      height: 20.h,
+                      width: 1.sw,
+                      child: Text(
+                          DateTime.now().difference(data.createdAt!).inHours>0?
+                        "${DateTime.now().difference(data.createdAt!).inHours} saat evvel":context.locale.new_new,
+                        overflow: TextOverflow.ellipsis,
+                        style: getRegularStyle(
+                            color: ColorManager.fourthBlack,
+                            fontSize: FontSize.s14),
+                      ),
                     ),
-                  ),
+                  ]
                 ],
               ),
             ),

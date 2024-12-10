@@ -17,7 +17,7 @@ class FirebaseService {
   static Future<void> initializeFirebase() async {
     await Firebase.initializeApp(
         options: DefaultFirebaseOptions.currentPlatform);
-    Firebase.app();
+    // Firebase.app();
     await FirebaseService.firebaseMessaging.requestPermission(alert: true);
 
     await FirebaseService.localNotificationsPlugin
@@ -28,7 +28,7 @@ class FirebaseService {
     if (status.isDenied) {
       await Permission.notification.request();
     }
-    print(await FirebaseService.firebaseMessaging.getToken());
+    // print(await FirebaseService.firebaseMessaging.getToken());
     await FirebaseService.initializeLocalNotifications();
     await FCMProvider.onMessage();
     await FirebaseService.onBackgroundMsg();

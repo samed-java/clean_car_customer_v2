@@ -1,6 +1,8 @@
 import 'package:clean_car_customer_v2/constants/res/color_manager.dart';
 import 'package:clean_car_customer_v2/constants/res/radius_manager.dart';
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
+import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
+import 'package:clean_car_customer_v2/utils/extensions/string_extension/string_extension.dart';
 import 'package:clean_car_customer_v2/utils/sheets/sheets.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -51,12 +53,13 @@ class _BannerWidgetState extends State<BannerWidget> {
                   duration: DurationConstant.ms100,
                   onPressed: () {
                     Sheets.showExtraDetailSheet(
-                        title: "Reklam",
+                        title: context.locale.reklam,
                         content: banner.description!,
-                        actionText: "Linke kecid edin",
+                        actionText: context.locale.Got_the_link,
                         actionIcon: SvgPicture.asset(IconAssets.web),
-                        mediaType: MediaType.networkVideo,
+                        mediaType:(banner.video??"").isVideo ? MediaType.networkVideo : (banner.video??"").isImage? MediaType.networkImage:null,
                         mediaSource: banner.video,
+                        hasAction: banner.link != null,
                         action: () {
                           if (banner.link != null) {
                             launchUrlString(banner.link!);

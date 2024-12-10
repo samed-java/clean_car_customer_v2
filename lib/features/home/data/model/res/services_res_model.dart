@@ -20,7 +20,7 @@ class ServiceItem {
   int id;
   String title;
   String icon;
-  String iconBlue;
+  String? iconBlue;
 
   ServiceItem({
     required this.id,

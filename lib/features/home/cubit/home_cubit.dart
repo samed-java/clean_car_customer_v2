@@ -75,9 +75,9 @@ class HomeCubit extends Cubit<HomeState> with BaseErrorHandler {
   final List<int> _filteredParameters = [0, 0, 0, 0];
 
   bool get isFilterNotEmpty =>
-      _filteredParameters.fold<int>(
+      (_filteredParameters.fold<int>(
           0, (previousValue, e) => previousValue + e) >
-      0;
+      0) || isFullTime;
 
   //late ValueNotifier<FilterFieldActiveStatus> activeStatus;
 
@@ -224,6 +224,7 @@ class HomeCubit extends Cubit<HomeState> with BaseErrorHandler {
   }
 
   void clearFilter() {
+    isFullTime = false;
     selectedCity.value = 0;
     selectedRegion.value = 0;
     selectedVillage.value = 0;

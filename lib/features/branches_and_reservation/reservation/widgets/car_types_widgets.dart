@@ -1,6 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:clean_car_customer_v2/features/branches_and_reservation/reservation/widgets/car_type_button.dart';
 import 'package:clean_car_customer_v2/features/branches_and_reservation/reservation/widgets/reservation_location_card.dart';
+import 'package:clean_car_customer_v2/features/branches_and_reservation/reservation/widgets/service_expanded_list.dart';
 import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -46,39 +47,52 @@ class _CarTypesWidgetsState extends State<CarTypesWidgets> {
                     ),
                   ),
                   Gaps.h10,
-                  SizedBox(
-                    height: 120.h,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: snapshot.data!.services!.length,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: EdgeInsets.only(left: 16.w),
-                          child: ValueListenableBuilder<Service?>(
-                              valueListenable: cubit.selectedService,
-                              builder: (context, value, child) {
-                                return CarTypeButton(
-                                  onPressed: () {
-                                    cubit.selectService(snapshot.data!.services!
-                                        .elementAt(index));
-                                  },
-                                  iconPath: snapshot.data!.services!
-                                      .elementAt(index)
-                                      .icon,
-                                  isSelected: value ==
-                                      snapshot.data!.services!.elementAt(index),
-                                  header: snapshot.data!.services!
-                                      .elementAt(index)
-                                      .title,
-                                  subText: snapshot.data!.services!
-                                      .elementAt(index)
-                                      .price,
-                                );
-                              }),
-                        );
-                      },
-                    ),
-                  ),
+                  Padding(
+                    padding: Paddings.horizontal16,
+                    child: ValueListenableBuilder<Service?>(
+                        valueListenable: cubit.selectedService,
+                        builder: (context, value, child) {
+                          return ServiceExpandedList(
+                              init: value,
+                              services: snapshot.data!.services!,
+                              onChange: (service) {
+                                cubit.selectService(service);
+                              });
+                        }),
+                  )
+                  // SizedBox(
+                  //   height: 120.h,
+                  //   child: ListView.builder(
+                  //     scrollDirection: Axis.horizontal,
+                  //     itemCount: snapshot.data!.services!.length,
+                  //     itemBuilder: (context, index) {
+                  //       return Padding(
+                  //         padding: EdgeInsets.only(left: 16.w),
+                  //         child: ValueListenableBuilder<Service?>(
+                  //             valueListenable: cubit.selectedService,
+                  //             builder: (context, value, child) {
+                  //               return CarTypeButton(
+                  //                 onPressed: () {
+                  //                   cubit.selectService(snapshot.data!.services!
+                  //                       .elementAt(index));
+                  //                 },
+                  //                 iconPath: snapshot.data!.services!
+                  //                     .elementAt(index)
+                  //                     .icon,
+                  //                 isSelected: value ==
+                  //                     snapshot.data!.services!.elementAt(index),
+                  //                 header: snapshot.data!.services!
+                  //                     .elementAt(index)
+                  //                     .title,
+                  //                 subText: snapshot.data!.services!
+                  //                     .elementAt(index)
+                  //                     .price,
+                  //               );
+                  //             }),
+                  //       );
+                  //     },
+                  //   ),
+                  // ),
                 ],
               ));
             } else {

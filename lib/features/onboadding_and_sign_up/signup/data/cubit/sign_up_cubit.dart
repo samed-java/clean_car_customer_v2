@@ -28,6 +28,7 @@ class SignUpCubit extends Cubit<SignUpState> with BaseErrorHandler {
   }
   final formKey = GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController();
+  final TextEditingController referralCodeController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
   final TextEditingController numberController = TextEditingController();
   final _signUpRepo = locator.get<SignUpRepository>();
@@ -83,10 +84,13 @@ class SignUpCubit extends Cubit<SignUpState> with BaseErrorHandler {
       var result = await _signUpRepo.send(SignUpReqModel(
           phone: _storageService.getPhoneNumber()!,
           name: nameController.text,
+          referralCode: referralCodeController.text,
           email: emailController.text));
       if (result.token != null) {
         _storageService.setAccessToken(result.token);
+        _storageService.setUserId(result.user.id);
         locator.get<EventLogger>().logSignUp(data:{
+          "id":result.user.id,
           "phone":result.user.phone,
           "name":result.user.name,
           "email":result.user.email

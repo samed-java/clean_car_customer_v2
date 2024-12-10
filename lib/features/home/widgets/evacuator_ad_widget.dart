@@ -28,12 +28,12 @@ class EvacuatorAdWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "CleanCar Evakuator ",
+                  "${context.locale.clean_car_evakuator} ",
                     style: getSemiBoldStyle(
                         color: ColorManager.mainBlue, fontSize: AppSize.s14),
                     ),
                 Text(
-                    "mobil tətbiqi tezliklə xidmətinizdə !!!",
+                    "${context.locale.mobile_application_coming}",
                     style: getMediumStyle(
                         color: ColorManager.mainBlack,
                         fontSize: AppSize.s14)),

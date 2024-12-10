@@ -1,3 +1,4 @@
+import 'package:clean_car_customer_v2/features/campaigns/data/model/res/campaigns_res_model.dart';
 import 'package:clean_car_customer_v2/features/home/data/model/res/branchs_res_model.dart';
 import 'package:clean_car_customer_v2/features/profile_section/reservations/data/model/reservations_model.dart';
 import 'package:clean_car_customer_v2/features/profile_section/settings/features/change_lang/data/model/res/languages_res_model.dart';
@@ -9,6 +10,7 @@ import '../../../../features/evaluation/data/model/res/rating_res_model.dart';
 import '../../../../features/home/data/model/res/regions_res_model.dart';
 import '../../../../features/home/data/model/res/services_res_model.dart';
 import '../../../../features/login/data/model/res/login_res_model.dart';
+import '../../../../features/notification/data/model/res/notifications_res_model.dart';
 import '../../../../features/offers/data/model/res/offers_res_model.dart';
 import '../../../../features/onboadding_and_sign_up/signup/data/model/response/sign_up_res_model.dart';
 import '../../../../features/onboadding_and_sign_up/signup/data/model/response/terms_res_model.dart';
@@ -23,6 +25,7 @@ class FactoryGenerator {
 
   static final Map<Type, Function> _factoryGenerator = {
     LanguageResponseModel: (json) => LanguageResponseModel.fromJson(json),
+    CampaignResModel: (json) => CampaignResModel.fromJson(json),
     SignUpResModel: (json) => SignUpResModel.fromJson(json),
     OfferResModel: (json) => OfferResModel.fromJson(json),
     RegionResModel: (json) => RegionResModel.fromJson(json),
@@ -42,6 +45,7 @@ class FactoryGenerator {
     ContactsResModel: (json) => ContactsResModel.fromJson(json),
     TermsResModel: (json) => TermsResModel.fromJson(json),
     RatingResModel: (json) => RatingResModel.fromJson(json),
+    NotificationsResModel: (json) => NotificationsResModel.fromJson(json),
   };
 
   static T? createObject<T>(Map<String, dynamic>? body) {

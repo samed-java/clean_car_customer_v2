@@ -65,10 +65,10 @@ dependencies:
   equatable: any
   animate_to: any
   rxdart: any
-  map_launcher: any
+  map_launcher: ^3.5.0
   google_maps_flutter: any
   dartz: any
-  url_launcher: any
+  url_launcher: ^6.3.1
   cached_video_player_plus: any
 
 

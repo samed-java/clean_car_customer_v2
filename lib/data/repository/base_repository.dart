@@ -26,7 +26,9 @@ abstract class BaseRepository<T> {
   }
 
   Future<T> send(BaseRequestModel body, {Map<String, dynamic>? path}) async {
+    print(path);
     String convertedUrl = _pathConverter(baseUrl, path);
+    print('converted Url: $convertedUrl');
     BaseResponseModel<T> result =
         await locator.get<GlobalService>().sendData<T>(convertedUrl, body);
     if (result != null) {

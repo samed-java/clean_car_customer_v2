@@ -75,47 +75,48 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> {
           decoration: BoxDecoration(
               color: ColorManager.mainWhite,
               borderRadius: BorderRadius.all(RadiusManager.radiusCircular4)),
-          child: ClipRRect(
-            borderRadius: BorderRadius.all(RadiusManager.radiusCircular4),
-            child: DropdownButtonHideUnderline(
-              child: DropdownButtonFormField<T>(
-                validator: (value) {
-                  setState(() {
-                    errorText = widget.validator?.call(value);
-                  });
-                  return errorText;
-                },
-                isDense: true,
-                value:
-                    widget.items?.isNotEmpty ?? false ? _selectedItems : null,
-                onChanged: _changeSelectItems,
-                // isExpanded: true,
-                iconSize: 0,
-                elevation: 0,
-                borderRadius: BorderRadius.all(RadiusManager.radiusCircular4),
-                dropdownColor: ColorManager.mainWhite,
-                decoration: InputDecoration(
-                    hintText: widget.labelText,
-                    hintStyle: TextStyle(
-                      color: Colors.grey.withOpacity(0.5),
-                    ),
-                    suffixIcon: const Icon(Icons.keyboard_arrow_down_sharp),
-                    errorText: '',
-                    errorStyle: const TextStyle(
-                        color: Colors.transparent, fontSize: 0, height: 0),
-                    errorBorder: InputBorder.none,
-                    border: InputBorder.none),
-                style: getMediumStyle(
-                    color: ColorManager.mainBlack, fontSize: FontSize.s14),
-                items: widget.items?.isNotEmpty ?? false
-                    ? widget.items!.entries
-                        .map((e) => DropdownMenuItem<T>(
-                              value: e.key,
+          child: DropdownButtonHideUnderline(
+            child: DropdownButtonFormField<T>(
+              validator: (value) {
+                setState(() {
+                  errorText = widget.validator?.call(value);
+                });
+                return errorText;
+              },
+              isDense: true,
+              value:
+                  widget.items?.isNotEmpty ?? false ? _selectedItems : null,
+              onChanged: _changeSelectItems,
+              // isExpanded: true,
+              iconSize: 0,
+              elevation: 0,
+              borderRadius: BorderRadius.all(RadiusManager.radiusCircular4),
+              dropdownColor: ColorManager.mainWhite,
+              decoration: InputDecoration(
+                  hintText: widget.labelText,
+                  hintStyle: TextStyle(
+                    color: Colors.grey.withOpacity(0.5),
+                  ),
+                  suffixIcon: const Icon(Icons.keyboard_arrow_down_sharp,color: Colors.black,),
+                  errorText: '',
+                  errorStyle: const TextStyle(
+                      color: Colors.transparent, fontSize: 0, height: 0),
+                  errorBorder: InputBorder.none,
+                  border: InputBorder.none),
+              style: getMediumStyle(
+                  color: ColorManager.mainBlack, fontSize: FontSize.s14),
+              items: widget.items?.isNotEmpty ?? false
+                  ? widget.items!.entries
+                      .map((e) => DropdownMenuItem<T>(
+                            value: e.key,
+                            child: Container(
+                              width: 220.w,
+                              height: 60,
                               child: widget.child(e.value),
-                            ))
-                        .toList()
-                    : [],
-              ),
+                            ),
+                          ))
+                      .toList()
+                  : [],
             ),
           ),
         ),

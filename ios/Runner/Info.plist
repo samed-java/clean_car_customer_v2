@@ -2,6 +2,11 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+        <string>comgooglemaps</string>
+        <string>waze</string>
+    </array>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>
@@ -32,6 +37,8 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Needed to access location for showing nearest branches.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>Needed to access location for showing nearest branches.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Needed to access location for showing nearest branches.</string>
@@ -70,6 +77,7 @@
       <dict>
       <key>CFBundleURLSchemes</key>
       <array>
+        <string>waze</string>
         <string>fb1180200159873112</string>
       </array>
       </dict>

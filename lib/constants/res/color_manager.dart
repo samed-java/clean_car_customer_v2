@@ -20,6 +20,7 @@ class ColorManager {
   static Color humanColor = HexColor.fromHex("#EB8D65");
   static Color secondaryOrange = HexColor.fromHex("#F79811").withOpacity(0.8);
   static Color mainRed = HexColor.fromHex("#ED5D5A");
+  static Color shadowColor = HexColor.fromHex("#4283F026");
 }
 
 extension HexColor on Color {

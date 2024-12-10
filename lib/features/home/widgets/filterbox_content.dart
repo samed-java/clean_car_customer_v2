@@ -53,13 +53,7 @@ class _FilterBoxContentState extends State<FilterBoxContent> {
               Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              BranchTimeTypeSelection(
-                onFullTimeStatusChanged: (isFullTime) {
-                  cubit.setFullTime(isFullTime);
-                },
-                initValue: cubit.isFullTime,
-              ),
-              Gaps.h10,
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -87,6 +81,13 @@ class _FilterBoxContentState extends State<FilterBoxContent> {
                     ),
                   ),
                 ],
+              ),
+              10.horizontalSpace,
+              BranchTimeTypeSelection(
+                onFullTimeStatusChanged: (isFullTime) {
+                  cubit.setFullTime(isFullTime);
+                },
+                initValue: cubit.isFullTime,
               ),
               Gaps.h10,
               // Şəhər
@@ -120,7 +121,6 @@ class _FilterBoxContentState extends State<FilterBoxContent> {
                         ]);
                   }),
 
-              Gaps.h16,
               // Bölgə
 
               //if (value.city)
@@ -132,6 +132,7 @@ class _FilterBoxContentState extends State<FilterBoxContent> {
                       return Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            Gaps.h16,
                             Text(
                               context.locale.region,
                               style: getRegularStyle(
@@ -156,7 +157,6 @@ class _FilterBoxContentState extends State<FilterBoxContent> {
                     return const SizedBox.shrink();
                   }),
 
-              Gaps.h16,
               // Qəsəbə
 
               //if (value.village)
@@ -169,6 +169,7 @@ class _FilterBoxContentState extends State<FilterBoxContent> {
                       return Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            Gaps.h16,
                             Text(
                               context.locale.township,
                               style: getRegularStyle(
@@ -212,12 +213,12 @@ class _FilterBoxContentState extends State<FilterBoxContent> {
                           CustomDropdown<int>(
                             items: cubit.services,
                             child: (item) =>
-                                Text((item as ServiceItem?)?.title ?? "------"),
+                                Text((item as ServiceItem?)?.title ?? "------",),
                             selectedItems: value,
                             onChanged: (value) {
                               //if (value != null) {
                               cubit.selectedService.value = value;
-                              //cubit.getRegions(value);
+                              //cubit.getVillages(value);
                               //}
                             },
                           )

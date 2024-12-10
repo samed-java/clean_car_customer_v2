@@ -3,6 +3,7 @@ import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
 import 'package:clean_car_customer_v2/features/branches_and_reservation/branch/widgets/branch_car_type.dart';
 import 'package:clean_car_customer_v2/features/branches_and_reservation/branch/widgets/branch_info.dart';
 import 'package:clean_car_customer_v2/features/branches_and_reservation/branch/widgets/branch_note.dart';
+import 'package:clean_car_customer_v2/features/branches_and_reservation/branch/widgets/branch_products.dart';
 import 'package:clean_car_customer_v2/features/branches_and_reservation/branch/widgets/branch_upper.dart';
 import 'package:clean_car_customer_v2/features/branches_and_reservation/reservation/data/model/res/reservation_parameters_res_model.dart';
 import 'package:clean_car_customer_v2/locator.dart';
@@ -105,6 +106,11 @@ class _BranchScreenState extends State<BranchScreen> {
                       ),
                       Gaps.h16,
                       BranchNoteWidget(
+                        model: widget.model,
+                      ),
+                      Gaps.h16,
+                      if(widget.model.products!.isNotEmpty)
+                      BranchProductsWidget(
                         model: widget.model,
                       ),
                       Gaps.h24,

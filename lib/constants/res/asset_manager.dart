@@ -9,6 +9,8 @@ class ImageAssets {
   static String onboarding2 = '$imagePath/onboarding2.svg';
   static String onboarding3 = '$imagePath/onboarding3.svg';
   static String logo = '$imagePath/logo.svg';
+  static String campaign = '$imagePath/campaign.svg';
+  static String campaignAd = '$imagePath/campaign_ad.svg';
   static String sedan = '$imagePath/sedan.svg';
   static String jeep = '$imagePath/jeep.svg';
   static String evacuatorAd = '$imagePath/evacuator_ad.svg';

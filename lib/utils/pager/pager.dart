@@ -2,6 +2,8 @@ import 'package:clean_car_customer_v2/features/branches_and_reservation/branch/b
 import 'package:clean_car_customer_v2/features/branches_and_reservation/branches/branches_screen.dart';
 import 'package:clean_car_customer_v2/features/branches_and_reservation/reservation/cubit/reservation_cubit.dart';
 import 'package:clean_car_customer_v2/features/branches_and_reservation/reservation/reservation_screen.dart';
+import 'package:clean_car_customer_v2/features/campaigns/campaign_page.dart';
+import 'package:clean_car_customer_v2/features/campaigns/cubit/campaigns_cubit.dart';
 import 'package:clean_car_customer_v2/features/evaluation/cubit/rating_cubit.dart';
 import 'package:clean_car_customer_v2/features/evaluation/evaluation_screen.dart';
 import 'package:clean_car_customer_v2/features/home/cubit/home_cubit.dart';
@@ -10,6 +12,7 @@ import 'package:clean_car_customer_v2/features/home/home_screen.dart';
 import 'package:clean_car_customer_v2/features/login/cubit/login_cubit.dart';
 import 'package:clean_car_customer_v2/features/login/login_screen.dart';
 import 'package:clean_car_customer_v2/features/main/main_screen.dart';
+import 'package:clean_car_customer_v2/features/notification/cubit/notifications_cubit.dart';
 import 'package:clean_car_customer_v2/features/offers/detailed_offers/detailed_offer_screen.dart';
 import 'package:clean_car_customer_v2/features/onboadding_and_sign_up/onboarding/onboarding.dart';
 import 'package:clean_car_customer_v2/features/onboadding_and_sign_up/otp/data/cubit/otp_cubit.dart';
@@ -67,6 +70,13 @@ class Pager {
             //lazy: false,
             create: (context) => OffersCubit()..execute(),
           ),
+          BlocProvider<NotificationsCubit>(
+            lazy: false,
+            create: (context) => NotificationsCubit()..execute(),
+          ),
+          BlocProvider<CampaignsCubit>(
+            lazy: false,
+              create: (context) => CampaignsCubit()..execute())
         ],
         child: const MainScreen(),
       );
@@ -80,9 +90,8 @@ class Pager {
         model: model,
       );
   static Widget reservation(
-          {
-            bool isNew = true,
-            bool isRenewNew = false,
+          {bool isNew = true,
+          bool isRenewNew = false,
           String? id,
           Branch? branch,
           Car? car,
@@ -174,13 +183,13 @@ class Pager {
         child: TermsAndAgreementScreen(),
       );
   static Widget splash(
-      {int? duration,
-        required String svgAssets,
-        required String headerText,
-        required String subText,
-        Widget? page,
-        Color? backgroundColor,
-        int? backCount}) =>
+          {int? duration,
+          required String svgAssets,
+          required String headerText,
+          required String subText,
+          Widget? page,
+          Color? backgroundColor,
+          int? backCount}) =>
       SplashScreen(
         svgAsset: svgAssets,
         headerText: headerText,
@@ -195,15 +204,26 @@ class Pager {
         child: const FAQScreen(),
       );
 
-  static Widget get notifications => NotificationPage();
+  static Widget get notifications => BlocProvider(
+        create: (context) => NotificationsCubit()..execute(),
+        child: NotificationPage(),
+      );
+  static Widget get campaign => BlocProvider(
+        create: (context) => CampaignsCubit()..execute(),
+        child: CampaignPage(),
+      );
 
   static Widget rating({
     required String reservationId,
     required String service,
     required String branch,
-  }) => BlocProvider(
+  }) =>
+      BlocProvider(
         create: (context) => RatingCubit(reservationId),
-        child: EvaluationScreen(service: service,branch: branch,),
+        child: EvaluationScreen(
+          service: service,
+          branch: branch,
+        ),
       );
 
   Pager._();

@@ -35,6 +35,18 @@ class StorageService {
     return instance.read<String>(StorageKeys.accessToken);
   }
 
+  Future<void> setUserId([String? id]) async {
+    if (id != null) {
+      await instance.write(StorageKeys.userId, id);
+    } else {
+      await instance.remove(StorageKeys.userId);
+    }
+  }
+
+  String? getUserId() {
+    return instance.read<String>(StorageKeys.userId);
+  }
+
   Future<void> setPhoneNumber([String? number]) async {
     if (number != null) {
       await instance.write(StorageKeys.number, number);

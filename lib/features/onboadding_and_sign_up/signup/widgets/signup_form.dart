@@ -3,6 +3,7 @@ import 'package:clean_car_customer_v2/components/custom_checkbar.dart';
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
 import 'package:clean_car_customer_v2/features/onboadding_and_sign_up/signup/components/terms_and_agreement.dart';
 import 'package:clean_car_customer_v2/features/onboadding_and_sign_up/signup/data/cubit/sign_up_cubit.dart';
+import 'package:clean_car_customer_v2/utils/extensions/controller_extension/controller_extension.dart';
 import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
 import 'package:clean_car_customer_v2/utils/pager/go.dart';
 import 'package:clean_car_customer_v2/utils/pager/pager.dart';
@@ -90,7 +91,7 @@ class _SignupFormWidgetState extends State<SignupFormWidget> {
             TextFormField(
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Please enter your name';
+                  return context.locale.notEmptyPhone;
                 }
                 return null;
               },
@@ -129,7 +130,7 @@ class _SignupFormWidgetState extends State<SignupFormWidget> {
               validator: (value) {
                 if (value != null && value.isNotEmpty) {
                   if (!value.isEmailValid()) {
-                    return "Please Enter Valid Email";
+                    return context.locale.please_enter_valid;
                   }
                 }
                 return null;
@@ -146,6 +147,42 @@ class _SignupFormWidgetState extends State<SignupFormWidget> {
                   borderRadius: BorderRadius.all(RadiusManager.radiusCircular6),
                 ),
               ),
+            ),
+
+            Gaps.h10,
+            //! Third Part
+
+            Row(
+              children: [
+                Gaps.w4,
+                Text(
+                  context.locale.referral_code,//context.locale.email,
+                  style: getRegularStyle(
+                      color: ColorManager.thirdBlack, fontSize: 14),
+                  textAlign: TextAlign.left,
+                ),
+                Expanded(child: Gaps.empty)
+              ],
+            ),
+            Gaps.h2,
+            TextFormField(
+              keyboardType: TextInputType.text,
+              cursorColor: ColorManager.thirdBlack,
+              controller: cubit.referralCodeController,
+              onChanged: (value) {},
+              decoration: InputDecoration(
+                contentPadding: Paddings.all8,
+                filled: true,
+                fillColor: ColorManager.mainWhite,
+                border: OutlineInputBorder(
+                  borderSide: BorderSide.none,
+                  borderRadius: BorderRadius.all(RadiusManager.radiusCircular6),
+                ),
+                suffixIcon: IconButton(onPressed: (){
+                  cubit.referralCodeController.pasteText();
+                },icon: Icon(Icons.paste,color: ColorManager.fifthBlack,),)
+              ),
+
             ),
 
             Gaps.h10,

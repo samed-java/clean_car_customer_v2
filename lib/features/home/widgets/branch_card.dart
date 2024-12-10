@@ -12,8 +12,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class BranchCard extends StatelessWidget {
-  const BranchCard({Key? key, required this.model}) : super(key: key);
+  const BranchCard({Key? key, required this.model, required this.headTitle}) : super(key: key);
   final Washing model;
+  final String headTitle;
   @override
   Widget build(BuildContext context) {
     return Bounce(
@@ -23,7 +24,7 @@ class BranchCard extends StatelessWidget {
         Go.to(Pager.branch(model));
       },
       child: Hero(
-        tag: '${model.id}-${model.title}',
+        tag: '$headTitle-${model.id}-${model.title}',
         child: Container(
           margin: Paddings.horizontal8,
           decoration: BoxDecoration(

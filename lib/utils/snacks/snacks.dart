@@ -11,7 +11,26 @@ import '../../constants/res/styles_manager.dart';
 import '../../constants/res/values_manager.dart';
 import '../services/navigation_service/navigation_service.dart';
 
-
+// select_branch
+// campaigns
+// visit_website
+// expiration_date
+// advertisements
+// Got_the_link
+// all_all
+// clean_car_evakuator
+// mobile_application_coming
+// phone_number_can
+// phone_format_incorrect
+// search_oil
+// search_details
+// read_more
+// at_branch
+// detailsss
+// products
+// referral_code
+// please_enter_valid
+// zoom_out
 class Snacks {
   Snacks._();
 

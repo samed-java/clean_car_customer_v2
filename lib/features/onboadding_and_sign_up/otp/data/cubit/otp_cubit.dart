@@ -40,6 +40,7 @@ class OTPCubit extends Cubit<OTPState> with BaseErrorHandler {
           otpCode: int.parse(otpController.text)));
       if (result.token != null) {
         _storageService.setAccessToken(result.token);
+        _storageService.setUserId(result.user.id);
         if (locator.get<StorageService>().getLangCode().isEmpty) {
           await locator.get<StorageService>().setLangCode("az");
         }

@@ -1,4 +1,5 @@
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
+import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -69,7 +70,7 @@ class _ChooseBranchContentState extends State<ChooseBranchContent> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Filial seçin",
+                  context.locale.select_branch,
                   style: getSemiBoldStyle(
                     color: ColorManager.mainBlue,
                     fontSize: 18,

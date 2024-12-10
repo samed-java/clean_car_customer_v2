@@ -10,12 +10,14 @@ import 'package:clean_car_customer_v2/utils/pager/go.dart';
 import 'package:clean_car_customer_v2/utils/pager/pager.dart';
 import 'package:clean_car_customer_v2/utils/services/firebase/fcm_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../locator.dart';
 import '../../utils/services/firebase/analytics/analytic_logger.dart';
 import '../../utils/services/firebase/analytics/event.dart';
+import '../home/cubit/home_cubit.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -40,7 +42,11 @@ class _MainScreenState extends State<MainScreen> {
                 reservationId: data["reservation_id"].toString(),
                 branch: data["branch"].toString(),
                 service: data["service"].toString())); // }
+          } else {
+            Go.to(Pager.notifications);
           }
+        } else {
+          Go.to(Pager.notifications);
         }
       }
     });
@@ -54,8 +60,14 @@ class _MainScreenState extends State<MainScreen> {
                 reservationId: data["reservation_id"].toString(),
                 branch: data["branch"].toString(),
                 service: data["service"].toString())); // }
+          } else {
+            Go.to(Pager.notifications);
           }
+        } else {
+          Go.to(Pager.notifications);
         }
+      }else {
+        Go.to(Pager.notifications);
       }
     });
     FCMProvider.onMessageRoute((message) {
@@ -69,7 +81,11 @@ class _MainScreenState extends State<MainScreen> {
                 branch: data["branch"].toString(),
                 service: data["service"].toString())); // }
           }
+        }else {
+          Go.to(Pager.notifications);
         }
+      }else {
+        Go.to(Pager.notifications);
       }
     });
     super.initState();
@@ -118,7 +134,9 @@ class _MainScreenState extends State<MainScreen> {
               buildTabItem(1, IconAssets.map, context.locale.branches),
               FloatingActionButton(
                 onPressed: () {
-                  locator.get<EventLogger>().logEvent(event: Event.go_to_reservation);
+                  locator
+                      .get<EventLogger>()
+                      .logEvent(event: Event.go_to_reservation);
                   Go.to(Pager.reservation());
                 },
                 elevation: 0,
@@ -139,6 +157,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget buildTabItem(int index, String icon, String label) {
     return InkWell(
       onTap: () {
+        context.read<HomeCubit>().clearFilter();
         setState(() {
           _currentIndex = index;
           _pageController.animateToPage(
@@ -150,29 +169,16 @@ class _MainScreenState extends State<MainScreen> {
       },
       child: Padding(
         padding: EdgeInsets.all(20.r),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            SvgPicture.asset(
-              icon,
-              width: 24.w,
-              height: 24.h,
-              colorFilter: ColorFilter.mode(
-                _currentIndex == index
-                    ? ColorManager.mainBlack
-                    : ColorManager.fourthBlack,
-                BlendMode.srcIn,
-              ),
-            ),
-            // Text(
-            //   label,
-            //   style: TextStyle(
-            //     color: _currentIndex == index
-            //         ? ColorManager.mainBlack
-            //         : ColorManager.thirdBlack,
-            //   ),
-            // ),
-          ],
+        child: SvgPicture.asset(
+          icon,
+          width: 24.sp,
+          height: 24.sp,
+          colorFilter: ColorFilter.mode(
+            _currentIndex == index
+                ? ColorManager.mainBlack
+                : ColorManager.fourthBlack,
+            BlendMode.srcIn,
+          ),
         ),
       ),
     );

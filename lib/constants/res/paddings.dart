@@ -40,4 +40,6 @@ class Paddings {
 
   static EdgeInsets all4 =
       EdgeInsets.only(top: 4.w, bottom: 4.w, left: 4.w, right: 4.w);
+  static EdgeInsets all2 =
+      EdgeInsets.only(top: 2.w, bottom: 2.w, left: 2.w, right: 2.w);
 }

@@ -9,6 +9,7 @@ import 'package:clean_car_customer_v2/locator.dart';
 import 'package:clean_car_customer_v2/utils/errors/base_error_handler.dart';
 import 'package:clean_car_customer_v2/utils/services/firebase/analytics/analytic_logger.dart';
 import 'package:clean_car_customer_v2/utils/services/firebase/analytics/event.dart';
+import 'package:clean_car_customer_v2/utils/sheets/sheets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
@@ -77,7 +78,16 @@ class ReservationCubit extends Cubit<ReservationState> with BaseErrorHandler {
     _scrollDown();
   }
 
-  void selectService(Service service) => selectedService.value = service;
+  void selectService(Service service){
+    selectedService.value = service;
+    print("salam");
+    if (selectedService.value != null &&
+        (selectedBranch.value?.products.isNotEmpty ?? false)) {
+      // Sheets.showProductSearchableSheet(
+      //     title: selectedService.value!.title,
+      //     products: selectedBranch.value!.products);
+    }
+  }
   void selectDate(DateTime date) {
     selectedDate.value = date;
   }
@@ -133,7 +143,7 @@ class ReservationCubit extends Cubit<ReservationState> with BaseErrorHandler {
 
   void reserve() {
     ErrorHandler(progressAction: () async {
-      if(inProgress) return;
+      if (inProgress) return;
       inProgress = true;
       emit(ReservationLoading());
       var model = ReservationSubmitReqModel(
@@ -154,7 +164,9 @@ class ReservationCubit extends Cubit<ReservationState> with BaseErrorHandler {
       } else {
         result = await locator.get<ReservationSubmitRepo>().send(model);
       }
-      locator.get<EventLogger>().logEvent(event: Event.confirm_reservation,data: model.toJson());
+      locator
+          .get<EventLogger>()
+          .logEvent(event: Event.confirm_reservation, data: model.toJson());
       emit(ReservationSuccess());
       inProgress = false;
     }, socketExceptionAction: (e) {

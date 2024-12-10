@@ -1,3 +1,5 @@
+import 'package:clean_car_customer_v2/features/campaigns/data/repo/campaigns_repo.dart';
+import 'package:clean_car_customer_v2/features/notification/data/repo/notifications_repo.dart';
 import 'package:clean_car_customer_v2/features/profile_section/reservation_details/data/repo/change_status_repository.dart';
 import 'package:clean_car_customer_v2/features/profile_section/reservations/data/repo/reservations_repository.dart';
 import 'package:clean_car_customer_v2/features/profile_section/settings/features/faq/data/repository/faq_repository.dart';
@@ -17,6 +19,7 @@ import 'features/home/data/repo/filial_repo.dart';
 import 'features/home/data/repo/regions_repo.dart';
 import 'features/home/data/repo/services_repo.dart';
 import 'features/login/data/repo/login_repository.dart';
+import 'features/notification/data/repo/read_notifications_repo.dart';
 import 'features/offers/data/repo/offers_repo.dart';
 import 'features/onboadding_and_sign_up/otp/data/repository/otp_repository.dart';
 import 'features/onboadding_and_sign_up/signup/data/repository/sign_up_repository.dart';
@@ -70,4 +73,10 @@ Future<void> setUpLocator() async {
       () => ChangeStatusEnableDisableRepository());
   locator.registerLazySingleton<RatingRepository>(
       () => RatingRepository());
+  locator.registerLazySingleton<CampaignsRepository>(
+      () => CampaignsRepository());
+  locator.registerLazySingleton<NotificationsRepository>(
+      () => NotificationsRepository());
+  locator.registerLazySingleton<ReadNotificationsRepository>(
+      () => ReadNotificationsRepository());
 }

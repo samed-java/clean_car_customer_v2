@@ -11,6 +11,8 @@ class ApiKeys {
   static const String login = "$_baseUrl/sendCustomerOtp";
   static const String verifyOTP = "$_baseUrl/customerVerifyOpt";
   static const String offers = "$_baseUrl/getCustomerOffers";
+  static const String campaigns = "$_baseUrl/campaigns";
+  static const String notifications = "$_baseUrl/notifications";
   static const String personalInfo = "$_baseUrl/profile";
   static const String reservationList = "$_baseUrl/reservation_list";
   static const String cars = "$_baseUrl/cars";
@@ -24,4 +26,5 @@ class ApiKeys {
   static const String faqs = "$_baseUrl/customerFaqs";
   static const String customerChangeStatus = "$_baseUrl/customerChangeStatus";
   static const String rating = "$_baseUrl/rating/add";
+  static const String changeRead = "$_baseUrl/changeRead";
 }

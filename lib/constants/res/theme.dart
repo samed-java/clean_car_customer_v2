@@ -8,7 +8,7 @@ ThemeData getApplicationTheme() {
   return ThemeData(
     // colors of the app
     primaryColor: ColorManager.mainBlue, // 1
-
+    useMaterial3: false,
     fontFamily: FontConstant.fontFamilyPoppins, // bura poppins olacaq
     // bottomNavigationBarTheme: BottomNavigationBarThemeData(
     // unselectedLabelStyle: getRegularStyle(color: ColorManager.neuturals4),
