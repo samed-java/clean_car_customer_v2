@@ -66,7 +66,7 @@ class _MainScreenState extends State<MainScreen> {
         } else {
           Go.to(Pager.notifications);
         }
-      }else {
+      } else {
         Go.to(Pager.notifications);
       }
     });
@@ -81,10 +81,10 @@ class _MainScreenState extends State<MainScreen> {
                 branch: data["branch"].toString(),
                 service: data["service"].toString())); // }
           }
-        }else {
+        } else {
           Go.to(Pager.notifications);
         }
-      }else {
+      } else {
         Go.to(Pager.notifications);
       }
     });
@@ -159,7 +159,7 @@ class _MainScreenState extends State<MainScreen> {
       onTap: () {
         context.read<HomeCubit>().clearFilter();
         setState(() {
-          _currentIndex = index;
+          // _currentIndex = index;
           _pageController.animateToPage(
             index,
             duration: const Duration(milliseconds: 300),

@@ -5,14 +5,16 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomSearchBar extends StatefulWidget {
-  CustomSearchBar(
+  const CustomSearchBar(
       {super.key,
       required this.focusNode,
       this.searchController,
       this.onSubmit,
       this.onChange,
       this.onPressed,
-      this.asButton = false, this.width});
+      this.hintText,
+      this.asButton = false,
+      this.width});
   final TextEditingController? searchController;
   final FocusNode focusNode;
   final Function? onSubmit;
@@ -20,6 +22,7 @@ class CustomSearchBar extends StatefulWidget {
   final Function? onPressed;
   final bool asButton;
   final double? width;
+  final String? hintText;
 
   @override
   State<CustomSearchBar> createState() => _CustomSearchBarState();
@@ -30,8 +33,8 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
 
   @override
   void initState() {
-    widget.focusNode.addListener((){
-      if(widget.focusNode.hasFocus){
+    widget.focusNode.addListener(() {
+      if (widget.focusNode.hasFocus) {
         isBack.value = true;
       }
     });
@@ -41,7 +44,8 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
   // final Function onFocusChanged;
   @override
   Widget build(BuildContext context) {
-    double width = this.widget.width??MediaQuery.of(context).size.width * (280 / 375);
+    double width =
+        widget.width ?? MediaQuery.of(context).size.width * (280 / 375);
     return SizedBox(
       height: 40.h,
       width: width,
@@ -72,7 +76,8 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
                         widget.searchController?.clear();
                         widget.focusNode.unfocus();
                         widget.onSubmit?.call();
-                        widget.onChange?.call(widget.searchController?.text ?? '');
+                        widget.onChange
+                            ?.call(widget.searchController?.text ?? '');
                         SystemChannels.textInput.invokeMethod("TextInput.hide");
                         isBack.value = false;
 
@@ -90,7 +95,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
               hintStyle:
                   getRegularStyle(color: ColorManager.fifthBlack, fontSize: 14),
               contentPadding: Paddings.horizontal16,
-              hintText: context.locale.findacarwash,
+              hintText: widget.hintText ?? context.locale.findacarwash,
               fillColor: ColorManager.mainWhite,
               filled: true,
               border: OutlineInputBorder(

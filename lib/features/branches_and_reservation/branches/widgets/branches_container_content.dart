@@ -2,7 +2,6 @@ import 'package:clean_car_customer_v2/components/custom_filter_button.dart';
 import 'package:clean_car_customer_v2/components/custom_filter_reset_button.dart';
 import 'package:clean_car_customer_v2/components/custom_searchbar.dart';
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
-import 'package:clean_car_customer_v2/features/branches_and_reservation/branches/widgets/branches_filter_dialog.dart';
 import 'package:clean_car_customer_v2/features/branches_and_reservation/branches/widgets/detailed_branch_card.dart';
 import 'package:clean_car_customer_v2/features/home/widgets/filter_dialog.dart';
 import 'package:clean_car_customer_v2/locator.dart';
@@ -15,7 +14,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../home/cubit/home_cubit.dart';
 
 class BranchesContent extends StatelessWidget {
-  BranchesContent({super.key});
+  const BranchesContent({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +38,6 @@ class BranchesContent extends StatelessWidget {
             ),
             16.horizontalSpace,
             BlocBuilder<HomeCubit, HomeState>(builder: (context, state) {
-              print(context.read<HomeCubit>().isFilterNotEmpty);
               if (context.read<HomeCubit>().isFilterNotEmpty) {
                 return Row(
                   children: [

@@ -1,10 +1,8 @@
-import 'package:animate_do/animate_do.dart';
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
 import 'package:clean_car_customer_v2/features/branches_and_reservation/reservation/cubit/reservation_cubit.dart';
 import 'package:clean_car_customer_v2/features/branches_and_reservation/reservation/data/model/res/reservation_parameters_res_model.dart';
 import 'package:clean_car_customer_v2/features/branches_and_reservation/reservation/widgets/choose_car_dialog.dart';
 import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bounce/flutter_bounce.dart' as bounce;
@@ -25,10 +23,9 @@ class ReservationLocationCard extends StatelessWidget {
               onPressed: () {
                 chooseBranch(context,
                     branchs: snapshot.data!.washings!,
-                    selected: cubit.selectedBranch.value,
-                    onSelect: (value) {
-                      cubit.selectBranch(value);
-                    });
+                    selected: cubit.selectedBranch.value, onSelect: (value) {
+                  cubit.selectBranch(value);
+                });
               },
               duration: const Duration(milliseconds: 100),
               child: Container(

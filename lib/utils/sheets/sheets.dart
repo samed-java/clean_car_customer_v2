@@ -75,7 +75,8 @@ class ExtraDetailSheetContent extends StatefulWidget {
     this.actionText,
     this.actionIcon,
     this.mediaType,
-    this.mediaSource, required this.hasAction,
+    this.mediaSource,
+    required this.hasAction,
   });
 
   final String title;
@@ -199,7 +200,9 @@ class _ExtraDetailSheetContentState extends State<ExtraDetailSheetContent> {
                         ),
                         child: Container(
                           width: 1.sw,
-                          height:widget.mediaType == MediaType.networkVideo ? 200.h:null ,
+                          height: widget.mediaType == MediaType.networkVideo
+                              ? 200.h
+                              : null,
                           decoration: BoxDecoration(
                               color: ColorManager.mainBackgroundColor,
                               borderRadius: BorderRadius.all(
@@ -216,7 +219,7 @@ class _ExtraDetailSheetContentState extends State<ExtraDetailSheetContent> {
                                     children: [
                                       controller!.value.isInitialized
                                           ? CachedVideoPlayerPlus(controller!)
-                                          : SizedBox.shrink(),
+                                          : const SizedBox.shrink(),
                                       Positioned(
                                         bottom: 8,
                                         right: 8,
@@ -245,10 +248,10 @@ class _ExtraDetailSheetContentState extends State<ExtraDetailSheetContent> {
                                 const (MediaType.assetVideo) =>
                                   controller!.value.isInitialized
                                       ? CachedVideoPlayerPlus(controller!)
-                                      : Center(
+                                      : const Center(
                                           child: CupertinoActivityIndicator(),
                                         ),
-                                (_) => SizedBox.shrink(),
+                                (_) => const SizedBox.shrink(),
                               };
                             },
                           ),
@@ -331,7 +334,7 @@ class _SearchableProductSheetContentState
       child: Container(
         padding: Paddings.all16,
         child: SingleChildScrollView(
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -410,14 +413,18 @@ class _SearchableProductSheetContentState
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text.rich(
-                            TextSpan(text: "${context.locale.at_branch} ", children: [
-                              TextSpan(
-                                text: widget.title,
-                                style: getSemiBoldStyle(
-                                    color: ColorManager.mainBlue, fontSize: 14),
-                              ),
-                              TextSpan(text: " ${context.locale.detailsss}:")
-                            ]),
+                            TextSpan(
+                                text: "${context.locale.at_branch} ",
+                                children: [
+                                  TextSpan(
+                                    text: widget.title,
+                                    style: getSemiBoldStyle(
+                                        color: ColorManager.mainBlue,
+                                        fontSize: 14),
+                                  ),
+                                  TextSpan(
+                                      text: " ${context.locale.detailsss}:")
+                                ]),
                             style: getSemiBoldStyle(
                                 color: ColorManager.mainBlack, fontSize: 14),
                           ),

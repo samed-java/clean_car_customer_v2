@@ -4,9 +4,6 @@ import 'package:clean_car_customer_v2/utils/language/data/model/response/languag
 import 'package:clean_car_customer_v2/utils/language/language_init.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-
-import '../../../generated/l10n.dart';
 
 extension LocaleExtension on BuildContext {
   void get initLocalization => InitializeLanguage.init();

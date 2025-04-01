@@ -21,17 +21,15 @@ init() async {
   await FirebaseService.initializeFirebase();
   try {
     var tracking = await AppTrackingTransparency.requestTrackingAuthorization();
-    if(tracking == TrackingStatus.authorized){
+    if (tracking == TrackingStatus.authorized) {
       AppTrackingTransparency.getAdvertisingIdentifier();
     }
-  } on PlatformException {
-  }
+  } on PlatformException {}
 
   Location.instance.requestPermission();
   await setUpLocator();
   await locator.get<StorageService>().init();
 
-  print(locator.get<StorageService>().getLangCode());
   if (locator.get<StorageService>().getLangCode().isEmpty) {
     await locator.get<StorageService>().setLangCode("az");
   }

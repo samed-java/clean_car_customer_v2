@@ -63,7 +63,8 @@ TextStyle getButtonStyle(
 TextStyle getUnderlineStyle(
     {double fontSize = FontSize.s12,
     String fontFamily = FontConstant.fontFamilyPoppins,
+    FontWeight fontWeight = FontWeightManager.regular,
     required Color color}) {
-  return _getTextStyle(fontSize, fontFamily, FontWeightManager.regular, color)
+  return _getTextStyle(fontSize, fontFamily, fontWeight, color)
       .copyWith(decoration: TextDecoration.underline);
 }

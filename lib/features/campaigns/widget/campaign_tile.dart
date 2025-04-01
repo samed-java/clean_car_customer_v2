@@ -1,34 +1,58 @@
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
 import 'package:clean_car_customer_v2/features/campaigns/data/model/res/campaigns_res_model.dart';
+import 'package:clean_car_customer_v2/features/campaigns/widget/campaign_branches_sheet.dart';
+import 'package:clean_car_customer_v2/features/campaigns/widget/campaign_detail_sheet.dart';
 import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
-import 'package:clean_car_customer_v2/utils/sheets/sheets.dart';
+import 'package:clean_car_customer_v2/utils/pager/go.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bounce/flutter_bounce.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
-class CampaignTile extends StatelessWidget {
-
+class CampaignTile extends StatefulWidget {
   const CampaignTile({
     super.key,
-    required this.isReaden,required this.data,
+    required this.isReaden,
+    required this.data,
   });
 
   final bool isReaden;
   final CampaignModel data;
 
+  @override
+  State<CampaignTile> createState() => _CampaignTileState();
+}
+
+class _CampaignTileState extends State<CampaignTile> {
+  bool _isExpanded = false;
+
+  void onShowBranches() {
+    Go.back();
+    CampaignBranchesSheet.showCampaignBranches(
+      reserveAction: onReserveAction,
+    );
+  }
+
+  void onReserveAction() {
+    // Implement the logic for reserve action
+  }
 
   @override
   Widget build(BuildContext context) {
+    String description = widget.data.description!;
+    bool isLongText = description.length > 100;
+
     return Bounce(
       duration: DurationConstant.ms100,
       onPressed: () {
-        Sheets.showExtraDetailSheet(
-            title: data.title!,
-            content: data.description!,
-            endDate: data.endDate!,
-            actionText: context.locale.visit_website,
-            actionIcon: SvgPicture.asset(IconAssets.web,width: 16,height: 16,));
+        CampaignDetailSheet.showCampaignDetail(
+          title: widget.data.title!,
+          content: widget.data.description!,
+          reserveAction: onReserveAction,
+          showBranches: onShowBranches,
+          endDate: widget.data.endDate,
+        );
       },
       child: Container(
         margin: Paddings.vertical8,
@@ -42,20 +66,21 @@ class CampaignTile extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-                width: 48.sp,
-                height: 48.sp,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: ColorManager.mainBackgroundColor,
+              width: 48.sp,
+              height: 48.sp,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: ColorManager.mainBackgroundColor,
+              ),
+              child: Center(
+                child: SvgPicture.asset(
+                  ImageAssets.campaign,
+                  fit: BoxFit.contain,
+                  width: 25.sp,
+                  height: 25.sp,
                 ),
-                child: Center(
-                  child: SvgPicture.asset(
-                    ImageAssets.campaign,
-                    fit: BoxFit.contain,
-                    width: 25.sp,
-                    height: 25.sp,
-                  ),
-                )),
+              ),
+            ),
             16.horizontalSpace,
             Expanded(
               child: Column(
@@ -66,10 +91,10 @@ class CampaignTile extends StatelessWidget {
                     height: 20.h,
                     width: 1.sw,
                     child: Text(
-                      data.title!,
+                      widget.data.title!,
                       overflow: TextOverflow.ellipsis,
                       style: getMediumStyle(
-                          color: isReaden
+                          color: widget.isReaden
                               ? ColorManager.mainBlack
                               : ColorManager.fourthBlack,
                           fontSize: FontSize.s14),
@@ -78,11 +103,34 @@ class CampaignTile extends StatelessWidget {
                   8.verticalSpace,
                   SizedBox(
                     width: 1.sw,
-                    child: Text(
-                      data.description!,
-                      style: getRegularStyle(
-                          color: ColorManager.fourthBlack,
-                          fontSize: FontSize.s14),
+                    child: RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: _isExpanded || !isLongText
+                                ? description
+                                : "${description.substring(0, 60)} ",
+                            style: getRegularStyle(
+                              color: ColorManager.fourthBlack,
+                              fontSize: FontSize.s14,
+                            ),
+                          ),
+                          if (isLongText && !_isExpanded)
+                            TextSpan(
+                              text: "davamını oxu",
+                              style: getUnderlineStyle(
+                                color: ColorManager.mainBlue,
+                                fontSize: FontSize.s14,
+                              ),
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                  setState(() {
+                                    _isExpanded = true;
+                                  });
+                                },
+                            ),
+                        ],
+                      ),
                     ),
                   ),
                   8.verticalSpace,
@@ -90,18 +138,21 @@ class CampaignTile extends StatelessWidget {
                     width: 1.sw,
                     child: Text.rich(
                       TextSpan(
-                          text: "${context.locale.expiration_date}: ",
-                          style: getSemiBoldStyle(
-                              color: ColorManager.thirdBlack,
-                              fontSize: FontSize.s14),
-                          children: [
-                            TextSpan(
-                              text: data.endDate!.toString(),
-                              style: getSemiBoldStyle(
-                                  color: ColorManager.mainRed,
-                                  fontSize: FontSize.s14),
+                        text: "${context.locale.expiration_date}: ",
+                        style: getSemiBoldStyle(
+                          color: ColorManager.thirdBlack,
+                          fontSize: FontSize.s14,
+                        ),
+                        children: [
+                          TextSpan(
+                            text: widget.data.endDate!.toString(),
+                            style: getSemiBoldStyle(
+                              color: ColorManager.mainRed,
+                              fontSize: FontSize.s14,
                             ),
-                          ]),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],

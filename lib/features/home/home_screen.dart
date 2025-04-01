@@ -1,19 +1,12 @@
 import 'package:clean_car_customer_v2/components/offer_card.dart';
-import 'package:clean_car_customer_v2/constants/res/asset_manager.dart';
-import 'package:clean_car_customer_v2/constants/res/color_manager.dart';
-import 'package:clean_car_customer_v2/constants/res/gaps.dart';
-import 'package:clean_car_customer_v2/constants/res/paddings.dart';
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
-import 'package:clean_car_customer_v2/constants/res/styles_manager.dart';
 import 'package:clean_car_customer_v2/features/campaigns/cubit/campaigns_cubit.dart';
 import 'package:clean_car_customer_v2/features/home/cubit/home_cubit.dart';
 import 'package:clean_car_customer_v2/features/home/widgets/banner.dart';
 import 'package:clean_car_customer_v2/features/home/widgets/campaign_widget.dart';
 import 'package:clean_car_customer_v2/features/home/widgets/evacuator_ad_widget.dart';
-import 'package:clean_car_customer_v2/features/home/widgets/filter_dialog.dart';
 import 'package:clean_car_customer_v2/features/home/widgets/branch_card.dart';
 import 'package:clean_car_customer_v2/components/custom_searchbar.dart';
-import 'package:clean_car_customer_v2/components/custom_filter_button.dart';
 import 'package:clean_car_customer_v2/features/home/widgets/text_widget.dart';
 import 'package:clean_car_customer_v2/features/notification/cubit/notifications_cubit.dart';
 import 'package:clean_car_customer_v2/features/offers/cubit/offers_cubit.dart';
@@ -75,7 +68,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         NotificationButton(
                           onPressed: () {
-                            Go.to(Pager.notifications).then((value)=> context.read<NotificationsCubit>().execute());
+                            Go.to(Pager.notifications).then((value) =>
+                                context.read<NotificationsCubit>().execute());
                           },
                         ),
                       ],
@@ -150,7 +144,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                       model: context
                                           .read<HomeCubit>()
                                           .mainResult!
-                                          .washings![index], headTitle: context.locale.all,
+                                          .washings![index],
+                                      headTitle: context.locale.all,
                                     ),
                                   );
                                 },
@@ -211,7 +206,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                       model: context
                                           .read<HomeCubit>()
                                           .mainResult!
-                                          .fullTimeWashings![index], headTitle: "7/24",
+                                          .fullTimeWashings![index],
+                                      headTitle: "7/24",
                                     ),
                                   );
                                 },
@@ -230,7 +226,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       Gaps.h16,
-                      CampaignWidget(),
+                      const CampaignWidget(),
                       Gaps.h16,
                       Padding(
                         padding: Paddings.horizontal16,

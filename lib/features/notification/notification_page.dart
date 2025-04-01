@@ -11,13 +11,12 @@ import '../../constants/res/asset_manager.dart';
 import '../../constants/res/color_manager.dart';
 import '../../constants/res/gaps.dart';
 import '../../constants/res/paddings.dart';
-import '../../constants/res/radius_manager.dart';
 import '../../constants/res/styles_manager.dart';
 import '../../utils/pager/go.dart';
 import 'cubit/notifications_cubit.dart';
 
 class NotificationPage extends StatelessWidget {
-  NotificationPage({super.key});
+  const NotificationPage({super.key});
 
   final bool isReaden = false;
 

@@ -16,7 +16,7 @@ import '../../utils/pager/go.dart';
 import 'cubit/campaigns_cubit.dart';
 
 class CampaignPage extends StatelessWidget {
-  CampaignPage({super.key});
+  const CampaignPage({super.key});
 
   final bool isReaden = false;
 
@@ -55,7 +55,7 @@ class CampaignPage extends StatelessWidget {
                   ),
                   Gaps.w4,
                   Text(
-                    context.locale.campaigns,//context.locale.notifications,
+                    context.locale.campaigns, //context.locale.notifications,
                     style: getSemiBoldStyle(
                       color: ColorManager.mainWhite,
                       fontSize: 20,
@@ -66,69 +66,69 @@ class CampaignPage extends StatelessWidget {
             ),
             Expanded(
               child: Container(
-                width: 1.sw,
-                // height: MediaQuery.of(context).size.height * (712 / 816),
-                decoration: BoxDecoration(
-                  color: ColorManager.mainBackgroundColor,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(16.r),
-                    topRight: Radius.circular(16.r),
+                  width: 1.sw,
+                  // height: MediaQuery.of(context).size.height * (712 / 816),
+                  decoration: BoxDecoration(
+                    color: ColorManager.mainBackgroundColor,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(16.r),
+                      topRight: Radius.circular(16.r),
+                    ),
                   ),
-                ),
-                child: Padding(
-                    padding: Paddings.all16,
-                    child: BlocBuilder<CampaignsCubit, CampaignsState>(
-                      builder: (context, state) {
-                        if (state is CampaignsSuccess) {
-                          return RefreshIndicator(
-                            onRefresh: () async {
-                              context.read<CampaignsCubit>().execute();
-                            },
-                            child: ListView.separated(
-                              physics: const AlwaysScrollableScrollPhysics(),
-                              separatorBuilder: (_, __) => 16.verticalSpace,
-                              itemBuilder: (_, index) {
-                                return Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      state.data.campaigns
-                                          ?.elementAt(index)
-                                          .date.toString() ??
-                                          '',
-                                      style: getMediumStyle(
-                                          color: ColorManager.secondaryBlack,
-                                          fontSize: FontSize.s14),
-                                    ),
-                                    8.horizontalSpace,
-                                    ...state.data.campaigns!
-                                        .elementAt(index)
-                                        .campaign!
-                                        .map((e) => CampaignTile(
-                                      isReaden: false,
-                                      data: e,
-                                    ))
-                                  ],
-                                );
+                  child: Padding(
+                      padding: Paddings.all16,
+                      child: BlocBuilder<CampaignsCubit, CampaignsState>(
+                        builder: (context, state) {
+                          if (state is CampaignsSuccess) {
+                            return RefreshIndicator(
+                              onRefresh: () async {
+                                context.read<CampaignsCubit>().execute();
                               },
-                              itemCount: state.data.campaigns!.length,
-                            ),
-                          );
-                        } else if (state is CampaignsLoading) {
-                          return const Center(
-                            child: CupertinoActivityIndicator(),
-                          );
-                        } else if (state is CampaignsFail) {
-                          return Center(
-                            child: Text(state.message ?? ''),
-                          );
-                        }
-                        return const SizedBox.shrink();
-                      },
-                    ))
-                    
-              ),
+                              child: ListView.separated(
+                                physics: const AlwaysScrollableScrollPhysics(),
+                                separatorBuilder: (_, __) => 16.verticalSpace,
+                                itemBuilder: (_, index) {
+                                  return Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        state.data.campaigns
+                                                ?.elementAt(index)
+                                                .date
+                                                .toString() ??
+                                            '',
+                                        style: getMediumStyle(
+                                            color: ColorManager.secondaryBlack,
+                                            fontSize: FontSize.s14),
+                                      ),
+                                      8.horizontalSpace,
+                                      ...state.data.campaigns!
+                                          .elementAt(index)
+                                          .campaign!
+                                          .map((e) => CampaignTile(
+                                                isReaden: false,
+                                                data: e,
+                                              ))
+                                    ],
+                                  );
+                                },
+                                itemCount: state.data.campaigns!.length,
+                              ),
+                            );
+                          } else if (state is CampaignsLoading) {
+                            return const Center(
+                              child: CupertinoActivityIndicator(),
+                            );
+                          } else if (state is CampaignsFail) {
+                            return Center(
+                              child: Text(state.message ?? ''),
+                            );
+                          }
+                          return const SizedBox.shrink();
+                        },
+                      ))),
             ),
           ],
         ),
