@@ -2,8 +2,11 @@ import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
 import 'package:clean_car_customer_v2/features/campaigns/data/model/res/campaigns_res_model.dart';
 import 'package:clean_car_customer_v2/features/campaigns/widget/campaign_branches_sheet.dart';
 import 'package:clean_car_customer_v2/features/campaigns/widget/campaign_detail_sheet.dart';
+import 'package:clean_car_customer_v2/utils/converters/campaing_converter.dart';
+import 'package:clean_car_customer_v2/utils/extensions/datetime_extension/datetime_extension.dart';
 import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
 import 'package:clean_car_customer_v2/utils/pager/go.dart';
+import 'package:clean_car_customer_v2/utils/pager/pager.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bounce/flutter_bounce.dart';
@@ -18,7 +21,7 @@ class CampaignTile extends StatefulWidget {
   });
 
   final bool isReaden;
-  final CampaignModel data;
+  final Campaign data;
 
   @override
   State<CampaignTile> createState() => _CampaignTileState();
@@ -29,13 +32,18 @@ class _CampaignTileState extends State<CampaignTile> {
 
   void onShowBranches() {
     Go.back();
-    CampaignBranchesSheet.showCampaignBranches(
-      reserveAction: onReserveAction,
-    );
+    CampaignBranchesSheet.showCampaignBranches(campaign: widget.data);
   }
 
   void onReserveAction() {
-    // Implement the logic for reserve action
+    final onlyBranch =
+        widget.data.washings?.length == 1 ? widget.data.washings?.first : null;
+    final firstService = widget.data.services?.first;
+
+    Go.to(Pager.reservation(
+      branch: branchConverted(onlyBranch),
+      service: serviceConverter(firstService),
+    ));
   }
 
   @override
@@ -51,7 +59,7 @@ class _CampaignTileState extends State<CampaignTile> {
           content: widget.data.description!,
           reserveAction: onReserveAction,
           showBranches: onShowBranches,
-          endDate: widget.data.endDate,
+          endDate: widget.data.endDate?.toShortDateString(),
         );
       },
       child: Container(
@@ -145,7 +153,7 @@ class _CampaignTileState extends State<CampaignTile> {
                         ),
                         children: [
                           TextSpan(
-                            text: widget.data.endDate!.toString(),
+                            text: widget.data.endDate!.toShortDateString(),
                             style: getSemiBoldStyle(
                               color: ColorManager.mainRed,
                               fontSize: FontSize.s14,

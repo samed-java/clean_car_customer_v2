@@ -1,6 +1,7 @@
 import 'dart:io';
 
-import 'package:bloc/bloc.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:clean_car_customer_v2/constants/res/values_manager.dart';
 import 'package:clean_car_customer_v2/features/branches_and_reservation/reservation/data/model/res/reservation_parameters_res_model.dart';
 import 'package:clean_car_customer_v2/features/branches_and_reservation/reservation/data/repo/reservation_parameters_repo.dart';
@@ -9,11 +10,8 @@ import 'package:clean_car_customer_v2/locator.dart';
 import 'package:clean_car_customer_v2/utils/errors/base_error_handler.dart';
 import 'package:clean_car_customer_v2/utils/services/firebase/analytics/analytic_logger.dart';
 import 'package:clean_car_customer_v2/utils/services/firebase/analytics/event.dart';
-import 'package:clean_car_customer_v2/utils/sheets/sheets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
-import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
 import '../../../../utils/snacks/snacks.dart';
 import '../../../profile_section/my_cars/data/model/res/my_cars_res_model.dart';
@@ -78,9 +76,8 @@ class ReservationCubit extends Cubit<ReservationState> with BaseErrorHandler {
     _scrollDown();
   }
 
-  void selectService(Service service){
+  void selectService(Service service) {
     selectedService.value = service;
-    print("salam");
     if (selectedService.value != null &&
         (selectedBranch.value?.products.isNotEmpty ?? false)) {
       // Sheets.showProductSearchableSheet(
@@ -88,6 +85,7 @@ class ReservationCubit extends Cubit<ReservationState> with BaseErrorHandler {
       //     products: selectedBranch.value!.products);
     }
   }
+
   void selectDate(DateTime date) {
     selectedDate.value = date;
   }
@@ -117,10 +115,6 @@ class ReservationCubit extends Cubit<ReservationState> with BaseErrorHandler {
                 ? DateFormat('dd.MM.yyyy').format(selectedDate.value!)
                 : null));
     if (result != null) {
-      print("==============");
-      print(result.services);
-      print("==============");
-
       params.value = result;
       if (selectedDate.value != null) {
         _scrollDown();
@@ -130,14 +124,18 @@ class ReservationCubit extends Cubit<ReservationState> with BaseErrorHandler {
 
   @override
   void onSocketException(SocketException e) {
-    print(e);
+    if (kDebugMode) {
+      print(e);
+    }
     super.onSocketException(e);
   }
 
   @override
   void onOtherError(Object e, StackTrace s) {
-    print(e);
-    print(s);
+    if (kDebugMode) {
+      print(e);
+      print(s);
+    }
     super.onOtherError(e, s);
   }
 
@@ -155,7 +153,6 @@ class ReservationCubit extends Cubit<ReservationState> with BaseErrorHandler {
           price: selectedService.value!.price,
           status: (!isNew && !isRenew) ? 1 : null);
       var result;
-      print(model.toJson());
 
       if (!isNew && reservationId != null && !isRenew) {
         result = await locator
@@ -174,8 +171,10 @@ class ReservationCubit extends Cubit<ReservationState> with BaseErrorHandler {
       inProgress = false;
       Snacks.showCustomSnack(message: "Connection error", isSucces: false);
     }, otherErrorAction: (e, s) {
-      print(e);
-      print(s);
+      if (kDebugMode) {
+        print(e);
+        print(s);
+      }
       emit(ReservationError());
       inProgress = false;
       Snacks.showCustomSnack(message: "Unknown error occured", isSucces: false);

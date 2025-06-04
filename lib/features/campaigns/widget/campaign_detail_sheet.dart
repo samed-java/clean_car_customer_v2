@@ -141,7 +141,7 @@ class _CampaignDetailContent extends StatelessWidget {
             ),
             16.verticalSpace,
             CustomButton(
-              frontText: 'context.locale.makereservation',
+              frontText: 'Keçərli Filiallara Bax',
               prefixIcon: SvgPicture.asset(IconAssets.location),
               backgroundColor: ColorManager.mainBlue.withOpacity(0.1),
               foregroundColor: ColorManager.mainBlue,

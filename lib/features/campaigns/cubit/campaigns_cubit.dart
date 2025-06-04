@@ -24,7 +24,7 @@ class CampaignsCubit extends Cubit<CampaignsState> with BaseErrorHandler {
 
   @override
   Future<void> onProgress() async {
-    if (result == null) emit(CampaignsLoading());
+    if (result.valueOrNull == null) emit(CampaignsLoading());
     result.value = await locator.get<CampaignsRepository>().fetch();
     emit(CampaignsSuccess(data: result.valueOrNull!));
   }
@@ -44,9 +44,12 @@ class CampaignsCubit extends Cubit<CampaignsState> with BaseErrorHandler {
 
   int calculateNew() {
     var value = result.valueOrNull;
-    int count = value?.campaigns?.fold<List<CampaignModel>>([], (i, n) => i + (n.campaign ?? []))
-        .where((e) => DateTime.parse(e.endDate!).isAfter(DateTime.now()))
-        .length??0;
+    int count = value?.campaigns != null
+        ? value?.campaigns!
+                .where((e) => e.endDate!.isAfter(DateTime.now()))
+                .length ??
+            0
+        : 0;
 
     return count;
   }

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -34,7 +33,10 @@ import '../services/navigation_service/navigation_service.dart';
 class Snacks {
   Snacks._();
 
-  static void showCustomSnack({required String message, bool isSucces = true}) {
+  static void showCustomSnack({
+    required String message,
+    bool isSucces = true,
+  }) {
     ScaffoldMessenger.of(NavigationService.instance.context)
         .showSnackBar(SnackBar(
       content: SizedBox(

@@ -1,4 +1,3 @@
-import 'package:clean_car_customer_v2/constants/res/font_manager.dart';
 import 'package:clean_car_customer_v2/features/campaigns/widget/campaign_tile.dart';
 import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
 import 'package:flutter/cupertino.dart';
@@ -80,6 +79,12 @@ class CampaignPage extends StatelessWidget {
                       child: BlocBuilder<CampaignsCubit, CampaignsState>(
                         builder: (context, state) {
                           if (state is CampaignsSuccess) {
+                            if (state.data.campaigns == null) {
+                              return const Center(child: Text("No data"));
+                            }
+                            if (state.data.campaigns!.isEmpty) {
+                              return const Center(child: Text("No data"));
+                            }
                             return RefreshIndicator(
                               onRefresh: () async {
                                 context.read<CampaignsCubit>().execute();
@@ -93,24 +98,29 @@ class CampaignPage extends StatelessWidget {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Text(
-                                        state.data.campaigns
-                                                ?.elementAt(index)
-                                                .date
-                                                .toString() ??
-                                            '',
-                                        style: getMediumStyle(
-                                            color: ColorManager.secondaryBlack,
-                                            fontSize: FontSize.s14),
-                                      ),
-                                      8.horizontalSpace,
-                                      ...state.data.campaigns!
-                                          .elementAt(index)
-                                          .campaign!
-                                          .map((e) => CampaignTile(
-                                                isReaden: false,
-                                                data: e,
-                                              ))
+                                      // Text(
+                                      //   state.data.campaigns
+                                      //           ?.elementAt(index)
+                                      //           .endDate
+                                      //           .toString() ??
+                                      //       '',
+                                      //   style: getMediumStyle(
+                                      //       color: ColorManager.secondaryBlack,
+                                      //       fontSize: FontSize.s14),
+                                      // ),
+                                      // 8.horizontalSpace,
+                                      // ...state.data.campaigns!
+                                      //     .elementAt(index)
+                                      //     .campaign!
+                                      //     .map((e) => CampaignTile(
+                                      //           isReaden: false,
+                                      //           data: e,
+                                      //         ))
+                                      CampaignTile(
+                                        isReaden: false,
+                                        data: state.data.campaigns!
+                                            .elementAt(index),
+                                      )
                                     ],
                                   );
                                 },

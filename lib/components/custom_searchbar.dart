@@ -56,11 +56,6 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
             controller: widget.searchController,
             focusNode: widget.focusNode,
             onTap: () {
-              // if (searchController.text.isEmpty) {
-              //   onFocusChanged();
-              // }
-              // isBack.value = !isBack.value;
-              // if (focusNode.hasFocus) {}
               if (!widget.asButton) {
                 isBack.value = true;
               } else {

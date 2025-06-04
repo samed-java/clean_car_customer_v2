@@ -1,5 +1,4 @@
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
-import 'package:clean_car_customer_v2/features/branches_and_reservation/branches/widgets/branches_container_content.dart';
 import 'package:clean_car_customer_v2/features/notification/cubit/notifications_cubit.dart';
 import 'package:clean_car_customer_v2/features/notification/data/model/res/notifications_res_model.dart';
 import 'package:flutter/material.dart';

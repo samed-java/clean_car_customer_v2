@@ -1,8 +1,13 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:clean_car_customer_v2/components/custom_button.dart';
 import 'package:clean_car_customer_v2/components/custom_searchbar.dart';
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
+import 'package:clean_car_customer_v2/features/campaigns/data/model/res/campaigns_res_model.dart';
+import 'package:clean_car_customer_v2/utils/converters/campaing_converter.dart';
 import 'package:clean_car_customer_v2/utils/extensions/locale_extension/locale_extension.dart';
 import 'package:clean_car_customer_v2/utils/pager/go.dart';
+import 'package:clean_car_customer_v2/utils/pager/pager.dart';
 import 'package:clean_car_customer_v2/utils/services/navigation_service/navigation_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bounce/flutter_bounce.dart';
@@ -11,7 +16,7 @@ import 'package:flutter_svg/svg.dart';
 
 class CampaignBranchesSheet {
   static void showCampaignBranches({
-    required Function() reserveAction,
+    required Campaign campaign,
   }) async {
     showModalBottomSheet(
         isScrollControlled: true,
@@ -23,105 +28,172 @@ class CampaignBranchesSheet {
         context: NavigationService.instance.context,
         builder: (context) {
           return _CampaignBranchesContent(
-            reserveAction: reserveAction,
+            campaign: campaign,
           );
         });
   }
 }
 
-class _CampaignBranchesContent extends StatelessWidget {
+class _CampaignBranchesContent extends StatefulWidget {
   const _CampaignBranchesContent({
-    required this.reserveAction,
+    required this.campaign,
   });
-  final Function() reserveAction;
+
+  final Campaign campaign;
+
+  @override
+  State<_CampaignBranchesContent> createState() =>
+      _CampaignBranchesContentState();
+}
+
+class _CampaignBranchesContentState extends State<_CampaignBranchesContent> {
+  CampaignWashing? _selectedBranch;
+  final TextEditingController _searchController = TextEditingController();
+  final FocusNode _focusNode = FocusNode();
+  List<CampaignWashing> _filteredBranches = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _filteredBranches = widget.campaign.washings ?? [];
+    _searchController.addListener(_onSearchChanged);
+  }
+
+  void _onSearchChanged() {
+    final query = _searchController.text.toLowerCase();
+    setState(() {
+      _filteredBranches = widget.campaign.washings!
+          .where((branch) => (branch.title ?? '').toLowerCase().contains(query))
+          .toList();
+    });
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  void onReserveAction() {
+    if (_selectedBranch != null) {
+      Go.to(
+        Pager.reservation(
+            branch: branchConverted(_selectedBranch),
+            service: serviceConverter(widget.campaign.services!.first)),
+      );
+      return;
+    }
+  }
+
+  void onTap(CampaignWashing branch) {
+    if (branch.id == _selectedBranch?.id) {
+      _selectedBranch = null;
+    } else {
+      _selectedBranch = branch;
+    }
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding:
-          EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-      child: Container(
-        padding: Paddings.all16,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  context.locale.branches,
-                  style: getSemiBoldStyle(
-                      color: ColorManager.mainBlue, fontSize: FontSize.s18),
-                ),
-                Bounce(
-                  duration: DurationConstant.ms100,
-                  onPressed: () => Go.back(),
-                  child: Icon(
-                    Icons.close,
-                    color: ColorManager.mainBlack,
-                    size: 20.sp,
-                  ),
-                )
-              ],
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return SingleChildScrollView(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom,
+          ),
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+              minHeight: constraints.maxHeight * 0.95,
             ),
-            16.verticalSpace,
-            Container(
-              padding: Paddings.all8,
-              constraints: BoxConstraints(maxHeight: 600.h),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(
-                  RadiusManager.radiusCircular6,
-                ),
-              ),
-              child: SingleChildScrollView(
+            child: IntrinsicHeight(
+              child: Container(
+                padding: Paddings.all16,
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    SizedBox(
-                      width: 1.sw,
-                      child: CustomSearchBar(
-                        focusNode: FocusNode(),
-                        hintText: 'context.locale.search',
-                      ),
-                    ),
-                    Column(
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.only(top: 16),
-                          child: _BranchItem(
-                            branch: DummyBranch(
-                              id: '1',
-                              title: 'Branch 1',
-                              distance: '2 km',
-                            ),
+                        Text(
+                          context.locale.branches,
+                          style: getSemiBoldStyle(
+                            color: ColorManager.mainBlue,
+                            fontSize: FontSize.s18,
+                          ),
+                        ),
+                        Bounce(
+                          duration: DurationConstant.ms100,
+                          onPressed: () => Go.back(),
+                          child: Icon(
+                            Icons.close,
+                            color: ColorManager.mainBlack,
+                            size: 20.sp,
                           ),
                         ),
                       ],
+                    ),
+                    16.verticalSpace,
+                    Container(
+                      padding: Paddings.all8,
+                      constraints: BoxConstraints(maxHeight: 650.h),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(
+                          RadiusManager.radiusCircular6,
+                        ),
+                      ),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              width: 1.sw,
+                              child: CustomSearchBar(
+                                searchController: _searchController,
+                                focusNode: _focusNode,
+                                hintText: 'Search',
+                              ),
+                            ),
+                            ...List.generate(_filteredBranches.length, (index) {
+                              final branch = _filteredBranches[index];
+                              return Padding(
+                                padding: const EdgeInsets.only(top: 16),
+                                child: Bounce(
+                                  onPressed: () => onTap(branch),
+                                  duration: DurationConstant.ms100,
+                                  child: _BranchItem(
+                                    branch: branch,
+                                    isSelected:
+                                        _selectedBranch?.id == branch.id,
+                                  ),
+                                ),
+                              );
+                            }),
+                          ],
+                        ),
+                      ),
+                    ),
+                    const Spacer(),
+                    CustomButton(
+                      frontText: context.locale.makereservation,
+                      onPressed: onReserveAction,
                     ),
                   ],
                 ),
               ),
             ),
-            16.verticalSpace,
-            CustomButton(
-              frontText: context.locale.makereservation,
-              onPressed: reserveAction,
-            )
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }
 
 class _BranchItem extends StatelessWidget {
-  const _BranchItem({required this.branch});
+  const _BranchItem({required this.branch, required this.isSelected});
 
-  final DummyBranch branch;
+  final CampaignWashing branch;
+  final bool isSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -129,6 +201,7 @@ class _BranchItem extends StatelessWidget {
       decoration: BoxDecoration(
         color: ColorManager.mainWhite,
         borderRadius: BorderRadius.all(RadiusManager.radiusCircular6),
+        border: isSelected ? Border.all(color: ColorManager.mainBlue) : null,
       ),
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -148,7 +221,7 @@ class _BranchItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  branch.title,
+                  branch.title!,
                   overflow: TextOverflow.ellipsis,
                   style: getUnderlineStyle(
                     color: ColorManager.mainBlack,
@@ -156,14 +229,14 @@ class _BranchItem extends StatelessWidget {
                     fontSize: FontSize.s14,
                   ),
                 ),
-                Text(
-                  branch.distance,
-                  overflow: TextOverflow.ellipsis,
-                  style: getMediumStyle(
-                    color: ColorManager.thirdBlack,
-                    fontSize: FontSize.s12,
-                  ),
-                )
+                // Text(
+                //   branch.distance,
+                //   overflow: TextOverflow.ellipsis,
+                //   style: getMediumStyle(
+                //     color: ColorManager.thirdBlack,
+                //     fontSize: FontSize.s12,
+                //   ),
+                // )
               ],
             ),
           ],
@@ -171,16 +244,4 @@ class _BranchItem extends StatelessWidget {
       ),
     );
   }
-}
-
-class DummyBranch {
-  final String id;
-  final String title;
-  final String distance;
-
-  DummyBranch({
-    required this.id,
-    required this.title,
-    required this.distance,
-  });
 }

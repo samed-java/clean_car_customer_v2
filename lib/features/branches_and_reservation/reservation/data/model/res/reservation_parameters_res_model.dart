@@ -36,16 +36,17 @@ class ReservationParametersResModel {
 class Service extends Equatable {
   final int serviceId;
   final String title;
-  final String icon;
+  final String? icon;
   final String price;
 
   const Service({
     required this.serviceId,
     required this.title,
-    required this.icon,
+    this.icon,
     required this.price,
   });
 
+  // TODO: service model must be change. Add discount percentage or price, It depends on backend.
   factory Service.fromJson(Map<String, dynamic> json) => Service(
         serviceId: json["service_id"],
         title: json["title"],
@@ -61,7 +62,6 @@ class Service extends Equatable {
       };
 
   @override
-  // TODO: implement props
   List<Object?> get props => [serviceId];
 }
 
@@ -112,7 +112,8 @@ class Branch extends Equatable {
         address: json["address"],
         lat: json["lat"],
         lon: json["lon"],
-        products: json["products"]?.map((x) => Product.fromJson(x)).toList()??<Product>[],
+        products: json["products"]?.map((x) => Product.fromJson(x)).toList() ??
+            <Product>[],
       );
 
   Map<String, dynamic> toJson() => {
@@ -173,7 +174,6 @@ class Product extends Equatable {
       };
 
   @override
-  // TODO: implement props
   List<Object?> get props => [
         id,
         washingId,
