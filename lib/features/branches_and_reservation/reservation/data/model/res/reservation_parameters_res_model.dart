@@ -38,27 +38,30 @@ class Service extends Equatable {
   final String title;
   final String? icon;
   final String price;
+  final String? discountedPrice;
 
   const Service({
     required this.serviceId,
     required this.title,
     this.icon,
     required this.price,
+    this.discountedPrice,
   });
 
   // TODO: service model must be change. Add discount percentage or price, It depends on backend.
   factory Service.fromJson(Map<String, dynamic> json) => Service(
-        serviceId: json["service_id"],
-        title: json["title"],
-        icon: json["icon"],
-        price: json["price"],
-      );
+      serviceId: json["service_id"],
+      title: json["title"],
+      icon: json["icon"],
+      price: json["price"],
+      discountedPrice: json["discounted_price"]);
 
   Map<String, dynamic> toJson() => {
         "service_id": serviceId,
         "title": title,
         "icon": icon,
         "price": price,
+        "discounted_price": discountedPrice,
       };
 
   @override

@@ -15,5 +15,9 @@ Branch? branchConverted(CampaignWashing? washing) {
 Service? serviceConverter(CampaignService? service) {
   if (service == null) return null;
   return Service(
-      serviceId: service.id!, title: service.title!, price: service.price!);
+    serviceId: service.id!,
+    title: service.title!,
+    price: service.price!,
+    discountedPrice: service.discountedPrice,
+  );
 }

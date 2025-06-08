@@ -151,6 +151,7 @@ class ReservationCubit extends Cubit<ReservationState> with BaseErrorHandler {
           day: DateFormat('dd.MM.yyyy').format(selectedDate.value!),
           time: selectedTime.value!.time,
           price: selectedService.value!.price,
+          discountedPrice: selectedService.value!.discountedPrice,
           status: (!isNew && !isRenew) ? 1 : null);
       var result;
 

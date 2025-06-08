@@ -105,13 +105,44 @@ class ReservationDetailContent extends StatelessWidget {
           Gaps.h16,
           Gaps.h16,
           ReservationDetailCard(
-            content: Text(
-              "${service.price} AZN",
-              style: getMediumStyle(
-                color: ColorManager.secondaryBlack,
-                fontSize: 14,
-              ),
-            ),
+            content: service.discountedPrice == null
+                ? Text(
+                    "${service.price} AZN",
+                    style: getMediumStyle(
+                      color: ColorManager.secondaryBlack,
+                      fontSize: 14,
+                    ),
+                  )
+                : Row(
+                    children: [
+                      Text(
+                        "${service.discountedPrice} AZN",
+                        style: getMediumStyle(
+                          color: ColorManager.secondaryBlack,
+                          fontSize: 14,
+                        ),
+                      ),
+                      Gaps.w12,
+                      Stack(
+                        children: [
+                          Text(
+                            "${service.price} AZN",
+                            style: getMediumStyle(
+                              color: ColorManager.fifthBlack.withOpacity(0.2),
+                              fontSize: 14,
+                            ),
+                          ),
+                          Positioned.fill(
+                            child: CustomPaint(
+                              painter: _DiagonalLinePainter(
+                                ColorManager.fifthBlack.withOpacity(0.2),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
             headerText: context.locale.price,
           ),
           Gaps.h16,
@@ -176,4 +207,22 @@ class ReservationDetailContent extends StatelessWidget {
       ),
     );
   }
+}
+
+class _DiagonalLinePainter extends CustomPainter {
+  _DiagonalLinePainter(this.color);
+
+  final Color color;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = color
+      ..strokeWidth = 2;
+
+    canvas.drawLine(Offset(0, size.height), Offset(size.width, 0), paint);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) => false;
 }
