@@ -217,27 +217,16 @@ class _BranchItem extends StatelessWidget {
               ),
             ),
             8.horizontalSpace,
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  branch.title!,
-                  overflow: TextOverflow.ellipsis,
-                  style: getUnderlineStyle(
-                    color: ColorManager.mainBlack,
-                    fontWeight: FontWeight.w500,
-                    fontSize: FontSize.s14,
-                  ),
+            Expanded(
+              child: Text(
+                branch.title!,
+                overflow: TextOverflow.ellipsis,
+                style: getUnderlineStyle(
+                  color: ColorManager.mainBlack,
+                  fontWeight: FontWeight.w500,
+                  fontSize: FontSize.s14,
                 ),
-                // Text(
-                //   branch.distance,
-                //   overflow: TextOverflow.ellipsis,
-                //   style: getMediumStyle(
-                //     color: ColorManager.thirdBlack,
-                //     fontSize: FontSize.s12,
-                //   ),
-                // )
-              ],
+              ),
             ),
           ],
         ),

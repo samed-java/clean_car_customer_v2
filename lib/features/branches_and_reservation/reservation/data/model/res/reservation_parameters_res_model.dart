@@ -48,7 +48,6 @@ class Service extends Equatable {
     this.discountedPrice,
   });
 
-  // TODO: service model must be change. Add discount percentage or price, It depends on backend.
   factory Service.fromJson(Map<String, dynamic> json) => Service(
       serviceId: json["service_id"],
       title: json["title"],
@@ -88,7 +87,6 @@ class Time extends Equatable {
       };
 
   @override
-  // TODO: implement props
   List<Object?> get props => [time];
 }
 
@@ -129,7 +127,6 @@ class Branch extends Equatable {
       };
 
   @override
-  // TODO: implement props
   List<Object?> get props => [id, washingName, address];
 }
 
