@@ -1,6 +1,5 @@
 import 'dart:math';
 
-import 'package:clean_car_customer_v2/constants/res/color_manager.dart';
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -144,7 +143,7 @@ class _ServiceExpandedLIstState extends State<ServiceExpandedList> {
                   bottomLeft: RadiusManager.radiusCircular6),
             ),
             child: SingleChildScrollView(
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               child: Column(
                 children: [
                   ...(query != null
@@ -152,48 +151,67 @@ class _ServiceExpandedLIstState extends State<ServiceExpandedList> {
                               .toLowerCase()
                               .contains(query!.toLowerCase()))
                           : widget.services)
-                      .map((e) => InkWell(
-                            onTap: () {
-                              setState(() {
-                                widget.onChange.call(e);
-                                selected = e;
-                                expanded = false;
-                              });
-                            },
-                            child: Container(
-                              width: 1.sw,
-                              height: 64,
-                              padding: Paddings.all8,
-                              decoration: BoxDecoration(
-                                  border: Border(
-                                top: BorderSide(
-                                    color:
-                                        ColorManager.mainBlack.withOpacity(.1)),
-                              )),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Expanded(
-                                      child: Text(
-                                    e.title,
-                                    // overflow: TextOverflow.ellipsis,
-                                    style: getRegularStyle(
-                                        color: ColorManager.secondaryBlack,
-                                        fontSize: FontSize.s14),
-                                  )),
-                                  16.horizontalSpace,
-                                  Text(
-                                    "${e.price} AZN",
-                                    overflow: TextOverflow.ellipsis,
-                                    style: getRegularStyle(
-                                        color: ColorManager.secondaryBlack,
-                                        fontSize: FontSize.s14),
-                                  )
-                                ],
+                      .map(
+                    (e) => InkWell(
+                      onTap: () {
+                        setState(() {
+                          widget.onChange.call(e);
+                          selected = e;
+                          expanded = false;
+                        });
+                      },
+                      child: Container(
+                        width: 1.sw,
+                        height: 64,
+                        padding: Paddings.all8,
+                        decoration: BoxDecoration(
+                            border: Border(
+                          top: BorderSide(
+                              color: ColorManager.mainBlack.withOpacity(.1)),
+                        )),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Expanded(
+                                child: Text(
+                              e.title,
+                              // overflow: TextOverflow.ellipsis,
+                              style: getRegularStyle(
+                                  color: ColorManager.secondaryBlack,
+                                  fontSize: FontSize.s14),
+                            )),
+                            16.horizontalSpace,
+                            if (e.discountedPrice == null)
+                              Text(
+                                "${e.price} AZN",
+                                overflow: TextOverflow.ellipsis,
+                                style: getRegularStyle(
+                                    color: ColorManager.secondaryBlack,
+                                    fontSize: FontSize.s14),
                               ),
-                            ),
-                          ))
+                            if (e.discountedPrice != null) ...[
+                              Text(
+                                "${e.discountedPrice} AZN",
+                                overflow: TextOverflow.ellipsis,
+                                style: getRegularStyle(
+                                    color: ColorManager.secondaryBlack,
+                                    fontSize: FontSize.s14),
+                              ),
+                              Text(
+                                "${e.price} AZN",
+                                overflow: TextOverflow.ellipsis,
+                                style: getRegularStyle(
+                                    color: ColorManager.fifthBlack
+                                        .withOpacity(0.2),
+                                    fontSize: FontSize.s12),
+                              ),
+                            ],
+                          ],
+                        ),
+                      ),
+                    ),
+                  )
                 ],
               ),
             ),
