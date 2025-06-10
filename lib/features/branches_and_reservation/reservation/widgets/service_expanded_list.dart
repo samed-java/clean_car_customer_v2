@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:clean_car_customer_v2/components/diagonal_line_painter.dart';
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -198,13 +199,26 @@ class _ServiceExpandedLIstState extends State<ServiceExpandedList> {
                                     color: ColorManager.secondaryBlack,
                                     fontSize: FontSize.s14),
                               ),
-                              Text(
-                                "${e.price} AZN",
-                                overflow: TextOverflow.ellipsis,
-                                style: getRegularStyle(
-                                    color: ColorManager.fifthBlack
-                                        .withOpacity(0.2),
-                                    fontSize: FontSize.s12),
+                              Gaps.w8,
+                              Stack(
+                                children: [
+                                  Text(
+                                    "${e.price} AZN",
+                                    overflow: TextOverflow.ellipsis,
+                                    style: getRegularStyle(
+                                        color: ColorManager.fifthBlack
+                                            .withOpacity(0.2),
+                                        fontSize: FontSize.s12),
+                                  ),
+                                  Positioned.fill(
+                                    child: CustomPaint(
+                                      painter: DiagonalLinePainter(
+                                        ColorManager.fifthBlack
+                                            .withOpacity(0.2),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ],
                           ],

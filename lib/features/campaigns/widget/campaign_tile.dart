@@ -49,7 +49,8 @@ class _CampaignTileState extends State<CampaignTile> {
   @override
   Widget build(BuildContext context) {
     String description = widget.data.description!;
-    bool isLongText = description.length > 100;
+    String shortTitle = widget.data.shortTitle!;
+    bool isLongText = shortTitle.length > 63;
 
     return Bounce(
       duration: DurationConstant.ms100,
@@ -115,9 +116,11 @@ class _CampaignTileState extends State<CampaignTile> {
                       text: TextSpan(
                         children: [
                           TextSpan(
-                            text: _isExpanded || !isLongText
+                            text: _isExpanded
                                 ? description
-                                : "${description.substring(0, 60)} ",
+                                : isLongText
+                                    ? "${shortTitle.substring(0, 60)} "
+                                    : shortTitle,
                             style: getRegularStyle(
                               color: ColorManager.fourthBlack,
                               fontSize: FontSize.s14,

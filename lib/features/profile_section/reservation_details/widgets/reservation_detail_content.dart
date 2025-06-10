@@ -1,4 +1,5 @@
 import 'package:clean_car_customer_v2/components/custom_button.dart';
+import 'package:clean_car_customer_v2/components/diagonal_line_painter.dart';
 import 'package:clean_car_customer_v2/constants/res/resources_export.dart';
 import 'package:clean_car_customer_v2/features/profile_section/reservation_details/cubit/change_status_cubit.dart';
 import 'package:clean_car_customer_v2/features/profile_section/reservation_details/widgets/reservation_detail_card.dart';
@@ -134,7 +135,7 @@ class ReservationDetailContent extends StatelessWidget {
                           ),
                           Positioned.fill(
                             child: CustomPaint(
-                              painter: _DiagonalLinePainter(
+                              painter: DiagonalLinePainter(
                                 ColorManager.fifthBlack.withOpacity(0.2),
                               ),
                             ),
@@ -207,22 +208,4 @@ class ReservationDetailContent extends StatelessWidget {
       ),
     );
   }
-}
-
-class _DiagonalLinePainter extends CustomPainter {
-  _DiagonalLinePainter(this.color);
-
-  final Color color;
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = color
-      ..strokeWidth = 2;
-
-    canvas.drawLine(Offset(0, size.height), Offset(size.width, 0), paint);
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) => false;
 }
